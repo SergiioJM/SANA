@@ -27,13 +27,4 @@ public class SanaApplication{
 	public void setDataSource(DataSource dataSource) {
 		jdbcTemplate = new JdbcTemplate(dataSource);
 	}
-/*
-	public void run(String... strings) throws Exception {
-		log.info("Selecciona");
-		Area n1 = jdbcTemplate.queryForObject(
-				"SELECT * FROM Area",
-				new AreaRowMapper());
-		log.info(n1.toString());
-	}
-	*/
 }
