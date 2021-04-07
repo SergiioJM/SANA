@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Controladores</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<h1>Lista de Controladores</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Identificador</th>
+        <th>Nombre</th>
+        <th>Direccion</th>
+        <th>email</th>
+        <th>Telefono</th>
+        <th>Fecha de inicio</th>
+        <th>Fecha de fin</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="controlador: ${controladores}">
+        <td th:text="${controlador.identificador}"></td>
+        <td th:text="${controlador.nombre}"></td>
+        <td th:text="${controlador.direccion}"></td>
+        <td th:text="${controlador.email}"></td>
+        <td th:text="${controlador.telefono}"></td>
+        <td th:text="${controlador.dataInicio}"></td>
+        <td th:text="${controlador.dateFin}"></td>
+        <td><a th:href="@{/controlador/update/{identificador}(identificador=${controlador.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
+        </td>
+        <td><a th:href="@{/controlador/delete/{identificador}(identificador=${controlador.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add"><button type="button" class="btn btn-success">Añade controlador</button></a>
+</body>
+</html>
