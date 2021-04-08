@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/area")
 
 public class AreaController {
+
     private AreaDAO areaDao;
 
     @Autowired

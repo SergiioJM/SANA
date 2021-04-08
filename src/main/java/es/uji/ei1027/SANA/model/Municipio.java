@@ -7,15 +7,16 @@ public class Municipio {
     String email;
     Integer telefono;
 
+    public Municipio() {
+
+    }
+
     public Municipio(String cif, String nombre, String direccion, String email, Integer telefono) {
         this.cif = cif;
         this.nombre = nombre;
         this.direccion = direccion;
         this.email = email;
         this.telefono = telefono;
-    }
-
-    public Municipio() {
     }
 
     public String getcif() {

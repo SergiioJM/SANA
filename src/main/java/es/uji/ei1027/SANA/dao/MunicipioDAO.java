@@ -23,7 +23,7 @@ public class MunicipioDAO {
         try{
             return jdbcTemplate.query(
                     "SELECT * FROM Municipio",
-                    new MunicipioRowMapper());
+                    new es.uji.ei1027.SANA.dao.MunicipioRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<Municipio>();

@@ -13,6 +13,16 @@ public class Area {
 
     }
 
+    public Area(String idArea, String nombre, String descripcion, PhysicalCharacteristics caracteristicas, String localizacion, TipoRestriccion tipoAcceso, Municipio municipio) {
+        this.idArea = idArea;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.caracteristicas = caracteristicas;
+        this.localizacion = localizacion;
+        this.tipoAcceso = tipoAcceso;
+        this.municipio = municipio;
+    }
+
     public PhysicalCharacteristics getCaracteristicas() {
         return caracteristicas;
     }
@@ -70,15 +80,7 @@ public class Area {
         this.municipio = municipio;
     }
 
-    public Area(String idArea, String nombre, String descripcion, PhysicalCharacteristics caracteristicas, String localizacion, TipoRestriccion tipoAcceso, Municipio municipio) {
-        this.idArea = idArea;
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.caracteristicas = caracteristicas;
-        this.localizacion = localizacion;
-        this.tipoAcceso = tipoAcceso;
-        this.municipio = municipio;
-    }
+
 
     @Override
     public String toString() {

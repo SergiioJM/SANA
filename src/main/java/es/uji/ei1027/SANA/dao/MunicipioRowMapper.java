@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public final class MunicipioRowMapper implements RowMapper<Municipio> {
+
     public Municipio mapRow(ResultSet rs, int rowNum) throws SQLException {
         Municipio municipality = new Municipio();
         municipality.setcif(rs.getString("cif"));
