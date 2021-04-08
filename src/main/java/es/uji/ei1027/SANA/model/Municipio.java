@@ -12,7 +12,7 @@ public class Municipio {
     }
 
     public Municipio(String cp, String nombre, String direccion, String email, Integer telefono) {
-        this.cp = Municipio.this.cp;
+        this.cp = cp;
         this.nombre = nombre;
         this.direccion = direccion;
         this.email = email;
