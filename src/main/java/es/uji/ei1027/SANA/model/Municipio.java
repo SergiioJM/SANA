@@ -20,11 +20,11 @@ public class Municipio {
     }
 
     public String getCp() {
-        return cp;
+        return this.cp;
     }
 
     public void setCp(String cp) {
-        this.cp = Municipio.this.cp;
+        this.cp = cp;
     }
 
     public String getNombre() {
