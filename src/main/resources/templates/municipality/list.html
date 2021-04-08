@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Municipios</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<h1>Lista de Municipios</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>CP</th>
+        <th>Nombre</th>
+        <th>Direccion</th>
+        <th>email</th>
+        <th>Telefono</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="municipality: ${municipios}">
+        <td th:text="${municipality.cif}"></td>
+        <td th:text="${municipality.nombre}"></td>
+        <td th:text="${municipality.direccion}"></td>
+        <td th:text="${municipality.email}"></td>
+        <td th:text="${municipality.telefono}"></td>
+        <td><a th:href="@{/municipality/update/{CP}(CP=${municipality.CP})}"><button type="button" class="btn btn-warning">Edita</button></a>
+        </td>
+        <td><a th:href="@{/municipality/delete/{CP}(CP=${municipality.CP})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add"><button type="button" class="btn btn-success">Añade municipio</button></a>
+</body>
+</html>

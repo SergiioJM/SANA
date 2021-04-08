@@ -10,7 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/controlador")
  public class ControladorController {
+
     private ControladorDAO controladorDAO;
+
     @Autowired
     public void setControladorDAO(ControladorDAO controladorDAO) {
             this.controladorDAO = controladorDAO;
