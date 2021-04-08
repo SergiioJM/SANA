@@ -23,17 +23,17 @@ public class ControladorDAO {
 
     public void addControlador(Controlador controlador) {
         jdbcTemplate.update("INSERT INTO Controlador VALUES(?,?,?,?,?,?,?)",
-            controlador.getIdentificador(),controlador.getNombre(),controlador.getDireccion(),controlador.getEmail(),controlador.getTelefono(),controlador.getDataInicio(),controlador.getDateFin());
+            controlador.getIdentificador(),controlador.getNombre(),controlador.getDireccion(),controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin());
     }
 
     public void updateControlador(Controlador controlador) {
-        jdbcTemplate.update("UPDATE Controlador SET nombre =?,direccion =?,email =?,telefono =?,dataInicio =?,dateFin =? WHERE identificador =?)",
-                controlador.getNombre(),controlador.getDireccion(),controlador.getEmail(),controlador.getTelefono(),controlador.getDataInicio(),controlador.getDateFin(),controlador.getIdentificador());
+        jdbcTemplate.update("UPDATE Controlador SET nombre =?,direccion =?,email =?,telefono =?,fechaInicio =?,fechaFin =? WHERE identificador =?)",
+                controlador.getNombre(),controlador.getDireccion(),controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin(),controlador.getIdentificador());
     }
 
     public void deleteControlador(Controlador controlador) {
         jdbcTemplate.update("DELETE FROM Controlador VALUES(?,?,?,?,?,?,?)",
-                controlador.getIdentificador(),controlador.getNombre(),controlador.getDireccion(),controlador.getEmail(),controlador.getTelefono(),controlador.getDataInicio(),controlador.getDateFin());
+                controlador.getIdentificador(),controlador.getNombre(),controlador.getDireccion(),controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin());
     }
 
     public Controlador getControlador(String controlador) {

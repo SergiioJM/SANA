@@ -13,8 +13,8 @@ public class ControladorRowMapper implements RowMapper<Controlador> {
         controlStaff.setDireccion(rs.getString("direccion"));
         controlStaff.setEmail(rs.getString("email"));
         controlStaff.setTelefono(rs.getInt("telefono"));
-        controlStaff.setDataInicio(rs.getDate("dataInicio"));
-        controlStaff.setDateFin(rs.getDate("dataFin"));
+        controlStaff.setDataInicio(rs.getDate("fechaInicio"));
+        controlStaff.setDateFin(rs.getDate("fechaFin"));
         return controlStaff;
     }
 }
