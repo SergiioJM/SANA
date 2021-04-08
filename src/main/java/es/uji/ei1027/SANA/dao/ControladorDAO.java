@@ -1,5 +1,6 @@
 package es.uji.ei1027.SANA.dao;
 
+import es.uji.ei1027.SANA.SanaApplication;
 import es.uji.ei1027.SANA.model.Controlador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -17,6 +18,7 @@ public class ControladorDAO {
     @Autowired
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
+
     }
 
     public void addControlador(Controlador controlador) {

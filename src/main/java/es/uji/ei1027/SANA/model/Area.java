@@ -4,16 +4,16 @@ public class Area {
     String idArea;
     String nombre;
     String descripcion;
-    PhysicalCharacteristics caracteristicas;
+    CaracteristicasFisicas caracteristicas;
     String localizacion;
-    TipoRestriccion tipoAcceso;
+    TipoAcceso tipoAcceso;
     Municipio municipio;
 
     public Area() {
 
     }
 
-    public Area(String idArea, String nombre, String descripcion, PhysicalCharacteristics caracteristicas, String localizacion, TipoRestriccion tipoAcceso, Municipio municipio) {
+    public Area(String idArea, String nombre, String descripcion, CaracteristicasFisicas caracteristicas, String localizacion, TipoAcceso tipoAcceso, Municipio municipio) {
         this.idArea = idArea;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -23,11 +23,11 @@ public class Area {
         this.municipio = municipio;
     }
 
-    public PhysicalCharacteristics getCaracteristicas() {
+    public CaracteristicasFisicas getCaracteristicas() {
         return caracteristicas;
     }
 
-    public void setCaracteristicas(PhysicalCharacteristics caracteristicas) {
+    public void setCaracteristicas(CaracteristicasFisicas caracteristicas) {
         this.caracteristicas = caracteristicas;
     }
 
@@ -39,11 +39,11 @@ public class Area {
         this.localizacion = localizacion;
     }
 
-    public TipoRestriccion getTipoAcceso() {
+    public TipoAcceso getTipoAcceso() {
         return tipoAcceso;
     }
 
-    public void setTipoAcceso(TipoRestriccion tipoAcceso) {
+    public void setTipoAcceso(TipoAcceso tipoAcceso) {
         this.tipoAcceso = tipoAcceso;
     }
 
