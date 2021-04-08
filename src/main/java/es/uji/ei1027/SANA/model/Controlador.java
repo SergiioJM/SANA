@@ -8,17 +8,17 @@ public class Controlador {
     String direccion;
     String email;
     int telefono;
-    Date dataInicio;
-    Date dateFin;
+    Date fechaInicio;
+    Date fechaFin;
 
-    public Controlador(String identificador, String nombre, String direccion, String email, int telefono, Date dataInicio, Date dateFin) {
+    public Controlador(String identificador, String nombre, String direccion, String email, int telefono, Date fechaInicio, Date fechaFin) {
         this.identificador = identificador;
         this.nombre = nombre;
         this.direccion = direccion;
         this.email = email;
         this.telefono = telefono;
-        this.dataInicio = dataInicio;
-        this.dateFin = dateFin;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
     }
 
     public Controlador() {
@@ -34,11 +34,11 @@ public class Controlador {
     }
 
     public Date getDataInicio() {
-        return dataInicio;
+        return fechaInicio;
     }
 
     public Date getDateFin() {
-        return dateFin;
+        return fechaFin;
     }
 
     public String getIdentificador() {
@@ -61,17 +61,17 @@ public class Controlador {
                 ", direccion='" + direccion + '\'' +
                 ", email='" + email + '\'' +
                 ", telefono=" + telefono +
-                ", dataInicio=" + dataInicio +
-                ", dateFin=" + dateFin +
+                ", dataInicio=" + fechaInicio +
+                ", dateFin=" + fechaFin +
                 '}';
     }
 
     public void setDataInicio(Date dataInicio) {
-        this.dataInicio = dataInicio;
+        this.fechaInicio = dataInicio;
     }
 
     public void setDateFin(Date dateFin) {
-        this.dateFin = dateFin;
+        this.fechaFin = dateFin;
     }
 
     public void setDireccion(String direccion) {

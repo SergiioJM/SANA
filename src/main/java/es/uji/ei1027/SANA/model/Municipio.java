@@ -1,7 +1,7 @@
 package es.uji.ei1027.SANA.model;
 
 public class Municipio {
-    String cif;
+    String cp;
     String nombre;
     String direccion;
     String email;
@@ -11,20 +11,20 @@ public class Municipio {
 
     }
 
-    public Municipio(String cif, String nombre, String direccion, String email, Integer telefono) {
-        this.cif = cif;
+    public Municipio(String cp, String nombre, String direccion, String email, Integer telefono) {
+        this.cp = Municipio.this.cp;
         this.nombre = nombre;
         this.direccion = direccion;
         this.email = email;
         this.telefono = telefono;
     }
 
-    public String getcif() {
-        return cif;
+    public String getcp() {
+        return cp;
     }
 
-    public void setcif(String cif) {
-        this.cif = cif;
+    public void setcp(String cp) {
+        this.cp = Municipio.this.cp;
     }
 
     public String getNombre() {
@@ -62,7 +62,7 @@ public class Municipio {
     @Override
     public String toString() {
         return "Municipio{" +
-                "cif='" + cif + '\'' +
+                "cp='" + cp + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", email='" + email + '\'' +
