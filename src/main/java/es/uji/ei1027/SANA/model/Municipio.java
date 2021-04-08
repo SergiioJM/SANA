@@ -1,30 +1,29 @@
 package es.uji.ei1027.SANA.model;
 
-public class Municipality {
-    String CIF;
+public class Municipio {
+    String cif;
     String nombre;
     String direccion;
     String email;
     Integer telefono;
 
-    public Municipality(String CIF, String nombre, String direccion, String email, Integer telefono) {
-        this.CIF = CIF;
+    public Municipio(String cif, String nombre, String direccion, String email, Integer telefono) {
+        this.cif = cif;
         this.nombre = nombre;
         this.direccion = direccion;
         this.email = email;
         this.telefono = telefono;
     }
 
-    public Municipality() {
-
+    public Municipio() {
     }
 
-    public String getCIF() {
-        return CIF;
+    public String getcif() {
+        return cif;
     }
 
-    public void setCIF(String CIF) {
-        this.CIF = CIF;
+    public void setcif(String cif) {
+        this.cif = cif;
     }
 
     public String getNombre() {
@@ -61,8 +60,8 @@ public class Municipality {
 
     @Override
     public String toString() {
-        return "Municipality{" +
-                "CIF='" + CIF + '\'' +
+        return "Municipio{" +
+                "cif='" + cif + '\'' +
                 ", nombre='" + nombre + '\'' +
                 ", direccion='" + direccion + '\'' +
                 ", email='" + email + '\'' +

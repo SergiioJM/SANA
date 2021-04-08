@@ -20,15 +20,15 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="municipality: ${municipios}">
-        <td th:text="${municipality.cif}"></td>
-        <td th:text="${municipality.nombre}"></td>
-        <td th:text="${municipality.direccion}"></td>
-        <td th:text="${municipality.email}"></td>
-        <td th:text="${municipality.telefono}"></td>
-        <td><a th:href="@{/municipality/update/{CP}(CP=${municipality.CP})}"><button type="button" class="btn btn-warning">Edita</button></a>
+    <tr th:each="municipio: ${municipios}">
+        <td th:text="${municipio.cif}"></td>
+        <td th:text="${municipio.nombre}"></td>
+        <td th:text="${municipio.direccion}"></td>
+        <td th:text="${municipio.email}"></td>
+        <td th:text="${municipio.telefono}"></td>
+        <td><a th:href="@{/municipio/update/{cif}(cif=${municipio.cif})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
-        <td><a th:href="@{/municipality/delete/{CP}(CP=${municipality.CP})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        <td><a th:href="@{/municipio/delete/{cif}(cif=${municipio.cif})}"><button type="button" class="btn btn-danger">Borra</button></a>
         </td>
     </tr>
     </tbody>

@@ -1,6 +1,6 @@
 package es.uji.ei1027.SANA.dao;
 
-import es.uji.ei1027.SANA.model.Municipality;
+import es.uji.ei1027.SANA.model.Municipio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class MunicipalityDAO {
+public class MunicipioDAO {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -19,14 +19,14 @@ public class MunicipalityDAO {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public List<Municipality> getMunicipios(){
+    public List<Municipio> getMunicipios(){
         try{
             return jdbcTemplate.query(
                     "SELECT * FROM Municipio",
-                    new es.uji.ei1027.SANA.dao.MunicipalityRowMapper());
+                    new MunicipioRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
-            return new ArrayList<Municipality>();
+            return new ArrayList<Municipio>();
         }
     }
 }

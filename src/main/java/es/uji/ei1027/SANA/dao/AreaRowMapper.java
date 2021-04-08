@@ -2,7 +2,7 @@ package es.uji.ei1027.SANA.dao;
 
 
 import es.uji.ei1027.SANA.model.Area;
-import es.uji.ei1027.SANA.model.Municipality;
+import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.PhysicalCharacteristics;
 import es.uji.ei1027.SANA.model.TipoRestriccion;
 import org.springframework.jdbc.core.RowMapper;
@@ -19,7 +19,7 @@ public final class AreaRowMapper implements RowMapper<Area> {
         area.setCaracteristicas((PhysicalCharacteristics) rs.getObject(rs.getString("caracteristicas")));
         area.setLocalizacion(rs.getString("localizacion"));
         area.setTipoAcceso((TipoRestriccion) rs.getObject(rs.getString("tipoAcceso")));
-        area.setMunicipio((Municipality) rs.getObject(rs.getString("municipio")));
+        area.setMunicipio((Municipio) rs.getObject(rs.getString("municipio")));
         return area;
     }
 }
