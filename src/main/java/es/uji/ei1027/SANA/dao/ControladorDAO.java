@@ -1,8 +1,6 @@
 package es.uji.ei1027.SANA.dao;
 
-import es.uji.ei1027.SANA.model.Area;
 import es.uji.ei1027.SANA.model.Controlador;
-import es.uji.ei1027.SANA.model.Municipio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
