@@ -5,7 +5,7 @@ public class Municipio {
     String nombre;
     String direccion;
     String email;
-    Integer telefono;
+    int telefono;
 
     public Municipio() {
 
