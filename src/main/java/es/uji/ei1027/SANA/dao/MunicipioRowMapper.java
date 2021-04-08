@@ -9,7 +9,7 @@ public final class MunicipioRowMapper implements RowMapper<Municipio> {
 
     public Municipio mapRow(ResultSet rs, int rowNum) throws SQLException {
         Municipio municipality = new Municipio();
-        municipality.setcif(rs.getString("cif"));
+        municipality.setCp(rs.getString("cif"));
         municipality.setNombre(rs.getString("nombre"));
         municipality.setDireccion(rs.getString("direccion"));
         municipality.setEmail(rs.getString("email"));

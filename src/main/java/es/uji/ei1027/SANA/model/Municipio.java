@@ -19,11 +19,11 @@ public class Municipio {
         this.telefono = telefono;
     }
 
-    public String getcp() {
+    public String getCp() {
         return cp;
     }
 
-    public void setcp(String cp) {
+    public void setCp(String cp) {
         this.cp = Municipio.this.cp;
     }
 
