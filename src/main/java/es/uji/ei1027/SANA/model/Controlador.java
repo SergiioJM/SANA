@@ -33,11 +33,11 @@ public class Controlador {
         return email;
     }
 
-    public Date getDataInicio() {
+    public Date getFechaInicio() {
         return fechaInicio;
     }
 
-    public Date getDateFin() {
+    public Date getFechaFin() {
         return fechaFin;
     }
 
@@ -61,17 +61,17 @@ public class Controlador {
                 ", direccion='" + direccion + '\'' +
                 ", email='" + email + '\'' +
                 ", telefono=" + telefono +
-                ", dataInicio=" + fechaInicio +
-                ", dateFin=" + fechaFin +
+                ", fechaInicio=" + fechaInicio +
+                ", fechaFin=" + fechaFin +
                 '}';
     }
 
-    public void setDataInicio(Date dataInicio) {
-        this.fechaInicio = dataInicio;
+    public void setFechaInicio(Date fechaInicio) {
+        this.fechaInicio = fechaInicio;
     }
 
-    public void setDateFin(Date dateFin) {
-        this.fechaFin = dateFin;
+    public void setFechaFin(Date fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
     public void setDireccion(String direccion) {
