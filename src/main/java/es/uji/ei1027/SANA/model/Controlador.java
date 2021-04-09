@@ -3,23 +3,13 @@ package es.uji.ei1027.SANA.model;
 import java.util.Date;
 
 public class Controlador {
-    String identificador;
+    private String identificador;
     String nombre;
     String direccion;
     String email;
     int telefono;
     Date fechaInicio;
     Date fechaFin;
-
-    public Controlador(String identificador, String nombre, String direccion, String email, int telefono, Date fechaInicio, Date fechaFin) {
-        this.identificador = identificador;
-        this.nombre = nombre;
-        this.direccion = direccion;
-        this.email = email;
-        this.telefono = telefono;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-    }
 
     public Controlador() {
 

@@ -31,7 +31,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
     @RequestMapping(value="/add")
     public String addControlador(Model model) {
-        model.addAttribute("controlador", new es.uji.ei1027.SANA.model.Controlador());
+        model.addAttribute("controlador", new Controlador());
         return "controlador/add";
     }
 
@@ -43,7 +43,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
         controladorDAO.addControlador(controlador);
         return "redirect:list";
     }
-/*
+
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
     public String editControlador(Model model, @PathVariable String identificador) {
         model.addAttribute("controlador", controladorDAO.getControlador(identificador) );
@@ -60,11 +60,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
         return "redirect:list";
     }
 
-    @RequestMapping(value="/delete/{nom}")
-    public String processDelete(@PathVariable Controlador identificador) {
+    @RequestMapping(value="/delete/{identificador}")
+    public String processDelete(@PathVariable String identificador) {
         controladorDAO.deleteControlador(identificador);
         return "redirect:../list";
     }
 
- */
 }

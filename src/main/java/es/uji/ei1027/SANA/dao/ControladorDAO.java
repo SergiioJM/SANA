@@ -1,6 +1,5 @@
 package es.uji.ei1027.SANA.dao;
 
-import es.uji.ei1027.SANA.SanaApplication;
 import es.uji.ei1027.SANA.model.Controlador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -31,15 +30,15 @@ public class ControladorDAO {
                 controlador.getNombre(),controlador.getDireccion(),controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin(),controlador.getIdentificador());
     }
 
-    public void deleteControlador(Controlador controlador) {
-        jdbcTemplate.update("DELETE FROM Controlador VALUES(?,?,?,?,?,?,?)",
-                controlador.getIdentificador(),controlador.getNombre(),controlador.getDireccion(),controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin());
+    public void deleteControlador(String identificador) {
+        jdbcTemplate.update("DELETE FROM Controlador WHERE identificador =?",
+                identificador);
     }
 
-    public Controlador getControlador(String controlador) {
+    public Controlador getControlador(String identificador) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM Controlador WHERE identificador =?",
-                    new ControladorRowMapper(), controlador);
+                    new ControladorRowMapper(), identificador);
         }
         catch(EmptyResultDataAccessException e) {
             return null;
