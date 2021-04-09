@@ -26,7 +26,7 @@ public class ControladorDAO {
     }
 
     public void updateControlador(Controlador controlador) {
-        jdbcTemplate.update("UPDATE Controlador SET nombre =?,direccion =?,email =?,telefono =?,fechaInicio =?,fechaFin =? WHERE identificador =?)",
+        jdbcTemplate.update("UPDATE Controlador SET nombre =?,direccion =?,email =?,telefono =?,fechaInicio =?,fechaFin =? WHERE identificador =?",
                 controlador.getNombre(),controlador.getDireccion(),controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin(),controlador.getIdentificador());
     }
 

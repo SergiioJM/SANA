@@ -14,20 +14,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 @RequestMapping("/controlador")
- public class ControladorController {
+
+public class ControladorController {
 
     private ControladorDAO controladorDAO;
 
     @Autowired
-    public void setControladorDAO(ControladorDAO controladorDAO) {
-            this.controladorDAO = controladorDAO;
-        }
+    public void setControladorDAO(ControladorDAO controladorDAO) { this.controladorDAO = controladorDAO; }
 
-        @RequestMapping("/list")
-        public String listaDeControladores(Model model){
-            model.addAttribute("controladores", controladorDAO.getControladores());
-            return "controlador/list";
-        }
+
+    @RequestMapping("/list")
+    public String listaDeControladores(Model model){
+        model.addAttribute("controladores", controladorDAO.getControladores());
+        return "controlador/list";
+    }
 
     @RequestMapping(value="/add")
     public String addControlador(Model model) {

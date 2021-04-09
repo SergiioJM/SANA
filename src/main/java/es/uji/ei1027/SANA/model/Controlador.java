@@ -12,7 +12,6 @@ public class Controlador {
     Date fechaFin;
 
     public Controlador() {
-
     }
 
     public String getDireccion() {

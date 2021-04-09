@@ -19,6 +19,32 @@ public class MunicipioDAO {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+
+    public void addMunicipio(Municipio municipio) {
+        jdbcTemplate.update("INSERT INTO Municipio VALUES(?,?,?,?,?)",
+                municipio.getCp(), municipio.getNombre(), municipio.getDireccion(), municipio.getEmail(), municipio.getTelefono());
+    }
+
+    public void updateMunicipio(Municipio municipio) {
+        jdbcTemplate.update("UPDATE Municipio SET nombre =?, direccion =?, email =?, telefono =? WHERE cp =?",
+                municipio.getNombre(),municipio.getDireccion(),municipio.getEmail(),municipio.getTelefono(),municipio.getCp());
+    }
+
+    public void deleteMunicipio(String cp) {
+        jdbcTemplate.update("DELETE FROM Municipio WHERE cp =?",
+                cp);
+    }
+
+    public Municipio getMunicipio(String cp) {
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM Municipio WHERE cp =?",
+                    new MunicipioRowMapper(), cp);
+        }
+        catch(EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
     public List<Municipio> getMunicipios(){
         try{
             return jdbcTemplate.query(

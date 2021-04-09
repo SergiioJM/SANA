@@ -25,8 +25,8 @@ public class AreaDAO {
     }
 
     public void deleteArea(Area area) {
-        jdbcTemplate.update("DELETE FROM Area VALUES(?,?,?,?,?,?,?)",
-                area.getIdArea(),area.getNombre(),area.getDescripcion(),area.getCaracteristicas(),area.getLocalizacion(),area.getTipoAcceso(),area.getMunicipio());
+        jdbcTemplate.update("DELETE FROM Area WHERE idArea =?",
+                area.getIdArea());
     }
 
     public void updateArea(Area area) {
