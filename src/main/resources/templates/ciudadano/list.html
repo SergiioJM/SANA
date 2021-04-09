@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Ciudadanos</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<h1>Lista de Ciudadanos</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>Nif</th>
+        <th>email</th>
+        <th>Residencia</th>
+        <th>FechaRegistro</th>
+        <th>Reserva</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="ciudadano: ${ciudadano}">
+        <td th:text="${ciudadano.nombre}"></td>
+        <td th:text="${ciudadano.nif}"></td>
+        <td th:text="${ciudadano.email}"></td>
+        <td th:text="${ciudadano.residencia}"></td>
+        <td th:text="${ciudadano.fechaRegisro}"></td>
+        <td th:text="${ciudadano.reserva}"></td>
+        <td><a th:href="@{/ciudadano/update/{nif}(nif=${ciudadano.nif})}"><button type="button" class="btn btn-warning">Edita</button></a>
+        </td>
+        <td><a th:href="@{/ciudadano/delete/{nif}(nif=${ciudadano.nif})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add"><button type="button" class="btn btn-success">Añade ciudadano</button></a>
+</body>
+</html>

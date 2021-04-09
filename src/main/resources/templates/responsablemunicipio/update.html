@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modificar ResponsableMunicipio</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Modifica el ResponsableMunicipio</h2>
+<form action="#" th:action="@{/responsablemunicipio/update}"
+      th:object="${responsablemunicipio}" method="post">
+    <table>
+        <tr>
+            <td><label>Nombre: </label></td>
+            <td><input type="text" th:field="*{nombre}" /></td>
+        </tr>
+        <tr>
+            <td><label>Email: </label></td>
+            <td><input type="text" th:field="*{email}" /></td>
+        </tr>
+        <tr>
+            <td><label>NumeroTelefono: </label></td>
+            <td><input type="text" th:field="*{numeroTelefono}" /></td>
+        </tr>
+        <tr>
+            <td><label>FechaInicio: </label></td>
+            <td><input type="date" th:field="*{fechaInicio}" /></td>
+        </tr>
+        <tr>
+            <td><label>FechaFin: </label></td>
+            <td><input type="date" th:field="*{fechaFin}" /></td>
+        </tr>
+        <tr>
+            <td><label>Identificador: </label></td>
+            <td><input type="text" th:field="*{identificador}" /></td>
+        </tr>
+        <tr>
+            <td><label>Municipio: </label></td>
+            <td><input type="text" th:field="*{municipio}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Modifica el ResponsableMunicipio" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

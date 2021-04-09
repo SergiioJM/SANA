@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Modificar Ciudadano</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Modifica el Ciudadano</h2>
+<form action="#" th:action="@{/ciudadano/update}"
+      th:object="${ciudadano}" method="post">
+    <table>
+        <tr>
+            <td><label>Nif: </label></td>
+            <td><input type="text" th:field="*{nif}" /></td>
+        </tr>
+        <tr>
+            <td><label>Nombre: </label></td>
+            <td><input type="text" th:field="*{nombre}" /></td>
+        </tr>
+        <tr>
+            <td><label>Email: </label></td>
+            <td><input type="text" th:field="*{email}" /></td>
+        </tr>
+        <tr>
+            <td><label>Residencia: </label></td>
+            <td><input type="text" th:field="*{residencia}" /></td>
+        </tr>
+        <tr>
+            <td><label>FechaRegistro: </label></td>
+            <td><input type="date" th:field="*{fechaRegistro}" /></td>
+        </tr>
+        <tr>
+            <td><label>Reserva: </label></td>
+            <td><input type="number" th:field="*{reserva}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Modifica el Ciudadano" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

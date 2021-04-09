@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Reservas</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<h1>Lista de Reservas</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Identificador</th>
+        <th>Hora</th>
+        <th>Fecha</th>
+        <th>NumeroPersonas</th>
+        <th>Estado</th>
+        <th>Zona</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reservaa: ${reserva}">
+        <td th:text="${reservaa.identificador}"></td>
+        <td th:text="${reservaa.hora}"></td>
+        <td th:text="${reservaa.fecha}"></td>
+        <td th:text="${reservaa.numeroPersonas}"></td>
+        <td th:text="${reservaa.estado}"></td>
+        <td th:text="${reservaa.zona}"></td>
+        <td><a th:href="@{/reserva/update/{identificador}(identificador=${reservaa.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
+        </td>
+        <td><a th:href="@{/reserva/delete/{identificador}(identificador=${reservaa.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add"><button type="button" class="btn btn-success">Añade reserva</button></a>
+</body>
+</html>

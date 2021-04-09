@@ -38,7 +38,7 @@ public class MunicipioController {
     public String processAddSubmit(@ModelAttribute("municipio") Municipio municipio,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "nadador/add";
+            return "municipio/add";
         municipioDAO.addMunicipio(municipio);
         return "redirect:list";
     }
