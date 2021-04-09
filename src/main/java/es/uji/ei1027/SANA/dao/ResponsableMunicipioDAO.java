@@ -6,6 +6,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,11 +46,12 @@ public class ResponsableMunicipioDAO {
         }
     }
 
-    public List<ResponsableMunicipio> getResponsableMunicipios(){
+    public List<ResponsableMunicipio> getResponsablesMunicipios(){
         try{
-            return jdbcTemplate.query(
+            List<ResponsableMunicipio> responsableMunicipios= jdbcTemplate.query(
                     "SELECT * FROM ResponsableMunicipio",
                     new ResponsableMunicipioRowMapper());
+            return responsableMunicipios;
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<ResponsableMunicipio>();
