@@ -22,7 +22,8 @@ public class ControladorDAO {
 
     public void addControlador(Controlador controlador) {
         jdbcTemplate.update("INSERT INTO Controlador VALUES(?,?,?,?,?,?,?)",
-            controlador.getIdentificador(),controlador.getNombre(),controlador.getDireccion(),controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin());
+            controlador.getIdentificador(),controlador.getNombre(),controlador.getDireccion(),
+                controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin());
     }
 
     public void updateControlador(Controlador controlador) {

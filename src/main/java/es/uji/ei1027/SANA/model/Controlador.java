@@ -1,5 +1,7 @@
 package es.uji.ei1027.SANA.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 public class Controlador {
@@ -12,6 +14,16 @@ public class Controlador {
     Date fechaFin;
 
     public Controlador() {
+    }
+
+    public Controlador(String identificador, String nombre, String direccion, String email, int telefono, Date fechaInicio, Date fechaFin) {
+        this.identificador = identificador;
+        this.nombre = nombre;
+        this.direccion = direccion;
+        this.email = email;
+        this.telefono = telefono;
+        this.fechaInicio = fechaInicio;
+        this.fechaFin = fechaFin;
     }
 
     public String getDireccion() {

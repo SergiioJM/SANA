@@ -12,8 +12,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.time.Instant;
+import java.time.LocalDate;
+import java.util.Date;
+
 @Controller
-@RequestMapping("/controlador")
+@RequestMapping("controlador")
 
 public class ControladorController {
 
@@ -36,10 +40,11 @@ public class ControladorController {
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("controlador") Controlador controlador,
-                                   BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "controlador/add";
+    public String processAddSubmit(@ModelAttribute("controlador") Controlador controlador, BindingResult bindingResult) {
+        //if (bindingResult.hasErrors())
+            //return "controlador/add";
+        //Date hoy= Date.from(Instant.now());
+        //Controlador controlador1 = new Controlador("Co1","Manel","Pobla","manel@gmail.com",123456789,hoy,hoy);
         controladorDAO.addControlador(controlador);
         return "redirect:list";
     }

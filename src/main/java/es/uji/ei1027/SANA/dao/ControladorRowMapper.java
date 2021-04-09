@@ -2,6 +2,8 @@ package es.uji.ei1027.SANA.dao;
 
 import es.uji.ei1027.SANA.model.Controlador;
 import org.springframework.jdbc.core.RowMapper;
+
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -13,8 +15,9 @@ public class ControladorRowMapper implements RowMapper<Controlador> {
         controlStaff.setDireccion(rs.getString("direccion"));
         controlStaff.setEmail(rs.getString("email"));
         controlStaff.setTelefono(rs.getInt("telefono"));
-        controlStaff.setFechaInicio(rs.getDate("fechaInicio"));
-        controlStaff.setFechaFin(rs.getDate("fechaFin"));
+        controlStaff.setFechaInicio(rs.getObject("fechaInicio",Date.class));
+        Date d2= rs.getObject("fechaFin",Date.class);
+        controlStaff.setFechaFin(d2 != null ? d2 : null);
         return controlStaff;
     }
 }
