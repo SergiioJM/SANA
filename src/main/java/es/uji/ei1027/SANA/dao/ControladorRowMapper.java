@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.RowMapper;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 
 public class ControladorRowMapper implements RowMapper<Controlador> {
     public Controlador mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -15,9 +16,8 @@ public class ControladorRowMapper implements RowMapper<Controlador> {
         controlStaff.setDireccion(rs.getString("direccion"));
         controlStaff.setEmail(rs.getString("email"));
         controlStaff.setTelefono(rs.getInt("telefono"));
-        controlStaff.setFechaInicio(rs.getObject("fechaInicio",Date.class));
-        Date d2= rs.getObject("fechaFin",Date.class);
-        controlStaff.setFechaFin(d2 != null ? d2 : null);
+        controlStaff.setFechaInicio(rs.getObject("fechaInicio", LocalDate.class));
+        controlStaff.setFechaInicio(rs.getObject("fechaFin", LocalDate.class));
         return controlStaff;
     }
 }

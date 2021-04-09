@@ -2,6 +2,7 @@ package es.uji.ei1027.SANA.model;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Controlador {
@@ -10,13 +11,13 @@ public class Controlador {
     String direccion;
     String email;
     int telefono;
-    Date fechaInicio;
-    Date fechaFin;
+    LocalDate fechaInicio;
+    LocalDate fechaFin;
 
     public Controlador() {
     }
 
-    public Controlador(String identificador, String nombre, String direccion, String email, int telefono, Date fechaInicio, Date fechaFin) {
+    public Controlador(String identificador, String nombre, String direccion, String email, int telefono, LocalDate fechaInicio, LocalDate fechaFin) {
         this.identificador = identificador;
         this.nombre = nombre;
         this.direccion = direccion;
@@ -34,11 +35,11 @@ public class Controlador {
         return email;
     }
 
-    public Date getFechaInicio() {
+    public LocalDate getFechaInicio() {
         return fechaInicio;
     }
 
-    public Date getFechaFin() {
+    public LocalDate getFechaFin() {
         return fechaFin;
     }
 
@@ -67,11 +68,11 @@ public class Controlador {
                 '}';
     }
 
-    public void setFechaInicio(Date fechaInicio) {
+    public void setFechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public void setFechaFin(Date fechaFin) {
+    public void setFechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
