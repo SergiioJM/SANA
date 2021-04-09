@@ -11,8 +11,8 @@
     <thead>
     <tr>
         <th>Nombre</th>
-        <th>Nif</th>
-        <th>email</th>
+        <th>NIF</th>
+        <th>Email</th>
         <th>Residencia</th>
         <th>FechaRegistro</th>
         <th>Reserva</th>
@@ -21,7 +21,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="ciudadano: ${ciudadano}">
+    <tr th:each="ciudadano: ${ciudadanos}">
         <td th:text="${ciudadano.nombre}"></td>
         <td th:text="${ciudadano.nif}"></td>
         <td th:text="${ciudadano.email}"></td>
