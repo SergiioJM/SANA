@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Modificar ResponsableMunicipio</title>
+    <title>Modificar Responsable de Municipio</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Modifica el ResponsableMunicipio</h2>
+<h2>Modifica el Responsable de Municipio</h2>
 <form action="#" th:action="@{/responsablemunicipio/update}"
       th:object="${responsablemunicipio}" method="post">
     <table>
         <tr>
-            <td><label>Nombre: </label></td>
+            <td><label>Nombre</label></td>
             <td><input type="text" th:field="*{nombre}" /></td>
         </tr>
         <tr>
-            <td><label>Email: </label></td>
+            <td><label>Email</label></td>
             <td><input type="text" th:field="*{email}" /></td>
         </tr>
         <tr>
-            <td><label>NumeroTelefono: </label></td>
+            <td><label>Teléfono</label></td>
             <td><input type="text" th:field="*{numeroTelefono}" /></td>
         </tr>
         <tr>
-            <td><label>FechaInicio: </label></td>
+            <td><label>Fecha de Inicio</label></td>
             <td><input type="date" th:field="*{fechaInicio}" /></td>
         </tr>
         <tr>
-            <td><label>FechaFin: </label></td>
+            <td><label>Fecha de Fin</label></td>
             <td><input type="date" th:field="*{fechaFin}" /></td>
         </tr>
         <tr>
-            <td><label>Identificador: </label></td>
+            <td><label>Identificador</label></td>
             <td><input type="text" th:field="*{identificador}" /></td>
         </tr>
         <tr>
-            <td><label>Municipio: </label></td>
+            <td><label>Municipio</label></td>
             <td><input type="text" th:field="*{municipio}" /></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Modifica el ResponsableMunicipio" /></td>
+            <td colspan="2"><input type="submit" value="Modifica el Responsable del Municipio" /></td>
         </tr>
     </table>
 </form>

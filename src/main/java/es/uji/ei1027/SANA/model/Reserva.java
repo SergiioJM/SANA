@@ -1,17 +1,17 @@
 package es.uji.ei1027.SANA.model;
 
-import java.sql.Date;
-import java.sql.Time;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Reserva {
     String identificador;
-    Time hora;
-    Date fecha;
+    LocalTime hora;
+    LocalDate fecha;
     int numeroPersonas;
     Estado estado;
     Zona zona;
 
-    public Reserva(String identificador, Time hora, Date fecha, int numeroPersonas, Estado estado, Zona zona) {
+    public Reserva(String identificador, LocalTime hora, LocalDate fecha, int numeroPersonas, Estado estado, Zona zona) {
         this.identificador = identificador;
         this.hora = hora;
         this.fecha = fecha;
@@ -32,19 +32,19 @@ public class Reserva {
         this.identificador = identificador;
     }
 
-    public Time getHora() {
+    public LocalTime getHora() {
         return hora;
     }
 
-    public void setHora(Time hora) {
+    public void setHora(LocalTime hora) {
         this.hora = hora;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

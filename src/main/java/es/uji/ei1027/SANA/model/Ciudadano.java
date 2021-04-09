@@ -1,16 +1,16 @@
 package es.uji.ei1027.SANA.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Ciudadano {
     String nombre;
     String NIF;
     String email;
     String residencia;
-    Date fechaRegistro;
+    LocalDate fechaRegistro;
     Reserva reserva;
 
-    public Ciudadano(String nombre, String NIF, String email, String residencia, Date fechaRegistro, Reserva reserva) {
+    public Ciudadano(String nombre, String NIF, String email, String residencia, LocalDate fechaRegistro, Reserva reserva) {
         this.nombre = nombre;
         this.NIF = NIF;
         this.email = email;
@@ -55,11 +55,11 @@ public class Ciudadano {
         this.residencia = residencia;
     }
 
-    public Date getFechaRegistro() {
+    public LocalDate getFechaRegistro() {
         return fechaRegistro;
     }
 
-    public void setFechaRegistro(Date fechaRegistro) {
+    public void setFechaRegistro(LocalDate fechaRegistro) {
         this.fechaRegistro = fechaRegistro;
     }
 

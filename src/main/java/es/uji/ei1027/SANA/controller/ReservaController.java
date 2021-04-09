@@ -1,8 +1,6 @@
 package es.uji.ei1027.SANA.controller;
 
-import es.uji.ei1027.SANA.dao.MunicipioDAO;
 import es.uji.ei1027.SANA.dao.ReservaDAO;
-import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.Reserva;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/reserva")
 public class ReservaController {
+
     private ReservaDAO reservaDAO;
 
     @Autowired

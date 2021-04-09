@@ -1,9 +1,7 @@
 package es.uji.ei1027.SANA.controller;
 
 import es.uji.ei1027.SANA.dao.CiudadanoDAO;
-import es.uji.ei1027.SANA.dao.ControladorDAO;
 import es.uji.ei1027.SANA.model.Ciudadano;
-import es.uji.ei1027.SANA.model.Controlador;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("ciudadano")
+@RequestMapping("/ciudadano")
+
 public class CiudadanoController {
+
     private CiudadanoDAO ciudadanoDAO;
 
     @Autowired

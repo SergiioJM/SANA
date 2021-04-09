@@ -1,17 +1,17 @@
 package es.uji.ei1027.SANA.model;
 
-import java.sql.Time;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class ServicioTemporal {
     String nombre;
-    Date fechaInicio;
-    Date fechaFin;
-    Time horaInicio;
-    Time horaFin;
+    LocalDate fechaInicio;
+    LocalDate fechaFin;
+    LocalTime horaInicio;
+    LocalTime horaFin;
     Area area;
 
-    public ServicioTemporal(String nombre, Date fechaInicio, Date fechaFin, Time horaInicio, Time horaFin, Area area) {
+    public ServicioTemporal(String nombre, LocalDate fechaInicio, LocalDate fechaFin, LocalTime horaInicio, LocalTime horaFin, Area area) {
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -32,35 +32,35 @@ public class ServicioTemporal {
         this.nombre = nombre;
     }
 
-    public Date getfechaInicio() {
+    public LocalDate getfechaInicio() {
         return fechaInicio;
     }
 
-    public void setfechaInicio(Date fechaInicio) {
+    public void setfechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getfechaFin() {
+    public LocalDate getfechaFin() {
         return fechaFin;
     }
 
-    public void setfechaFin(Date fechaFin) {
+    public void setfechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
-    public Time getHoraInicio() {
+    public LocalTime getHoraInicio() {
         return horaInicio;
     }
 
-    public void setHoraInicio(Time horaInicio) {
+    public void setHoraInicio(LocalTime horaInicio) {
         this.horaInicio = horaInicio;
     }
 
-    public Time getHoraFin() {
+    public LocalTime getHoraFin() {
         return horaFin;
     }
 
-    public void setHoraFin(Time horaFin) {
+    public void setHoraFin(LocalTime horaFin) {
         this.horaFin = horaFin;
     }
 

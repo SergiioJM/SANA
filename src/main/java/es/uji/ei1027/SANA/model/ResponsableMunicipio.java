@@ -1,17 +1,17 @@
 package es.uji.ei1027.SANA.model;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class ResponsableMunicipio {
     String nombre;
     String email;
     int numeroTelefono;
-    Date fechaInicio;
-    Date fechaFin;
+    LocalDate fechaInicio;
+    LocalDate fechaFin;
     String identificador;
-    Municipio municipio;
+    String municipio;
 
-    public ResponsableMunicipio(String nombre, String email, int numeroTelefono, Date fechaInicio, Date fechaFin, String identificador, Municipio municipio) {
+    public ResponsableMunicipio(String nombre, String email, int numeroTelefono, LocalDate fechaInicio, LocalDate fechaFin, String identificador, String municipio) {
         this.nombre = nombre;
         this.email = email;
         this.numeroTelefono = numeroTelefono;
@@ -49,19 +49,19 @@ public class ResponsableMunicipio {
         this.numeroTelefono = numeroTelefono;
     }
 
-    public Date getfechaInicio() {
+    public LocalDate getfechaInicio() {
         return fechaInicio;
     }
 
-    public void setfechaInicio(Date fechaInicio) {
+    public void setfechaInicio(LocalDate fechaInicio) {
         this.fechaInicio = fechaInicio;
     }
 
-    public Date getfechaFin() {
+    public LocalDate getfechaFin() {
         return fechaFin;
     }
 
-    public void setfechaFin(Date fechaFin) {
+    public void setfechaFin(LocalDate fechaFin) {
         this.fechaFin = fechaFin;
     }
 
@@ -73,11 +73,11 @@ public class ResponsableMunicipio {
         this.identificador = identificador;
     }
 
-    public Municipio getMunicipio() {
+    public String getMunicipio() {
         return municipio;
     }
 
-    public void setMunicipio(Municipio municipio) {
+    public void setMunicipio(String municipio) {
         this.municipio = municipio;
     }
 

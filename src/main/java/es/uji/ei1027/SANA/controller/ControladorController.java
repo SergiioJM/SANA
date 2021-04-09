@@ -1,6 +1,5 @@
 package es.uji.ei1027.SANA.controller;
 
-import es.uji.ei1027.SANA.dao.AreaDAO;
 import es.uji.ei1027.SANA.dao.ControladorDAO;
 import es.uji.ei1027.SANA.model.Controlador;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("controlador")
+@RequestMapping("/controlador")
 
 public class ControladorController {
 

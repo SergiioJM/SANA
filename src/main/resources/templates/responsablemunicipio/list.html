@@ -1,20 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Gestionar ResponsableMunicipios</title>
+    <title>Gestionar Responsables de Municipios</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 </head>
 <body>
-<h1>Lista de ResponsablesMunicipios</h1>
+<h1>Lista de Responsables de Municipios</h1>
 <table class="table table-striped">
     <thead>
     <tr>
         <th>Nombre</th>
-        <th>Mail</th>
-        <th>NumeroTelefono</th>
-        <th>FechaInicio</th>
-        <th>FechaFin</th>
+        <th>Email</th>
+        <th>Teléfono</th>
+        <th>Fecha de Inicio</th>
+        <th>Fecha de Fin</th>
         <th>Identificador</th>
         <th>Municipio</th>
         <th></th>
@@ -22,21 +22,21 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="responsable: ${responsablemunicipio}">
-        <td th:text="${responsable.nombre}"></td>
-        <td th:text="${responsable.mail}"></td>
-        <td th:text="${responsable.numeroTelefono}"></td>
-        <td th:text="${responsable.fechaInicio}"></td>
-        <td th:text="${responsable.fechaFin}"></td>
-        <td th:text="${responsable.identificador}"></td>
-        <td th:text="${responsable.municipio}"></td>
-        <td><a th:href="@{/responsablemunicipio/update/{identificador}(identificador=${responsable.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
+    <tr th:each="responsablemunicipio: ${responsables}">
+        <td th:text="${responsablemunicipio.nombre}"></td>
+        <td th:text="${responsablemunicipio.email}"></td>
+        <td th:text="${responsablemunicipio.numeroTelefono}"></td>
+        <td th:text="${responsablemunicipio.fechaInicio}"></td>
+        <td th:text="${responsablemunicipio.fechaFin}"></td>
+        <td th:text="${responsablemunicipio.identificador}"></td>
+        <td th:text="${responsablemunicipio.municipio}"></td>
+        <td><a th:href="@{/responsablemunicipio/update/{identificador}(identificador=${responsablemunicipio.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
-        <td><a th:href="@{/responsablemunicipio/delete/{identificador}(identificador=${responsable.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        <td><a th:href="@{/responsablemunicipio/delete/{identificador}(identificador=${responsablemunicipio.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
         </td>
     </tr>
     </tbody>
 </table>
-<a href="add"><button type="button" class="btn btn-success">Añade ResponsableMunicipio</button></a>
+<a href="add"><button type="button" class="btn btn-success">Añade Responsable de Municipio</button></a>
 </body>
 </html>
