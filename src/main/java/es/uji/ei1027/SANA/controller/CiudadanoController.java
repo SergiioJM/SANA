@@ -38,8 +38,6 @@ public class CiudadanoController {
     public String processAddSubmit(@ModelAttribute("ciudadano") Ciudadano ciudadano, BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "ciudadano/add";
-        //Date hoy= Date.from(Instant.now());
-        //Controlador controlador1 = new Controlador("Co1","Manel","Pobla","manel@gmail.com",123456789,hoy,hoy);
         ciudadanoDAO.addCiudadano(ciudadano);
         return "redirect:list";
     }

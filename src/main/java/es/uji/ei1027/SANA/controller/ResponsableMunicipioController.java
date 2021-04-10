@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
-@RequestMapping("/responsablemunicipio")
+@RequestMapping("/responsable")
 public class ResponsableMunicipioController {
 
     private ResponsableMunicipioDAO responsableMunicipioDAO;
@@ -24,37 +24,37 @@ public class ResponsableMunicipioController {
 
     @RequestMapping("/list")
     public String list(Model model){
-        model.addAttribute("responsablesTotales", responsableMunicipioDAO.getResponsablesMunicipios());
-        return "responsablemunicipio/list";
+        model.addAttribute("responsables", responsableMunicipioDAO.getResponsablesMunicipios());
+        return "responsable/list";
     }
 
     @RequestMapping(value="/add")
     public String addResponsableMunicipio(Model model) {
-        model.addAttribute("responsablemunicipio", new ResponsableMunicipio());
-        return "responsablemunicipio/add";
+        model.addAttribute("responsable", new ResponsableMunicipio());
+        return "responsable/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("responsablemunicipio") ResponsableMunicipio responsableMunicipio,
+    public String processAddSubmit(@ModelAttribute("responsable") ResponsableMunicipio responsableMunicipio,
                                    BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "responsablemunicipio/add";
+            return "responsable/add";
         responsableMunicipioDAO.addResponsableMunicipio(responsableMunicipio);
         return "redirect:list";
     }
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
     public String editResponsableMunicipio(Model model, @PathVariable String identificador) {
-        model.addAttribute("responsablemunicipio", responsableMunicipioDAO.getResponsableMunicipio(identificador));
-        return "responsablemunicipio/update";
+        model.addAttribute("responsable", responsableMunicipioDAO.getResponsableMunicipio(identificador));
+        return "responsable/update";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("responsablemunicipio") ResponsableMunicipio responsableMunicipio,
+            @ModelAttribute("responsable") ResponsableMunicipio responsableMunicipio,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "responsablemunicipio/update";
+            return "responsable/update";
         responsableMunicipioDAO.updateResponsableMunicipio(responsableMunicipio);
         return "redirect:list";
     }

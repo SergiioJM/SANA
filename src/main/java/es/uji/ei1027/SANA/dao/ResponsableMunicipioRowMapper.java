@@ -11,9 +11,9 @@ public final class ResponsableMunicipioRowMapper implements RowMapper<Responsabl
         ResponsableMunicipio responsableMunicipio = new ResponsableMunicipio();
         responsableMunicipio.setNombre(rs.getString("nombre"));
         responsableMunicipio.setEmail(rs.getString("email"));
-        responsableMunicipio.setNumeroTelefono(rs.getInt("numerotelefono"));
-        responsableMunicipio.setfechaInicio(rs.getObject("fechainicio", LocalDate.class));
-        responsableMunicipio.setfechaFin(rs.getObject("fechafin", LocalDate.class));
+        responsableMunicipio.setNumero(rs.getInt("numerotelefono"));
+        responsableMunicipio.setfechaInicio(rs.getObject("fechaInicio", LocalDate.class));
+        responsableMunicipio.setfechaFin(rs.getObject("fechaFin", LocalDate.class));
         responsableMunicipio.setIdentificador(rs.getString("identificador"));
         responsableMunicipio.setMunicipio(rs.getString("municipio"));
         return responsableMunicipio;

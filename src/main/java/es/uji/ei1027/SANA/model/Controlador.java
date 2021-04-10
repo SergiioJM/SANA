@@ -11,8 +11,8 @@ public class Controlador {
     String direccion;
     String email;
     int telefono;
-    LocalDate fechaInicio;
-    LocalDate fechaFin;
+    java.time.LocalDate fechaInicio;
+    java.time.LocalDate fechaFin;
 
     public Controlador() {
     }

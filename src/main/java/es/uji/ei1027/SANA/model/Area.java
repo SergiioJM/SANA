@@ -4,9 +4,9 @@ public class Area {
     String idArea;
     String nombre;
     String descripcion;
-    CaracteristicasFisicas caracteristicas;
+    CaracteristicasFisicas caracteristicas; //Creo que el fallo es esto
     String localizacion;
-    TipoAcceso tipoAcceso;
+    TipoAcceso tipoAcceso;  //Creo que el fallo es esto
     String municipio;
 
     public Area() {

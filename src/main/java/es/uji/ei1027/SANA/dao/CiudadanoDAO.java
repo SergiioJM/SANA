@@ -23,12 +23,12 @@ public class CiudadanoDAO {
 
     public void addCiudadano(Ciudadano ciudadano) {
         jdbcTemplate.update("INSERT INTO Ciudadano VALUES(?,?,?,?,?,?)",
-                ciudadano.getNombre(),ciudadano.getNIF(),ciudadano.getEmail(),ciudadano.getResidencia(),ciudadano.getFechaRegistro(),ciudadano.getReserva());
+                ciudadano.getNombre(),ciudadano.getNif(),ciudadano.getEmail(),ciudadano.getResidencia(),ciudadano.getFechaRegistro(),ciudadano.getReserva());
     }
 
     public void updateCiudadano(Ciudadano ciudadano) {
         jdbcTemplate.update("UPDATE Ciudadano SET nombre =?, email =?, residencia =?, fechaRegistro =?, reserva=? WHERE nif =?",
-                ciudadano.getNombre(),ciudadano.getEmail(),ciudadano.getResidencia(),ciudadano.getFechaRegistro(),ciudadano.getReserva(),ciudadano.getNIF());
+                ciudadano.getNombre(),ciudadano.getEmail(),ciudadano.getResidencia(),ciudadano.getFechaRegistro(),ciudadano.getReserva(),ciudadano.getNif());
     }
 
     public void deleteCiudadano(String Nif) {

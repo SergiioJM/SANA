@@ -20,8 +20,8 @@
     <tbody>
     <tr th:each="zona: ${zonas}">
         <td th:text="${zona.identificador}"></td>
-        <td th:text="${zona.nombre}"></td>
-        <td th:text="${zona.direccion}"></td>
+        <td th:text="${zona.capacidad}"></td>
+        <td th:text="${zona.idArea}"></td>
         <td><a th:href="@{/zona/update/{identificador}(identificador=${zona.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
         <td><a th:href="@{/zona/delete/{identificador}(identificador=${zona.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>

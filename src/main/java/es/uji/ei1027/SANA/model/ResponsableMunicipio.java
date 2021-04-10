@@ -5,21 +5,12 @@ import java.time.LocalDate;
 public class ResponsableMunicipio {
     private String nombre;
     private String email;
-    private int numeroTelefono;
-    private LocalDate fechainicio;
-    private LocalDate fechafin;
+    private int numero;
+    private java.time.LocalDate fechaInicioo;
+    private java.time.LocalDate fechaFin;
     private String identificador;
     private String municipio;
 
-    public ResponsableMunicipio(String nombre, String email, int numeroTelefono, LocalDate fechaInicio, LocalDate fechafin, String identificador, String municipio) {
-        this.nombre = nombre;
-        this.email = email;
-        this.numeroTelefono = numeroTelefono;
-        this.fechainicio = fechaInicio;
-        this.fechafin = fechafin;
-        this.identificador = identificador;
-        this.municipio = municipio;
-    }
 
     public ResponsableMunicipio() {
     }
@@ -40,28 +31,28 @@ public class ResponsableMunicipio {
         this.email = email;
     }
 
-    public int getNumeroTelefono() {
-        return numeroTelefono;
+    public int getNumero() {
+        return numero;
     }
 
-    public void setNumeroTelefono(int numeroTelefono) {
-        this.numeroTelefono = numeroTelefono;
+    public void setNumero(int numero) {
+        this.numero = numero;
     }
 
-    public LocalDate getfechaInicio() {
-        return fechainicio;
+    public java.time.LocalDate getfechaInicio() {
+        return fechaInicioo;
     }
 
-    public void setfechaInicio(LocalDate fechaInicio) {
-        this.fechainicio = fechaInicio;
+    public void setfechaInicio(java.time.LocalDate fechaInicio) {
+        this.fechaInicioo = fechaInicio;
     }
 
-    public LocalDate getfechaFin() {
-        return fechafin;
+    public java.time.LocalDate getfechaFin() {
+        return fechaFin;
     }
 
-    public void setfechaFin(LocalDate fechaFin) {
-        this.fechafin = fechaFin;
+    public void setfechaFin(java.time.LocalDate fechaFin) {
+        this.fechaFin = fechaFin;
     }
 
     public String getIdentificador() {
@@ -85,9 +76,9 @@ public class ResponsableMunicipio {
         return "ResponsableMunicipio{" +
                 "nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
-                ", numeroTelefono=" + numeroTelefono +
-                ", fechaInicio=" + fechainicio +
-                ", fechaFin=" + fechafin +
+                ", numeroTelefono=" + numero +
+                ", fechaInicio=" + fechaInicioo +
+                ", fechaFin=" + fechaFin +
                 ", identificador='" + identificador + '\'' +
                 ", municipio=" + municipio +
                 '}';

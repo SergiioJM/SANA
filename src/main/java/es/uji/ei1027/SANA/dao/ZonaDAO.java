@@ -1,5 +1,6 @@
 package es.uji.ei1027.SANA.dao;
 
+import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.Zona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -18,6 +19,30 @@ public class ZonaDAO {
     public void setDataSource(DataSource dataSource) {
         jdbcTemplate = new JdbcTemplate(dataSource);
 
+    }
+    public void addZona(Zona zona) {
+        jdbcTemplate.update("INSERT INTO Zona VALUES(?,?,?)",
+                zona.getIdentificador(),zona.getCapacidad(),zona.getIdArea());
+    }
+
+    public void updateZona(Zona zona) {
+        jdbcTemplate.update("UPDATE Zona SET capacidad =?, idArea=? WHERE identificador =?",
+                zona.getCapacidad(),zona.getIdArea(),zona.getIdentificador());
+    }
+
+    public void deleteZona(String identificador) {
+        jdbcTemplate.update("DELETE FROM Zona WHERE identificador =?",
+                identificador);
+    }
+
+    public Zona getZona(String identificador) {
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM Zona WHERE identificador =?",
+                    new es.uji.ei1027.SANA.dao.ZonaRowMapper(), identificador);
+        }
+        catch(EmptyResultDataAccessException e) {
+            return null;
+        }
     }
 
     public List<Zona> getZonas(){

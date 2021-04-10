@@ -1,14 +1,17 @@
 package es.uji.ei1027.SANA.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Reserva {
     String identificador;
+    @DateTimeFormat(pattern = "HH:mm")
     LocalTime hora;
     LocalDate fecha;
     int numeroPersonas;
-    Estado estado;
+    Estado estado; //Creo que el fallo es esto
     String zona;
 
     public Reserva(String identificador, LocalTime hora, LocalDate fecha, int numeroPersonas, Estado estado, String zona) {

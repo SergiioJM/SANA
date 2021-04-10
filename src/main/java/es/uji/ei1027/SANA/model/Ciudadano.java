@@ -4,15 +4,15 @@ import java.time.LocalDate;
 
 public class Ciudadano {
     String nombre;
-    String NIF;
+    String nif;
     String email;
     String residencia;
     LocalDate fechaRegistro;
     String reserva;
 
-    public Ciudadano(String nombre, String NIF, String email, String residencia, LocalDate fechaRegistro, String reserva) {
+    public Ciudadano(String nombre, String nif, String email, String residencia, LocalDate fechaRegistro, String reserva) {
         this.nombre = nombre;
-        this.NIF = NIF;
+        this.nif = nif;
         this.email = email;
         this.residencia = residencia;
         this.fechaRegistro = fechaRegistro;
@@ -31,12 +31,12 @@ public class Ciudadano {
         this.nombre = nombre;
     }
 
-    public String getNIF() {
-        return NIF;
+    public String getNif() {
+        return nif;
     }
 
-    public void setNIF(String NIF) {
-        this.NIF = NIF;
+    public void setNif(String nif) {
+        this.nif = nif;
     }
 
     public String getEmail() {
@@ -75,7 +75,7 @@ public class Ciudadano {
     public String toString() {
         return "Ciudadano{" +
                 "nombre='" + nombre + '\'' +
-                ", NIF='" + NIF + '\'' +
+                ", NIF='" + nif + '\'' +
                 ", email='" + email + '\'' +
                 ", residencia='" + residencia + '\'' +
                 ", fechaRegistro=" + fechaRegistro +

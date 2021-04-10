@@ -1,5 +1,7 @@
 package es.uji.ei1027.SANA.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
@@ -7,7 +9,9 @@ public class ServicioTemporal {
     String nombre;
     LocalDate fechaInicio;
     LocalDate fechaFin;
+    @DateTimeFormat(pattern = "HH:mm:ss")
     LocalTime horaInicio;
+    @DateTimeFormat(pattern = "HH:mm:ss")
     LocalTime horaFin;
     String area;
 

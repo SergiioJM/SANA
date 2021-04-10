@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Modificar Responsable de Municipio</title>
+    <title>Crear Responsable de Municipio</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Modifica el Responsable de Municipio</h2>
-<form action="#" th:action="@{/responsablemunicipio/update}"
-      th:object="${responsablemunicipio}" method="post">
+<h2>Nuevo Responsable de Municipio</h2>
+<form action="#" th:action="@{/responsable/add}"
+      th:object="${responsable}" method="post">
     <table>
         <tr>
             <td><label>Nombre</label></td>
@@ -40,7 +40,7 @@
             <td><input type="text" th:field="*{municipio}" /></td>
         </tr>
         <tr>
-            <td colspan="2"><input type="submit" value="Modifica el Responsable del Municipio" /></td>
+            <td colspan="2"><input type="submit" value="Añade Responsable de Municipio" /></td>
         </tr>
     </table>
 </form>

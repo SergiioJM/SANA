@@ -6,7 +6,6 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,12 +22,12 @@ public class ResponsableMunicipioDAO {
 
     public void addResponsableMunicipio(ResponsableMunicipio responsableMunicipio) {
         jdbcTemplate.update("INSERT INTO ResponsableMunicipio VALUES(?,?,?,?,?,?,?)",
-                responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),responsableMunicipio.getNumeroTelefono(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),responsableMunicipio.getIdentificador(),responsableMunicipio.getMunicipio());
+                responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),responsableMunicipio.getNumero(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),responsableMunicipio.getIdentificador(),responsableMunicipio.getMunicipio());
     }
 
     public void updateResponsableMunicipio(ResponsableMunicipio responsableMunicipio) {
         jdbcTemplate.update("UPDATE ResponsableMunicipio SET nombre =?, email =?, numeroTelefono =?, fechaInicio =?, fechaFin =?, municipio =? WHERE identificador =?",
-                responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),responsableMunicipio.getNumeroTelefono(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),responsableMunicipio.getMunicipio(), responsableMunicipio.getIdentificador());
+                responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),responsableMunicipio.getNumero(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),responsableMunicipio.getMunicipio(), responsableMunicipio.getIdentificador());
     }
 
     public void deleteResponsableMunicipio(String identificador) {
@@ -48,10 +47,9 @@ public class ResponsableMunicipioDAO {
 
     public List<ResponsableMunicipio> getResponsablesMunicipios(){
         try{
-            List<ResponsableMunicipio> responsableMunicipios= jdbcTemplate.query(
+            return jdbcTemplate.query(
                     "SELECT * FROM ResponsableMunicipio",
                     new ResponsableMunicipioRowMapper());
-            return responsableMunicipios;
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<ResponsableMunicipio>();
