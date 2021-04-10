@@ -8,9 +8,9 @@ public class Ciudadano {
     String email;
     String residencia;
     LocalDate fechaRegistro;
-    Reserva reserva;
+    String reserva;
 
-    public Ciudadano(String nombre, String NIF, String email, String residencia, LocalDate fechaRegistro, Reserva reserva) {
+    public Ciudadano(String nombre, String NIF, String email, String residencia, LocalDate fechaRegistro, String reserva) {
         this.nombre = nombre;
         this.NIF = NIF;
         this.email = email;
@@ -63,11 +63,11 @@ public class Ciudadano {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public Reserva getReserva() {
+    public String getReserva() {
         return reserva;
     }
 
-    public void setReserva(Reserva reserva) {
+    public void setReserva(String reserva) {
         this.reserva = reserva;
     }
 

@@ -9,9 +9,9 @@ public class Reserva {
     LocalDate fecha;
     int numeroPersonas;
     Estado estado;
-    Zona zona;
+    String zona;
 
-    public Reserva(String identificador, LocalTime hora, LocalDate fecha, int numeroPersonas, Estado estado, Zona zona) {
+    public Reserva(String identificador, LocalTime hora, LocalDate fecha, int numeroPersonas, Estado estado, String zona) {
         this.identificador = identificador;
         this.hora = hora;
         this.fecha = fecha;
@@ -64,11 +64,11 @@ public class Reserva {
         this.estado = estado;
     }
 
-    public Zona getZona() {
+    public String getZona() {
         return zona;
     }
 
-    public void setZona(Zona zona) {
+    public void setZona(String zona) {
         this.zona = zona;
     }
 

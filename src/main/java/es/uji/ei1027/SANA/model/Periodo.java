@@ -8,9 +8,9 @@ public class Periodo {
     LocalDate fechaFin;
     LocalTime horaInicio;
     LocalTime horaFin;
-    Area idArea;
+    String idArea;
 
-    public Periodo(LocalDate fechaInicio, LocalDate fechaFin, LocalTime horaInicio, LocalTime horaFin, Area idArea) {
+    public Periodo(LocalDate fechaInicio, LocalDate fechaFin, LocalTime horaInicio, LocalTime horaFin, String idArea) {
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.horaInicio = horaInicio;
@@ -54,11 +54,11 @@ public class Periodo {
         this.horaFin = horaFin;
     }
 
-    public Area getIdArea() {
+    public String getIdArea() {
         return idArea;
     }
 
-    public void setIdArea(Area idArea) {
+    public void setIdArea(String idArea) {
         this.idArea = idArea;
     }
 

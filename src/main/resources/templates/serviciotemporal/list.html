@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Servicios Temporales</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<h1>Lista de Servicios Temporales</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th>FechaInicio</th>
+        <th>FechaFin</th>
+        <th>HoraInicio</th>
+        <th>HoraFin</th>
+        <th>Nombre de Area</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="servicio: ${serviciostemporales}">
+        <td th:text="${servicio.nombre}"></td>
+        <td th:text="${servicio.fechaInicio}"></td>
+        <td th:text="${servicio.fechaFin}"></td>
+        <td th:text="${servicio.horaInicio}"></td>
+        <td th:text="${servicio.horaFin}"></td>
+        <td th:text="${servicio.nombreArea}"></td>
+        <td><a th:href="@{/serviciotemporal/update/{nombre}(nombre=${servicio.nombre})}"><button type="button" class="btn btn-warning">Edita</button></a>
+        </td>
+        <td><a th:href="@{/serviciotemporal/delete/{nombre}(nombre=${servicio.nombre})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add"><button type="button" class="btn btn-success">Añade servicio Temporal</button></a>
+</body>
+</html>

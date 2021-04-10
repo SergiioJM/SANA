@@ -25,7 +25,7 @@ public class CiudadanoController {
     @RequestMapping("/list")
     public String listaDeCiudadanos(Model model){
         model.addAttribute("ciudadanos", ciudadanoDAO.getCiudadanos());
-        return "ciudadanos/list";
+        return "ciudadano/list";
     }
 
     @RequestMapping(value="/add")

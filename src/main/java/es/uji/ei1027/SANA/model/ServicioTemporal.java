@@ -9,9 +9,9 @@ public class ServicioTemporal {
     LocalDate fechaFin;
     LocalTime horaInicio;
     LocalTime horaFin;
-    Area area;
+    String area;
 
-    public ServicioTemporal(String nombre, LocalDate fechaInicio, LocalDate fechaFin, LocalTime horaInicio, LocalTime horaFin, Area area) {
+    public ServicioTemporal(String nombre, LocalDate fechaInicio, LocalDate fechaFin, LocalTime horaInicio, LocalTime horaFin, String area) {
         this.nombre = nombre;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -64,11 +64,11 @@ public class ServicioTemporal {
         this.horaFin = horaFin;
     }
 
-    public Area getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(Area area) {
+    public void setArea(String area) {
         this.area = area;
     }
 

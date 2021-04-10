@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class ResponsableMunicipioRowMapper implements RowMapper<ResponsableMunicipio> {
+public final class ResponsableMunicipioRowMapper implements RowMapper<ResponsableMunicipio> {
     public ResponsableMunicipio mapRow(ResultSet rs, int rowNum) throws SQLException {
         ResponsableMunicipio responsableMunicipio = new ResponsableMunicipio();
         responsableMunicipio.setNombre(rs.getString("nombre"));

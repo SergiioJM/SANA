@@ -8,7 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
 
-public class ControladorRowMapper implements RowMapper<Controlador> {
+public final class ControladorRowMapper implements RowMapper<Controlador> {
     public Controlador mapRow(ResultSet rs, int rowNum) throws SQLException {
         Controlador controlStaff = new Controlador();
         controlStaff.setIdentificador(rs.getString("identificador"));

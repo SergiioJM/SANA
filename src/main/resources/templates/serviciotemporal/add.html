@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear Servicio Temporal</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nuevo Servicio Temporal</h2>
+<form action="#" th:action="@{/serviciotemporal/add}"
+      th:object="${serviciotemporal}" method="post">
+    <table>
+        <tr>
+            <td><label>Nombre: </label></td>
+            <td><input type="text" th:field="*{nombre}" /></td>
+        </tr>
+        <tr>
+            <td><label>Fecha Inicio: </label></td>
+            <td><input type="date" th:field="*{fechaInicio}" /></td>
+        </tr>
+        <tr>
+            <td><label>Fecha Fin: </label></td>
+            <td><input type="date" th:field="*{fechaFin}" /></td>
+        </tr>
+        <tr>
+            <td><label>Hora Fin: </label></td>
+            <td><input type="text" th:field="*{horaInicio}" /></td>
+        </tr>
+        <tr>
+            <td><label>Hora Fin: </label></td>
+            <td><input type="text" th:field="*{horaFin}" /></td>
+        </tr>
+        <tr>
+            <td><label>NombreArea: </label></td>
+            <td><input type="text" th:field="*{nombreArea}" /></td>
+        </tr>
+
+        <tr>
+            <td colspan="2"><input type="submit" value="Añade Servicio Temporal" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

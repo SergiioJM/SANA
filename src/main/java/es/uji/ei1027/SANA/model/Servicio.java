@@ -2,13 +2,13 @@ package es.uji.ei1027.SANA.model;
 
 public class Servicio {
     String nombre;
-    String descricpcion;
+    String descripcion;
     String estado;
-    Area area;
+    String area;
 
-    public Servicio(String nombre, String descricpcion, String estado, Area area) {
+    public Servicio(String nombre, String descripcion, String estado, String area) {
         this.nombre = nombre;
-        this.descricpcion = descricpcion;
+        this.descripcion = descripcion;
         this.estado = estado;
         this.area = area;
     }
@@ -25,12 +25,12 @@ public class Servicio {
         this.nombre = nombre;
     }
 
-    public String getDescricpcion() {
-        return descricpcion;
+    public String getDescripcion() {
+        return descripcion;
     }
 
-    public void setDescricpcion(String descricpcion) {
-        this.descricpcion = descricpcion;
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
     public String getEstado() {
@@ -41,11 +41,11 @@ public class Servicio {
         this.estado = estado;
     }
 
-    public Area getArea() {
+    public String getArea() {
         return area;
     }
 
-    public void setArea(Area area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
@@ -53,7 +53,7 @@ public class Servicio {
     public String toString() {
         return "Servicio{" +
                 "nombre='" + nombre + '\'' +
-                ", descricpcion='" + descricpcion + '\'' +
+                ", descricpcion='" + descripcion + '\'' +
                 ", estado='" + estado + '\'' +
                 ", area=" + area +
                 '}';

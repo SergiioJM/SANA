@@ -18,7 +18,7 @@ public final class AreaRowMapper implements RowMapper<Area> {
         area.setCaracteristicas((CaracteristicasFisicas) rs.getObject(rs.getString("caracteristicas")));
         area.setLocalizacion(rs.getString("localizacion"));
         area.setTipoAcceso((TipoAcceso) rs.getObject(rs.getString("tipoAcceso")));
-        area.setMunicipio((Municipio) rs.getObject(rs.getString("municipio")));
+        area.setMunicipio(rs.getString("municipio"));
         return area;
     }
 }

@@ -6,10 +6,10 @@ public class PeriodoAsignado {
     String identificador;
     LocalDate fechaInicio;
     LocalDate fechaFin;
-    Controlador controlador;
-    Area area;
+    String controlador;
+    String area;
 
-    public PeriodoAsignado(String identificador, LocalDate fechaInicio, LocalDate fechaFin, Controlador controlador, Area area) {
+    public PeriodoAsignado(String identificador, LocalDate fechaInicio, LocalDate fechaFin, String controlador, String area) {
         this.identificador = identificador;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
@@ -33,11 +33,11 @@ public class PeriodoAsignado {
         return fechaFin;
     }
 
-    public Controlador getControlador() {
+    public String getControlador() {
         return controlador;
     }
 
-    public Area getArea() {
+    public String getArea() {
         return area;
     }
 
@@ -53,11 +53,11 @@ public class PeriodoAsignado {
         this.fechaFin = fechaFin;
     }
 
-    public void setControlador(Controlador controlador) {
+    public void setControlador(String controlador) {
         this.controlador = controlador;
     }
 
-    public void setArea(Area area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
