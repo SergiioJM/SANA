@@ -6,15 +6,15 @@ public class PeriodoAsignado {
     String identificador;
     LocalDate fechaInicio;
     LocalDate fechaFin;
-    String controlador;
-    String area;
+    String nombreControlador;
+    String nombreArea;
 
-    public PeriodoAsignado(String identificador, LocalDate fechaInicio, LocalDate fechaFin, String controlador, String area) {
+    public PeriodoAsignado(String identificador, LocalDate fechaInicio, LocalDate fechaFin, String nombreControlador, String nombreArea) {
         this.identificador = identificador;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
-        this.controlador = controlador;
-        this.area = area;
+        this.nombreControlador = nombreControlador;
+        this.nombreArea = nombreArea;
     }
 
     public PeriodoAsignado() {
@@ -34,11 +34,11 @@ public class PeriodoAsignado {
     }
 
     public String getControlador() {
-        return controlador;
+        return nombreControlador;
     }
 
     public String getArea() {
-        return area;
+        return nombreArea;
     }
 
     public void setIdentificador(String identificador) {
@@ -53,12 +53,12 @@ public class PeriodoAsignado {
         this.fechaFin = fechaFin;
     }
 
-    public void setControlador(String controlador) {
-        this.controlador = controlador;
+    public void setControlador(String nombreControlador) {
+        this.nombreControlador = nombreControlador;
     }
 
-    public void setArea(String area) {
-        this.area = area;
+    public void setArea(String nombreArea) {
+        this.nombreArea = nombreArea;
     }
 
     @Override
@@ -67,8 +67,8 @@ public class PeriodoAsignado {
                 "identificador='" + identificador + '\'' +
                 ", fechaInicio=" + fechaInicio +
                 ", fechaFin=" + fechaFin +
-                ", controlador=" + controlador +
-                ", area=" + area +
+                ", controlador=" + nombreControlador +
+                ", area=" + nombreArea +
                 '}';
     }
 }

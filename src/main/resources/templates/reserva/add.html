@@ -7,32 +7,32 @@
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Nuevo Reserva</h2>
+<h2>Nueva Reserva</h2>
 <form action="#" th:action="@{/reserva/add}"
       th:object="${reserva}" method="post">
     <table>
         <tr>
-            <td><label>Identificador: </label></td>
+            <td><label>Identificado</label></td>
             <td><input type="text" th:field="*{identificador}" /></td>
         </tr>
         <tr>
-            <td><label>Hora: </label></td>
+            <td><label>Hora</label></td>
             <td><input type="text" th:field="*{hora}" /></td>
         </tr>
         <tr>
-            <td><label>Fecha: </label></td>
+            <td><label>Fecha</label></td>
             <td><input type="date" th:field="*{fecha}" /></td>
         </tr>
         <tr>
-            <td><label>NumeroPersonas: </label></td>
+            <td><label>Numero de Personas</label></td>
             <td><input type="number" th:field="*{numeroPersonas}" /></td>
         </tr>
         <tr>
-            <td><label>Estado: </label></td>
+            <td><label>Estado</label></td>
             <td><input type="text" th:field="*{estado}" /></td>
         </tr>
         <tr>
-            <td><label>Zona: </label></td>
+            <td><label>Zona</label></td>
             <td><input type="text" th:field="*{zona}" /></td>
         </tr>
         <tr>

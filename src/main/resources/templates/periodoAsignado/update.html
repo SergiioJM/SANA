@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Actualiza Periodo Asignado</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Actualiza Periodo Asignado</h2>
+<form action="#" th:action="@{/periodoAsignado/update}"
+      th:object="${periodoAsignado}" method="post">
+  <table>
+    <tr>
+      <td><label>Identificador: </label></td>
+      <td><input type="text" th:field="*{identificador}" /></td>
+    </tr>
+    <tr>
+      <td><label>Fecha de Inicio</label></td>
+      <td><input type="text" th:field="*{fechaInicio}" /></td>
+    </tr>
+    <tr>
+      <td><label>Fecha de Fin</label></td>
+      <td><input type="text" th:field="*{fechaFin}" /></td>
+    </tr>
+    <tr>
+      <td><label>Código del Controlador</label></td>
+      <td><input type="text" th:field="*{nombreControlador}" /></td>
+    </tr>
+    <tr>
+      <td><label>Código del Area</label></td>
+      <td><input type="text" th:field="*{nombreArea}" /></td>
+    </tr>
+    <tr>
+      <td colspan="2"><input type="submit" value="Actualiza Periodo Asignado" /></td>
+    </tr>
+  </table>
+</form>
+</body>
+</html>

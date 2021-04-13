@@ -12,8 +12,8 @@ public final class PeriodoAsignadoRowMapper implements RowMapper<PeriodoAsignado
         periodoAsignado.setIdentificador(rs.getString("identificador"));
         periodoAsignado.setFechaInicio(rs.getObject("fechaInicio", LocalDate.class));
         periodoAsignado.setFechaFin(rs.getObject("fechaFin", LocalDate.class));
-        periodoAsignado.setControlador(rs.getString("controlador"));
-        periodoAsignado.setArea(rs.getString("area"));
+        periodoAsignado.setControlador(rs.getString("nombreControlador"));
+        periodoAsignado.setArea(rs.getString("nombreArea"));
         return periodoAsignado;
     }
 }

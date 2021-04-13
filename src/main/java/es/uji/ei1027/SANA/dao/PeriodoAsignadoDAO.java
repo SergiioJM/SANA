@@ -20,9 +20,24 @@ public class PeriodoAsignadoDAO {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    public void addPeriodoAsignado(PeriodoAsignado periodoAsignado) {
+        jdbcTemplate.update("INSERT INTO Municipio VALUES(?,?,?,?,?)",
+                periodoAsignado.getIdentificador(), periodoAsignado.getFechaInicio(), periodoAsignado.getFechaFin(), periodoAsignado.getControlador(), periodoAsignado.getArea());
+    }
+
+    public void updatePeriodoAsignado(PeriodoAsignado periodoAsignado) {
+        jdbcTemplate.update("UPDATE PeriodoAsignado SET VALUES fechaInicio =?, fechaFin =?, nombreControlador =?, nombreArea =? WHERE identificador =?)",
+                periodoAsignado.getFechaInicio(), periodoAsignado.getFechaFin(), periodoAsignado.getControlador(), periodoAsignado.getArea(), periodoAsignado.getIdentificador());
+    }
+
+    public void deletePeriodoAsignado(String identificador) {
+        jdbcTemplate.update("DELETE FROM PeriodoAsignado WHERE identificador =?",
+                identificador);
+    }
+
     public PeriodoAsignado getPeriodoAsignado(String area) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM PeridoAsignado WHERE area =?",
+            return jdbcTemplate.queryForObject("SELECT * FROM PeriodoAsignado WHERE nombreArea =?",
                     new PeriodoAsignadoRowMapper(), area);
         }
         catch(EmptyResultDataAccessException e) {
