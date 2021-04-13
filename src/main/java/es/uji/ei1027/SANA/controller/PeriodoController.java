@@ -1,7 +1,6 @@
 package es.uji.ei1027.SANA.controller;
 
 
-import es.uji.ei1027.SANA.dao.MunicipioDAO;
 import es.uji.ei1027.SANA.dao.PeriodoDAO;
 import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.Periodo;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.time.Period;
 
 @Controller
 @RequestMapping("/periodo")
@@ -48,9 +46,9 @@ public class PeriodoController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/update/{cp}", method = RequestMethod.GET)
-    public String editPeriodo(Model model, @PathVariable String cp) {
-        model.addAttribute("periodo", periodoDAO.getPeriodo(cp));
+    @RequestMapping(value="/update/{idArea}", method = RequestMethod.GET)
+    public String editPeriodo(Model model, @PathVariable String idArea) {
+        model.addAttribute("periodo", periodoDAO.getPeriodo(idArea));
         return "periodo/update";
     }
 
@@ -59,7 +57,7 @@ public class PeriodoController {
             @ModelAttribute("periodo") Periodo periodo,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "municipio/update";
+            return "periodo/update";
         periodoDAO.updatePeriodo(periodo);
         return "redirect:list";
     }
