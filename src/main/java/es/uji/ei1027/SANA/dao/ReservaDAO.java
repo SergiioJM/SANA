@@ -52,7 +52,7 @@ public class ReservaDAO {
                     new es.uji.ei1027.SANA.dao.ReservaRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
-            return new ArrayList<Reserva>();
+            return new ArrayList<>();
         }
     }
 }

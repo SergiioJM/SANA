@@ -1,6 +1,5 @@
 package es.uji.ei1027.SANA.dao;
 
-import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.ServicioTemporal;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -53,7 +52,7 @@ public class ServicioTemporalDAO {
                     new es.uji.ei1027.SANA.dao.ServicioTemporalRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
-            return new ArrayList<ServicioTemporal>();
+            return new ArrayList<>();
         }
     }
 }

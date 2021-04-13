@@ -53,7 +53,7 @@ public class ControladorDAO {
                     new es.uji.ei1027.SANA.dao.ControladorRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
-            return new ArrayList<Controlador>();
+            return new ArrayList<>();
         }
     }
 }

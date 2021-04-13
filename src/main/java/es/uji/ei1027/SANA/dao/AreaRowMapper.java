@@ -1,7 +1,6 @@
 package es.uji.ei1027.SANA.dao;
 
 import es.uji.ei1027.SANA.model.Area;
-import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.CaracteristicasFisicas;
 import es.uji.ei1027.SANA.model.TipoAcceso;
 import org.springframework.jdbc.core.RowMapper;

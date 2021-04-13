@@ -1,6 +1,5 @@
 package es.uji.ei1027.SANA.dao;
 
-import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.Zona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -52,7 +51,7 @@ public class ZonaDAO {
                     new es.uji.ei1027.SANA.dao.ZonaRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
-            return new ArrayList<Zona>();
+            return new ArrayList<>();
         }
     }
 }
