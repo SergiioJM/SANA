@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Gestionar Periodos Asignados</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<h1>Lista de Periodos Asignados</h1>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Identificador</th>
+    <th>Fecha de Inicio</th>
+    <th>Fecha de Fin</th>
+    <th>Controlador</th>
+    <th>Area</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="periodoAsignado: ${periodosAsignados}">
+    <td th:text="${periodoAsignado.identificador}"></td>
+    <td th:text="${periodoAsignado.fechaInicio}"></td>
+    <td th:text="${periodoAsignado.fechaFin}"></td>
+    <td th:text="${periodoAsignado.controlador}"></td>
+    <td th:text="${periodoAsignado.area}"></td>
+    <td><a th:href="@{/reserva/update/{identificador}(identificador=${periodoAsignado.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
+    </td>
+    <td><a th:href="@{/reserva/delete/{identificador}(identificador=${periodoAsignado.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<a href="add"><button type="button" class="btn btn-success">Añade reserva</button></a>
+</body>
+</html>

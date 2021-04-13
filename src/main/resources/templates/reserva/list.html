@@ -21,16 +21,16 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="reservaa: ${reserva}">
-        <td th:text="${reservaa.identificador}"></td>
-        <td th:text="${reservaa.hora}"></td>
-        <td th:text="${reservaa.fecha}"></td>
-        <td th:text="${reservaa.numeroPersonas}"></td>
-        <td th:text="${reservaa.estado}"></td>
-        <td th:text="${reservaa.zona}"></td>
-        <td><a th:href="@{/reserva/update/{identificador}(identificador=${reservaa.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
+    <tr th:each="reserva: ${reservas}">
+        <td th:text="${reserva.identificador}"></td>
+        <td th:text="${reserva.hora}"></td>
+        <td th:text="${reserva.fecha}"></td>
+        <td th:text="${reserva.numeroPersonas}"></td>
+        <td th:text="${reserva.estado}"></td>
+        <td th:text="${reserva.zona}"></td>
+        <td><a th:href="@{/reserva/update/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
-        <td><a th:href="@{/reserva/delete/{identificador}(identificador=${reservaa.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        <td><a th:href="@{/reserva/delete/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
         </td>
     </tr>
     </tbody>

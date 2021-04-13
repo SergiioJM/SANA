@@ -24,7 +24,7 @@ public class ReservaController {
 
     @RequestMapping("/list")
     public String listaDeReservas(Model model){
-        model.addAttribute("reserva", reservaDAO.getReservas());
+        model.addAttribute("reservas", reservaDAO.getReservas());
         return "reserva/list";
     }
 
