@@ -21,7 +21,7 @@ public class PeriodoAsignadoDAO {
     }
 
     public void addPeriodoAsignado(PeriodoAsignado periodoAsignado) {
-        jdbcTemplate.update("INSERT INTO Municipio VALUES(?,?,?,?,?)",
+        jdbcTemplate.update("INSERT INTO PeriodoAsignado VALUES(?,?,?,?,?)",
                 periodoAsignado.getIdentificador(), periodoAsignado.getFechaInicio(), periodoAsignado.getFechaFin(), periodoAsignado.getControlador(), periodoAsignado.getArea());
     }
 
