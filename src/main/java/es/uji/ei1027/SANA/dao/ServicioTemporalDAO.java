@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 @Repository
 public class ServicioTemporalDAO {
+
     private JdbcTemplate jdbcTemplate;
 
     @Autowired

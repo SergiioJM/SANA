@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 @RequestMapping("/serviciotemporal")
 public class ServicioTemporalController {
+
     private ServicioTemporalDAO servicioTemporalDAO;
 
     @Autowired

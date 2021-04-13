@@ -19,7 +19,9 @@ public class ControladorController {
     private ControladorDAO controladorDAO;
 
     @Autowired
-    public void setControladorDAO(ControladorDAO controladorDAO) { this.controladorDAO = controladorDAO; }
+    public void setControladorDAO(ControladorDAO controladorDAO) {
+        this.controladorDAO = controladorDAO;
+    }
 
 
     @RequestMapping("/list")

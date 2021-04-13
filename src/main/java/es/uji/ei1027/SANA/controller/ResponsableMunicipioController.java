@@ -23,7 +23,7 @@ public class ResponsableMunicipioController {
     }
 
     @RequestMapping("/list")
-    public String list(Model model){
+    public String listaResponsables(Model model){
         model.addAttribute("responsables", responsableMunicipioDAO.getResponsablesMunicipios());
         return "responsable/list";
     }
