@@ -9,7 +9,7 @@ import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class PeriodoRowMapper implements RowMapper<Periodo> {
+public final class PeriodoRowMapper implements RowMapper<Periodo> {
     public Periodo mapRow(ResultSet rs, int rowNum) throws SQLException {
         Periodo periodo = new Periodo();
         periodo.setIdentificador(rs.getString("identificador"));

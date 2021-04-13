@@ -26,11 +26,11 @@
         <td th:text="${periodo.getfechaInicio()}"></td>
         <td th:text="${periodo.getfechaFin()}"></td>
         <td th:text="${periodo.getHoraInicio()}"></td>
-        <td th:text="${periodo.getHoraFin}"></td>
-        <td th:text="${periodo.getIdArea}"></td>
-        <td><a th:href="@{/periodo/update/{identificador}(identificador=${periodo.getArea()})}"><button type="button" class="btn btn-warning">Edita</button></a>
+        <td th:text="${periodo.getHoraFin()}"></td>
+        <td th:text="${periodo.getIdArea()}"></td>
+        <td><a th:href="@{/periodo/update/{identificador}(identificador=${periodo.getIdentificador()})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
-        <td><a th:href="@{/periodo/delete/{identificador}(identificador=${periodo.getArea()})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        <td><a th:href="@{/periodo/delete/{identificador}(identificador=${periodo.getIdentificador()})}"><button type="button" class="btn btn-danger">Borra</button></a>
         </td>
     </tr>
     </tbody>
