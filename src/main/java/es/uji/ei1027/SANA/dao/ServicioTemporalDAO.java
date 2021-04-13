@@ -22,12 +22,12 @@ public class ServicioTemporalDAO {
 
     public void addServicioTemporal(ServicioTemporal servicioTemporal) {
         jdbcTemplate.update("INSERT INTO ServicioTemporal VALUES(?,?,?,?,?,?)",
-                servicioTemporal.getNombre(),servicioTemporal.getfechaInicio(),servicioTemporal.getfechaFin(),servicioTemporal.getHoraInicio(),servicioTemporal.getfechaFin(),servicioTemporal.getArea());
+                servicioTemporal.getNombre(),servicioTemporal.getfechaInicio(),servicioTemporal.getfechaFin(),servicioTemporal.getHoraInicio(),servicioTemporal.getHoraFin(),servicioTemporal.getNombreArea());
     }
 
     public void updateServicioTemporal(ServicioTemporal servicioTemporal) {
         jdbcTemplate.update("UPDATE ServicioTemporal SET fechaInicio =?, fechaFin =?, horaInicio =?, horaFin =?, nombreArea =? WHERE nombre =?",
-                servicioTemporal.getfechaInicio(),servicioTemporal.getfechaFin(),servicioTemporal.getHoraInicio(),servicioTemporal.getfechaFin(),servicioTemporal.getArea(),servicioTemporal.getNombre());
+                servicioTemporal.getfechaInicio(),servicioTemporal.getfechaFin(),servicioTemporal.getHoraInicio(),servicioTemporal.getHoraFin(),servicioTemporal.getNombreArea(),servicioTemporal.getNombre());
     }
 
     public void deleteServicioTemporal(String nombre) {

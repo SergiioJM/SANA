@@ -27,7 +27,7 @@
         <td th:text="${servicio.getfechaFin()}"></td>
         <td th:text="${servicio.horaInicio}"></td>
         <td th:text="${servicio.horaFin}"></td>
-        <td th:text="${servicio.area}"></td>
+        <td th:text="${servicio.nombreArea}"></td>
         <td><a th:href="@{/serviciotemporal/update/{nombre}(nombre=${servicio.nombre})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
         <td><a th:href="@{/serviciotemporal/delete/{nombre}(nombre=${servicio.nombre})}"><button type="button" class="btn btn-danger">Borra</button></a>
