@@ -1,6 +1,5 @@
 package es.uji.ei1027.SANA.dao;
 
-import es.uji.ei1027.SANA.model.Area;
 import es.uji.ei1027.SANA.model.Periodo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -53,7 +52,7 @@ public class PeriodoDAO {
                     new es.uji.ei1027.SANA.dao.PeriodoRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
-            return new ArrayList<Periodo>();
+            return new ArrayList<>();
         }
     }
 }

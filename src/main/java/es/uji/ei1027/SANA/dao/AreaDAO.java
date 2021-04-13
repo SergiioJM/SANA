@@ -51,7 +51,7 @@ public class AreaDAO {
                     new es.uji.ei1027.SANA.dao.AreaRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
-            return new ArrayList<Area>();
+            return new ArrayList<>();
         }
     }
 }

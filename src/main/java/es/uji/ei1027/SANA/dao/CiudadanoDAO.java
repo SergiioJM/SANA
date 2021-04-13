@@ -52,7 +52,7 @@ public class CiudadanoDAO {
                     new es.uji.ei1027.SANA.dao.CiudadanoRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
-            return new ArrayList<Ciudadano>();
+            return new ArrayList<>();
         }
     }
 }

@@ -52,7 +52,7 @@ public class MunicipioDAO {
                     new es.uji.ei1027.SANA.dao.MunicipioRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
-            return new ArrayList<Municipio>();
+            return new ArrayList<>();
         }
     }
 }

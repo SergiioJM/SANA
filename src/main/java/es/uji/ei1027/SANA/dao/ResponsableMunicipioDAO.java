@@ -52,7 +52,7 @@ public class ResponsableMunicipioDAO {
                     new ResponsableMunicipioRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
-            return new ArrayList<ResponsableMunicipio>();
+            return new ArrayList<>();
         }
     }
 }

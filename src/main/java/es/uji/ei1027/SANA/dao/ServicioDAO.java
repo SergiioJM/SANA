@@ -52,7 +52,7 @@ public class ServicioDAO {
                     new es.uji.ei1027.SANA.dao.ServicioRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
-            return new ArrayList<Servicio>();
+            return new ArrayList<>();
         }
     }
 }

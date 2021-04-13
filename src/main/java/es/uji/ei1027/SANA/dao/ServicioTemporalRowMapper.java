@@ -1,13 +1,10 @@
 package es.uji.ei1027.SANA.dao;
 
-import es.uji.ei1027.SANA.model.Area;
-import es.uji.ei1027.SANA.model.Municipio;
+
 import es.uji.ei1027.SANA.model.ServicioTemporal;
 import org.springframework.jdbc.core.RowMapper;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
