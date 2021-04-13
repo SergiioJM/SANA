@@ -22,12 +22,12 @@ public class ResponsableMunicipioDAO {
 
     public void addResponsableMunicipio(ResponsableMunicipio responsableMunicipio) {
         jdbcTemplate.update("INSERT INTO ResponsableMunicipio VALUES(?,?,?,?,?,?,?)",
-                responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),responsableMunicipio.getNumero(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),responsableMunicipio.getIdentificador(),responsableMunicipio.getMunicipio());
+                responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),responsableMunicipio.getNumerotelefono(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),responsableMunicipio.getIdentificador(),responsableMunicipio.getMunicipio());
     }
 
     public void updateResponsableMunicipio(ResponsableMunicipio responsableMunicipio) {
         jdbcTemplate.update("UPDATE ResponsableMunicipio SET nombre =?, email =?, numeroTelefono =?, fechaInicio =?, fechaFin =?, municipio =? WHERE identificador =?",
-                responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),responsableMunicipio.getNumero(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),responsableMunicipio.getMunicipio(), responsableMunicipio.getIdentificador());
+                responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),responsableMunicipio.getNumerotelefono(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),responsableMunicipio.getMunicipio(), responsableMunicipio.getIdentificador());
     }
 
     public void deleteResponsableMunicipio(String identificador) {

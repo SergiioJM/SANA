@@ -15,14 +15,6 @@ public class ServicioTemporal {
     LocalTime horaFin;
     String area;
 
-    public ServicioTemporal(String nombre, LocalDate fechaInicio, LocalDate fechaFin, LocalTime horaInicio, LocalTime horaFin, String area) {
-        this.nombre = nombre;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-        this.area = area;
-    }
 
     public ServicioTemporal() {
 

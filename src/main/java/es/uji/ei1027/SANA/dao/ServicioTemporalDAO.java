@@ -49,7 +49,7 @@ public class ServicioTemporalDAO {
         try{
             return jdbcTemplate.query(
                     "SELECT * FROM ServicioTemporal",
-                    new es.uji.ei1027.SANA.dao.ServicioTemporalRowMapper());
+                    new ServicioTemporalRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();

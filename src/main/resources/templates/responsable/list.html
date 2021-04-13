@@ -25,9 +25,9 @@
     <tr th:each="responsable: ${responsables}">
         <td th:text="${responsable.nombre}"></td>
         <td th:text="${responsable.email}"></td>
-        <td th:text="${responsable.numero}"></td>
-        <td th:text="${responsable.fechaInicio}"></td>  <!-- Fallo aqui -->
-        <td th:text="${responsable.fechaFin}"></td>      <!-- Fallo aqui -->
+        <td th:text="${responsable.numerotelefono}"></td>
+        <td th:text="${responsable.getfechaInicio()}"></td>
+        <td th:text="${responsable.getfechaFin()}"></td>
         <td th:text="${responsable.identificador}"></td>
         <td th:text="${responsable.municipio}"></td>
         <td><a th:href="@{/responsable/update/{identificador}(identificador=${responsable.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>

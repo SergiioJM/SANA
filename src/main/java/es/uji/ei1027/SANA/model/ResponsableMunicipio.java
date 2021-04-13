@@ -1,13 +1,11 @@
 package es.uji.ei1027.SANA.model;
 
-import java.time.LocalDate;
-
 public class ResponsableMunicipio {
     private String nombre;
     private String email;
-    private int numero;
-    private java.time.LocalDate fechaInicioo;
-    private java.time.LocalDate fechaFin;
+    private int numerotelefono;
+    java.time.LocalDate fechaInicioo;
+    java.time.LocalDate fechaFin;
     private String identificador;
     private String municipio;
 
@@ -31,12 +29,12 @@ public class ResponsableMunicipio {
         this.email = email;
     }
 
-    public int getNumero() {
-        return numero;
+    public int getNumerotelefono() {
+        return numerotelefono;
     }
 
-    public void setNumero(int numero) {
-        this.numero = numero;
+    public void setNumerotelefono(int numerotelefono) {
+        this.numerotelefono = numerotelefono;
     }
 
     public java.time.LocalDate getfechaInicio() {
@@ -76,7 +74,7 @@ public class ResponsableMunicipio {
         return "ResponsableMunicipio{" +
                 "nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
-                ", numeroTelefono=" + numero +
+                ", numeroTelefono=" + numerotelefono +
                 ", fechaInicio=" + fechaInicioo +
                 ", fechaFin=" + fechaFin +
                 ", identificador='" + identificador + '\'' +
