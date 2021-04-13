@@ -4,13 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Periodo {
+    String identificador;
     LocalDate fechaInicio;
     LocalDate fechaFin;
     LocalTime horaInicio;
     LocalTime horaFin;
     String idArea;
 
-    public Periodo(LocalDate fechaInicio, LocalDate fechaFin, LocalTime horaInicio, LocalTime horaFin, String idArea) {
+    public Periodo(String identificador, LocalDate fechaInicio, LocalDate fechaFin, LocalTime horaInicio, LocalTime horaFin, String idArea) {
+        this.identificador = identificador;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
         this.horaInicio = horaInicio;
@@ -21,6 +23,10 @@ public class Periodo {
     public Periodo() {
 
     }
+
+    public String getIdentificador(){return identificador;}
+
+    public void setIdentificador(String identificador){this.identificador=identificador;}
 
     public LocalDate getfechaInicio() {
         return fechaInicio;

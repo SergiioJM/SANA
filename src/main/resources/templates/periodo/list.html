@@ -10,6 +10,7 @@
 <table class="table table-striped">
     <thead>
     <tr>
+        <th>Identificador</th>
         <th>FechaInicio</th>
         <th>FechaFin</th>
         <th>HoraInicio</th>
@@ -21,6 +22,7 @@
     </thead>
     <tbody>
     <tr th:each="periodo: ${periodos}">
+        <td th:text="${periodo.getIdentificador()}"></td>
         <td th:text="${periodo.getfechaInicio()}"></td>
         <td th:text="${periodo.getfechaFin()}"></td>
         <td th:text="${periodo.getHoraInicio()}"></td>

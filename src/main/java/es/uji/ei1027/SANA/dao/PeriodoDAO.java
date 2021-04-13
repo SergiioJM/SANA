@@ -21,24 +21,24 @@ public class PeriodoDAO {
     }
 
     public void addPeriodo(Periodo periodo) {
-        jdbcTemplate.update("INSERT INTO Periodo VALUES(?,?,?,?,?)",
-                periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdArea());
+        jdbcTemplate.update("INSERT INTO Periodo VALUES(?,?,?,?,?,?)",
+                periodo.getIdentificador(),periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdArea());
     }
 
-    public void deletePeriodo(String idArea) {
-        jdbcTemplate.update("DELETE FROM Periodo WHERE idArea =?",
-                idArea);
+    public void deletePeriodo(String identificador) {
+        jdbcTemplate.update("DELETE FROM Periodo WHERE identificador =?",
+                identificador);
     }
 
     public void updatePeriodo(Periodo periodo) {
-        jdbcTemplate.update("UPDATE Periodo SET fechaInicio =?, fechaFin =?, horaInicio =?, horaFin =?, idArea =?",
-                periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdArea());
+        jdbcTemplate.update("UPDATE Periodo SET identificador =?, fechaInicio =?, fechaFin =?, horaInicio =?, horaFin =?, idArea =?",
+                periodo.getIdentificador(),periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdArea());
     }
 
-    public Periodo getPeriodo(String periodo) {
+    public Periodo getPeriodo(String identificador) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM Periodo WHERE idArea =?",
-                    new PeriodoRowMapper(), periodo);
+            return jdbcTemplate.queryForObject("SELECT * FROM Periodo WHERE identificador =?",
+                    new PeriodoRowMapper(), identificador);
         }
         catch(EmptyResultDataAccessException e) {
             return null;

@@ -12,6 +12,7 @@ import java.time.LocalTime;
 public class PeriodoRowMapper implements RowMapper<Periodo> {
     public Periodo mapRow(ResultSet rs, int rowNum) throws SQLException {
         Periodo periodo = new Periodo();
+        periodo.setIdentificador(rs.getString("identificador"));
         periodo.setfechaInicio(rs.getObject("fechaInicio", LocalDate.class));
         periodo.setfechaFin(rs.getObject("fechaFin", LocalDate.class));
         periodo.setHoraInicio(rs.getObject("horaInicio", LocalTime.class));
