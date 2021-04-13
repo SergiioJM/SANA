@@ -1,7 +1,6 @@
 package es.uji.ei1027.SANA.controller;
 
 import es.uji.ei1027.SANA.dao.ServicioDAO;
-import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.Servicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
