@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Periodos</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<h1>Lista de Periodos</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>FechaInicio</th>
+        <th>FechaFin</th>
+        <th>HoraInicio</th>
+        <th>HoraFin</th>
+        <th>idArea</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="periodo: ${periodos}">
+        <td th:text="${periodo.getfechaInicio()}"></td>
+        <td th:text="${periodo.getfechaFin()}"></td>
+        <td th:text="${periodo.getHoraInicio()}"></td>
+        <td th:text="${periodo.getHoraFin}"></td>
+        <td th:text="${periodo.getIdArea}"></td>
+        <td><a th:href="@{/periodo/update/{identificador}(identificador=${periodo.getArea()})}"><button type="button" class="btn btn-warning">Edita</button></a>
+        </td>
+        <td><a th:href="@{/periodo/delete/{identificador}(identificador=${periodo.getArea()})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add"><button type="button" class="btn btn-success">Añade reserva</button></a>
+</body>
+</html>
