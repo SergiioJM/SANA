@@ -26,7 +26,7 @@ public class PeriodoAsignadoDAO {
     }
 
     public void updatePeriodoAsignado(PeriodoAsignado periodoAsignado) {
-        jdbcTemplate.update("UPDATE PeriodoAsignado SET VALUES fechaInicio =?, fechaFin =?, nombreControlador =?, nombreArea =? WHERE identificador =?)",
+        jdbcTemplate.update("UPDATE PeriodoAsignado SET  fechaInicio =?, fechaFin =?, nombreControlador =?, nombreArea =? WHERE identificador =?",
                 periodoAsignado.getFechaInicio(), periodoAsignado.getFechaFin(), periodoAsignado.getControlador(), periodoAsignado.getArea(), periodoAsignado.getIdentificador());
     }
 
@@ -37,7 +37,7 @@ public class PeriodoAsignadoDAO {
 
     public PeriodoAsignado getPeriodoAsignado(String area) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM PeriodoAsignado WHERE nombreArea =?",
+            return jdbcTemplate.queryForObject("SELECT * FROM PeriodoAsignado WHERE identificador =?",
                     new PeriodoAsignadoRowMapper(), area);
         }
         catch(EmptyResultDataAccessException e) {

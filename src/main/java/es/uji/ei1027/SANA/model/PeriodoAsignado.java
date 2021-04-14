@@ -67,8 +67,8 @@ public class PeriodoAsignado {
                 "identificador='" + identificador + '\'' +
                 ", fechaInicio=" + fechaInicio +
                 ", fechaFin=" + fechaFin +
-                ", controlador=" + nombreControlador +
-                ", area=" + nombreArea +
+                ", codigoControlador='" + nombreControlador + '\'' +
+                ", codigoArea='" + nombreArea + '\'' +
                 '}';
     }
 }

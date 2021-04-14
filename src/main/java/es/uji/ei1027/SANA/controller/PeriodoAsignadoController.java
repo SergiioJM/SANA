@@ -44,7 +44,7 @@ public class PeriodoAsignadoController {
     }
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
-    public String editMunicipio(Model model, @PathVariable String identificador) {
+    public String editPeriodoAsignado(Model model, @PathVariable String identificador) {
         model.addAttribute("periodoAsignado", periodoAsignadoDAO.getPeriodoAsignado(identificador));
         return "periodoAsignado/update";
     }

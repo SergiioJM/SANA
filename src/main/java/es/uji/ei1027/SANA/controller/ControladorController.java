@@ -38,10 +38,8 @@ public class ControladorController {
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("controlador") Controlador controlador, BindingResult bindingResult) {
-        //if (bindingResult.hasErrors())
-            //return "controlador/add";
-        //Date hoy= Date.from(Instant.now());
-        //Controlador controlador1 = new Controlador("Co1","Manel","Pobla","manel@gmail.com",123456789,hoy,hoy);
+        if (bindingResult.hasErrors())
+            return "controlador/add";
         controladorDAO.addControlador(controlador);
         return "redirect:list";
     }
