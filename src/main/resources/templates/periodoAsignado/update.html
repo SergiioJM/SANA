@@ -1,18 +1,18 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-  <title>Actualiza Periodo Asignado</title>
+  <title>Edita Periodo Asignado</title>
   <meta charset="UTF-8" />
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Actualiza Periodo Asignado</h2>
+<h2>Edita Periodo Asignado</h2>
 <form action="#" th:action="@{/periodoAsignado/update}"
       th:object="${periodoAsignado}" method="post">
   <table>
     <tr>
-      <td><label>Identificador: </label></td>
+      <td><label>Identificador</label></td>
       <td><input type="text" th:field="*{identificador}" /></td>
     </tr>
     <tr>
@@ -25,14 +25,14 @@
     </tr>
     <tr>
       <td><label>Código del Controlador</label></td>
-      <td><input type="text" th:field="*{nombreControlador}" /></td>
+      <td><input type="text" th:field="*{controlador}" /></td>
     </tr>
     <tr>
       <td><label>Código del Area</label></td>
-      <td><input type="text" th:field="*{nombreArea}" /></td>
+      <td><input type="text" th:field="*{area}" /></td>
     </tr>
     <tr>
-      <td colspan="2"><input type="submit" value="Actualiza Periodo Asignado" /></td>
+      <td colspan="2"><input type="submit" value="Edita Periodo Asignado" /></td>
     </tr>
   </table>
 </form>

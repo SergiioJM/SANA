@@ -12,7 +12,7 @@
       th:object="${periodoAsignado}" method="post">
   <table>
     <tr>
-      <td><label>Identificador: </label></td>
+      <td><label>Identificador</label></td>
       <td><input type="text" th:field="*{identificador}" /></td>
     </tr>
     <tr>
@@ -25,11 +25,11 @@
     </tr>
     <tr>
       <td><label>Código del Controlador</label></td>
-      <td><input type="text" th:field="*{nombreControlador}" /></td>
+      <td><input type="text" th:field="*{controlador}" /></td>
     </tr>
     <tr>
       <td><label>Código del Area</label></td>
-      <td><input type="text" th:field="*{nombreArea}" /></td>
+      <td><input type="text" th:field="*{area}" /></td>
     </tr>
     <tr>
       <td colspan="2"><input type="submit" value="Añade Periodo Asignado" /></td>
