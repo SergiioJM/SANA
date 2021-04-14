@@ -1,43 +1,43 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Modifica de un periodo</title>
+    <title>Edita un periodo</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Modifica periodo</h2>
+<h2>Edita periodo</h2>
 <form action="#" th:action="@{/periodo/update}"
       th:object="${periodo}" method="post">
     <table>
         <tr>
-            <td><label>Identificador: </label></td>
+            <td><label>Identificador</label></td>
             <td><input type="text" th:field="*{identificador}" /></td>
         </tr>
         <tr>
-            <td><label>Fecha Inicio: </label></td>
+            <td><label>Fecha de Inicio</label></td>
             <td><input type="text" th:field="*{fechaInicio}" /></td>
         </tr>
         <tr>
-            <td><label>Fecha Fin: </label></td>
+            <td><label>Fecha de Fin</label></td>
             <td><input type="text" th:field="*{fechaFin}" /></td>
         </tr>
         <tr>
-            <td><label>Hora Inicio: </label></td>
+            <td><label>Hora de Inicio</label></td>
             <td><input type="text" th:field="*{horaInicio}" /></td>
         </tr>
         <tr>
-            <td><label>Hora Fin: </label></td>
+            <td><label>Hora de Fin</label></td>
             <td><input type="text" th:field="*{horaFin}" /></td>
         </tr>
         <tr>
-            <td><label>NombreArea: </label></td>
+            <td><label>Identificador del Area</label></td>
             <td><input type="text" th:field="*{idArea}" /></td>
         </tr>
 
         <tr>
-            <td colspan="2"><input type="submit" value="Modifica servicio" /></td>
+            <td colspan="2"><input type="submit" value="Edita el Periodo" /></td>
         </tr>
     </table>
 </form>
