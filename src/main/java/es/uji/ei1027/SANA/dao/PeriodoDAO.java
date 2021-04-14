@@ -31,8 +31,8 @@ public class PeriodoDAO {
     }
 
     public void updatePeriodo(Periodo periodo) {
-        jdbcTemplate.update("UPDATE Periodo SET identificador =?, fechaInicio =?, fechaFin =?, horaInicio =?, horaFin =?, idArea =?",
-                periodo.getIdentificador(),periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdArea());
+        jdbcTemplate.update("UPDATE Periodo SET fechaInicio =?, fechaFin =?, horaInicio =?, horaFin =?, idArea =? WHERE identificador=?" ,
+                periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdArea(),periodo.getIdentificador());
     }
 
     public Periodo getPeriodo(String identificador) {

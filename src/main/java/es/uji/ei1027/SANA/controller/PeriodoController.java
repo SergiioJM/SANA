@@ -33,7 +33,7 @@ public class PeriodoController {
 
     @RequestMapping(value="/add")
     public String addPeriodo(Model model) {
-        model.addAttribute("periodo", new Municipio());
+        model.addAttribute("periodo", new Periodo());
         return "periodo/add";
     }
 
@@ -46,9 +46,9 @@ public class PeriodoController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/update/{idArea}", method = RequestMethod.GET)
-    public String editPeriodo(Model model, @PathVariable String idArea) {
-        model.addAttribute("periodo", periodoDAO.getPeriodo(idArea));
+    @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
+    public String editPeriodo(Model model, @PathVariable String identificador) {
+        model.addAttribute("periodo", periodoDAO.getPeriodo(identificador));
         return "periodo/update";
     }
 
@@ -62,9 +62,9 @@ public class PeriodoController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/delete/{idArea}")
-    public String processDelete(@PathVariable String idArea) {
-        periodoDAO.deletePeriodo(idArea);
+    @RequestMapping(value="/delete/{identificador}")
+    public String processDelete(@PathVariable String identificador) {
+        periodoDAO.deletePeriodo(identificador);
         return "redirect:../list";
     }
 

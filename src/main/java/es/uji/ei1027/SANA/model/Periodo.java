@@ -71,11 +71,12 @@ public class Periodo {
     @Override
     public String toString() {
         return "Periodo{" +
-                "fechaInicio=" + fechaInicio +
+                "identificador='" + identificador + '\'' +
+                ", fechaInicio=" + fechaInicio +
                 ", fechaFin=" + fechaFin +
                 ", horaInicio=" + horaInicio +
                 ", horaFin=" + horaFin +
-                ", idArea=" + idArea +
+                ", idArea='" + idArea + '\'' +
                 '}';
     }
 }
