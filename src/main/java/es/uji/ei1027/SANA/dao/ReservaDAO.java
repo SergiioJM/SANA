@@ -46,12 +46,16 @@ public class ReservaDAO {
     }
 
     public List<Reserva> getReservas(){
-        try{
-            return jdbcTemplate.query(
+        try {
+            List<Reserva> res = jdbcTemplate.query(
                     "SELECT * FROM Reserva",
                     new es.uji.ei1027.SANA.dao.ReservaRowMapper());
-        }
-        catch(EmptyResultDataAccessException e) {
+
+            for (Reserva e : res){
+                e.toString();
+            }
+            return res;
+        }catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();
         }
     }

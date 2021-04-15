@@ -11,10 +11,10 @@ public class Reserva {
     LocalTime hora;
     LocalDate fecha;
     int numeroPersonas;
-    Estado estado; //Creo que el fallo es esto
+    String estado; //Creo que el fallo es esto
     String zona;
 
-    public Reserva(String identificador, LocalTime hora, LocalDate fecha, int numeroPersonas, Estado estado, String zona) {
+    public Reserva(String identificador, LocalTime hora, LocalDate fecha, int numeroPersonas, String estado, String zona) {
         this.identificador = identificador;
         this.hora = hora;
         this.fecha = fecha;
@@ -59,11 +59,11 @@ public class Reserva {
         this.numeroPersonas = numeroPersonas;
     }
 
-    public Estado getEstado() {
+    public String getEstado() {
         return estado;
     }
 
-    public void setEstado(Estado estado) {
+    public void setEstado(String estado) {
         this.estado = estado;
     }
 
