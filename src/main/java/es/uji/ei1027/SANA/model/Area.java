@@ -4,7 +4,7 @@ public class Area {
     String idArea;
     String nombre;
     String descripcion;
-    CaracteristicasFisicas caracteristicas; //Creo que el fallo es esto
+    String caracteristicas; //Creo que el fallo es esto
     String localizacion;
     String tipoAcceso;  //Creo que el fallo es esto
     String municipio;
@@ -13,7 +13,7 @@ public class Area {
 
     }
 
-    public Area(String idArea, String nombre, String descripcion, CaracteristicasFisicas caracteristicas, String localizacion, String tipoAcceso, String municipio) {
+    public Area(String idArea, String nombre, String descripcion, String caracteristicas, String localizacion, String tipoAcceso, String municipio) {
         this.idArea = idArea;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -23,11 +23,11 @@ public class Area {
         this.municipio = municipio;
     }
 
-    public CaracteristicasFisicas getCaracteristicas() {
+    public String getCaracteristicas() {
         return caracteristicas;
     }
 
-    public void setCaracteristicas(CaracteristicasFisicas caracteristicas) {
+    public void setCaracteristicas(String caracteristicas) {
         this.caracteristicas = caracteristicas;
     }
 

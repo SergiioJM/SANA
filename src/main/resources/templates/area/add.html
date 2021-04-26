@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear Area</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nueva Area</h2>
+<form action="#" th:action="@{/area/add}"
+      th:object="${area}" method="post">
+    <table>
+        <tr>
+            <td><label>Id del area</label></td>
+            <td><input type="text" th:field="*{idArea}" /></td>
+        </tr>
+        <tr>
+            <td><label>Nombre</label></td>
+            <td><input type="text" th:field="*{nombre}" /></td>
+        </tr>
+        <tr>
+            <td><label>Descripcion</label></td>
+            <td><input type="text" th:field="*{descripcion}" /></td>
+        </tr>
+        <tr>
+            <td><label>Caracteristicas</label></td>
+            <td><input type="number" th:field="*{caracteristicas}" /></td>
+        </tr>
+        <tr>
+            <td><label>Localizacion</label></td>
+            <td><input type="text" th:field="*{localizacion}" /></td>
+        </tr>
+        <tr>
+            <td><label>Tipo de acceso</label></td>
+            <td><input type="number" th:field="*{tipoAcceso}" /></td>
+        </tr>
+        <tr>
+            <td><label>Municipio</label></td>
+            <td><input type="text" th:field="*{municipio}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Añade Reserva" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>

@@ -12,7 +12,7 @@ public class Reserva {
     LocalDate fecha;
     int numeroPersonas;
     String estado; //Creo que el fallo es esto
-    String zona;
+
 
     public Reserva(String identificador, LocalTime hora, LocalDate fecha, int numeroPersonas, String estado, String zona) {
         this.identificador = identificador;
@@ -20,7 +20,6 @@ public class Reserva {
         this.fecha = fecha;
         this.numeroPersonas = numeroPersonas;
         this.estado = estado;
-        this.zona = zona;
     }
 
     public Reserva() {
@@ -67,13 +66,6 @@ public class Reserva {
         this.estado = estado;
     }
 
-    public String getZona() {
-        return zona;
-    }
-
-    public void setZona(String zona) {
-        this.zona = zona;
-    }
 
     @Override
     public String toString() {
@@ -83,7 +75,6 @@ public class Reserva {
                 ", fecha=" + fecha +
                 ", numeroPersonas=" + numeroPersonas +
                 ", estado='" + estado + '\'' +
-                ", zona=" + zona +
                 '}';
     }
 }
