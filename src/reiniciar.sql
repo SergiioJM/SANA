@@ -1,8 +1,15 @@
-CREATE TYPE tipoAcceso AS ENUM('restringido','norestringido','cerrado');
+DROP TABLE Ciudadano;
+DROP TABLE Reserva;
+DROP TABLE Zona;
+DROP TABLE ServicioTemporal;
+DROP TABLE Servicio;
+DROP TABLE PeriodoAsignado;
+DROP TABLE Periodo;
+DROP TABLE ResponsableMunicipio;
+DROP TABLE  Controlador;
+DROP TABLE  Area;
+DROP TABLE  Municipio;
 
-CREATE TYPE caracteristicasFisicas AS ENUM('montana','desierto','playa','bosque');
-
-CREATE TYPE estado AS ENUM('usada','cancelada', 'disponible');
 
 CREATE TABLE Municipio(
 	cp	VARCHAR(9),
@@ -11,7 +18,7 @@ CREATE TABLE Municipio(
     	email   		 VARCHAR(50),
 telefono 	 INTEGER,
 
-    CONSTRAINT 	cp_municipio PRIMARY KEY (cp));
+CONSTRAINT 	cp_municipio PRIMARY KEY (cp));
 CREATE TABLE Area(
 	idArea		VARCHAR(9),
 	nombre	VARCHAR(50) NOT NULL,
