@@ -1,5 +1,6 @@
 package es.uji.ei1027.SANA.dao;
 
+import es.uji.ei1027.SANA.model.Estado;
 import es.uji.ei1027.SANA.model.Reserva;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -22,12 +23,12 @@ public class ReservaDAO {
 
     public void addReserva(Reserva reserva) {
         jdbcTemplate.update("INSERT INTO Reserva VALUES(?,?,?,?,?,?)",
-                reserva.getIdentificador(),reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getZona());
+                reserva.getIdentificador(),reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),Estado.valueOf(reserva.getEstado()),reserva.getZona());
     }
 
     public void updateReserva(Reserva reserva) {
         jdbcTemplate.update("UPDATE Reserva SET hora =?, fecha =?, numeroPersonas =?, estado =?, zona=? WHERE identificador =?",
-                reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getZona(),reserva.getIdentificador());
+                reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas()," " ,reserva.getZona(),reserva.getIdentificador());
     }
 
     public void deleteReserva(String identificador) {
