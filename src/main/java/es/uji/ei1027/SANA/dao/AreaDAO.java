@@ -30,7 +30,7 @@ public class AreaDAO {
     }
 
     public void updateArea(Area area) {
-        jdbcTemplate.update("UPDATE Area SET nombre =?, descripcion =?, caracteristicas =?, localizacion =?, tipoAcceso =?, municipio =? WHERE idArea =?",
+        jdbcTemplate.update("UPDATE Area SET nombre =?, descripcion =?, caracteristicasfisicas =?, localizacion =?, tipoAcceso =?, municipio =? WHERE idArea =?",
                 area.getNombre(),area.getDescripcion(),area.getCaracteristicas(),area.getLocalizacion(),area.getTipoAcceso(),area.getMunicipio(), area.getIdArea());
     }
 
@@ -46,9 +46,13 @@ public class AreaDAO {
 
     public List<Area> getAreas(){
         try{
-            return jdbcTemplate.query(
+            List<Area> areas= jdbcTemplate.query(
                     "SELECT * FROM Area",
                     new es.uji.ei1027.SANA.dao.AreaRowMapper());
+            for (Area a: areas){
+                a.toString();
+            }
+            return areas;
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();

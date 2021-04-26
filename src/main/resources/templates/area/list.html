@@ -26,9 +26,9 @@
         <td th:text="${area.idArea}"></td>
         <td th:text="${area.nombre}"></td>
         <td th:text="${area.descripcion}"></td>
-        <td th:text="${area.caracteristicas}"></td>
+        <td th:text="${area.caracteristicas.name()}"></td>
         <td th:text="${area.localizacion}"></td>
-        <td th:text="${area.tipoAcceso}"></td>
+        <td th:text="${area.tipoAcceso.name()}"></td>
         <td th:text="${area.municipio}"></td>
         <td><a th:href="@{/area/update/{idArea}(idArea=${area.idArea})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>

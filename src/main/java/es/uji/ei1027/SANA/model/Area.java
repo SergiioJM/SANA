@@ -6,14 +6,14 @@ public class Area {
     String descripcion;
     CaracteristicasFisicas caracteristicas; //Creo que el fallo es esto
     String localizacion;
-    TipoAcceso tipoAcceso;  //Creo que el fallo es esto
+    String tipoAcceso;  //Creo que el fallo es esto
     String municipio;
 
     public Area() {
 
     }
 
-    public Area(String idArea, String nombre, String descripcion, CaracteristicasFisicas caracteristicas, String localizacion, TipoAcceso tipoAcceso, String municipio) {
+    public Area(String idArea, String nombre, String descripcion, CaracteristicasFisicas caracteristicas, String localizacion, String tipoAcceso, String municipio) {
         this.idArea = idArea;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -39,11 +39,11 @@ public class Area {
         this.localizacion = localizacion;
     }
 
-    public TipoAcceso getTipoAcceso() {
+    public String getTipoAcceso() {
         return tipoAcceso;
     }
 
-    public void setTipoAcceso(TipoAcceso tipoAcceso) {
+    public void setTipoAcceso(String tipoAcceso) {
         this.tipoAcceso = tipoAcceso;
     }
 
