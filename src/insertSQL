@@ -1,9 +1,3 @@
-CREATE TYPE tipoAcceso AS ENUM('restringido','norestringido','cerrado');
-
-CREATE TYPE caracteristicasFisicas AS ENUM('montana','desierto','playa','bosque');
-
-CREATE TYPE estado AS ENUM('usada','cancelada', 'disponible');
-
 CREATE TABLE Municipio(
 	cp	VARCHAR(9),
 	nombre VARCHAR(50) NOT NULL,
@@ -126,10 +120,8 @@ CREATE TABLE Reserva(
 	fecha		Date,
 	numeroPersonas	INTEGER,
 	estado			VARCHAR(20),
-	zona			VARCHAR(9) NOT NULL,
 
 	CONSTRAINT cp_reserva PRIMARY KEY(identificador),
-	CONSTRAINT cp_reserva_zona FOREIGN KEY (zona) REFERENCES Zona(identificador) ON DELETE RESTRICT ON UPDATE CASCADE,
 CONSTRAINT ri_numeroPersonas CHECK (numeroPersonas>0),
 CONSTRAINT ri_estado CHECK (estado IN('usada','cancelada', 'disponible'))
 );
@@ -157,14 +149,15 @@ REFERENCES Reserva(identificador) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 INSERT INTO Municipio VALUES('12590','Castellon','C/Jaume I','castellon@caste.com','12345678');
-INSERT INTO Area VALUES('A01', 'Campus UJI', 'Universitat Jaume I', 'desierto', 'UJI', 'norestringido', 12590 );
+INSERT INTO Area VALUES('A01', 'Campus UJI', 'Universitat Jaume I', 'desierto', 'UJI', 'norestringido', '12590' );
 INSERT INTO Controlador VALUES('C01','Juan','C/ De la guerra','juan@caste.com','54678912','2021-04-08',NULL);
 INSERT INTO ResponsableMunicipio VALUES('Paco','paco@caste.com','09874564','2021-04-08',NULL,'R01','12590');
- INSERT INTO Periodo VALUES(P01,'2021-04-08',NULL,'12:35:38','18:45:20','A01');
+INSERT INTO Periodo VALUES('P01','2021-04-08',NULL,'12:35:38','18:45:20','A01');
 INSERT INTO PeriodoAsignado VALUES('P01','2021-04-08',NULL,'C01','A01');
-INSERT INTO Servicio VALUES('Piscina',Baño en la piscina','usada','A01');
+INSERT INTO Servicio VALUES('Piscina','Baño en la piscina','usada','A01');
 INSERT INTO ServicioTemporal VALUES('ControladorPlaya','2011-08-10','2012-08-25','10:00:00','20:15:00','A01');
-INSERT INTO Zona VALUES('Z01','50','A01');
-INSERT INTO Reserva VALUES('R01','15:15:15','2021-04-08','50','cancelada','Z01');
+INSERT INTO Zona VALUES('Z01','50', 'A01');
+INSERT INTO Reserva VALUES('R01','15:15:15','2021-04-08','50','cancelada');
+INSERT INTO ReservaZonas VALUES('R01','Z01');
 INSERT INTO Ciudadano VALUES('Joaquin', '20939567Z', 'joaquin@caste.com', 'Fuentes Claras','2021-04-08','R01');
 
