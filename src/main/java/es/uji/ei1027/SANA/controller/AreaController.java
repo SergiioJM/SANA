@@ -61,7 +61,7 @@ public class AreaController {
     }
 
     @RequestMapping(value="/delete/{idArea}")
-    public String processDelete(@PathVariable Area idArea) {
+    public String processDelete(@PathVariable String idArea) {
         areaDao.deleteArea(idArea);
         return "redirect:../list";
     }

@@ -1,6 +1,5 @@
 package es.uji.ei1027.SANA.dao;
 
-import es.uji.ei1027.SANA.model.Estado;
 import es.uji.ei1027.SANA.model.Reserva;
 import org.springframework.jdbc.core.RowMapper;
 
