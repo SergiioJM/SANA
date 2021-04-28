@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear Reserva en una zona</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+</head>
+<body>
+<h2>Nueva Reserva de una zona</h2>
+<form action="#" th:action="@{/reservazona/add}"
+      th:object="${reservazona}" method="post">
+    <table>
+        <tr>
+            <td><label>Reserva</label></td>
+            <td><input type="text" th:field="*{reserva}" /></td>
+        </tr>
+        <tr>
+            <td><label>Zona</label></td>
+            <td><input type="text" th:field="*{zona}" /></td>
+        </tr>
+        <tr>
+            <td colspan="2"><input type="submit" value="Añade Reserva en una zona" /></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
