@@ -38,7 +38,7 @@ public class ResponsableValidator implements Validator {
             ArrayList<String> lista = new ArrayList<>();
             for (Municipio e : municipioDAO.getMunicipios()) {
                 lista.add(e.getCp());
-                System.out.println(e);
+                System.out.println(e);;
             }
         }
         if (!lista.contains(responsableMunicipio.getMunicipio().trim())) errors.rejectValue("municipiono", "obligatori",
