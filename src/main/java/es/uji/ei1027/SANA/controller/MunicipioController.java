@@ -46,7 +46,7 @@ public class MunicipioController {
             municipioDAO.addMunicipio(municipio);
         }
         catch (DuplicateKeyException e ){
-            throw new ClaveDuplicada("Ya existe la clave primaria introducida","CPduplicada");
+            throw new ClaveDuplicadaException("Ya existe la clave primaria introducida","CPduplicada");
         }        return "redirect:list";
     }
 
