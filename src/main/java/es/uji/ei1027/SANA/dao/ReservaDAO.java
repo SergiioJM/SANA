@@ -21,13 +21,13 @@ public class ReservaDAO {
 
 
     public void addReserva(Reserva reserva) {
-        jdbcTemplate.update("INSERT INTO Reserva VALUES(?,?,?,?,?)",
-                reserva.getIdentificador(),reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado());
+        jdbcTemplate.update("INSERT INTO Reserva VALUES(?,?,?,?,?,?)",
+                reserva.getIdentificador(),reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(), reserva.getCiudadano());
     }
 
     public void updateReserva(Reserva reserva) {
-        jdbcTemplate.update("UPDATE Reserva SET hora =?, fecha =?, numeroPersonas =?, estado =? WHERE identificador =?",
-                reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getIdentificador());
+        jdbcTemplate.update("UPDATE Reserva SET hora =?, fecha =?, numeroPersonas =?, estado =?, ciudadano =? WHERE identificador =?",
+                reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getCiudadano(),reserva.getIdentificador());
     }
 
     public void deleteReserva(String identificador) {
