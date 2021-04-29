@@ -3,6 +3,7 @@ package es.uji.ei1027.SANA.controller;
 import es.uji.ei1027.SANA.dao.ResponsableMunicipioDAO;
 import es.uji.ei1027.SANA.model.ResponsableMunicipio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -37,9 +38,16 @@ public class ResponsableMunicipioController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("responsable") ResponsableMunicipio responsableMunicipio,
                                    BindingResult bindingResult) {
+        ResponsableValidator responsableValidator= new ResponsableValidator();
+        responsableValidator.validate(responsableMunicipio,bindingResult);
         if (bindingResult.hasErrors())
             return "responsable/add";
-        responsableMunicipioDAO.addResponsableMunicipio(responsableMunicipio);
+        try {
+            responsableMunicipioDAO.addResponsableMunicipio(responsableMunicipio);
+        }
+        catch (DuplicateKeyException e ){
+            throw new ClaveDuplicada("Ya existe la clave primaria introducida","CPduplicada");
+        }
         return "redirect:list";
     }
 

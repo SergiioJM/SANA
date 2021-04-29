@@ -13,6 +13,8 @@ import java.util.List;
 public class MunicipioDAO {
 
     private JdbcTemplate jdbcTemplate;
+    public MunicipioDAO(){
+    }
 
     @Autowired
     public void setDataSource(DataSource dataSource) {

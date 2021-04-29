@@ -14,6 +14,7 @@
         <tr>
             <td><label>Nombre</label></td>
             <td><input type="text" th:field="*{nombre}" /></td>
+            <td th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></td>
         </tr>
         <tr>
             <td><label>Email</label></td>
@@ -30,6 +31,7 @@
         <tr>
             <td><label>Fecha de Fin</label></td>
             <td><input type="text" th:field="*{fechaFin}" /></td>
+            <td th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}" class="error"></td>
         </tr>
         <tr>
             <td><label>Identificador</label></td>
@@ -37,7 +39,9 @@
         </tr>
         <tr>
             <td><label>Municipio</label></td>
-            <td><input type="text" th:field="*{municipio}" /></td>
+            <td><input type="text" th:field="*{municipio}" maxlength="10" /></td>
+            <td th:if="${#fields.hasErrors('municipio')}" th:errors="*{municipio}" class="error"></td>
+            <td th:if="${#fields.hasErrors('municipio')}" th:errors="*{municipiono}" class="error"></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Añade Responsable de Municipio" /></td>
