@@ -41,10 +41,9 @@
       <td><input type="text" th:field="*{area}" /></td>
       <td th:if="${#fields.hasErrors('area')}" th:errors="*{area}" class="error"></td>
     </tr>
-    <tr>
-      <td colspan="2"><input type="submit" value="Añade Periodo Asignado" /></td>
-    </tr>
   </table>
-</form>
+  <a href="add"><button type="button" class="btn btn-success">Añade un Periodo Asignado</button></a>
+  <a href="/periodoAsignado/list"><button type="button" class="btn btn-secondary">Volver</button></a>
+  <a href="/"> <button type="button" class="btn btn-outline-secondary">Menu Princpial</button></a></form>
 </body>
 </html>
