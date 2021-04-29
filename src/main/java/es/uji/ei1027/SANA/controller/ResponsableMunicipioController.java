@@ -39,11 +39,14 @@ public class ResponsableMunicipioController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("responsable") ResponsableMunicipio responsableMunicipio,
                                    BindingResult bindingResult) {
+        System.out.println("1");
         ResponsableMunicipioValidator responsableMunicipioValidator= new ResponsableMunicipioValidator();
         responsableMunicipioValidator.validate(responsableMunicipio,bindingResult);
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
+            System.out.println("Entra aqui");
             return "responsable/add";
-        try {
+
+        }try {
             responsableMunicipioDAO.addResponsableMunicipio(responsableMunicipio);
         }
         catch (DuplicateKeyException e ){
