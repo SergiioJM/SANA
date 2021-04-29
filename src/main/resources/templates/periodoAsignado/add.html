@@ -5,6 +5,8 @@
   <meta charset="UTF-8" />
   <link rel="stylesheet"
         href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/estilos.css"
+        th:href="@{/css/estilos.css}"/>
 </head>
 <body>
 <h2>Nuevo Periodo Asignado</h2>
@@ -14,7 +16,7 @@
     <tr>
       <td><label>Identificador</label></td>
       <td><input type="text" th:field="*{identificador}" /></td>
-      <td th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}"></td>
+      <td th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}" class="error"></td>
     </tr>
     <tr>
       <td><label>Fecha de Inicio</label></td>
@@ -31,12 +33,12 @@
     <tr>
       <td><label>Código del Controlador</label></td>
       <td><input type="text" th:field="*{controlador}" /></td>
-      <td th:if="${#fields.hasErrors('controlador')}" th:errors="*{controlador}"></td>
+      <td th:if="${#fields.hasErrors('controlador')}" th:errors="*{controlador}" class="error"></td>
     </tr>
     <tr>
       <td><label>Código del Area</label></td>
       <td><input type="text" th:field="*{area}" /></td>
-      <td th:if="${#fields.hasErrors('area')}" th:errors="*{area}"></td>
+      <td th:if="${#fields.hasErrors('area')}" th:errors="*{area}" class="error"></td>
     </tr>
     <tr>
       <td colspan="2"><input type="submit" value="Añade Periodo Asignado" /></td>

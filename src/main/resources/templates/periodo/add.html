@@ -5,6 +5,8 @@
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css"
+          th:href="@{/css/estilos.css}"/>
 </head>
 <body>
 <h2>Nuevo Periodo</h2>
@@ -14,7 +16,7 @@
         <tr>
             <td><label>Identificador</label></td>
             <td><input type="text" th:field="*{identificador}" /></td>
-            <td th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}"></td>
+            <td th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}" class="error"></td>
 
         </tr>
         <tr>
@@ -40,7 +42,7 @@
         <tr>
             <td><label>Identificador del Area: </label></td>
             <td><input type="text" th:field="*{idArea}" /></td>
-            <td th:if="${#fields.hasErrors('idArea')}" th:errors="*{idArea}"></td>
+            <td th:if="${#fields.hasErrors('idArea')}" th:errors="*{idArea}" class="error"></td>
         </tr>
 
         <tr>
