@@ -2,7 +2,6 @@ package es.uji.ei1027.SANA.controller;
 
 
 import es.uji.ei1027.SANA.dao.PeriodoDAO;
-import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.Periodo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +39,8 @@ public class PeriodoController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("periodo") Periodo periodo,
                                    BindingResult bindingResult) {
+        PeriodoValidator periodoValidator = new PeriodoValidator();
+        periodoValidator.validate(periodo,bindingResult);
         if (bindingResult.hasErrors())
             return "periodo/add";
         periodoDAO.addPeriodo(periodo);

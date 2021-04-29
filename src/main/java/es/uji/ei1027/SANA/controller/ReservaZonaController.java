@@ -1,8 +1,6 @@
 package es.uji.ei1027.SANA.controller;
 
-import es.uji.ei1027.SANA.dao.AreaDAO;
 import es.uji.ei1027.SANA.dao.ReservaZonaDAO;
-import es.uji.ei1027.SANA.model.Area;
 import es.uji.ei1027.SANA.model.ReservaZona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

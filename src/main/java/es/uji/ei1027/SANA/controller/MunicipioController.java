@@ -34,9 +34,11 @@ public class MunicipioController {
         return "municipio/add";
     }
 
-    @RequestMapping(value="/add", method= RequestMethod.POST)
+    @RequestMapping(value="/add", method=RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("municipio") Municipio municipio,
                                    BindingResult bindingResult) {
+        MunicipioValidator MunicipioValidator = new MunicipioValidator();
+        MunicipioValidator.validate(municipio, bindingResult);
         if (bindingResult.hasErrors())
             return "municipio/add";
         municipioDAO.addMunicipio(municipio);

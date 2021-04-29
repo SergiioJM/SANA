@@ -25,7 +25,14 @@
         </tr>
         <tr>
             <td><label>Caracteristicas</label></td>
-            <td><input type="text" th:field="*{caracteristicas}" /></td>
+            <td><select class="form_control" type="text" th:field="*{caracteristicas}">
+                <option value="No seleccionado">Selecciona las características del area</option>
+                <option value="montana">Montaña</option>
+                <option value="desierto">Desierto</option>
+                <option value="playa">Playa</option>
+                <option value="bosque">Bosque</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td><label>Localizacion</label></td>
@@ -33,7 +40,13 @@
         </tr>
         <tr>
             <td><label>Tipo de acceso</label></td>
-            <td><input type="text" th:field="*{tipoAcceso}" /></td>
+            <td><select class="form_control" type="text" th:field="*{tipoAcceso}">
+                <option value="No seleccionado">Selecciona el tipo de acceso al area</option>
+                <option value="restringido">Restringido</option>
+                <option value="norestringido">No Restringido</option>
+                <option value="cerrado">Cerrado</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td><label>Municipio</label></td>

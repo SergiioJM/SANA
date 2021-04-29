@@ -37,8 +37,10 @@ public class PeriodoAsignadoController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("periodoAsignado") PeriodoAsignado periodoAsignado,
                                    BindingResult bindingResult) {
+        PeriodoAsignadoValidator periodoAsignadoValidator = new PeriodoAsignadoValidator();
+        periodoAsignadoValidator.validate(periodoAsignado,bindingResult);
         if (bindingResult.hasErrors())
-            return "municipio/add";
+            return "periodoAsignado/add";
         periodoAsignadoDAO.addPeriodoAsignado(periodoAsignado);
         return "redirect:list";
     }
