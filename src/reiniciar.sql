@@ -181,7 +181,7 @@ INSERT INTO Area VALUES('A01', 'Campus UJI', 'Universitat Jaume I', 'desierto', 
 INSERT INTO Controlador VALUES('C01','Juan','C/ De la guerra','juan@caste.com','54678912','2021-04-08',NULL);
 INSERT INTO ResponsableMunicipio VALUES('Paco','paco@caste.com','09874564','2021-04-08',NULL,'R01','12590');
 INSERT INTO Periodo VALUES('P01','2021-04-08',NULL,'12:35:38','18:45:20','A01');
-INSERT INTO PeriodoAsignado VALUES('P01','2021-04-08',NULL,'C01','A01');
+INSERT INTO PeriodoAsignado VALUES('PA01','2021-04-08',NULL,'C01','A01');
 INSERT INTO Servicio VALUES('Piscina','Baño en la piscina','usada','A01');
 INSERT INTO ServicioTemporal VALUES('ControladorPlaya','2011-08-10','2012-08-25','10:00:00','20:15:00','A01');
 INSERT INTO Zona VALUES('Z01','50','A01');

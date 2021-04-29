@@ -13,7 +13,8 @@
     <table>
         <tr>
             <td><label>CP</label></td>
-            <td><input type="text" th:field="*{cp}" /></td>
+            <td><input type="text" th:field="*{cp}"
+                       placeholder="Código postal"/></td>
             <td th:if="${#fields.hasErrors('cp')}" th:errors="*{cp}"></td>
 
         </tr>

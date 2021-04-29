@@ -9,7 +9,7 @@ import org.springframework.validation.Validator;
 
 import java.util.ArrayList;
 
-public class ResponsableValidator implements Validator {
+public class ResponsableMunicipioValidator implements Validator {
 
     public MunicipioDAO municipioDAO;
 

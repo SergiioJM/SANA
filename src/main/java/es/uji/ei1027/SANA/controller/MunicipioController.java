@@ -46,8 +46,9 @@ public class MunicipioController {
             municipioDAO.addMunicipio(municipio);
         }
         catch (DuplicateKeyException e ){
-            throw new ClaveDuplicadaException("Ya existe la clave primaria introducida","CPduplicada");
-        }        return "redirect:list";
+            throw new ClaveDuplicadaException("Ya existe el codigo postal " + municipio.getCp() + " para un municipio","CPduplicada");
+        }
+        return "redirect:list";
     }
 
     @RequestMapping(value="/update/{cp}", method = RequestMethod.GET)

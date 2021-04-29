@@ -48,7 +48,7 @@ public class PeriodoController {
             periodoDAO.addPeriodo(periodo);
         }
         catch (DuplicateKeyException e ){
-            throw new ClaveDuplicadaException("Ya existe la clave primaria introducida","CPduplicada");
+            throw new ClaveDuplicadaException("Ya existe el identificador " + periodo.getIdentificador() + " para un periodo","CPduplicada");
         }
         return "redirect:list";
     }

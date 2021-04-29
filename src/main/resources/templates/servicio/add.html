@@ -12,20 +12,20 @@
       th:object="${servicio}" method="post">
     <table>
         <tr>
-            <td><label>Nombre: </label></td>
+            <td><label>Nombre</label></td>
             <td><input type="text" th:field="*{nombre}" /></td>
             <td th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></td>
         </tr>
         <tr>
-            <td><label>Descripción: </label></td>
+            <td><label>Descripción</label></td>
             <td><input type="text" th:field="*{descripcion}" /></td>
         </tr>
         <tr>
-            <td><label>Estado: </label></td>
+            <td><label>Estado</label></td>
             <td><input type="text" th:field="*{estado}" /></td>
         </tr>
         <tr>
-            <td><label>Nombre del Area: </label></td>
+            <td><label>Identificador del Area</label></td>
             <td><input type="text" th:field="*{area}" /></td>
             <td th:if="${#fields.hasErrors('area')}" th:errors="*{area}" class="error"></td>
         </tr>

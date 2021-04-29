@@ -8,7 +8,6 @@ public class Municipio {
     int telefono;
 
     public Municipio() {
-
     }
 
     public Municipio(String cp, String nombre, String direccion, String email, Integer telefono) {

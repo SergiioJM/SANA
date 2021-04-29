@@ -42,7 +42,12 @@ public class PeriodoAsignadoController {
         periodoAsignadoValidator.validate(periodoAsignado,bindingResult);
         if (bindingResult.hasErrors())
             return "periodoAsignado/add";
-        periodoAsignadoDAO.addPeriodoAsignado(periodoAsignado);
+        try {
+            periodoAsignadoDAO.addPeriodoAsignado(periodoAsignado);
+        }
+        catch (DuplicateKeyException e ) {
+            throw new ClaveDuplicadaException("Ya existe el identificador " + periodoAsignado.getIdentificador()+ " para un periodo asignado", "CPduplicada");
+        }
         return "redirect:list";
     }
 

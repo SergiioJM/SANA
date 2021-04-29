@@ -19,7 +19,5 @@ public class CiudadanoValidator implements Validator {
                         "El nif es obligatorio");
                 if (ciudadano.getNombre().trim().equals("")) errors.rejectValue("nombre", "obligatori",
                     "El nombre es obligatorio");
-
         }
-
 }

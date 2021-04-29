@@ -3,6 +3,7 @@ package es.uji.ei1027.SANA.controller;
 import es.uji.ei1027.SANA.dao.ServicioDAO;
 import es.uji.ei1027.SANA.model.Servicio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -39,7 +40,12 @@ public class ServicioController {
         servicioValidator.validate(servicio,bindingResult);
         if (bindingResult.hasErrors())
             return "servicio/add";
-        servicioDAO.addServicio(servicio);
+        try {
+            servicioDAO.addServicio(servicio);
+        }
+        catch (DuplicateKeyException e ){
+            throw new ClaveDuplicadaException("Ya existe el nombre " + servicio.getNombre() + " para un servicio","CPduplicada");
+        }
         return "redirect:list";
     }
 

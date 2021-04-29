@@ -45,7 +45,7 @@ public class CiudadanoController {
             ciudadanoDAO.addCiudadano(ciudadano);
         }
         catch (DuplicateKeyException e ){
-            throw new ClaveDuplicada("Ya existe la clave primaria introducida","CPduplicada");
+            throw new ClaveDuplicadaException("Ya existe el NIF " + ciudadano.getNif(),"CPduplicada");
         }
         return "redirect:list";
     }

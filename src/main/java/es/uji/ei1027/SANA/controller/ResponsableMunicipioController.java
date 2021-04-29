@@ -1,6 +1,5 @@
 package es.uji.ei1027.SANA.controller;
 
-import es.uji.ei1027.SANA.dao.MunicipioDAO;
 import es.uji.ei1027.SANA.dao.ResponsableMunicipioDAO;
 import es.uji.ei1027.SANA.model.ResponsableMunicipio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,15 +39,15 @@ public class ResponsableMunicipioController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("responsable") ResponsableMunicipio responsableMunicipio,
                                    BindingResult bindingResult) {
-        ResponsableValidator responsableValidator= new ResponsableValidator();
-        responsableValidator.validate(responsableMunicipio,bindingResult);
+        ResponsableMunicipioValidator responsableMunicipioValidator= new ResponsableMunicipioValidator();
+        responsableMunicipioValidator.validate(responsableMunicipio,bindingResult);
         if (bindingResult.hasErrors())
             return "responsable/add";
         try {
             responsableMunicipioDAO.addResponsableMunicipio(responsableMunicipio);
         }
         catch (DuplicateKeyException e ){
-            throw new ClaveDuplicada("Ya existe la clave primaria introducida","CPduplicada");
+            throw new ClaveDuplicadaException("Ya existe el identificador " + responsableMunicipio.getIdentificador() + " para un responsable","CPduplicada");
         }
         return "redirect:list";
     }
@@ -65,8 +64,8 @@ public class ResponsableMunicipioController {
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "responsable/update";
-        ResponsableValidator responsableValidator= new ResponsableValidator();
-        responsableValidator.validate(responsableMunicipio,bindingResult);
+        ResponsableMunicipioValidator responsableMunicipioValidator= new ResponsableMunicipioValidator();
+        responsableMunicipioValidator.validate(responsableMunicipio,bindingResult);
         responsableMunicipioDAO.updateResponsableMunicipio(responsableMunicipio);
         return "redirect:list";
     }
