@@ -18,11 +18,15 @@
     </tr>
     <tr>
       <td><label>Fecha de Inicio</label></td>
-      <td><input type="text" th:field="*{fechaInicio}" /></td>
+      <td><input type="text" th:field="*{fechaInicio}"
+                 placeholder="D/M/YY"/></td>
     </tr>
     <tr>
       <td><label>Fecha de Fin</label></td>
-      <td><input type="text" th:field="*{fechaFin}" /></td>
+      <td><input type="text" th:field="*{fechaFin}"
+                 placeholder="D/M/YY"/></td>
+      <td th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}"></td>
+
     </tr>
     <tr>
       <td><label>Código del Controlador</label></td>
