@@ -31,7 +31,7 @@ public class PeriodoAsignadoValidator implements Validator {
         List<String> controladores = new ArrayList<>();
         for (Controlador c: controladorDAO.getControladores()){
             System.out.println(c);
-            controladores.add(c.getNombre());
+            controladores.add(c.getIdentificador());
         }
         if (!controladores.contains(periodoAsignado.getControlador()))
             errors.rejectValue("controlador","obligatorio","El controlador debe de existir");
