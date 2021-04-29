@@ -1,14 +1,15 @@
 DROP TABLE Ciudadano;
-DROP TABLE Reserva;
-DROP TABLE Zona;
+DROP TABLE Reserva CASCADE;
+DROP TABLE ReservaZonas CASCADE;
+DROP TABLE Zona CASCADE;
 DROP TABLE ServicioTemporal;
 DROP TABLE Servicio;
 DROP TABLE PeriodoAsignado;
 DROP TABLE Periodo;
 DROP TABLE ResponsableMunicipio;
-DROP TABLE  Controlador;
-DROP TABLE  Area;
-DROP TABLE  Municipio;
+DROP TABLE Controlador;
+DROP TABLE Area CASCADE;
+DROP TABLE Municipio CASCADE;
 
 
 CREATE TABLE Municipio(
@@ -58,7 +59,7 @@ CREATE TABLE ResponsableMunicipio(
 
 	CONSTRAINT cp_responsableMunicipio PRIMARY KEY(identificador),
 	CONSTRAINT ca_responsable_municipio FOREIGN KEY (municipio) REFERENCES Municipio(cp) ON DELETE RESTRICT ON UPDATE CASCADE ,
-     CONSTRAINT ri_fechaFin CHECK (fechaFin>fechaInicio)
+    CONSTRAINT ri_fechaFin CHECK (fechaFin>fechaInicio)
 
 );
 
@@ -127,18 +128,30 @@ CREATE TABLE Zona(
 CONSTRAINT ri_capacidad CHECK (capacidad>0)
 );
 
+CREATE TABLE Ciudadano(
+	nombre 	VARCHAR(50),
+	nif 		VARCHAR(9),
+	email		VARCHAR(50),
+	residencia	VARCHAR(50),
+	fechaRegistro	Date,
+
+	CONSTRAINT cp_ciudadano PRIMARY KEY(nif)
+);
+
 CREATE TABLE Reserva(
 	identificador 	VARCHAR(9),
 	hora		Time,
 	fecha		Date,
 	numeroPersonas	INTEGER,
-	estado			VARCHAR(20),
-	zona			VARCHAR(9) NOT NULL,
+	estado		VARCHAR(20),
+	zona		VARCHAR(9) NOT NULL,
+	ciudadano   VARCHAR(9),
 
 	CONSTRAINT cp_reserva PRIMARY KEY(identificador),
-	CONSTRAINT cp_reserva_zona FOREIGN KEY (zona) REFERENCES Zona(identificador) ON DELETE RESTRICT ON UPDATE CASCADE,
-CONSTRAINT ri_numeroPersonas CHECK (numeroPersonas>0),
-CONSTRAINT ri_estado CHECK (estado IN('usada','cancelada', 'disponible'))
+	CONSTRAINT ca_reserva_zona FOREIGN KEY (zona) REFERENCES Zona(identificador) ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT ca_ciudadano FOREIGN KEY (ciudadano) REFERENCES Ciudadano(nif) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT ri_numeroPersonas CHECK (numeroPersonas>0),
+    CONSTRAINT ri_estado CHECK (estado IN('usada','cancelada', 'disponible'))
 );
 
 CREATE TABLE ReservaZonas(
@@ -167,11 +180,12 @@ INSERT INTO Municipio VALUES('12590','Castellon','C/Jaume I','castellon@caste.co
 INSERT INTO Area VALUES('A01', 'Campus UJI', 'Universitat Jaume I', 'desierto', 'UJI', 'norestringido', 12590 );
 INSERT INTO Controlador VALUES('C01','Juan','C/ De la guerra','juan@caste.com','54678912','2021-04-08',NULL);
 INSERT INTO ResponsableMunicipio VALUES('Paco','paco@caste.com','09874564','2021-04-08',NULL,'R01','12590');
- INSERT INTO Periodo VALUES(P01,'2021-04-08',NULL,'12:35:38','18:45:20','A01');
+INSERT INTO Periodo VALUES('P01','2021-04-08',NULL,'12:35:38','18:45:20','A01');
 INSERT INTO PeriodoAsignado VALUES('P01','2021-04-08',NULL,'C01','A01');
-INSERT INTO Servicio VALUES('Piscina',Baño en la piscina','usada','A01');
+INSERT INTO Servicio VALUES('Piscina','Baño en la piscina','usada','A01');
 INSERT INTO ServicioTemporal VALUES('ControladorPlaya','2011-08-10','2012-08-25','10:00:00','20:15:00','A01');
 INSERT INTO Zona VALUES('Z01','50','A01');
-INSERT INTO Reserva VALUES('R01','15:15:15','2021-04-08','50','cancelada','Z01');
-INSERT INTO Ciudadano VALUES('Joaquin', '20939567Z', 'joaquin@caste.com', 'Fuentes Claras','2021-04-08','R01');
+INSERT INTO Ciudadano VALUES('Joaquin', '20939567Z', 'joaquin@caste.com', 'Fuentes Claras','2021-04-08');
+INSERT INTO Reserva VALUES('R01','15:15:15','2021-04-08','50','cancelada','Z01','20939567Z');
+INSERT INTO ReservaZonas ('R01','Z01');
 
