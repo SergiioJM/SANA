@@ -1,6 +1,5 @@
 package es.uji.ei1027.SANA.controller;
 
-import es.uji.ei1027.SANA.dao.ControladorDAO;
 import es.uji.ei1027.SANA.model.PeriodoAsignado;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -14,7 +13,6 @@ public class PeriodoAsignadoValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         PeriodoAsignado periodoAsignado = (PeriodoAsignado) obj;
-        ControladorDAO controladorDAO = new ControladorDAO();
         if (periodoAsignado.getIdentificador().trim().equals(""))
             errors.rejectValue("identificador","obligatorio", "El periodo asignado tiene que tener un identificador");
 
@@ -24,14 +22,21 @@ public class PeriodoAsignadoValidator implements Validator {
         if (periodoAsignado.getArea().trim().equals(""))
             errors.rejectValue("area","obligatorio", "El periodo asignado debe tener un area");
 
-    /*   List<String> controladores = new ArrayList<>();
+        if (periodoAsignado.getFechaInicio() == null)
+            errors.rejectValue("fechaInicio", "obligatorio", "Tienes que introducir una fecha de inicio");
+
+        if (periodoAsignado.getFechaFin() != null) {
+            if (periodoAsignado.getFechaInicio().isAfter(periodoAsignado.getFechaFin()))
+                errors.rejectValue("fechaFin", "obligatorio", "La fecha de fin tiene que ser posterior a la de inicio");
+        }
+
+        /* List<String> controladores = new ArrayList<>();
         for (Controlador c: controladorDAO.getControladores()){
-            System.out.println(c);
             controladores.add(c.getIdentificador());
         }
         if (!controladores.contains(periodoAsignado.getControlador()))
             errors.rejectValue("controlador","obligatorio","El controlador debe de existir");
+*/
 
-     */
     }
 }

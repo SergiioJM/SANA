@@ -19,5 +19,12 @@ public class PeriodoValidator implements Validator {
         if (periodo.getIdArea().trim().equals(""))
             errors.rejectValue("idArea","obligatorio","El periodo tiene que ir relacionado con un area");
 
+        if (periodo.getfechaInicio() == null)
+            errors.rejectValue("fechaInicio", "obligatorio", "Tienes que introducir una fecha de inicio");
+
+        if (periodo.getfechaFin() != null) {
+            if (periodo.getfechaInicio().isAfter(periodo.getfechaFin()))
+                errors.rejectValue("fechaFin", "obligatorio", "La fecha de fin tiene que ser posterior a la de inicio");
+        }
     }
 }

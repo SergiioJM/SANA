@@ -1,13 +1,9 @@
 package es.uji.ei1027.SANA.controller;
 
 import es.uji.ei1027.SANA.dao.MunicipioDAO;
-import es.uji.ei1027.SANA.model.Ciudadano;
-import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.ResponsableMunicipio;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
-
-import java.util.ArrayList;
 
 public class ResponsableMunicipioValidator implements Validator {
 
@@ -30,11 +26,15 @@ public class ResponsableMunicipioValidator implements Validator {
                 "El nombre es obligatorio");
         if (responsableMunicipio.getIdentificador().trim().equals("")) errors.rejectValue("identificador", "obligatori",
                 "El identificador es obligatorio");
+
+        if (responsableMunicipio.getfechaInicio() == null)
+            errors.rejectValue("fechaInicio", "obligatorio", "Tienes que introducir una fecha de inicio");
+
+        if (responsableMunicipio.getfechaFin() != null) {
+            if (responsableMunicipio.getfechaInicio().isAfter(responsableMunicipio.getfechaFin()))
+                errors.rejectValue("fechaFin", "obligatorio", "La fecha de fin tiene que ser posterior a la de inicio");
+        }
         /*
-        if (responsableMunicipio.getfechaInicio().isAfter(responsableMunicipio.getfechaFin()))
-            errors.rejectValue("fechaFin", "obligatori", "La fecha de fin tiene que ser mayor que la fecha de inicio");
-
-
             ArrayList<String> lista = new ArrayList<>();
             for (Municipio e : municipioDAO.getMunicipios()) {
                 lista.add(e.getCp());

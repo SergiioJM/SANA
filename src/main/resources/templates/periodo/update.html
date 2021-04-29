@@ -15,7 +15,6 @@
             <td><label>Identificador</label></td>
             <td><input type="text" th:field="*{identificador}"
                        readonly="readonly"/></td>
-
         </tr>
         <tr>
             <td><label>Fecha de Inicio</label></td>
@@ -23,7 +22,9 @@
         </tr>
         <tr>
             <td><label>Fecha de Fin</label></td>
-            <td><input type="text" th:field="*{fechaFin}" /></td>
+            <td><input type="text" th:field="*{fechaFin}"
+            <td th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}" class="error"></td>
+            /></td>
         </tr>
         <tr>
             <td><label>Hora de Inicio</label></td>
