@@ -1,5 +1,6 @@
 package es.uji.ei1027.SANA.controller;
 
+import es.uji.ei1027.SANA.dao.MunicipioDAO;
 import es.uji.ei1027.SANA.dao.ResponsableMunicipioDAO;
 import es.uji.ei1027.SANA.model.ResponsableMunicipio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class ResponsableMunicipioController {
 
     private ResponsableMunicipioDAO responsableMunicipioDAO;
+
 
     @Autowired
     public void setResponsableMunicipioDAO(ResponsableMunicipioDAO responsableMunicipioDAO) {
@@ -63,6 +65,8 @@ public class ResponsableMunicipioController {
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "responsable/update";
+        ResponsableValidator responsableValidator= new ResponsableValidator();
+        responsableValidator.validate(responsableMunicipio,bindingResult);
         responsableMunicipioDAO.updateResponsableMunicipio(responsableMunicipio);
         return "redirect:list";
     }

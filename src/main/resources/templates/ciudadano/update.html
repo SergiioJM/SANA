@@ -18,7 +18,7 @@
         </tr>
         <tr>
             <td><label>NIF</label></td>
-            <td><input type="text" th:field="*{nif}" /></td>
+            <td><input type="text" th:field="*{nif}" readonly="readonly"/></td>
             <td th:if="${#fields.hasErrors('nif')}" th:errors="*{nif}" class="error"></td>
         </tr>
         <tr>

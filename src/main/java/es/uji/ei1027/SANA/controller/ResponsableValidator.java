@@ -10,6 +10,9 @@ import org.springframework.validation.Validator;
 import java.util.ArrayList;
 
 public class ResponsableValidator implements Validator {
+
+    public MunicipioDAO municipioDAO;
+
     @Override
     public boolean supports(Class<?> cls) {
         return ResponsableMunicipio.class.equals(cls);
@@ -20,23 +23,27 @@ public class ResponsableValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ResponsableMunicipio responsableMunicipio=(ResponsableMunicipio) o;
+
         if (responsableMunicipio.getMunicipio().trim().equals("")) errors.rejectValue("municipio", "obligatori",
                 "El municipio es obligatorio");
         if (responsableMunicipio.getNombre().trim().equals("")) errors.rejectValue("nombre", "obligatori",
                 "El nombre es obligatorio");
-
+        if (responsableMunicipio.getIdentificador().trim().equals("")) errors.rejectValue("identificador", "obligatori",
+                "El identificador es obligatorio");
         /*
         if (responsableMunicipio.getfechaInicio().isAfter(responsableMunicipio.getfechaFin()))
             errors.rejectValue("fechaFin", "obligatori", "La fecha de fin tiene que ser mayor que la fecha de inicio");
 
-        MunicipioDAO municipioDAO= new MunicipioDAO();
-        ArrayList<String> lista= new ArrayList<>();
-        for(Municipio e: municipioDAO.getMunicipios()){
-            lista.add(e.getCp());
+
+            ArrayList<String> lista = new ArrayList<>();
+            for (Municipio e : municipioDAO.getMunicipios()) {
+                lista.add(e.getCp());
+                System.out.println(e);
+            }
         }
         if (!lista.contains(responsableMunicipio.getMunicipio().trim())) errors.rejectValue("municipiono", "obligatori",
                 "El municipio no existe");
+        */
 
-         */
     }
 }

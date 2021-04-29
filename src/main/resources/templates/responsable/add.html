@@ -36,12 +36,12 @@
         <tr>
             <td><label>Identificador</label></td>
             <td><input type="text" th:field="*{identificador}" /></td>
+            <td th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}" class="error"></td>
         </tr>
         <tr>
             <td><label>Municipio</label></td>
             <td><input type="text" th:field="*{municipio}" maxlength="10" /></td>
             <td th:if="${#fields.hasErrors('municipio')}" th:errors="*{municipio}" class="error"></td>
-            <td th:if="${#fields.hasErrors('municipio')}" th:errors="*{municipiono}" class="error"></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Añade Responsable de Municipio" /></td>

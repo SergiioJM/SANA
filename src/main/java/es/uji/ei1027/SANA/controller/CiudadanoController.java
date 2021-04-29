@@ -3,6 +3,7 @@ package es.uji.ei1027.SANA.controller;
 import es.uji.ei1027.SANA.dao.CiudadanoDAO;
 import es.uji.ei1027.SANA.model.Ciudadano;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -40,7 +41,12 @@ public class CiudadanoController {
         ciudadanoValidator.validate(ciudadano,bindingResult);
         if (bindingResult.hasErrors())
             return "ciudadano/add";
-        ciudadanoDAO.addCiudadano(ciudadano);
+        try {
+            ciudadanoDAO.addCiudadano(ciudadano);
+        }
+        catch (DuplicateKeyException e ){
+            throw new ClaveDuplicada("Ya existe la clave primaria introducida","CPduplicada");
+        }
         return "redirect:list";
     }
 
