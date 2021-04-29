@@ -36,6 +36,8 @@ public class CiudadanoController {
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("ciudadano") Ciudadano ciudadano, BindingResult bindingResult) {
+        CiudadanoValidator ciudadanoValidator=new CiudadanoValidator();
+        ciudadanoValidator.validate(ciudadano,bindingResult);
         if (bindingResult.hasErrors())
             return "ciudadano/add";
         ciudadanoDAO.addCiudadano(ciudadano);
@@ -52,6 +54,8 @@ public class CiudadanoController {
     public String processUpdateSubmit(
             @ModelAttribute("ciudadano") Ciudadano ciudadano,
             BindingResult bindingResult) {
+        CiudadanoValidator ciudadanoValidator=new CiudadanoValidator();
+        ciudadanoValidator.validate(ciudadano,bindingResult);
         if (bindingResult.hasErrors())
             return "ciudadano/update";
         ciudadanoDAO.updateCiudadano(ciudadano);

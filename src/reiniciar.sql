@@ -151,12 +151,12 @@ CREATE TABLE ReservaZonas(
 );
 
 CREATE TABLE Ciudadano(
-	nombre 	VARCHAR(50),
-	nif 		VARCHAR(9),
+	nombre 	VARCHAR(50) NOT NULL,
+	nif 		VARCHAR(9) NOT NULL,
 	email		VARCHAR(50),
 	residencia	VARCHAR(50),
 	fechaRegistro	Date,
-	reserva	VARCHAR(9) NOT NULL,
+	reserva	VARCHAR(9),
 
 	CONSTRAINT cp_ciudadano PRIMARY KEY(nif),
 	CONSTRAINT ca_ciudadano_reserva FOREIGN KEY (reserva)

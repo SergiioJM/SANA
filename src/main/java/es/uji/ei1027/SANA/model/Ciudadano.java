@@ -8,15 +8,15 @@ public class Ciudadano {
     String email;
     String residencia;
     LocalDate fechaRegistro;
-    String reserva;
 
-    public Ciudadano(String nombre, String nif, String email, String residencia, LocalDate fechaRegistro, String reserva) {
+
+    public Ciudadano(String nombre, String nif, String email, String residencia, LocalDate fechaRegistro) {
         this.nombre = nombre;
         this.nif = nif;
         this.email = email;
         this.residencia = residencia;
         this.fechaRegistro = fechaRegistro;
-        this.reserva = reserva;
+
     }
 
     public Ciudadano() {
@@ -63,13 +63,6 @@ public class Ciudadano {
         this.fechaRegistro = fechaRegistro;
     }
 
-    public String getReserva() {
-        return reserva;
-    }
-
-    public void setReserva(String reserva) {
-        this.reserva = reserva;
-    }
 
     @Override
     public String toString() {
@@ -79,7 +72,6 @@ public class Ciudadano {
                 ", email='" + email + '\'' +
                 ", residencia='" + residencia + '\'' +
                 ", fechaRegistro=" + fechaRegistro +
-                ", reserva=" + reserva +
                 '}';
     }
 }

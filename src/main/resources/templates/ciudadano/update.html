@@ -12,16 +12,18 @@
       th:object="${ciudadano}" method="post">
     <table>
         <tr>
-            <td><label>NIF</label></td>
-            <td><input type="text" th:field="*{nif}" /></td>
+            <td><label>Nombre</label></td>
+            <td><input type="text" th:field="*{nombre}" maxlength="9"/></td>
+            <td th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></td>
         </tr>
         <tr>
-            <td><label>Nombre</label></td>
-            <td><input type="text" th:field="*{nombre}" /></td>
+            <td><label>NIF</label></td>
+            <td><input type="text" th:field="*{nif}" /></td>
+            <td th:if="${#fields.hasErrors('nif')}" th:errors="*{nif}" class="error"></td>
         </tr>
         <tr>
             <td><label>Email</label></td>
-            <td><input type="text" th:field="*{email}" /></td>
+            <td><input type="text" th:field="*{email}" placeholder="...@..."/></td>
         </tr>
         <tr>
             <td><label>Residencia</label></td>
@@ -29,11 +31,7 @@
         </tr>
         <tr>
             <td><label>Fecha de Registro</label></td>
-            <td><input type="text" th:field="*{fechaRegistro}" /></td>
-        </tr>
-        <tr>
-            <td><label>Reserva</label></td>
-            <td><input type="text" th:field="*{reserva}" /></td>
+            <td><input type="text" th:field="*{fechaRegistro}" placeholder="D/M/YY"/></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Modifica el Ciudadano" /></td>

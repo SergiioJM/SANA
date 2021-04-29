@@ -15,7 +15,6 @@ public final class CiudadanoRowMapper implements RowMapper<Ciudadano> {
         ciudadano.setEmail(rs.getString("email"));
         ciudadano.setResidencia(rs.getString("residencia"));
         ciudadano.setFechaRegistro(rs.getObject("fechaRegistro", LocalDate.class));
-        ciudadano.setReserva(rs.getString("reserva"));
         return ciudadano;
     }
 }

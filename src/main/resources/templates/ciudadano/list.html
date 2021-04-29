@@ -27,7 +27,6 @@
         <td th:text="${ciudadano.email}"></td>
         <td th:text="${ciudadano.residencia}"></td>
         <td th:text="${ciudadano.fechaRegistro}"></td>
-        <td th:text="${ciudadano.reserva}"></td>
         <td><a th:href="@{/ciudadano/update/{nif}(nif=${ciudadano.nif})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
         <td><a th:href="@{/ciudadano/delete/{nif}(nif=${ciudadano.nif})}"><button type="button" class="btn btn-danger">Borra</button></a>

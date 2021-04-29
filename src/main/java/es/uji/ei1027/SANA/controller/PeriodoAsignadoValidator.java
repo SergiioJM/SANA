@@ -30,6 +30,7 @@ public class PeriodoAsignadoValidator implements Validator {
 
         List<String> controladores = new ArrayList<>();
         for (Controlador c: controladorDAO.getControladores()){
+            System.out.println(c);
             controladores.add(c.getNombre());
         }
         if (!controladores.contains(periodoAsignado.getControlador()))
