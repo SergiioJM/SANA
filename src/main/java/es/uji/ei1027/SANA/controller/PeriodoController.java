@@ -4,6 +4,7 @@ package es.uji.ei1027.SANA.controller;
 import es.uji.ei1027.SANA.dao.PeriodoDAO;
 import es.uji.ei1027.SANA.model.Periodo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,7 +44,12 @@ public class PeriodoController {
         periodoValidator.validate(periodo,bindingResult);
         if (bindingResult.hasErrors())
             return "periodo/add";
-        periodoDAO.addPeriodo(periodo);
+        try {
+            periodoDAO.addPeriodo(periodo);
+        }
+        catch (DuplicateKeyException e ){
+            throw new ClaveDuplicadaException("Ya existe la clave primaria introducida","CPduplicada");
+        }
         return "redirect:list";
     }
 

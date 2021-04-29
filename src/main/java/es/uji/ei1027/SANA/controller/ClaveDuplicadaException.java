@@ -1,10 +1,10 @@
 package es.uji.ei1027.SANA.controller;
 
-public class ClaveDuplicada extends RuntimeException{
+public class ClaveDuplicadaException extends RuntimeException{
     String message;    // Missatge per mostrar a la vista
     String errorName;     // Identificador de l’error
 
-    public ClaveDuplicada(String message, String errorName)
+    public ClaveDuplicadaException(String message, String errorName)
     {
         this.message=message;
         this.errorName=errorName;

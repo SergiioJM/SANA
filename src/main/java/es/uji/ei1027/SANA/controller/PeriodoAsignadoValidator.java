@@ -28,7 +28,7 @@ public class PeriodoAsignadoValidator implements Validator {
         if (periodoAsignado.getArea().trim().equals(""))
             errors.rejectValue("area","obligatorio", "El periodo asignado debe tener un area");
 
-        List<String> controladores = new ArrayList<>();
+       List<String> controladores = new ArrayList<>();
         for (Controlador c: controladorDAO.getControladores()){
             System.out.println(c);
             controladores.add(c.getIdentificador());

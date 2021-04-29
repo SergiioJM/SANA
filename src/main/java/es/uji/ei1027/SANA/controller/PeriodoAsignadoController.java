@@ -3,6 +3,7 @@ package es.uji.ei1027.SANA.controller;
 import es.uji.ei1027.SANA.dao.PeriodoAsignadoDAO;
 import es.uji.ei1027.SANA.model.PeriodoAsignado;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -57,8 +58,12 @@ public class PeriodoAsignadoController {
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
             return "periodoAsignado/update";
-        periodoAsignadoDAO.updatePeriodoAsignado(periodoAsignado);
-        return "redirect:list";
+        try {
+            periodoAsignadoDAO.addPeriodoAsignado(periodoAsignado);
+        }
+        catch (DuplicateKeyException e ){
+            throw new ClaveDuplicadaException("Ya existe la clave primaria introducida","CPduplicada");
+        }        return "redirect:list";
     }
 
     @RequestMapping(value="/delete/{identificador}")

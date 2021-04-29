@@ -15,6 +15,7 @@
         <th>Fecha</th>
         <th>Numero de Personas</th>
         <th>Estado</th>
+        <th>Ciudadano</th>
         <th></th>
         <th></th>
     </tr>
@@ -26,6 +27,7 @@
         <td th:text="${reserva.fecha}"></td>
         <td th:text="${reserva.numeroPersonas}"></td>
         <td th:text="${reserva.estado}"></td>
+        <td th:text="${reserva.ciudadano}"></td>
         <td><a th:href="@{/reserva/update/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
         <td><a th:href="@{/reserva/delete/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>

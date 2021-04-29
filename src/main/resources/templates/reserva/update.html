@@ -12,24 +12,28 @@
       th:object="${reserva}" method="post">
     <table>
         <tr>
-            <td><label>Identificador: </label></td>
+            <td><label>Identificador</label></td>
             <td><input type="text" th:field="*{identificador}" /></td>
         </tr>
         <tr>
-            <td><label>Hora: </label></td>
+            <td><label>Hora</label></td>
             <td><input type="text" th:field="*{hora}" /></td>
         </tr>
         <tr>
-            <td><label>Fecha: </label></td>
+            <td><label>Fecha</label></td>
             <td><input type="text" th:field="*{fecha}" /></td>
         </tr>
         <tr>
-            <td><label>NumeroPersonas: </label></td>
+            <td><label>Numero de Personas</label></td>
             <td><input type="number" th:field="*{numeroPersonas}" /></td>
         </tr>
         <tr>
-            <td><label>Estado: </label></td>
+            <td><label>Estado</label></td>
             <td><input type="text" th:field="*{estado}" /></td>
+        </tr>
+        <tr>
+            <td><label>Ciudadano</label></td>
+            <td><input type="text" th:field="*{ciudadano}" /></td>
         </tr>
         <tr>
             <td colspan="2"><input type="submit" value="Modifica la reserva" /></td>
