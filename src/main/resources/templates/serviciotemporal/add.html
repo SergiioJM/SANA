@@ -18,18 +18,22 @@
         <tr>
             <td><label>Fecha de Inicio: </label></td>
             <td><input type="text" th:field="*{fechaInicio}" /></td>
+            <td th:if="${#fields.hasErrors('fechaInicio')}" th:errors="*{fechaInicio}" class="error"></td>
         </tr>
         <tr>
             <td><label>Fecha de Fin: </label></td>
             <td><input type="text" th:field="*{fechaFin}" /></td>
+            <td th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}" class="error"></td>
         </tr>
         <tr>
             <td><label>Hora de Inicio: </label></td>
             <td><input type="text" th:field="*{horaInicio}" /></td>
+            <td th:if="${#fields.hasErrors('horaInicio')}" th:errors="*{horaInicio}" class="error"></td>
         </tr>
         <tr>
             <td><label>Hora de Fin: </label></td>
             <td><input type="text" th:field="*{horaFin}" /></td>
+            <td th:if="${#fields.hasErrors('horaFin')}" th:errors="*{horaFin}" class="error"></td>
         </tr>
         <tr>
             <td><label>Identificador del Area: </label></td>

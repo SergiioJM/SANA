@@ -39,6 +39,8 @@ public class ServicioTemporalController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("serviciotemporal") ServicioTemporal servicioTemporal,
                                    BindingResult bindingResult) {
+        ServicioTemporalValidator servicioTemporalValidatorValidator= new ServicioTemporalValidator();
+        servicioTemporalValidatorValidator.validate(servicioTemporal,bindingResult);
         if (bindingResult.hasErrors())
             return "serviciotemporal/add";
         servicioTemporalDAO.addServicioTemporal(servicioTemporal);
@@ -55,6 +57,8 @@ public class ServicioTemporalController {
     public String processUpdateSubmit(
             @ModelAttribute("serviciotemporal") ServicioTemporal servicioTemporal,
             BindingResult bindingResult) {
+        ServicioTemporalValidator servicioTemporalValidatorValidator= new ServicioTemporalValidator();
+        servicioTemporalValidatorValidator.validate(servicioTemporal,bindingResult);
         if (bindingResult.hasErrors())
             return "serviciotemporal/update";
         servicioTemporalDAO.updateServicioTemporal(servicioTemporal);
