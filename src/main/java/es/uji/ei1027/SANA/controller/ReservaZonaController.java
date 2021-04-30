@@ -3,6 +3,7 @@ package es.uji.ei1027.SANA.controller;
 import es.uji.ei1027.SANA.dao.ReservaZonaDAO;
 import es.uji.ei1027.SANA.model.ReservaZona;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,9 +37,17 @@ public class ReservaZonaController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reservazona") ReservaZona reservaZona,
                                    BindingResult bindingResult) {
+        ReservaZonaValidator reservaZonaValidator= new ReservaZonaValidator();
+        reservaZonaValidator.validate(reservaZona,bindingResult);
         if (bindingResult.hasErrors())
             return "reservazona/add";
-        reservaZonaDAO.addReservaZona(reservaZona);
+        try {
+            reservaZonaDAO.addReservaZona(reservaZona);
+        }
+        catch (DuplicateKeyException e ) {
+            throw new ClaveDuplicadaException("Ya existe la reserva: " + reservaZona.getReserva(), "CPduplicada");
+        }
+
         return "redirect:list";
     }
 

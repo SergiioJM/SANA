@@ -14,10 +14,12 @@
         <tr>
             <td><label>Reserva</label></td>
             <td><input type="text" th:field="*{reserva}" /></td>
+            <td th:if="${#fields.hasErrors('reserva')}" th:errors="*{reserva}" class="error"></td>
         </tr>
         <tr>
             <td><label>Zona</label></td>
             <td><input type="text" th:field="*{zona}" /></td>
+            <td th:if="${#fields.hasErrors('zona')}" th:errors="*{zona}" class="error"></td>
         </tr>
     </table>
     <a href="add"><button type="submit" class="btn btn-success">Añade una Reserva en una Zona</button></a>

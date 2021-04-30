@@ -6,6 +6,7 @@ import es.uji.ei1027.SANA.dao.ZonaDAO;
 import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.Zona;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,6 +39,8 @@ public class ZonaController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("zona") Zona zona,
                                    BindingResult bindingResult) {
+        ZonaValidator zonaValidator =new ZonaValidator();
+        zonaValidator.validate(zona,bindingResult);
         if (bindingResult.hasErrors())
             return "zona/add";
         zonaDAO.addZona(zona);
@@ -54,9 +57,17 @@ public class ZonaController {
     public String processUpdateSubmit(
             @ModelAttribute("zona") Zona zona,
             BindingResult bindingResult) {
+        ZonaValidator zonaValidator =new ZonaValidator();
+        zonaValidator.validate(zona,bindingResult);
         if (bindingResult.hasErrors())
             return "zona/update";
-        zonaDAO.updateZona(zona);
+        try {
+            zonaDAO.updateZona(zona);
+        }
+        catch (DuplicateKeyException e ) {
+            throw new ClaveDuplicadaException("Ya existe una zona con ese identificador: " + zona.getIdentificador(), "CPduplicada");
+        }
+
         return "redirect:list";
     }
 

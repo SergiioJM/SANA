@@ -1,7 +1,7 @@
 package es.uji.ei1027.SANA.controller;
 
 
-import es.uji.ei1027.SANA.model.Servicio;
+
 import es.uji.ei1027.SANA.model.ServicioTemporal;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
@@ -9,7 +9,7 @@ import org.springframework.validation.Validator;
 public class ServicioTemporalValidator implements Validator {
     @Override
     public boolean supports(Class<?> cls) {
-        return Servicio.class.equals(cls);
+        return ServicioTemporal.class.equals(cls);
     }
 
     @Override

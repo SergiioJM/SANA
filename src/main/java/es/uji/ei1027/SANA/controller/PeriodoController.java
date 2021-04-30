@@ -63,9 +63,17 @@ public class PeriodoController {
     public String processUpdateSubmit(
             @ModelAttribute("periodo") Periodo periodo,
             BindingResult bindingResult) {
+        PeriodoValidator periodoValidator = new PeriodoValidator();
+        periodoValidator.validate(periodo,bindingResult);
         if (bindingResult.hasErrors())
             return "periodo/update";
-        periodoDAO.updatePeriodo(periodo);
+        try {
+            periodoDAO.updatePeriodo(periodo);
+        }
+        catch (DuplicateKeyException e ) {
+            throw new ClaveDuplicadaException("Ya existe un periodo con ese identificador: " + periodo.getIdentificador(), "CPduplicada");
+        }
+
         return "redirect:list";
     }
 

@@ -5,6 +5,7 @@ import es.uji.ei1027.SANA.dao.ServicioTemporalDAO;
 import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.ServicioTemporal;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -43,7 +44,12 @@ public class ServicioTemporalController {
         servicioTemporalValidatorValidator.validate(servicioTemporal,bindingResult);
         if (bindingResult.hasErrors())
             return "serviciotemporal/add";
-        servicioTemporalDAO.addServicioTemporal(servicioTemporal);
+        try {
+            servicioTemporalDAO.addServicioTemporal(servicioTemporal);
+        }
+        catch (DuplicateKeyException e ) {
+            throw new ClaveDuplicadaException("Ya existe un servicio Temporal con ese Nombre: " + servicioTemporal.getNombre(), "CPduplicada");
+        }
         return "redirect:list";
     }
 
