@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResponsableMunicipioValidator implements Validator {
-
-    private MunicipioDAO municipioDAO= new MunicipioDAO();
+    public MunicipioDAO municipioDAO;
+    public ResponsableMunicipioValidator(MunicipioDAO municipioDAO){
+        this.municipioDAO=municipioDAO;
+    }
     private JdbcTemplate jdbcTemplate;
     @Override
     public boolean supports(Class<?> cls) {
@@ -24,13 +26,14 @@ public class ResponsableMunicipioValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ResponsableMunicipio responsableMunicipio=(ResponsableMunicipio) o;
-        /*ArrayList<String> lista = new ArrayList<>();
-        List<Municipio> lista2 = jdbcTemplate.query("SELECT * FROM Municipio", new es.uji.ei1027.SANA.dao.MunicipioRowMapper());
+
+
+        ArrayList<String> lista = new ArrayList<>();
+        List<Municipio> lista2 = municipioDAO.getMunicipios();
         for (Municipio e : lista2) {
             lista.add(e.getCp());
-            System.out.println(e);
+            //System.out.println(e);
         }
-         */
 
         if (responsableMunicipio.getMunicipio().trim().equals("")) errors.rejectValue("municipio", "obligatori",
                 "El municipio es obligatorio");
@@ -47,9 +50,9 @@ public class ResponsableMunicipioValidator implements Validator {
                 errors.rejectValue("fechaFin", "obligatorio", "La fecha de fin tiene que ser posterior a la de inicio");
         }
 
-
-        //if (!lista.contains(responsableMunicipio.getMunicipio().trim()))
-            //errors.rejectValue("municipiono", "obligatori", "El municipio no existe");
+        Boolean esta=lista.contains(responsableMunicipio.getMunicipio());
+        //if (esta.equals(Boolean.FALSE));
+            //errors.rejectValue("muni", "El municipio no existe");
 
     }
 }
