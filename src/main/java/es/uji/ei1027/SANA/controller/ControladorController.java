@@ -2,7 +2,9 @@ package es.uji.ei1027.SANA.controller;
 
 import es.uji.ei1027.SANA.dao.ControladorDAO;
 import es.uji.ei1027.SANA.model.Controlador;
+import es.uji.ei1027.SANA.model.Municipio;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -36,11 +38,19 @@ public class ControladorController {
         return "controlador/add";
     }
 
-    @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("controlador") Controlador controlador, BindingResult bindingResult) {
+    @RequestMapping(value="/add", method=RequestMethod.POST)
+    public String processAddSubmit(@ModelAttribute("controlador") Controlador controlador,
+                                   BindingResult bindingResult) {
+        ControladorValidator controladorValidator = new ControladorValidator();
+        controladorValidator.validate(controlador, bindingResult);
         if (bindingResult.hasErrors())
             return "controlador/add";
-        controladorDAO.addControlador(controlador);
+        try {
+            controladorDAO.addControlador(controlador);
+        }
+        catch (DuplicateKeyException e ){
+            throw new ClaveDuplicadaException("Ya existe el identificador " + controlador.getIdentificador(), "IDduplicado");
+        }
         return "redirect:list";
     }
 

@@ -3,8 +3,8 @@
 <head>
     <title>Crear Reserva</title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
 </head>
 <body>
 <h2>Nueva Reserva</h2>
@@ -14,6 +14,7 @@
         <tr>
             <td><label>Identificado</label></td>
             <td><input type="text" th:field="*{identificador}" /></td>
+            <td th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}" class="error"></td>
         </tr>
         <tr>
             <td><label>Hora</label></td>

@@ -2,6 +2,7 @@ package es.uji.ei1027.SANA.controller;
 
 import es.uji.ei1027.SANA.dao.AreaDAO;
 import es.uji.ei1027.SANA.model.Area;
+import es.uji.ei1027.SANA.model.Municipio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,12 +35,13 @@ public class AreaController {
         model.addAttribute("area", new Area());
         return "area/add";
     }
-
-    @RequestMapping(value="/add", method= RequestMethod.POST)
+    @RequestMapping(value="/add", method=RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("area") Area area,
                                    BindingResult bindingResult) {
+        AreaValidator areaValidator = new AreaValidator();
+        areaValidator.validate(area, bindingResult);
         if (bindingResult.hasErrors())
-            return "area/add";
+        return "area/add";
         areaDao.addArea(area);
         return "redirect:list";
     }
@@ -55,7 +57,7 @@ public class AreaController {
             @ModelAttribute("area") Area area,
             BindingResult bindingResult) {
         if (bindingResult.hasErrors())
-            return "Area/update";
+            return "area/update";
         areaDao.updateArea(area);
         return "redirect:list";
     }
