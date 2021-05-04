@@ -47,10 +47,8 @@
             <td>
                 <!--<input type="text" th:field="*{municipio}" maxlength="10" /> -->
                 <select class="form_control" type="text" th:field="*{municipio}">
-                    <option value="No seleccionat"></option>
-                    <li th:each="cp: ${municipioslista}"> <!--Falla aqui, la etiqueta (li) -->
-                        <option value="${cp}" th:text="${cp}"></option>
-                    </li>
+                    <option th:each="cp: ${municipioslista}" th:value="${cp}" th:text="${cp}">
+                    </option>
                 </select>
             </td>
             <td th:if="${#fields.hasErrors('municipio')}" th:errors="*{municipio}" class="error"></td>

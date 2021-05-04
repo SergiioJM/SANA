@@ -37,11 +37,18 @@
         </tr>
         <tr>
             <td><label>Identificador</label></td>
-            <td><input type="text" th:field="*{identificador}" readonly="readonly"/></td>
+            <td><input type="text" th:field="*{identificador}" /></td>
+            <td th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}" class="error"></td>
         </tr>
         <tr>
             <td><label>Municipio</label></td>
-            <td><input type="text" th:field="*{municipio}" maxlength="10" /></td>
+            <td>
+                <!--<input type="text" th:field="*{municipio}" maxlength="10" /> -->
+                <select class="form_control" type="text" th:field="*{municipio}">
+                    <option th:each="cp: ${municipioslista}" th:value="${cp}" th:text="${cp}">
+                    </option>
+                </select>
+            </td>
             <td th:if="${#fields.hasErrors('municipio')}" th:errors="*{municipio}" class="error"></td>
         </tr>
     </table>

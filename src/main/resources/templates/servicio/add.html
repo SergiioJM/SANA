@@ -28,7 +28,12 @@
         </tr>
         <tr>
             <td><label>Identificador del Area</label></td>
-            <td><input type="text" th:field="*{area}" /></td>
+            <!--<td><input type="text" th:field="*{area}" /></td> -->
+            <td>
+            <select class="form_control" type="text" th:field="*{area}">
+                <option th:each="idArea: ${arealista}" th:value="${idArea}" th:text="${idArea}"></option>
+            </select>
+            </td>
             <td th:if="${#fields.hasErrors('area')}" th:errors="*{area}" class="error"></td>
         </tr>
     </table>

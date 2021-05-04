@@ -57,12 +57,9 @@ public class ResponsableMunicipioController {
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("responsable") ResponsableMunicipio responsableMunicipio,
-                                   @ModelAttribute("municipioslista") List<String> municipios,
                                    BindingResult bindingResult) {
-        for (String e: municipios){
-            System.out.println("entra");
-            System.out.println(e);
-        }
+        System.out.println("entra1");
+
         ResponsableMunicipioValidator responsableMunicipioValidator= new ResponsableMunicipioValidator(MunicipioDAO);
         responsableMunicipioValidator.validate(responsableMunicipio,bindingResult);
         if (bindingResult.hasErrors()) {
@@ -80,6 +77,14 @@ public class ResponsableMunicipioController {
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
     public String editResponsableMunicipio(Model model, @PathVariable String identificador) {
         model.addAttribute("responsable", responsableMunicipioDAO.getResponsableMunicipio(identificador));
+
+        List<Municipio> lista2 = MunicipioDAO.getMunicipios();
+        ArrayList<String> lista = new ArrayList<>();
+        for (Municipio e : lista2) {
+            lista.add(e.getCp());
+
+        }
+        model.addAttribute("municipioslista",lista);
         return "responsable/update";
     }
 

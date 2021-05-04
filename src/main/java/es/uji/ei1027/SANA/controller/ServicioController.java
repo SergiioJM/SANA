@@ -1,6 +1,9 @@
 package es.uji.ei1027.SANA.controller;
 
+import es.uji.ei1027.SANA.dao.AreaDAO;
 import es.uji.ei1027.SANA.dao.ServicioDAO;
+import es.uji.ei1027.SANA.model.Area;
+import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.Servicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -11,14 +14,23 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/servicio")
 public class ServicioController {
     private ServicioDAO servicioDAO;
+    private AreaDAO areaDAO;
 
     @Autowired
     public void setServicioDAO(ServicioDAO servicioDAO) {
         this.servicioDAO = servicioDAO;
+    }
+    @Autowired
+    public void setAreaDAO(AreaDAO areaDAO) {
+        this.areaDAO=areaDAO;
     }
 
     @RequestMapping("/list")
@@ -30,6 +42,14 @@ public class ServicioController {
     @RequestMapping(value="/add")
     public String addServicios(Model model) {
         model.addAttribute("servicio", new Servicio());
+
+        List<Area> lista2 = areaDAO.getAreas();
+        ArrayList<String> lista = new ArrayList<>();
+        for (Area e : lista2) {
+            lista.add(e.getIdArea());
+
+        }
+        model.addAttribute("arealista",lista);
         return "servicio/add";
     }
 
@@ -52,6 +72,14 @@ public class ServicioController {
     @RequestMapping(value="/update/{nombre}", method = RequestMethod.GET)
     public String editServicio(Model model, @PathVariable String nombre) {
         model.addAttribute("servicio", servicioDAO.getServicio(nombre));
+
+        List<Area> lista2 = areaDAO.getAreas();
+        ArrayList<String> lista = new ArrayList<>();
+        for (Area e : lista2) {
+            lista.add(e.getIdArea());
+
+        }
+        model.addAttribute("arealista",lista);
         return "servicio/update";
     }
 
