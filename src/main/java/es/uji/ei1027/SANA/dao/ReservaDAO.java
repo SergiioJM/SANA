@@ -45,6 +45,21 @@ public class ReservaDAO {
         }
     }
 
+    public List<Reserva> getReservasPorCiudadano (String ciudadano) {
+        try {
+            List<Reserva> res = jdbcTemplate.query(
+                    "SELECT * FROM Reserva WHERE ciudadano =?",
+                    new es.uji.ei1027.SANA.dao.ReservaRowMapper());
+
+            for (Reserva e : res){
+                e.toString();
+            }
+            return res;
+        }catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+
     public List<Reserva> getReservas(){
         try {
             List<Reserva> res = jdbcTemplate.query(
