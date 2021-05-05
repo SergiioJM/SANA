@@ -15,9 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 @Controller
 @RequestMapping("/responsable")
@@ -53,8 +51,6 @@ public class ResponsableMunicipioController {
 
         }
         model.addAttribute("municipioslista",lista);
-        model.addAttribute("modelo",model);
-
         return "responsable/add";
     }
 

@@ -21,9 +21,12 @@
             <td th:if="${#fields.hasErrors('capacidad')}" th:errors="*{capacidad}" class="error"></td>
         </tr>
         <tr>
-            <td><label>Identificador del Area Area</label></td>
-            <td><input type="text" th:field="*{idArea}" /></td>
-            <td th:if="${#fields.hasErrors('idArea')}" th:errors="*{idArea}" class="error"></td>
+            <td><label>Identificador del Area</label></td>
+            <td>
+                <select class="form_control" type="text" th:field="*{idArea}">
+                    <option th:each="idArea: ${arealista}" th:value="${idArea}" th:text="${idArea}"></option>
+                </select>
+            </td>
         </tr>
     </table>
     <a href="add"><button type="submit" class="btn btn-success">Añade una Zona</button></a>

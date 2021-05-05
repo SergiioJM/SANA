@@ -27,12 +27,20 @@
       <td th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}" class="error"></td>
     </tr>
     <tr>
-      <td><label>Código del Controlador</label></td>
-      <td><input type="text" th:field="*{controlador}" /></td>
+      <td><label>Identificador del Controlador</label></td>
+      <td>
+        <select class="form_control" type="text" th:field="*{controlador}">
+          <option th:each="idControlador: ${controladorlista}" th:value="${idControlador}" th:text="${idControlador}"></option>
+        </select>
+      </td>
     </tr>
     <tr>
-      <td><label>Código del Area</label></td>
-      <td><input type="text" th:field="*{area}" /></td>
+      <td><label>Identificador del Area</label></td>
+      <td>
+        <select class="form_control" type="text" th:field="*{area}">
+          <option th:each="area: ${arealista}" th:value="${area}" th:text="${area}"></option>
+        </select>
+      </td>
     </tr>
   </table>
   <a href="add"><button type="submit" class="btn btn-success">Modifica un Periodo Asignado</button></a>

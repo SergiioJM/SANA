@@ -1,6 +1,10 @@
 package es.uji.ei1027.SANA.controller;
 
+import es.uji.ei1027.SANA.dao.AreaDAO;
+import es.uji.ei1027.SANA.dao.ControladorDAO;
 import es.uji.ei1027.SANA.dao.PeriodoAsignadoDAO;
+import es.uji.ei1027.SANA.model.Area;
+import es.uji.ei1027.SANA.model.Controlador;
 import es.uji.ei1027.SANA.model.PeriodoAsignado;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -12,16 +16,32 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/periodoAsignado")
 public class PeriodoAsignadoController {
 
     private PeriodoAsignadoDAO periodoAsignadoDAO;
+    private AreaDAO areaDAO;
+    private ControladorDAO controladorDAO;
 
     @Autowired
     public void setPeriodoAsignadoDAO(PeriodoAsignadoDAO periodoAsignadoDAO) {
         this.periodoAsignadoDAO = periodoAsignadoDAO;
     }
+
+    @Autowired
+    public void setAreaDAO(AreaDAO areaDAO) {
+        this.areaDAO=areaDAO;
+    }
+
+    @Autowired
+    public void setControladorDao(ControladorDAO controladorDAO) {
+        this.controladorDAO = controladorDAO;
+    }
+
 
     @RequestMapping("/list")
     public String listaDePeriodosAsignados(Model model){
@@ -32,16 +52,41 @@ public class PeriodoAsignadoController {
     @RequestMapping(value="/add")
     public String addPeriodoAsignado(Model model) {
         model.addAttribute("periodoAsignado", new PeriodoAsignado());
+        List<Area> lista2 = areaDAO.getAreas();
+        ArrayList<String> lista = new ArrayList<>();
+        for (Area e : lista2)
+            lista.add(e.getIdArea());
+        model.addAttribute("arealista",lista);
+
+        List<Controlador> lista3 = controladorDAO.getControladores();
+        ArrayList<String> listaAux = new ArrayList<>();
+        for (Controlador e : lista3)
+            listaAux.add(e.getIdentificador());
+        model.addAttribute("controladorlista",listaAux);
+
         return "periodoAsignado/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("periodoAsignado") PeriodoAsignado periodoAsignado,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult, Model model) {
         PeriodoAsignadoValidator periodoAsignadoValidator = new PeriodoAsignadoValidator();
         periodoAsignadoValidator.validate(periodoAsignado,bindingResult);
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
+            List<Area> lista2 = areaDAO.getAreas();
+            ArrayList<String> lista = new ArrayList<>();
+            for (Area e : lista2)
+                lista.add(e.getIdArea());
+            model.addAttribute("arealista", lista);
+
+            List<Controlador> lista3 = controladorDAO.getControladores();
+            ArrayList<String> listaAux = new ArrayList<>();
+            for (Controlador e : lista3)
+                listaAux.add(e.getIdentificador());
+            model.addAttribute("controladorlista", listaAux);
+
             return "periodoAsignado/add";
+        }
         try {
             periodoAsignadoDAO.addPeriodoAsignado(periodoAsignado);
         }
@@ -54,17 +99,42 @@ public class PeriodoAsignadoController {
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
     public String editPeriodoAsignado(Model model, @PathVariable String identificador) {
         model.addAttribute("periodoAsignado", periodoAsignadoDAO.getPeriodoAsignado(identificador));
+        List<Area> lista2 = areaDAO.getAreas();
+        ArrayList<String> lista = new ArrayList<>();
+        for (Area e : lista2)
+            lista.add(e.getIdArea());
+        model.addAttribute("arealista",lista);
+
+        List<Controlador> lista3 = controladorDAO.getControladores();
+        ArrayList<String> listaAux = new ArrayList<>();
+        for (Controlador e : lista3)
+            listaAux.add(e.getIdentificador());
+        model.addAttribute("controladorlista",listaAux);
+
         return "periodoAsignado/update";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
             @ModelAttribute("periodoAsignado") PeriodoAsignado periodoAsignado,
-            BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
+            BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            List<Area> lista2 = areaDAO.getAreas();
+            ArrayList<String> lista = new ArrayList<>();
+            for (Area e : lista2)
+                lista.add(e.getIdArea());
+            model.addAttribute("arealista", lista);
+
+            List<Controlador> lista3 = controladorDAO.getControladores();
+            ArrayList<String> listaAux = new ArrayList<>();
+            for (Controlador e : lista3)
+                listaAux.add(e.getIdentificador());
+            model.addAttribute("controladorlista", listaAux);
+
             return "periodoAsignado/update";
+        }
         try {
-            periodoAsignadoDAO.addPeriodoAsignado(periodoAsignado);
+            periodoAsignadoDAO.updatePeriodoAsignado(periodoAsignado);
         }
         catch (DuplicateKeyException e ){
             throw new ClaveDuplicadaException("Ya existe la clave primaria introducida","CPduplicada");

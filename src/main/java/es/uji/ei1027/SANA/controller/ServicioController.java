@@ -3,7 +3,6 @@ package es.uji.ei1027.SANA.controller;
 import es.uji.ei1027.SANA.dao.AreaDAO;
 import es.uji.ei1027.SANA.dao.ServicioDAO;
 import es.uji.ei1027.SANA.model.Area;
-import es.uji.ei1027.SANA.model.Municipio;
 import es.uji.ei1027.SANA.model.Servicio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -45,10 +44,8 @@ public class ServicioController {
 
         List<Area> lista2 = areaDAO.getAreas();
         ArrayList<String> lista = new ArrayList<>();
-        for (Area e : lista2) {
+        for (Area e : lista2)
             lista.add(e.getIdArea());
-
-        }
         model.addAttribute("arealista",lista);
         return "servicio/add";
     }
@@ -66,7 +63,8 @@ public class ServicioController {
 
             }
             model.addAttribute("arealista",lista);
-            return "servicio/add";}
+            return "servicio/add";
+        }
         try {
             servicioDAO.addServicio(servicio);
         }
