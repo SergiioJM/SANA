@@ -14,12 +14,6 @@
       th:object="${periodo}" method="post">
     <table>
         <tr>
-            <td><label>Identificador</label></td>
-            <td><input type="text" th:field="*{identificador}" /></td>
-            <td th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}" class="error"></td>
-
-        </tr>
-        <tr>
             <td><label>Fecha de Inicio</label></td>
             <td><input type="text" th:field="*{fechaInicio}"
                        placeholder="D/M/YY"/></td>

@@ -22,7 +22,11 @@ public class PeriodoAsignadoDAO {
 
     public void addPeriodoAsignado(PeriodoAsignado periodoAsignado) {
         jdbcTemplate.update("INSERT INTO PeriodoAsignado VALUES(?,?,?,?,?)",
-                periodoAsignado.getIdentificador(), periodoAsignado.getFechaInicio(), periodoAsignado.getFechaFin(), periodoAsignado.getControlador(), periodoAsignado.getArea());
+                obtenerPA(), periodoAsignado.getFechaInicio(), periodoAsignado.getFechaFin(), periodoAsignado.getControlador(), periodoAsignado.getArea());
+    }
+
+    public String obtenerPA(){
+        return "PA" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM PeriodoAsignado", String.class);
     }
 
     public void updatePeriodoAsignado(PeriodoAsignado periodoAsignado) {

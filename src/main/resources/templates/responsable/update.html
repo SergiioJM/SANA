@@ -12,6 +12,11 @@
       th:object="${responsable}" method="post">
     <table>
         <tr>
+            <td><label>Identificador</label></td>
+            <td><input type="text" th:field="*{identificador}" readonly="readonly"/></td>
+            <td th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}" class="error"></td>
+        </tr>
+        <tr>
             <td><label>Nombre</label></td>
             <td><input type="text" th:field="*{nombre}" /></td>
             <td th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></td>
@@ -34,11 +39,6 @@
             <td><label>Fecha de Fin</label></td>
             <td><input type="text" th:field="*{fechaFin}" placeholder="D/M/YY" /></td>
             <td th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}" class="error"></td>
-        </tr>
-        <tr>
-            <td><label>Identificador</label></td>
-            <td><input type="text" th:field="*{identificador}" readonly="readonly"/></td>
-            <td th:if="${#fields.hasErrors('identificador')}" th:errors="*{identificador}" class="error"></td>
         </tr>
         <tr>
             <td><label>Municipio</label></td>

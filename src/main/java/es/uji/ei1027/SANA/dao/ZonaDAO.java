@@ -21,7 +21,11 @@ public class ZonaDAO {
     }
     public void addZona(Zona zona) {
         jdbcTemplate.update("INSERT INTO Zona VALUES(?,?,?)",
-                zona.getIdentificador(),zona.getCapacidad(),zona.getIdArea());
+                obtenerZ(),zona.getCapacidad(),zona.getIdArea());
+    }
+
+    public String obtenerZ(){
+        return "Z" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Zona", String.class);
     }
 
     public void updateZona(Zona zona) {

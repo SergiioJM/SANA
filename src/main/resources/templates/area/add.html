@@ -12,11 +12,6 @@
       th:object="${area}" method="post">
     <table>
         <tr>
-            <td><label>Id del area</label></td>
-            <td><input type="text" th:field="*{idArea}" /></td>
-            <td th:if="${#fields.hasErrors('idArea')}" th:errors="*{idArea}" class="error"></td>
-        </tr>
-        <tr>
             <td><label>Nombre</label></td>
             <td><input type="text" th:field="*{nombre}" /></td>
         </tr>

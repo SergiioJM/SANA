@@ -22,7 +22,11 @@ public class PeriodoDAO {
 
     public void addPeriodo(Periodo periodo) {
         jdbcTemplate.update("INSERT INTO Periodo VALUES(?,?,?,?,?,?)",
-                periodo.getIdentificador(),periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdArea());
+                obtenerP(),periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdArea());
+    }
+
+    public String obtenerP(){
+        return "P" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Periodo", String.class);
     }
 
     public void deletePeriodo(String identificador) {

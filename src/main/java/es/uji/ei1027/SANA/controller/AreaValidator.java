@@ -14,8 +14,6 @@ public class AreaValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         Area area = (Area) obj;
-        if (area.getIdArea().trim().equals(""))
-            errors.rejectValue("idArea","obligatorio", "Tiene que introducir un idArea");
         if (area.getMunicipio().trim().equals(""))
             errors.rejectValue("municipio","obligatorio", "Tiene que introducir un municipio");
 

@@ -5,9 +5,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import javax.sql.DataSource;
 import java.util.ArrayList;
 import java.util.List;
-import javax.sql.DataSource;
 
 @Repository
 public class AreaDAO {
@@ -21,7 +22,11 @@ public class AreaDAO {
 
     public void addArea(Area area) {
         jdbcTemplate.update("INSERT INTO Area VALUES(?,?,?,?,?,?,?)",
-                area.getIdArea(),area.getNombre(),area.getDescripcion(),area.getCaracteristicas(),area.getLocalizacion(),area.getTipoAcceso(),area.getMunicipio());
+                obtenerA(),area.getNombre(),area.getDescripcion(),area.getCaracteristicas(),area.getLocalizacion(),area.getTipoAcceso(),area.getMunicipio());
+    }
+
+    public String obtenerA(){
+        return "A" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Area", String.class);
     }
 
     public void deleteArea(String area) {

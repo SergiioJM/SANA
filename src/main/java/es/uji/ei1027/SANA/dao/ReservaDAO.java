@@ -22,7 +22,11 @@ public class ReservaDAO {
 
     public void addReserva(Reserva reserva) {
         jdbcTemplate.update("INSERT INTO Reserva VALUES(?,?,?,?,?,?,?)",
-                reserva.getIdentificador(),reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(), reserva.getZona() ,reserva.getCiudadano());
+                obtenerR(),reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(), reserva.getZona() ,reserva.getCiudadano());
+    }
+
+    public String obtenerR(){
+        return "R" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Reserva", String.class);
     }
 
     public void updateReserva(Reserva reserva) {

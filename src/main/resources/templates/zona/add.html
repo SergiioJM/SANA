@@ -12,10 +12,6 @@
       th:object="${zona}" method="post">
     <table>
         <tr>
-            <td><label>Identificador de la Zona</label></td>
-            <td><input type="text" th:field="*{identificador}" /></td>
-        </tr>
-        <tr>
             <td><label>Capacidad</label></td>
             <td><input type="number" th:field="*{capacidad}" /></td>
             <td th:if="${#fields.hasErrors('capacidad')}" th:errors="*{capacidad}" class="error"></td>

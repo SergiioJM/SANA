@@ -14,8 +14,7 @@ public class ControladorValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Controlador con =(Controlador) o;
-        if (con.getIdentificador().trim().equals(""))
-            errors.rejectValue("identificador", "obligatorio", "Tienes que introducir un identificador");
+
         if (con.getFechaInicio() == null)
             errors.rejectValue("fechaInicio", "obligatorio", "Tienes que introducir una fecha de inicio");
         if (con.getFechaFin() != null) {

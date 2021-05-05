@@ -22,9 +22,13 @@ public class ControladorDAO {
 
     public void addControlador(Controlador controlador) {
         jdbcTemplate.update("INSERT INTO Controlador VALUES(?,?,?,?,?,?,?)",
-            controlador.getIdentificador(),controlador.getNombre(),controlador.getDireccion(),
+            obtenerC(),controlador.getNombre(),controlador.getDireccion(),
                 controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin());
     }
+    public String obtenerC(){
+        return "C" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Controlador", String.class);
+    }
+
 
     public void updateControlador(Controlador controlador) {
         jdbcTemplate.update("UPDATE Controlador SET nombre =?,direccion =?,email =?,telefono =?,fechaInicio =?,fechaFin =? WHERE identificador =?",

@@ -22,7 +22,11 @@ public class ResponsableMunicipioDAO {
 
     public void addResponsableMunicipio(ResponsableMunicipio responsableMunicipio) {
         jdbcTemplate.update("INSERT INTO ResponsableMunicipio VALUES(?,?,?,?,?,?,?)",
-                responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),responsableMunicipio.getNumerotelefono(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),responsableMunicipio.getIdentificador(),responsableMunicipio.getMunicipio());
+                responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),responsableMunicipio.getNumerotelefono(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),obtenerRM(),responsableMunicipio.getMunicipio());
+    }
+
+    public String obtenerRM(){
+        return "RM" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM ResponsableMunicipio", String.class);
     }
 
     public void updateResponsableMunicipio(ResponsableMunicipio responsableMunicipio) {
