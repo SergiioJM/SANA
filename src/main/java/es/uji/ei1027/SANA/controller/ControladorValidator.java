@@ -18,13 +18,10 @@ public class ControladorValidator implements Validator {
             errors.rejectValue("identificador", "obligatorio", "Tienes que introducir un identificador");
         if (con.getFechaInicio() == null)
             errors.rejectValue("fechaInicio", "obligatorio", "Tienes que introducir una fecha de inicio");
-        /*
         if (con.getFechaFin() != null) {
             if (con.getFechaInicio().isAfter(con.getFechaFin()))
                 errors.rejectValue("fechaFin", "obligatorio", "La fecha de fin tiene que ser posterior a la de inicio");
         }
-
-         */
     }
 }
 

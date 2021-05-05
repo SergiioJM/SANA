@@ -35,10 +35,12 @@
         <tr>
             <td><label>Fecha de inicio (D/M/YY)</label></td>
             <td><input type="text" th:field="*{fechaInicio}" /></td>
+            <td th:if="${#fields.hasErrors('fechaInicio')}" th:errors="*{fechaInicio}" class="error"></td>
         </tr>
         <tr>
             <td><label>Fecha de fin (D/M/YY)</label></td>
             <td><input type="text" th:field="*{fechaFin}" /></td>
+            <td th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}" class="error"></td>
         </tr>
     </table>
     <a href="add"><button type="submit" class="btn btn-success">Añade un Controlador</button></a>
