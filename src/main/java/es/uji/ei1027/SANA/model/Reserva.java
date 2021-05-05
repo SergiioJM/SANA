@@ -4,9 +4,11 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class Reserva {
-    String identificador;
+    private static AtomicInteger cod = new AtomicInteger(0);
+    String identificador = "R"+ cod;
     @DateTimeFormat(pattern = "HH:mm")
     LocalTime hora;
     LocalDate fecha;
@@ -15,9 +17,8 @@ public class Reserva {
     String zona;
     String ciudadano;
 
-
-    public Reserva(String identificador, LocalTime hora, LocalDate fecha, int numeroPersonas, String estado,String zona, String ciudadano) {
-        this.identificador = identificador;
+    public Reserva(LocalTime hora, LocalDate fecha, int numeroPersonas, String estado,String zona, String ciudadano) {
+        cod.getAndIncrement();
         this.hora = hora;
         this.fecha = fecha;
         this.numeroPersonas = numeroPersonas;
@@ -27,7 +28,6 @@ public class Reserva {
     }
 
     public Reserva() {
-
     }
 
     public String getIdentificador() {

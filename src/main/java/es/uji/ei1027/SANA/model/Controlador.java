@@ -3,6 +3,7 @@ package es.uji.ei1027.SANA.model;
 import java.time.LocalDate;
 
 public class Controlador {
+    private static int cod = 0;
     String identificador;
     String nombre;
     String direccion;
@@ -11,17 +12,20 @@ public class Controlador {
     LocalDate fechaInicio;
     LocalDate fechaFin;
 
-    public Controlador() {
-    }
-
-    public Controlador(String identificador, String nombre, String direccion, String email, int telefono, LocalDate fechaInicio, LocalDate fechaFin) {
-        this.identificador = identificador;
+  /*  public Controlador(String nombre, String direccion, String email, int telefono, LocalDate fechaInicio, LocalDate fechaFin) {
+        this.identificador = "C"+ cod;
+        cod += 1;
         this.nombre = nombre;
         this.direccion = direccion;
         this.email = email;
         this.telefono = telefono;
         this.fechaInicio = fechaInicio;
         this.fechaFin = fechaFin;
+    }
+*/
+    public Controlador(){
+        this.identificador = "C"+ cod;
+        this.cod += 1;
     }
 
     public String getDireccion() {
