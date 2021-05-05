@@ -15,7 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/responsable")
@@ -58,23 +60,19 @@ public class ResponsableMunicipioController {
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("responsable") ResponsableMunicipio responsableMunicipio,
-
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult, Model model) {
 
         ResponsableMunicipioValidator responsableMunicipioValidator= new ResponsableMunicipioValidator(MunicipioDAO);
         responsableMunicipioValidator.validate(responsableMunicipio,bindingResult);
 
         if (bindingResult.hasErrors()) {
             List<Municipio> lista2 = MunicipioDAO.getMunicipios();
-            ArrayList<String> lista = new ArrayList<>();
+            List<String> lista = new ArrayList<>();
             for (Municipio e : lista2) {
                 lista.add(e.getCp());
 
             }
-            //model1.addAttribute("municipioslista",lista);
-                // --> Necesito ficar el atribut si o si
-                // --> O anar a el metodo de dal
-
+            model.addAttribute("municipioslista",lista);
             return "responsable/add";
 
 
@@ -104,11 +102,19 @@ public class ResponsableMunicipioController {
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
             @ModelAttribute("responsable") ResponsableMunicipio responsableMunicipio,
-            BindingResult bindingResult) {
+            BindingResult bindingResult, Model model) {
         ResponsableMunicipioValidator responsableMunicipioValidator= new ResponsableMunicipioValidator(MunicipioDAO);
         responsableMunicipioValidator.validate(responsableMunicipio,bindingResult);
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
+            List<Municipio> lista2 = MunicipioDAO.getMunicipios();
+            ArrayList<String> lista = new ArrayList<>();
+            for (Municipio e : lista2) {
+                lista.add(e.getCp());
+
+            }
+            model.addAttribute("municipioslista",lista);
             return "responsable/update";
+        }
 
         responsableMunicipioDAO.updateResponsableMunicipio(responsableMunicipio);
         return "redirect:list";

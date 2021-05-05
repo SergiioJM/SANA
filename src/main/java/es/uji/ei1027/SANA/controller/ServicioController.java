@@ -55,11 +55,18 @@ public class ServicioController {
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("servicio") Servicio servicio,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult, Model model) {
         ServicioValidator servicioValidator= new ServicioValidator();
         servicioValidator.validate(servicio,bindingResult);
-        if (bindingResult.hasErrors())
-            return "servicio/add";
+        if (bindingResult.hasErrors()){
+            List<Area> lista2 = areaDAO.getAreas();
+            ArrayList<String> lista = new ArrayList<>();
+            for (Area e : lista2) {
+                lista.add(e.getIdArea());
+
+            }
+            model.addAttribute("arealista",lista);
+            return "servicio/add";}
         try {
             servicioDAO.addServicio(servicio);
         }
@@ -86,11 +93,21 @@ public class ServicioController {
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
             @ModelAttribute("servicio") Servicio servicio,
-            BindingResult bindingResult) {
+            BindingResult bindingResult ,Model model) {
+
         ServicioValidator servicioValidator= new ServicioValidator();
         servicioValidator.validate(servicio,bindingResult);
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
+
+            List<Area> lista2 = areaDAO.getAreas();
+            ArrayList<String> lista = new ArrayList<>();
+            for (Area e : lista2) {
+                lista.add(e.getIdArea());
+
+            }
+            model.addAttribute("arealista",lista);
             return "servicio/update";
+        }
         servicioDAO.updateServicio(servicio);
         return "redirect:list";
     }
