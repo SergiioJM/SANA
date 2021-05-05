@@ -4,9 +4,9 @@ public class Area {
     String idArea;
     String nombre;
     String descripcion;
-    String caracteristicas; //Creo que el fallo es esto
+    String caracteristicas;
     String localizacion;
-    String tipoAcceso;  //Creo que el fallo es esto
+    String tipoAcceso;
     String municipio;
 
     public Area() {
@@ -46,7 +46,6 @@ public class Area {
     public void setTipoAcceso(String tipoAcceso) {
         this.tipoAcceso = tipoAcceso;
     }
-
 
     public String getIdArea() {
         return idArea;
