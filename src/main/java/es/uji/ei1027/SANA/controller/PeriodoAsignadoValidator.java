@@ -13,8 +13,6 @@ public class PeriodoAsignadoValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         PeriodoAsignado periodoAsignado = (PeriodoAsignado) obj;
-        if (periodoAsignado.getIdentificador().trim().equals(""))
-            errors.rejectValue("identificador","obligatorio", "El periodo asignado tiene que tener un identificador");
 
         if (periodoAsignado.getControlador().trim().equals(""))
             errors.rejectValue("controlador", "obligatorio","El periodo asignado debe tener un controlador");

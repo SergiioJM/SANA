@@ -39,8 +39,6 @@ public class ResponsableMunicipioValidator implements Validator {
                 "El municipio es obligatorio");
         if (responsableMunicipio.getNombre().trim().equals("")) errors.rejectValue("nombre", "obligatori",
                 "El nombre es obligatorio");
-        if (responsableMunicipio.getIdentificador().trim().equals("")) errors.rejectValue("identificador", "obligatori",
-                "El identificador es obligatorio");
 
         if (responsableMunicipio.getfechaInicio() == null)
             errors.rejectValue("fechaInicio", "obligatorio", "Tienes que introducir una fecha de inicio");
