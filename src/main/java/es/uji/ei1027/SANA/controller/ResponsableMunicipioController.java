@@ -51,19 +51,32 @@ public class ResponsableMunicipioController {
 
         }
         model.addAttribute("municipioslista",lista);
+        model.addAttribute("modelo",model);
 
         return "responsable/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("responsable") ResponsableMunicipio responsableMunicipio,
+
                                    BindingResult bindingResult) {
-        System.out.println("entra1");
 
         ResponsableMunicipioValidator responsableMunicipioValidator= new ResponsableMunicipioValidator(MunicipioDAO);
         responsableMunicipioValidator.validate(responsableMunicipio,bindingResult);
+
         if (bindingResult.hasErrors()) {
+            List<Municipio> lista2 = MunicipioDAO.getMunicipios();
+            ArrayList<String> lista = new ArrayList<>();
+            for (Municipio e : lista2) {
+                lista.add(e.getCp());
+
+            }
+            //model1.addAttribute("municipioslista",lista);
+                // --> Necesito ficar el atribut si o si
+                // --> O anar a el metodo de dal
+
             return "responsable/add";
+
 
         }try {
             responsableMunicipioDAO.addResponsableMunicipio(responsableMunicipio);
@@ -92,10 +105,11 @@ public class ResponsableMunicipioController {
     public String processUpdateSubmit(
             @ModelAttribute("responsable") ResponsableMunicipio responsableMunicipio,
             BindingResult bindingResult) {
-        if (bindingResult.hasErrors())
-            return "responsable/update";
         ResponsableMunicipioValidator responsableMunicipioValidator= new ResponsableMunicipioValidator(MunicipioDAO);
         responsableMunicipioValidator.validate(responsableMunicipio,bindingResult);
+        if (bindingResult.hasErrors())
+            return "responsable/update";
+
         responsableMunicipioDAO.updateResponsableMunicipio(responsableMunicipio);
         return "redirect:list";
     }
