@@ -19,15 +19,15 @@
         <tr>
             <td><label>Identificador de la Zona</label></td>
             <td>
-                <select class="form_control" type="text" th:field="*{zona}">
+                <select class="form_control" type="text" th:field="*{zona}" multiple>
                     <option th:each="idZona: ${zonalista}" th:value="${idZona}" th:text="${idZona}"></option>
                 </select>
             </td>
         </tr>
     </table>
+    <a>Para seleccionar varias shift y seleccionas todas las que quieras</a>
+    <br>
     <a href="add"><button type="submit" class="btn btn-success">Añade una Reserva en una Zona</button></a>
-    <a href="/reservaZona/list"><button type="button" class="btn btn-secondary">Volver</button></a>
-    <a href="/"> <button type="button" class="btn btn-outline-secondary">Menu Princpial</button></a></form>
 </form>
 </body>
 </html>

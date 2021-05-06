@@ -47,7 +47,6 @@ public class ReservaZonaController {
         for (Zona e : lista2)
             lista.add(e.getIdentificador());
         model.addAttribute("zonalista",lista);
-
         model.addAttribute("reservazona", reservaZona);
         return "reservazona/add";
     }
@@ -55,21 +54,27 @@ public class ReservaZonaController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reservazona") ReservaZona reservaZona,
                                    BindingResult bindingResult, Model model) {
-        ReservaZonaValidator reservaZonaValidator= new ReservaZonaValidator();
-        reservaZonaValidator.validate(reservaZona,bindingResult);
-        if (bindingResult.hasErrors()) {
-            List<Zona> lista2 = zonaDAO.getZonas();
-            ArrayList<String> lista = new ArrayList<>();
-            for (Zona e : lista2)
-                lista.add(e.getIdentificador());
-            model.addAttribute("zonalista",lista);
-            return "reservazona/add";
 
-        }try {
-            reservaZonaDAO.addReservaZona(reservaZona);
-        }
-        catch (DuplicateKeyException e ) {
-            throw new ClaveDuplicadaException("Ya existe la reserva: " + reservaZona.getReserva(), "CPduplicada");
+        for (String zona: reservaZona.getZona().split(",")) {
+            ReservaZona reservaZona1= new ReservaZona();
+            reservaZona1.setZona(zona);
+            reservaZona1.setReserva(reservaZona.getReserva());
+            ReservaZonaValidator reservaZonaValidator = new ReservaZonaValidator();
+            reservaZonaValidator.validate(reservaZona1, bindingResult);
+            if (bindingResult.hasErrors()) {
+                List<Zona> lista2 = zonaDAO.getZonas();
+                ArrayList<String> lista = new ArrayList<>();
+                for (Zona e : lista2)
+                    lista.add(e.getIdentificador());
+                model.addAttribute("zonalista", lista);
+                return "reservazona/add";
+
+            }
+            try {
+                reservaZonaDAO.addReservaZona(reservaZona1);
+            } catch (DuplicateKeyException e) {
+                throw new ClaveDuplicadaException("Ya existe la reserva: " + reservaZona.getReserva(), "CPduplicada");
+            }
         }
 
         return "redirect:list";
