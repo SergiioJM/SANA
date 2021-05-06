@@ -1,7 +1,9 @@
 package es.uji.ei1027.SANA.controller;
 
 import es.uji.ei1027.SANA.dao.ReservaZonaDAO;
+import es.uji.ei1027.SANA.dao.ZonaDAO;
 import es.uji.ei1027.SANA.model.ReservaZona;
+import es.uji.ei1027.SANA.model.Zona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -12,14 +14,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Controller
 @RequestMapping("/reservazona")
 public class ReservaZonaController {
     private ReservaZonaDAO reservaZonaDAO;
+    private ZonaDAO zonaDAO;
 
     @Autowired
     public void setReservaZonaDAO(ReservaZonaDAO reservaZonaDAO) {
         this.reservaZonaDAO = reservaZonaDAO;
+    }
+    @Autowired
+    public void setZonaDAO(ZonaDAO zonaDAO) {
+        this.zonaDAO = zonaDAO;
     }
 
     @RequestMapping("/list")
@@ -30,9 +40,13 @@ public class ReservaZonaController {
 
     @RequestMapping(value="/add/{id}")
     public String addArea(Model model, @PathVariable String id) {
-        System.out.println("------------" + id);
         ReservaZona reservaZona= new ReservaZona();
         reservaZona.setReserva(id);
+        List<Zona> lista2 = zonaDAO.getZonas();
+        ArrayList<String> lista = new ArrayList<>();
+        for (Zona e : lista2)
+            lista.add(e.getIdentificador());
+        model.addAttribute("zonalista",lista);
 
         model.addAttribute("reservazona", reservaZona);
         return "reservazona/add";
@@ -40,12 +54,18 @@ public class ReservaZonaController {
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reservazona") ReservaZona reservaZona,
-                                   BindingResult bindingResult) {
+                                   BindingResult bindingResult, Model model) {
         ReservaZonaValidator reservaZonaValidator= new ReservaZonaValidator();
         reservaZonaValidator.validate(reservaZona,bindingResult);
-        if (bindingResult.hasErrors())
+        if (bindingResult.hasErrors()) {
+            List<Zona> lista2 = zonaDAO.getZonas();
+            ArrayList<String> lista = new ArrayList<>();
+            for (Zona e : lista2)
+                lista.add(e.getIdentificador());
+            model.addAttribute("zonalista",lista);
             return "reservazona/add";
-        try {
+
+        }try {
             reservaZonaDAO.addReservaZona(reservaZona);
         }
         catch (DuplicateKeyException e ) {

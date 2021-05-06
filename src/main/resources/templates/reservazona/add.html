@@ -17,9 +17,12 @@
             <!--<td th:if="${#fields.hasErrors('reserva')}" th:errors="*{reserva}" class="error"></td>-->
         </tr>
         <tr>
-            <td><label>Zona</label></td>
-            <td><input type="text" th:field="*{zona}" /></td>
-            <td th:if="${#fields.hasErrors('zona')}" th:errors="*{zona}" class="error"></td>
+            <td><label>Identificador de la Zona</label></td>
+            <td>
+                <select class="form_control" type="text" th:field="*{zona}">
+                    <option th:each="idZona: ${zonalista}" th:value="${idZona}" th:text="${idZona}"></option>
+                </select>
+            </td>
         </tr>
     </table>
     <a href="add"><button type="submit" class="btn btn-success">Añade una Reserva en una Zona</button></a>
