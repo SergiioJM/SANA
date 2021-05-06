@@ -16,12 +16,13 @@ CREATE TABLE Municipio(
 	cp	VARCHAR(9),
 	nombre VARCHAR(50) NOT NULL,
 	direccion   	 VARCHAR(50),
-    	email   		 VARCHAR(50),
-telefono 	 INTEGER,
+    email   		 VARCHAR(50),
+    telefono 	 INTEGER,
 
 CONSTRAINT 	cp_municipio PRIMARY KEY (cp));
+
 CREATE TABLE Area(
-	idArea		VARCHAR(9),
+	idArea		INTEGER,
 	nombre	VARCHAR(50) NOT NULL,
 	descripcion	VARCHAR(100),
 	caracteristicasFisicas VARCHAR(100),
@@ -36,7 +37,7 @@ CONSTRAINT ri_tipoAcceso CHECK (tipoAcceso IN('restringido','norestringido','cer
 );
 
 CREATE TABLE Controlador (
-    identificador    	 VARCHAR(50),
+    identificador    	 INTEGER,
     nombre   		 VARCHAR(50) NOT NULL,
     direccion   	 	 VARCHAR(50),
     email   		 VARCHAR(50),
@@ -54,7 +55,7 @@ CREATE TABLE ResponsableMunicipio(
 	numerotelefono	INTEGER,
 	fechaInicio	DATE,
 	fechaFin	DATE,
-	identificador	VARCHAR(50),
+	identificador	INTEGER ,
 	municipio	VARCHAR(9) NOT NULL,
 
 	CONSTRAINT cp_responsableMunicipio PRIMARY KEY(identificador),
@@ -64,12 +65,12 @@ CREATE TABLE ResponsableMunicipio(
 );
 
 CREATE TABLE Periodo(
-	identificador 		VARCHAR(50),
+	identificador 		INTEGER ,
 	fechaInicio		Date,
 	fechaFin		Date	NULL,
 	horaInicio		Time,
 	horaFin		Time,
-	idArea			VARCHAR(9) NOT NULL,
+	idArea			INTEGER  NOT NULL,
 
 	CONSTRAINT cp_periodo PRIMARY KEY(identificador),
 	CONSTRAINT ca_periodo_area FOREIGN KEY(idArea) REFERENCES Area(idArea) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -78,11 +79,11 @@ CREATE TABLE Periodo(
 );
 
 CREATE TABLE PeriodoAsignado(
-identificador    	 VARCHAR(50),
+identificador    	 INTEGER ,
  	fechaInicio   	 	Date,
     	fechaFin  		 Date	NULL,
-	nombreControlador	VARCHAR(50) NOT NULL,
-	nombreArea		VARCHAR(50) NOT NULL,
+	nombreControlador	INTEGER  NOT NULL,
+	nombreArea		INTEGER  NOT NULL,
 
 CONSTRAINT 	cp_periodoAsignado PRIMARY KEY (identificador),
     	CONSTRAINT ca_controlador_periodo FOREIGN KEY (nombreControlador) REFERENCES
@@ -119,9 +120,9 @@ CREATE TABLE ServicioTemporal(
 );
 
 CREATE TABLE Zona(
-	identificador	VARCHAR(9),
+	identificador	INTEGER ,
 	capacidad	INTEGER,
-	idArea		VARCHAR(9) NOT NULL,
+	idArea		INTEGER  NOT NULL,
 
 	CONSTRAINT cp_zona PRIMARY KEY(identificador),
 	CONSTRAINT ca_zona_area FOREIGN KEY (idArea) REFERENCES Area(idArea) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -139,7 +140,7 @@ CREATE TABLE Ciudadano(
 );
 
 CREATE TABLE Reserva(
-	identificador 	VARCHAR(9),
+	identificador 	INTEGER,
 	hora		Time,
 	fecha		Date,
 	numeroPersonas	INTEGER,
@@ -155,7 +156,7 @@ CREATE TABLE Reserva(
 );
 
 CREATE TABLE ReservaZonas(
-	id_reserva 	VARCHAR(9),
+	id_reserva 	INTEGER ,
 	id_zona	VARCHAR(9),
 
 	CONSTRAINT cp_reserva2 PRIMARY KEY(id_reserva,id_zona),

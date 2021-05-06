@@ -1,11 +1,11 @@
 package es.uji.ei1027.SANA.model;
 
 public class Zona {
-        String identificador;
+        int identificador;
         int capacidad;
-        String idArea;
+        int idArea;
 
-        public Zona(String identificador, int capacidad, String idArea) {
+        public Zona(int identificador, int capacidad, int idArea) {
             this.identificador = identificador;
             this.capacidad = capacidad;
             this.idArea = idArea;
@@ -15,11 +15,11 @@ public class Zona {
 
         }
 
-        public String getIdentificador() {
+        public int getIdentificador() {
             return identificador;
         }
 
-        public void setIdentificador(String identificador) {
+        public void setIdentificador(int identificador) {
             this.identificador = identificador;
         }
 
@@ -31,11 +31,11 @@ public class Zona {
             this.capacidad = capacidad;
         }
 
-        public String getIdArea() {
+        public int getIdArea() {
             return idArea;
         }
 
-        public void setIdArea(String idArea) {
+        public void setIdArea(int idArea) {
             this.idArea = idArea;
         }
 

@@ -82,7 +82,7 @@ public class ResponsableMunicipioController {
     }
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
-    public String editResponsableMunicipio(Model model, @PathVariable String identificador) {
+    public String editResponsableMunicipio(Model model, @PathVariable int identificador) {
         model.addAttribute("responsable", responsableMunicipioDAO.getResponsableMunicipio(identificador));
 
         List<Municipio> lista2 = MunicipioDAO.getMunicipios();
@@ -117,7 +117,7 @@ public class ResponsableMunicipioController {
     }
 
     @RequestMapping(value="/delete/{identificador}")
-    public String processDelete(@PathVariable String identificador) {
+    public String processDelete(@PathVariable int identificador) {
         responsableMunicipioDAO.deleteResponsableMunicipio(identificador);
         return "redirect:../list";
     }

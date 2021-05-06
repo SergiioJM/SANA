@@ -25,16 +25,16 @@ public class PeriodoDAO {
                 obtenerP(),periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdArea());
     }
 
-    public String obtenerP(){
+    public int obtenerP(){
         String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Periodo", String.class);
         if (consulta == null){
-            return "P1";
+            return 1;
         }
-        int p = Integer.parseInt(consulta.replace("P","")) + 1;
-        return "P" + p;
+        int p = Integer.parseInt(consulta) + 1;
+        return p;
     }
 
-    public void deletePeriodo(String identificador) {
+    public void deletePeriodo(int identificador) {
         jdbcTemplate.update("DELETE FROM Periodo WHERE identificador =?",
                 identificador);
     }
@@ -44,7 +44,7 @@ public class PeriodoDAO {
                 periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdArea(),periodo.getIdentificador());
     }
 
-    public Periodo getPeriodo(String identificador) {
+    public Periodo getPeriodo(int identificador) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM Periodo WHERE identificador =?",
                     new PeriodoRowMapper(), identificador);

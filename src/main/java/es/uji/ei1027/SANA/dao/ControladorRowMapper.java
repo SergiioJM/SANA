@@ -9,7 +9,7 @@ import java.time.LocalDate;
 public final class ControladorRowMapper implements RowMapper<Controlador> {
     public Controlador mapRow(ResultSet rs, int rowNum) throws SQLException {
         Controlador controlStaff = new Controlador();
-        controlStaff.setIdentificador(rs.getString("identificador"));
+        controlStaff.setIdentificador(rs.getInt("identificador"));
         controlStaff.setNombre(rs.getString("nombre"));
         controlStaff.setDireccion(rs.getString("direccion"));
         controlStaff.setEmail(rs.getString("email"));

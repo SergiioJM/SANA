@@ -25,16 +25,16 @@ public class AreaDAO {
                 obtenerA(),area.getNombre(),area.getDescripcion(),area.getCaracteristicas(),area.getLocalizacion(),area.getTipoAcceso(),area.getMunicipio());
     }
 
-    public String obtenerA(){
+    public int obtenerA(){
         String consulta = jdbcTemplate.queryForObject("SELECT MAX(idArea) AS id FROM Area", String.class);
         if (consulta == null){
-            return "A1";
+            return 1;
         }
-        int a = Integer.parseInt(consulta.replace("A","")) + 1;
-        return "A" + a;
+        int a = Integer.parseInt(consulta) + 1;
+        return  a;
     }
 
-    public void deleteArea(String area) {
+    public void deleteArea(int area) {
         jdbcTemplate.update("DELETE FROM Area WHERE idArea =?", area);
     }
 
@@ -43,7 +43,7 @@ public class AreaDAO {
                 area.getNombre(),area.getDescripcion(),area.getCaracteristicas(),area.getLocalizacion(),area.getTipoAcceso(),area.getMunicipio(), area.getIdArea());
     }
 
-    public Area getArea(String area) {
+    public Area getArea(int area) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM Area WHERE idArea =?",
                     new AreaRowMapper(), area);

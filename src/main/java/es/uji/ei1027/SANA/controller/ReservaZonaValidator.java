@@ -13,8 +13,6 @@ public class ReservaZonaValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ReservaZona reservaZona=(ReservaZona) o;
-        if (reservaZona.getReserva().trim().equals(""))
-            errors.rejectValue("reserva", "obligatorio", "Tienes que introducir una Reserva");
 
         if (reservaZona.getZona().trim().equals("")) {
             errors.rejectValue("zona", "obligatorio", "Tienes que introducir una Zona");

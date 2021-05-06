@@ -25,25 +25,25 @@ public class PeriodoAsignadoDAO {
                 obtenerPA(), periodoAsignado.getFechaInicio(), periodoAsignado.getFechaFin(), periodoAsignado.getControlador(), periodoAsignado.getArea());
     }
 
-    public String obtenerPA(){
+    public int obtenerPA(){
         String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM PeriodoAsignado", String.class);
         if (consulta == null){
-            return "PA1";
+            return 1;
         }
-        int pa = Integer.parseInt(consulta.replace("PA","")) + 1;
-        return "PA" + pa;    }
+        int pa = Integer.parseInt(consulta) + 1;
+        return pa;    }
 
     public void updatePeriodoAsignado(PeriodoAsignado periodoAsignado) {
         jdbcTemplate.update("UPDATE PeriodoAsignado SET  fechaInicio =?, fechaFin =?, nombreControlador =?, nombreArea =? WHERE identificador =?",
                 periodoAsignado.getFechaInicio(), periodoAsignado.getFechaFin(), periodoAsignado.getControlador(), periodoAsignado.getArea(), periodoAsignado.getIdentificador());
     }
 
-    public void deletePeriodoAsignado(String identificador) {
+    public void deletePeriodoAsignado(int identificador) {
         jdbcTemplate.update("DELETE FROM PeriodoAsignado WHERE identificador =?",
                 identificador);
     }
 
-    public PeriodoAsignado getPeriodoAsignado(String area) {
+    public PeriodoAsignado getPeriodoAsignado(int area) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM PeriodoAsignado WHERE identificador =?",
                     new PeriodoAsignadoRowMapper(), area);

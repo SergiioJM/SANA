@@ -9,7 +9,7 @@ public final class AreaRowMapper implements RowMapper<Area> {
 
     public Area mapRow(ResultSet rs, int rowNum) throws SQLException {
         Area area = new Area();
-        area.setIdArea(rs.getString("idArea"));
+        area.setIdArea(rs.getInt("idArea"));
         area.setNombre(rs.getString("nombre"));
         area.setDescripcion(rs.getString("descripcion"));
         area.setCaracteristicas(rs.getString("caracteristicasfisicas"));

@@ -13,9 +13,6 @@ public class PeriodoValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         Periodo periodo = (Periodo) obj;
-        if (periodo.getIdArea().trim().equals(""))
-            errors.rejectValue("idArea","obligatorio","El periodo tiene que ir relacionado con un area");
-
         if (periodo.getfechaInicio() == null)
             errors.rejectValue("fechaInicio", "obligatorio", "Tienes que introducir una fecha de inicio");
 

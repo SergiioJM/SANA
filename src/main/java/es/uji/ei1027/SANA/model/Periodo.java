@@ -4,29 +4,20 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class Periodo {
-    String identificador;
+    int identificador;
     LocalDate fechaInicio;
     LocalDate fechaFin;
     LocalTime horaInicio;
     LocalTime horaFin;
-    String idArea;
-
-    public Periodo(String identificador, LocalDate fechaInicio, LocalDate fechaFin, LocalTime horaInicio, LocalTime horaFin, String idArea) {
-        this.identificador = identificador;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.horaInicio = horaInicio;
-        this.horaFin = horaFin;
-        this.idArea = idArea;
-    }
+    int idArea;
 
     public Periodo() {
 
     }
 
-    public String getIdentificador(){return identificador;}
+    public int getIdentificador(){return identificador;}
 
-    public void setIdentificador(String identificador){this.identificador=identificador;}
+    public void setIdentificador(int identificador){this.identificador=identificador;}
 
     public LocalDate getfechaInicio() {
         return fechaInicio;
@@ -60,11 +51,11 @@ public class Periodo {
         this.horaFin = horaFin;
     }
 
-    public String getIdArea() {
+    public int getIdArea() {
         return idArea;
     }
 
-    public void setIdArea(String idArea) {
+    public void setIdArea(int idArea) {
         this.idArea = idArea;
     }
 

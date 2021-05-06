@@ -43,7 +43,7 @@ public class ServicioController {
         model.addAttribute("servicio", new Servicio());
 
         List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2)
             lista.add(e.getIdArea());
         model.addAttribute("arealista",lista);
@@ -57,7 +57,7 @@ public class ServicioController {
         servicioValidator.validate(servicio,bindingResult);
         if (bindingResult.hasErrors()){
             List<Area> lista2 = areaDAO.getAreas();
-            ArrayList<String> lista = new ArrayList<>();
+            ArrayList<Integer> lista = new ArrayList<>();
             for (Area e : lista2) {
                 lista.add(e.getIdArea());
 
@@ -79,7 +79,7 @@ public class ServicioController {
         model.addAttribute("servicio", servicioDAO.getServicio(nombre));
 
         List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2) {
             lista.add(e.getIdArea());
 
@@ -98,7 +98,7 @@ public class ServicioController {
         if (bindingResult.hasErrors()) {
 
             List<Area> lista2 = areaDAO.getAreas();
-            ArrayList<String> lista = new ArrayList<>();
+            ArrayList<Integer> lista = new ArrayList<>();
             for (Area e : lista2) {
                 lista.add(e.getIdArea());
 

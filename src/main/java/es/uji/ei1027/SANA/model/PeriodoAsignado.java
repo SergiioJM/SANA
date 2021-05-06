@@ -3,25 +3,17 @@ package es.uji.ei1027.SANA.model;
 import java.time.LocalDate;
 
 public class PeriodoAsignado {
-    String identificador;
+    int identificador;
     LocalDate fechaInicio;
     LocalDate fechaFin;
-    String nombreControlador;
-    String nombreArea;
-
-    public PeriodoAsignado(String identificador, LocalDate fechaInicio, LocalDate fechaFin, String nombreControlador, String nombreArea) {
-        this.identificador = identificador;
-        this.fechaInicio = fechaInicio;
-        this.fechaFin = fechaFin;
-        this.nombreControlador = nombreControlador;
-        this.nombreArea = nombreArea;
-    }
+    int nombreControlador;
+    int nombreArea;
 
     public PeriodoAsignado() {
 
     }
 
-    public String getIdentificador() {
+    public int getIdentificador() {
         return identificador;
     }
 
@@ -33,15 +25,15 @@ public class PeriodoAsignado {
         return fechaFin;
     }
 
-    public String getControlador() {
+    public int getControlador() {
         return nombreControlador;
     }
 
-    public String getArea() {
+    public int getArea() {
         return nombreArea;
     }
 
-    public void setIdentificador(String identificador) {
+    public void setIdentificador(int identificador) {
         this.identificador = identificador;
     }
 
@@ -53,11 +45,11 @@ public class PeriodoAsignado {
         this.fechaFin = fechaFin;
     }
 
-    public void setControlador(String nombreControlador) {
+    public void setControlador(int nombreControlador) {
         this.nombreControlador = nombreControlador;
     }
 
-    public void setArea(String nombreArea) {
+    public void setArea(int nombreArea) {
         this.nombreArea = nombreArea;
     }
 

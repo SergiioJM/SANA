@@ -25,14 +25,14 @@ public class ResponsableMunicipioDAO {
                 responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),responsableMunicipio.getNumerotelefono(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),obtenerRM(),responsableMunicipio.getMunicipio());
     }
 
-    public String obtenerRM(){
+    public int obtenerRM(){
         String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM ResponsableMunicipio", String.class);
         if (consulta == null){
-            return "RM1";
+            return 1;
         }
 
-        int rm = Integer.parseInt(consulta.replace("RM","")) + 1;
-        return "RM" + rm;
+        int rm = Integer.parseInt(consulta) + 1;
+        return rm;
     }
 
     public void updateResponsableMunicipio(ResponsableMunicipio responsableMunicipio) {
@@ -40,12 +40,12 @@ public class ResponsableMunicipioDAO {
                 responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),responsableMunicipio.getNumerotelefono(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),responsableMunicipio.getMunicipio(), responsableMunicipio.getIdentificador());
     }
 
-    public void deleteResponsableMunicipio(String identificador) {
+    public void deleteResponsableMunicipio(int identificador) {
         jdbcTemplate.update("DELETE FROM ResponsableMunicipio WHERE identificador =?",
                 identificador);
     }
 
-    public ResponsableMunicipio getResponsableMunicipio(String identificador) {
+    public ResponsableMunicipio getResponsableMunicipio(int identificador) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM ResponsableMunicipio WHERE identificador =?",
                     new ResponsableMunicipioRowMapper(), identificador);

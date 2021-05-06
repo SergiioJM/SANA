@@ -12,7 +12,7 @@ public final class ReservaRowMapper implements RowMapper<Reserva> {
 
     public Reserva mapRow(ResultSet rs, int rowNum) throws SQLException {
         Reserva reserva= new Reserva();
-        reserva.setIdentificador(rs.getString("identificador"));
+        reserva.setIdentificador(rs.getInt("identificador"));
         reserva.setHora(rs.getObject("hora", LocalTime.class));
         reserva.setFecha(rs.getObject("fecha", LocalDate.class));
         reserva.setNumeroPersonas(rs.getInt("numeroPersonas"));

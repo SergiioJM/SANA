@@ -42,7 +42,7 @@ public class ZonaController {
     public String addZona(Model model) {
         model.addAttribute("zona", new Zona());
         List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2)
             lista.add(e.getIdArea());
         model.addAttribute("arealista",lista);
@@ -56,7 +56,7 @@ public class ZonaController {
         zonaValidator.validate(zona,bindingResult);
         if (bindingResult.hasErrors()) {
             List<Area> lista2 = areaDAO.getAreas();
-            ArrayList<String> lista = new ArrayList<>();
+            ArrayList<Integer> lista = new ArrayList<>();
             for (Area e : lista2)
                 lista.add(e.getIdArea());
             model.addAttribute("arealista", lista);
@@ -67,10 +67,10 @@ public class ZonaController {
     }
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
-    public String editZona(Model model, @PathVariable String identificador) {
+    public String editZona(Model model, @PathVariable int identificador) {
         model.addAttribute("zona", zonaDAO.getZona(identificador));
         List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2)
             lista.add(e.getIdArea());
         model.addAttribute("arealista",lista);
@@ -85,7 +85,7 @@ public class ZonaController {
         zonaValidator.validate(zona,bindingResult);
         if (bindingResult.hasErrors()) {
             List<Area> lista2 = areaDAO.getAreas();
-            ArrayList<String> lista = new ArrayList<>();
+            ArrayList<Integer> lista = new ArrayList<>();
             for (Area e : lista2)
                 lista.add(e.getIdArea());
             model.addAttribute("arealista", lista);
@@ -102,7 +102,7 @@ public class ZonaController {
     }
 
     @RequestMapping(value="/delete/{cp}")
-    public String processDelete(@PathVariable String cp) {
+    public String processDelete(@PathVariable int cp) {
         zonaDAO.deleteZona(cp);
         return "redirect:../list";
     }

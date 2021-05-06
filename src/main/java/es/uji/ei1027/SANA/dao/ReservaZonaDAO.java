@@ -1,6 +1,5 @@
 package es.uji.ei1027.SANA.dao;
 
-import es.uji.ei1027.SANA.model.Area;
 import es.uji.ei1027.SANA.model.ReservaZona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -25,12 +24,12 @@ public class ReservaZonaDAO {
                 reservaZona.getReserva(),reservaZona.getZona());
     }
 
-    public void deleteReservaZona(String reserva,String zona) {
+    public void deleteReservaZona(int reserva,String zona) {
         jdbcTemplate.update("DELETE FROM ReservaZonas WHERE id_reserva =? AND id_zona=?",reserva,zona );
     }
 
 
-    public List<String> getReservaZona(String reserva) {
+    public List<String> getReservaZona(int reserva) {
         try {
             return jdbcTemplate.queryForList("SELECT id_zona FROM ReservaZonas WHERE id_reserva=?",
                     String.class, reserva);

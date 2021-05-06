@@ -6,7 +6,7 @@ public class ResponsableMunicipio {
     private int numerotelefono;
     java.time.LocalDate fechaInicioo;
     java.time.LocalDate fechaFin;
-    private String identificador;
+    private int identificador;
     private String municipio;
 
 
@@ -53,11 +53,11 @@ public class ResponsableMunicipio {
         this.fechaFin = fechaFin;
     }
 
-    public String getIdentificador() {
+    public int getIdentificador() {
         return identificador;
     }
 
-    public void setIdentificador(String identificador) {
+    public void setIdentificador(int identificador) {
         this.identificador = identificador;
     }
 

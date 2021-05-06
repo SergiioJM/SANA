@@ -9,11 +9,11 @@ import java.time.LocalDate;
 public final class PeriodoAsignadoRowMapper implements RowMapper<PeriodoAsignado> {
     public PeriodoAsignado mapRow(ResultSet rs, int rowNum) throws SQLException {
         PeriodoAsignado periodoAsignado = new PeriodoAsignado();
-        periodoAsignado.setIdentificador(rs.getString("identificador"));
+        periodoAsignado.setIdentificador(rs.getInt("identificador"));
         periodoAsignado.setFechaInicio(rs.getObject("fechaInicio", LocalDate.class));
         periodoAsignado.setFechaFin(rs.getObject("fechaFin", LocalDate.class));
-        periodoAsignado.setControlador(rs.getString("nombreControlador"));
-        periodoAsignado.setArea(rs.getString("nombreArea"));
+        periodoAsignado.setControlador(rs.getInt("nombreControlador"));
+        periodoAsignado.setArea(rs.getInt("nombreArea"));
         return periodoAsignado;
     }
 }

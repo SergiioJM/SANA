@@ -1,16 +1,16 @@
 package es.uji.ei1027.SANA.model;
 
 public class ReservaZona {
-    String reserva;
+    int reserva;
     String zona;
 
     public ReservaZona(){}
 
-    public String getReserva() {
+    public int getReserva() {
         return reserva;
     }
 
-    public void setReserva(String reserva) {
+    public void setReserva(int reserva) {
         this.reserva = reserva;
     }
 

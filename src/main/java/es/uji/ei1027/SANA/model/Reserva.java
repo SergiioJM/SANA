@@ -4,10 +4,9 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.concurrent.atomic.AtomicInteger;
 
 public class Reserva {
-    String identificador;
+    int identificador;
     @DateTimeFormat(pattern = "HH:mm")
     LocalTime hora;
     LocalDate fecha;
@@ -28,11 +27,11 @@ public class Reserva {
     public Reserva() {
     }
 
-    public String getIdentificador() {
+    public int getIdentificador() {
         return identificador;
     }
 
-    public void setIdentificador(String identificador) {
+    public void setIdentificador(int identificador) {
         this.identificador = identificador;
     }
 

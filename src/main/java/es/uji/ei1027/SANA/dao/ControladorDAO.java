@@ -25,13 +25,13 @@ public class ControladorDAO {
             obtenerC(),controlador.getNombre(),controlador.getDireccion(),
                 controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin());
     }
-    public String obtenerC(){
+    public int obtenerC(){
         String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Controlador", String.class);
         if (consulta == null){
-            return "C1";
+            return 1;
         }
-        int c = Integer.parseInt(consulta.replace("C","")) + 1;
-        return "C" + c;
+        int c = Integer.parseInt(consulta) + 1;
+        return  c;
     }
 
 
@@ -40,12 +40,12 @@ public class ControladorDAO {
                 controlador.getNombre(),controlador.getDireccion(),controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin(),controlador.getIdentificador());
     }
 
-    public void deleteControlador(String identificador) {
+    public void deleteControlador(int identificador) {
         jdbcTemplate.update("DELETE FROM Controlador WHERE identificador =?",
                 identificador);
     }
 
-    public Controlador getControlador(String identificador) {
+    public Controlador getControlador(int identificador) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM Controlador WHERE identificador =?",
                     new ControladorRowMapper(), identificador);

@@ -24,14 +24,14 @@ public class ZonaDAO {
                 obtenerZ(),zona.getCapacidad(),zona.getIdArea());
     }
 
-    public String obtenerZ(){
+    public int obtenerZ(){
         String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Zona", String.class);
         if (consulta == null){
-            return "Z";
+            return 1;
         }
 
-        int z = Integer.parseInt(consulta.replace("Z","")) + 1;
-        return "Z" + z;
+        int z = Integer.parseInt(consulta) + 1;
+        return z;
     }
 
     public void updateZona(Zona zona) {
@@ -39,12 +39,12 @@ public class ZonaDAO {
                 zona.getCapacidad(),zona.getIdArea(),zona.getIdentificador());
     }
 
-    public void deleteZona(String identificador) {
+    public void deleteZona(int identificador) {
         jdbcTemplate.update("DELETE FROM Zona WHERE identificador =?",
                 identificador);
     }
 
-    public Zona getZona(String identificador) {
+    public Zona getZona(int identificador) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM Zona WHERE identificador =?",
                     new es.uji.ei1027.SANA.dao.ZonaRowMapper(), identificador);

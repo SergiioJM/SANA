@@ -14,7 +14,5 @@ public class ReservaValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         Reserva reserva = (Reserva) obj;
-        if (reserva.getIdentificador().trim().equals(""))
-            errors.rejectValue("identificador","obligatorio", "Tiene que introducir un identificador");
     }
 }

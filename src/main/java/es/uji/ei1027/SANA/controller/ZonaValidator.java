@@ -13,8 +13,6 @@ public class ZonaValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Zona zona=(Zona) o;
-        if (zona.getIdArea().trim().equals(""))
-            errors.rejectValue("idArea", "obligatorio", "Tienes que introducir un Area");
 
         if (zona.getCapacidad() < 1) {
             errors.rejectValue("capacidad", "obligatorio", "La capacidad tiene que ser mayor que 0");

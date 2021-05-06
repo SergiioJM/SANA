@@ -60,7 +60,7 @@ public class AreaController {
     }
 
     @RequestMapping(value="/update/{idArea}", method = RequestMethod.GET)
-    public String editArea(Model model, @PathVariable String idArea) {
+    public String editArea(Model model, @PathVariable int idArea) {
         model.addAttribute("area", areaDao.getArea(idArea));
         return "area/update";
     }
@@ -76,7 +76,7 @@ public class AreaController {
     }
 
     @RequestMapping(value="/delete/{idArea}")
-    public String processDelete(@PathVariable String idArea) {
+    public String processDelete(@PathVariable int idArea) {
         areaDao.deleteArea(idArea);
         return "redirect:../list";
     }

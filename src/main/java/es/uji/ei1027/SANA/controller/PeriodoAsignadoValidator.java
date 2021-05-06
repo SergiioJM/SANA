@@ -14,11 +14,6 @@ public class PeriodoAsignadoValidator implements Validator {
     public void validate(Object obj, Errors errors) {
         PeriodoAsignado periodoAsignado = (PeriodoAsignado) obj;
 
-        if (periodoAsignado.getControlador().trim().equals(""))
-            errors.rejectValue("controlador", "obligatorio","El periodo asignado debe tener un controlador");
-
-        if (periodoAsignado.getArea().trim().equals(""))
-            errors.rejectValue("area","obligatorio", "El periodo asignado debe tener un area");
 
         if (periodoAsignado.getFechaInicio() == null)
             errors.rejectValue("fechaInicio", "obligatorio", "Tienes que introducir una fecha de inicio");

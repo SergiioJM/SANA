@@ -39,11 +39,11 @@ public class ReservaZonaController {
     }
 
     @RequestMapping(value="/add/{id}")
-    public String addArea(Model model, @PathVariable String id) {
+    public String addArea(Model model, @PathVariable int id) {
         ReservaZona reservaZona= new ReservaZona();
         reservaZona.setReserva(id);
         List<Zona> lista2 = zonaDAO.getZonas();
-        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>();
         for (Zona e : lista2)
             lista.add(e.getIdentificador());
         model.addAttribute("zonalista",lista);
@@ -63,7 +63,7 @@ public class ReservaZonaController {
             reservaZonaValidator.validate(reservaZona1, bindingResult);
             if (bindingResult.hasErrors()) {
                 List<Zona> lista2 = zonaDAO.getZonas();
-                ArrayList<String> lista = new ArrayList<>();
+                ArrayList<Integer> lista = new ArrayList<>();
                 for (Zona e : lista2)
                     lista.add(e.getIdentificador());
                 model.addAttribute("zonalista", lista);
@@ -81,7 +81,7 @@ public class ReservaZonaController {
     }
 
     @RequestMapping(value="/delete/{reserva}/{zona}")
-    public String processDelete(@PathVariable String reserva,@PathVariable String zona) {
+    public String processDelete(@PathVariable int reserva,@PathVariable String zona) {
        reservaZonaDAO.deleteReservaZona(reserva,zona);
         return "redirect:../../list";
     }

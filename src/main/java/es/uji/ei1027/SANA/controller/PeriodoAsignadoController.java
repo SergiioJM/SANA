@@ -53,13 +53,13 @@ public class PeriodoAsignadoController {
     public String addPeriodoAsignado(Model model) {
         model.addAttribute("periodoAsignado", new PeriodoAsignado());
         List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2)
             lista.add(e.getIdArea());
         model.addAttribute("arealista",lista);
 
         List<Controlador> lista3 = controladorDAO.getControladores();
-        ArrayList<String> listaAux = new ArrayList<>();
+        ArrayList<Integer> listaAux = new ArrayList<>();
         for (Controlador e : lista3)
             listaAux.add(e.getIdentificador());
         model.addAttribute("controladorlista",listaAux);
@@ -74,13 +74,13 @@ public class PeriodoAsignadoController {
         periodoAsignadoValidator.validate(periodoAsignado,bindingResult);
         if (bindingResult.hasErrors()) {
             List<Area> lista2 = areaDAO.getAreas();
-            ArrayList<String> lista = new ArrayList<>();
+            ArrayList<Integer> lista = new ArrayList<>();
             for (Area e : lista2)
                 lista.add(e.getIdArea());
             model.addAttribute("arealista", lista);
 
             List<Controlador> lista3 = controladorDAO.getControladores();
-            ArrayList<String> listaAux = new ArrayList<>();
+            ArrayList<Integer> listaAux = new ArrayList<>();
             for (Controlador e : lista3)
                 listaAux.add(e.getIdentificador());
             model.addAttribute("controladorlista", listaAux);
@@ -97,16 +97,16 @@ public class PeriodoAsignadoController {
     }
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
-    public String editPeriodoAsignado(Model model, @PathVariable String identificador) {
+    public String editPeriodoAsignado(Model model, @PathVariable int identificador) {
         model.addAttribute("periodoAsignado", periodoAsignadoDAO.getPeriodoAsignado(identificador));
         List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2)
             lista.add(e.getIdArea());
         model.addAttribute("arealista",lista);
 
         List<Controlador> lista3 = controladorDAO.getControladores();
-        ArrayList<String> listaAux = new ArrayList<>();
+        ArrayList<Integer> listaAux = new ArrayList<>();
         for (Controlador e : lista3)
             listaAux.add(e.getIdentificador());
         model.addAttribute("controladorlista",listaAux);
@@ -120,13 +120,13 @@ public class PeriodoAsignadoController {
             BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             List<Area> lista2 = areaDAO.getAreas();
-            ArrayList<String> lista = new ArrayList<>();
+            ArrayList<Integer> lista = new ArrayList<>();
             for (Area e : lista2)
                 lista.add(e.getIdArea());
             model.addAttribute("arealista", lista);
 
             List<Controlador> lista3 = controladorDAO.getControladores();
-            ArrayList<String> listaAux = new ArrayList<>();
+            ArrayList<Integer> listaAux = new ArrayList<>();
             for (Controlador e : lista3)
                 listaAux.add(e.getIdentificador());
             model.addAttribute("controladorlista", listaAux);
@@ -142,7 +142,7 @@ public class PeriodoAsignadoController {
     }
 
     @RequestMapping(value="/delete/{identificador}")
-    public String processDelete(@PathVariable String identificador) {
+    public String processDelete(@PathVariable int identificador) {
         periodoAsignadoDAO.deletePeriodoAsignado(identificador);
         return "redirect:../list";
     }

@@ -21,31 +21,33 @@ public class ReservaDAO {
 
 
     public void addReserva(Reserva reserva) {
-        String ide=obtenerR();
+        int ide=obtenerR();
         jdbcTemplate.update("INSERT INTO Reserva VALUES(?,?,?,?,?,?,?)",
                 ide,reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getZona() ,reserva.getCiudadano());
-        reserva.setIdentificador(ide);
+                reserva.setIdentificador(ide);
     }
 
-    public String obtenerR(){
+    public int obtenerR(){
         String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Reserva", String.class);
         if (consulta == null){
-            return "R1";
+            return 1;
         }
-        int r = Integer.parseInt(consulta.replace("R","")) + 1;
-        return "R" + r;    }
+
+        int r = Integer.parseInt(consulta) + 1;
+        return r;
+    }
 
     public void updateReserva(Reserva reserva) {
         jdbcTemplate.update("UPDATE Reserva SET hora =?, fecha =?, numeroPersonas =?, estado =?,zona=?, ciudadano =? WHERE identificador =?",
                 reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getZona(),reserva.getCiudadano(),reserva.getIdentificador());
     }
 
-    public void deleteReserva(String identificador) {
+    public void deleteReserva(int identificador) {
         jdbcTemplate.update("DELETE FROM Reserva WHERE identificador =?",
                 identificador);
     }
 
-    public Reserva getReserva(String identificador) {
+    public Reserva getReserva(int identificador) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM Reserva WHERE identificador =?",
                     new ReservaRowMapper(), identificador);

@@ -1,7 +1,7 @@
 package es.uji.ei1027.SANA.model;
 
 public class Area {
-    String idArea;
+    int idArea;
     String nombre;
     String descripcion;
     String caracteristicas;
@@ -13,7 +13,7 @@ public class Area {
 
     }
 
-    public Area(String idArea, String nombre, String descripcion, String caracteristicas, String localizacion, String tipoAcceso, String municipio) {
+    public Area(int idArea, String nombre, String descripcion, String caracteristicas, String localizacion, String tipoAcceso, String municipio) {
         this.idArea = idArea;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -47,11 +47,11 @@ public class Area {
         this.tipoAcceso = tipoAcceso;
     }
 
-    public String getIdArea() {
+    public int getIdArea() {
         return idArea;
     }
 
-    public void setIdArea(String idArea) {
+    public void setIdArea(int idArea) {
         this.idArea = idArea;
     }
 

@@ -46,7 +46,7 @@ public class PeriodoController {
     public String addPeriodo(Model model) {
         model.addAttribute("periodo", new Periodo());
         List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2)
             lista.add(e.getIdArea());
         model.addAttribute("arealista",lista);
@@ -60,7 +60,7 @@ public class PeriodoController {
         periodoValidator.validate(periodo,bindingResult);
         if (bindingResult.hasErrors()) {
             List<Area> lista2 = areaDAO.getAreas();
-            ArrayList<String> lista = new ArrayList<>();
+            ArrayList<Integer> lista = new ArrayList<>();
             for (Area e : lista2) {
                 lista.add(e.getIdArea());
 
@@ -78,10 +78,10 @@ public class PeriodoController {
     }
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
-    public String editPeriodo(Model model, @PathVariable String identificador) {
+    public String editPeriodo(Model model, @PathVariable int identificador) {
         model.addAttribute("periodo", periodoDAO.getPeriodo(identificador));
         List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2)
             lista.add(e.getIdArea());
         model.addAttribute("arealista",lista);
@@ -96,24 +96,18 @@ public class PeriodoController {
         periodoValidator.validate(periodo,bindingResult);
         if (bindingResult.hasErrors()) {
             List<Area> lista2 = areaDAO.getAreas();
-            ArrayList<String> lista = new ArrayList<>();
+            ArrayList<Integer> lista = new ArrayList<>();
             for (Area e : lista2)
                 lista.add(e.getIdArea());
             model.addAttribute("arealista",lista);
             return "periodo/update";
         }
-        try {
             periodoDAO.updatePeriodo(periodo);
-        }
-        catch (DuplicateKeyException e ) {
-            throw new ClaveDuplicadaException("Ya existe un periodo con ese identificador: " + periodo.getIdentificador(), "CPduplicada");
-        }
-
         return "redirect:list";
     }
 
     @RequestMapping(value="/delete/{identificador}")
-    public String processDelete(@PathVariable String identificador) {
+    public String processDelete(@PathVariable int identificador) {
         periodoDAO.deletePeriodo(identificador);
         return "redirect:../list";
     }

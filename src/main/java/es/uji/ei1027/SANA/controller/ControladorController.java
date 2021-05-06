@@ -2,7 +2,6 @@ package es.uji.ei1027.SANA.controller;
 
 import es.uji.ei1027.SANA.dao.ControladorDAO;
 import es.uji.ei1027.SANA.model.Controlador;
-import es.uji.ei1027.SANA.model.Municipio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -55,7 +54,7 @@ public class ControladorController {
     }
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
-    public String editControlador(Model model, @PathVariable String identificador) {
+    public String editControlador(Model model, @PathVariable int identificador) {
         model.addAttribute("controlador", controladorDAO.getControlador(identificador) );
         return "controlador/update";
     }
@@ -71,7 +70,7 @@ public class ControladorController {
     }
 
     @RequestMapping(value="/delete/{identificador}")
-    public String processDelete(@PathVariable String identificador) {
+    public String processDelete(@PathVariable int identificador) {
         controladorDAO.deleteControlador(identificador);
         return "redirect:../list";
     }

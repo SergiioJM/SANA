@@ -44,7 +44,7 @@ public class ServicioTemporalController {
     public String addserviciotemporal(Model model) {
         model.addAttribute("serviciotemporal", new ServicioTemporal());
         List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2)
             lista.add(e.getIdArea());
         model.addAttribute("arealista",lista);
@@ -58,7 +58,7 @@ public class ServicioTemporalController {
         servicioTemporalValidatorValidator.validate(servicioTemporal,bindingResult);
         if (bindingResult.hasErrors()) {
             List<Area> lista2 = areaDAO.getAreas();
-            ArrayList<String> lista = new ArrayList<>();
+            ArrayList<Integer> lista = new ArrayList<>();
             for (Area e : lista2)
                 lista.add(e.getIdArea());
             model.addAttribute("arealista", lista);
@@ -77,7 +77,7 @@ public class ServicioTemporalController {
     public String editserviciotemporal(Model model, @PathVariable String nombre) {
         model.addAttribute("serviciotemporal", servicioTemporalDAO.getServicioTemporal(nombre));
         List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<String> lista = new ArrayList<>();
+        ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2)
             lista.add(e.getIdArea());
         model.addAttribute("arealista",lista);
@@ -92,7 +92,7 @@ public class ServicioTemporalController {
         servicioTemporalValidatorValidator.validate(servicioTemporal,bindingResult);
         if (bindingResult.hasErrors()) {
             List<Area> lista2 = areaDAO.getAreas();
-            ArrayList<String> lista = new ArrayList<>();
+            ArrayList<Integer> lista = new ArrayList<>();
             for (Area e : lista2)
                 lista.add(e.getIdArea());
             model.addAttribute("arealista", lista);
