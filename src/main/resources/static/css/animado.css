@@ -12,7 +12,6 @@
 
 body {
 	font-family: 'Bebas Neue', cursive;
-	background-image: url('./../img/bg.jpg');
 }
 
 a {
@@ -23,13 +22,14 @@ a {
 
 main {
 	width: 90%;
-	margin: auto;
+    margin: auto;
+    padding-top: 5em;
 	max-width: 800px;
 	min-height: 100vh;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: start;
 }
 
 .logotipo {
