@@ -26,7 +26,13 @@ public class ResponsableMunicipioDAO {
     }
 
     public String obtenerRM(){
-        return "RM" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM ResponsableMunicipio", String.class);
+        String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM ResponsableMunicipio", String.class);
+        if (consulta == null){
+            return "RM1";
+        }
+
+        int rm = Integer.parseInt(consulta.replace("RM","")) + 1;
+        return "RM" + rm;
     }
 
     public void updateResponsableMunicipio(ResponsableMunicipio responsableMunicipio) {

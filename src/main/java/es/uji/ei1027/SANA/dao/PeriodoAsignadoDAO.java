@@ -26,8 +26,12 @@ public class PeriodoAsignadoDAO {
     }
 
     public String obtenerPA(){
-        return "PA" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM PeriodoAsignado", String.class);
-    }
+        String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM PeriodoAsignado", String.class);
+        if (consulta == null){
+            return "PA1";
+        }
+        int pa = Integer.parseInt(consulta.replace("PA","")) + 1;
+        return "PA" + pa;    }
 
     public void updatePeriodoAsignado(PeriodoAsignado periodoAsignado) {
         jdbcTemplate.update("UPDATE PeriodoAsignado SET  fechaInicio =?, fechaFin =?, nombreControlador =?, nombreArea =? WHERE identificador =?",

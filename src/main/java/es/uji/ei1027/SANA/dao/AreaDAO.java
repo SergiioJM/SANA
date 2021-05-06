@@ -26,7 +26,12 @@ public class AreaDAO {
     }
 
     public String obtenerA(){
-        return "A" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Area", String.class);
+        String consulta = jdbcTemplate.queryForObject("SELECT MAX(idArea) AS id FROM Area", String.class);
+        if (consulta == null){
+            return "A1";
+        }
+        int a = Integer.parseInt(consulta.replace("A","")) + 1;
+        return "A" + a;
     }
 
     public void deleteArea(String area) {

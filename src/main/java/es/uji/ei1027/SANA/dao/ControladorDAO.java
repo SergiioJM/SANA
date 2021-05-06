@@ -26,7 +26,12 @@ public class ControladorDAO {
                 controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin());
     }
     public String obtenerC(){
-        return "C" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Controlador", String.class);
+        String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Controlador", String.class);
+        if (consulta == null){
+            return "C1";
+        }
+        int c = Integer.parseInt(consulta.replace("C","")) + 1;
+        return "C" + c;
     }
 
 

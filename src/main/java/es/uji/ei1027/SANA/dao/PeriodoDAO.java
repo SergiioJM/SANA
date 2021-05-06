@@ -26,7 +26,12 @@ public class PeriodoDAO {
     }
 
     public String obtenerP(){
-        return "P" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Periodo", String.class);
+        String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Periodo", String.class);
+        if (consulta == null){
+            return "P1";
+        }
+        int p = Integer.parseInt(consulta.replace("P","")) + 1;
+        return "P" + p;
     }
 
     public void deletePeriodo(String identificador) {

@@ -25,7 +25,13 @@ public class ZonaDAO {
     }
 
     public String obtenerZ(){
-        return "Z" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Zona", String.class);
+        String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Zona", String.class);
+        if (consulta == null){
+            return "Z";
+        }
+
+        int z = Integer.parseInt(consulta.replace("Z","")) + 1;
+        return "Z" + z;
     }
 
     public void updateZona(Zona zona) {

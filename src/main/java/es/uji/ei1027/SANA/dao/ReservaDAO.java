@@ -26,8 +26,12 @@ public class ReservaDAO {
     }
 
     public String obtenerR(){
-        return "R" + jdbcTemplate.queryForObject("SELECT COUNT(*) FROM Reserva", String.class);
-    }
+        String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Reserva", String.class);
+        if (consulta == null){
+            return "R1";
+        }
+        int r = Integer.parseInt(consulta.replace("R","")) + 1;
+        return "R" + r;    }
 
     public void updateReserva(Reserva reserva) {
         jdbcTemplate.update("UPDATE Reserva SET hora =?, fecha =?, numeroPersonas =?, estado =?, zona=?, ciudadano =? WHERE identificador =?",
