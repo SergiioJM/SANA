@@ -28,9 +28,13 @@ public class ReservaZonaController {
         return "reservazona/list";
     }
 
-    @RequestMapping(value="/add")
-    public String addArea(Model model) {
-        model.addAttribute("reservazona", new ReservaZona());
+    @RequestMapping(value="/add/{id}")
+    public String addArea(Model model, @PathVariable String id) {
+        System.out.println("------------" + id);
+        ReservaZona reservaZona= new ReservaZona();
+        reservaZona.setReserva(id);
+
+        model.addAttribute("reservazona", reservaZona);
         return "reservazona/add";
     }
 

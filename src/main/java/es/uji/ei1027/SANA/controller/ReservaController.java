@@ -1,6 +1,7 @@
 package es.uji.ei1027.SANA.controller;
 
 import es.uji.ei1027.SANA.dao.ReservaDAO;
+import es.uji.ei1027.SANA.dao.ReservaZonaDAO;
 import es.uji.ei1027.SANA.dao.ZonaDAO;
 import es.uji.ei1027.SANA.model.Reserva;
 import es.uji.ei1027.SANA.model.Zona;
@@ -22,15 +23,24 @@ public class ReservaController {
 
     private ReservaDAO reservaDAO;
     private ZonaDAO zonaDAO;
+    private ReservaZonaDAO reservaZonaDAO;
+    private ReservaZonaController reservaZonaController;
 
     @Autowired
     public void setReservaDAO(ReservaDAO reservaDAO) {
         this.reservaDAO = reservaDAO;
     }
-
+    @Autowired
+    public void setReservaZonaDAO(ReservaZonaDAO reservaZonaDAO) {
+        this.reservaZonaDAO = reservaZonaDAO;
+    }
     @Autowired
     public void setZonaDAO(ZonaDAO zonaDAO) {
         this.zonaDAO = zonaDAO;
+    }
+    @Autowired
+    public void setReservaZonaController(ReservaZonaController reservaZonaController) {
+        this.reservaZonaController = reservaZonaController;
     }
 
     @RequestMapping("/list")
@@ -62,7 +72,8 @@ public class ReservaController {
             return "reserva/add";
         }
         reservaDAO.addReserva(reserva);
-        return "redirect:list";
+        //return "redirect:list";
+        return "redirect:../reservazona/add/"+ reserva.getIdentificador();
     }
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)

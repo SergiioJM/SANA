@@ -21,8 +21,10 @@ public class ReservaDAO {
 
 
     public void addReserva(Reserva reserva) {
+        String ide=obtenerR();
         jdbcTemplate.update("INSERT INTO Reserva VALUES(?,?,?,?,?,?,?)",
-                obtenerR(),reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(), reserva.getZona() ,reserva.getCiudadano());
+                ide,reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getZona() ,reserva.getCiudadano());
+        reserva.setIdentificador(ide);
     }
 
     public String obtenerR(){
@@ -34,7 +36,7 @@ public class ReservaDAO {
         return "R" + r;    }
 
     public void updateReserva(Reserva reserva) {
-        jdbcTemplate.update("UPDATE Reserva SET hora =?, fecha =?, numeroPersonas =?, estado =?, zona=?, ciudadano =? WHERE identificador =?",
+        jdbcTemplate.update("UPDATE Reserva SET hora =?, fecha =?, numeroPersonas =?, estado =?,zona=?, ciudadano =? WHERE identificador =?",
                 reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getZona(),reserva.getCiudadano(),reserva.getIdentificador());
     }
 

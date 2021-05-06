@@ -13,8 +13,8 @@
     <table>
         <tr>
             <td><label>Reserva</label></td>
-            <td><input type="text" th:field="*{reserva}" /></td>
-            <td th:if="${#fields.hasErrors('reserva')}" th:errors="*{reserva}" class="error"></td>
+            <td><input type="text" th:field="*{reserva}" readonly="readonly"/></td>
+            <!--<td th:if="${#fields.hasErrors('reserva')}" th:errors="*{reserva}" class="error"></td>-->
         </tr>
         <tr>
             <td><label>Zona</label></td>

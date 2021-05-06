@@ -30,10 +30,10 @@ public class ReservaZonaDAO {
     }
 
 
-    public ReservaZona getReservaZona(String reserva, String zona) {
+    public List<String> getReservaZona(String reserva) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM ReservaZonas WHERE id_reserva=? AND id_zona",
-                    new ReservaZonaRowMapper(), reserva,zona);
+            return jdbcTemplate.queryForList("SELECT id_zona FROM ReservaZonas WHERE id_reserva=?",
+                    String.class, reserva);
         }
         catch(EmptyResultDataAccessException e) {
             return null;

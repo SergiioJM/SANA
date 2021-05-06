@@ -7,8 +7,7 @@ import java.time.LocalTime;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public class Reserva {
-    private static AtomicInteger cod = new AtomicInteger(0);
-    String identificador = "R"+ cod;
+    String identificador;
     @DateTimeFormat(pattern = "HH:mm")
     LocalTime hora;
     LocalDate fecha;
@@ -18,7 +17,6 @@ public class Reserva {
     String ciudadano;
 
     public Reserva(LocalTime hora, LocalDate fecha, int numeroPersonas, String estado,String zona, String ciudadano) {
-        cod.getAndIncrement();
         this.hora = hora;
         this.fecha = fecha;
         this.numeroPersonas = numeroPersonas;
