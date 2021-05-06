@@ -9,3 +9,24 @@
 .center {
      text-align: center;
 }
+
+*{box-sizing : border-box;}
+.boton{
+	display:inline-block;
+	width:100px;
+	height:30px;
+	text-align:center;
+	font-size:14px;
+	border:1px solid #007095;
+	border-radius:5px;
+	cursor:pointer;
+	color:white;
+	padding:5px 0 5px 20px;
+	background-image: url('/images/calendar-alt-regular.svg');
+	background-repeat:no-repeat;
+
+    background-size:20px 20px;
+	background-position:10px 5px;
+	background-color:#008CBA;
+}
+.boton:hover{ background-color:#007095;}
