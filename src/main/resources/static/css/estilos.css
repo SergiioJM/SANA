@@ -19,24 +19,24 @@ img {
 
 .boton{
 	display:inline-block;
-	width:100px;
-	height:30px;
+	width:150px;
+	height:40px;
 	text-align:center;
-	font-size:14px;
-	border:1px solid #007095;
+	font-size:22px;
+	border:1px solid #2e5fff;
 	border-radius:5px;
 	cursor:pointer;
 	color:white;
-	padding:5px 0 5px 20px;
+	padding: 5px;
 
 }
 .boton:hover{
-	background-color:#007095;}
+	background-color:#2e5fff;}
 
 .reserva{
 	background-image: url('/images/calendar-alt-regular.svg');
 	background-repeat:no-repeat;
 	background-size:20px 20px;
 	background-position:10px 5px;
-	background-color:#008CBA;
+	background-color:#2e5fff;
 }
