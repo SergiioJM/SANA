@@ -67,4 +67,14 @@ public class AreaDAO {
             return new ArrayList<>();
         }
     }
+    public List<Integer> getZonasArea(int area){
+        try{
+            List<Integer> zonas= jdbcTemplate.queryForList(
+                    "SELECT identificador FROM Zonas WHERE idArea =?", Integer.class,area);
+            return zonas;
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
 }

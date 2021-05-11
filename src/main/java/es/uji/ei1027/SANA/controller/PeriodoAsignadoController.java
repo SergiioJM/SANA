@@ -3,9 +3,7 @@ package es.uji.ei1027.SANA.controller;
 import es.uji.ei1027.SANA.dao.AreaDAO;
 import es.uji.ei1027.SANA.dao.ControladorDAO;
 import es.uji.ei1027.SANA.dao.PeriodoAsignadoDAO;
-import es.uji.ei1027.SANA.model.Area;
-import es.uji.ei1027.SANA.model.Controlador;
-import es.uji.ei1027.SANA.model.PeriodoAsignado;
+import es.uji.ei1027.SANA.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -145,5 +143,15 @@ public class PeriodoAsignadoController {
     public String processDelete(@PathVariable int identificador) {
         periodoAsignadoDAO.deletePeriodoAsignado(identificador);
         return "redirect:../list";
+    }
+    @RequestMapping("/reservassuarea/{area}")
+    public String listaDeReservasEnPeriodosAsignados(@PathVariable int area ,Model model){
+        List<Integer> zonas= periodoAsignadoDAO.getZonasArea(area);
+        List<ReservaZona> resevaEnArea = new ArrayList<>();
+        for(Integer e : zonas){
+            resevaEnArea.addAll(periodoAsignadoDAO.getreservas(e));
+        }
+        model.addAttribute("listaDeReservasEnZona", resevaEnArea);
+        return "periodoAsignado/reservassuarea";
     }
 }

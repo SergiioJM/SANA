@@ -1,6 +1,7 @@
 package es.uji.ei1027.SANA.dao;
 
 import es.uji.ei1027.SANA.model.PeriodoAsignado;
+import es.uji.ei1027.SANA.model.ReservaZona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -61,6 +62,27 @@ public class PeriodoAsignadoDAO {
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<PeriodoAsignado>();
+        }
+    }
+    public List<Integer> getZonasArea(int area){
+        try{
+            List<Integer> zonas= jdbcTemplate.queryForList(
+                    "SELECT identificador FROM Zona WHERE idArea =?", Integer.class,area);
+            return zonas;
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+    public List<ReservaZona> getreservas(int zona){
+        String zona1= String.valueOf(zona);
+        try{
+            List<ReservaZona> reservas= jdbcTemplate.query(
+                    "SELECT * FROM ReservaZonas WHERE id_zona=?", new ReservaZonaRowMapper(),zona1);
+            return reservas;
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
         }
     }
 }
