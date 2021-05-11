@@ -62,6 +62,11 @@ public class AreaController {
     @RequestMapping(value="/update/{idArea}", method = RequestMethod.GET)
     public String editArea(Model model, @PathVariable int idArea) {
         model.addAttribute("area", areaDao.getArea(idArea));
+        List<Municipio> lista = municipioDAO.getMunicipios();
+        ArrayList<String> nombres = new ArrayList<>();
+        for(Municipio mun : lista)
+            nombres.add(mun.getCp());
+        model.addAttribute("municipiolista",nombres);
         return "area/update";
     }
 
