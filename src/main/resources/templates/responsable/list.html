@@ -19,6 +19,7 @@
         <th>Municipio</th>
         <th></th>
         <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -33,6 +34,8 @@
         <td><a th:href="@{/responsable/update/{identificador}(identificador=${responsable.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
         <td><a th:href="@{/responsable/delete/{identificador}(identificador=${responsable.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        </td>
+        <td><a th:href="@{/responsable/reservasmunicipio/{identificador}(identificador=${responsable.municipio})}"><button type="button" class="btn btn-warning">Ver reservas de un municipio</button></a>
         </td>
     </tr>
     </tbody>

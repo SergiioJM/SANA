@@ -3,6 +3,7 @@ package es.uji.ei1027.SANA.controller;
 import es.uji.ei1027.SANA.dao.MunicipioDAO;
 import es.uji.ei1027.SANA.dao.ResponsableMunicipioDAO;
 import es.uji.ei1027.SANA.model.Municipio;
+import es.uji.ei1027.SANA.model.ReservaZona;
 import es.uji.ei1027.SANA.model.ResponsableMunicipio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -120,5 +121,16 @@ public class ResponsableMunicipioController {
     public String processDelete(@PathVariable int identificador) {
         responsableMunicipioDAO.deleteResponsableMunicipio(identificador);
         return "redirect:../list";
+    }
+    @RequestMapping("/reservasmunicipio/{municipio}")
+    public String listaDeReservasEnPeriodosAsignados(@PathVariable String municipio ,Model model){
+        List<Integer> areas= responsableMunicipioDAO.getAreaMunicipio(municipio);
+        List<ReservaZona> resevaEnMunicipio = new ArrayList<>();
+        for(Integer e : areas){
+            for (Integer i: responsableMunicipioDAO.getZonasArea(e))
+                resevaEnMunicipio.addAll(responsableMunicipioDAO.getreservas(i));
+        }
+        model.addAttribute("reservasmunicipioo", resevaEnMunicipio);
+        return "responsable/reservasmunicipio";
     }
 }

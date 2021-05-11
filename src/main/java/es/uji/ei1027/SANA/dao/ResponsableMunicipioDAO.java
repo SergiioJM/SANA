@@ -1,5 +1,6 @@
 package es.uji.ei1027.SANA.dao;
 
+import es.uji.ei1027.SANA.model.ReservaZona;
 import es.uji.ei1027.SANA.model.ResponsableMunicipio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -60,6 +61,40 @@ public class ResponsableMunicipioDAO {
             return jdbcTemplate.query(
                     "SELECT * FROM ResponsableMunicipio",
                     new ResponsableMunicipioRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+    public List<Integer> getAreaMunicipio(String municipio){
+        try{
+            List<Integer> zonas= jdbcTemplate.queryForList(
+                    "SELECT idArea FROM Area WHERE municipio =?", Integer.class,municipio);
+            System.out.println(zonas.size());
+            return zonas;
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+    public List<Integer> getZonasArea(int area){
+        try{
+            List<Integer> zonas= jdbcTemplate.queryForList(
+                    "SELECT identificador FROM Zona WHERE idArea =?", Integer.class,area);
+            System.out.println(zonas.size());
+            return zonas;
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+    public List<ReservaZona> getreservas(int zona){
+        String zona1= String.valueOf(zona);
+        try{
+            List<ReservaZona> reservas= jdbcTemplate.query(
+                    "SELECT * FROM ReservaZonas WHERE id_zona=?", new ReservaZonaRowMapper(),zona1);
+            System.out.println(reservas.size());
+            return reservas;
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();
