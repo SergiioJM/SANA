@@ -40,3 +40,10 @@ img {
 	background-position:10px 5px;
 	background-color:#2e5fff;
 }
+
+.loggeduser {
+	color: black;
+	text-align: right;
+	margin-right: 10pt;
+}
+
