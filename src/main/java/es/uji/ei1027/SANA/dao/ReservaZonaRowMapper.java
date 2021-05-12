@@ -10,7 +10,7 @@ public class ReservaZonaRowMapper implements RowMapper<ReservaZona> {
     public ReservaZona mapRow(ResultSet rs, int rowNum) throws SQLException {
         ReservaZona reservaZona= new ReservaZona();
         reservaZona.setReserva(rs.getInt("id_reserva"));
-        reservaZona.setZona(rs.getString("id_zona"));
+        reservaZona.setZona(rs.getInt("id_zona"));
         return reservaZona;
 
     }
