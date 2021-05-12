@@ -120,7 +120,7 @@ CREATE TABLE ServicioTemporal(
 );
 
 CREATE TABLE Zona(
-	identificador	INTEGER ,
+	identificador	VARCHAR ,
 	capacidad	INTEGER,
 	idArea		INTEGER  NOT NULL,
 
@@ -157,7 +157,7 @@ CREATE TABLE Reserva(
 
 CREATE TABLE ReservaZonas(
 	id_reserva 	INTEGER ,
-	id_zona	INTEGER ,
+	id_zona	VARCHAR,
 
 	CONSTRAINT cp_reserva2 PRIMARY KEY(id_reserva,id_zona),
 	CONSTRAINT cp_zona FOREIGN KEY (id_zona) REFERENCES Zona(identificador) ON DELETE RESTRICT ON UPDATE CASCADE,

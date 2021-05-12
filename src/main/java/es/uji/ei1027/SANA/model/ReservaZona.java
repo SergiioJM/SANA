@@ -2,7 +2,7 @@ package es.uji.ei1027.SANA.model;
 
 public class ReservaZona {
     int reserva;
-    int zona;
+    String zona;
 
     public ReservaZona(){}
 
@@ -14,11 +14,11 @@ public class ReservaZona {
         this.reserva = reserva;
     }
 
-    public int getZona() {
+    public String getZona() {
         return zona;
     }
 
-    public void setZona(int zona) {
+    public void setZona(String zona) {
         this.zona = zona;
     }
 
