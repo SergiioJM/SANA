@@ -1,6 +1,7 @@
 package es.uji.ei1027.SANA.dao;
 
 import es.uji.ei1027.SANA.model.Ciudadano;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,15 +21,16 @@ public class CiudadanoDAO {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 
     public void addCiudadano(Ciudadano ciudadano) {
-        jdbcTemplate.update("INSERT INTO Ciudadano VALUES(?,?,?,?,?)",
-                ciudadano.getNombre(),ciudadano.getNif(),ciudadano.getEmail(),ciudadano.getResidencia(),ciudadano.getFechaRegistro());
+        jdbcTemplate.update("INSERT INTO Ciudadano VALUES(?,?,?,?,?,?)",
+                ciudadano.getNombre(),ciudadano.getNif(),ciudadano.getEmail(),ciudadano.getResidencia(),ciudadano.getFechaRegistro(),passwordEncryptor.encryptPassword(ciudadano.getPassword()));
     }
 
     public void updateCiudadano(Ciudadano ciudadano) {
-        jdbcTemplate.update("UPDATE Ciudadano SET nombre =?, email =?, residencia =?, fechaRegistro =? WHERE nif =?",
-                ciudadano.getNombre(),ciudadano.getEmail(),ciudadano.getResidencia(),ciudadano.getFechaRegistro(),ciudadano.getNif());
+        jdbcTemplate.update("UPDATE Ciudadano SET nombre =?, email =?, residencia =?, fechaRegistro =?, password =? WHERE nif =?",
+                ciudadano.getNombre(),ciudadano.getEmail(),ciudadano.getResidencia(),ciudadano.getFechaRegistro(),ciudadano.getPassword(),ciudadano.getNif());
     }
 
     public void deleteCiudadano(String Nif) {
@@ -41,6 +43,16 @@ public class CiudadanoDAO {
                     new CiudadanoRowMapper(), Nif);
         }
         catch(EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
+    public Ciudadano getPassword(String nif) {
+        try{
+            return jdbcTemplate.queryForObject("SELECT password FROM Ciudadano WHERE nif =?",
+                    new CiudadanoRowMapper(),nif);
+        }
+        catch (EmptyResultDataAccessException e) {
             return null;
         }
     }

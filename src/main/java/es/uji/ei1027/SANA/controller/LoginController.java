@@ -23,7 +23,7 @@ class UserValidator implements Validator {
     @Override
     public void validate(Object obj, Errors errors) {
         UserDetails userDetails = (UserDetails)obj;
-        if (userDetails.getNombre().trim().equals(""))
+        if (userDetails.getNif().trim().equals(""))
             errors.rejectValue("nombre", "obligatori",
                     "El campo usuario no puede estar vacio");
         if (userDetails.getPassword().trim().equals(""))
@@ -48,10 +48,11 @@ public class LoginController {
                              BindingResult bindingResult, HttpSession session) {
         UserValidator userValidator = new UserValidator();
         userValidator.validate(user, bindingResult);
+        System.out.println(session.getAttribute(user.getPassword()));
         if (bindingResult.hasErrors()) {
             return "login";
         }
-        user = userDao.loadUserByUsername(user.getNombre(), user.getPassword());
+        user = userDao.loadUserByUsername(user.getNif(), user.getPassword());
         if (user == null) {
             bindingResult.rejectValue("password", "badpw", "Contraseña incorrecta");
             return "login";

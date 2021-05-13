@@ -8,14 +8,16 @@ public class Ciudadano {
     String email;
     String residencia;
     LocalDate fechaRegistro;
+    String password;
 
 
-    public Ciudadano(String nombre, String nif, String email, String residencia, LocalDate fechaRegistro) {
+    public Ciudadano(String nombre, String nif, String email, String residencia, LocalDate fechaRegistro, String password) {
         this.nombre = nombre;
         this.nif = nif;
         this.email = email;
         this.residencia = residencia;
         this.fechaRegistro = fechaRegistro;
+        this.password = password;
 
     }
 
@@ -63,6 +65,11 @@ public class Ciudadano {
         this.fechaRegistro = fechaRegistro;
     }
 
+    public String getPassword() { return password; }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     @Override
     public String toString() {

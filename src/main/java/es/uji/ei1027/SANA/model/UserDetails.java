@@ -1,34 +1,16 @@
 package es.uji.ei1027.SANA.model;
 
 public class UserDetails {
-    String nombre;
+    String nif;
     String password;
 
-    public String getNombre() {
-        return nombre;
+    public String getNif() {
+        return nif;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setNif(String nif) {
+        this.nif = nif;
     }
-
- /*   public String getApellidos() {
-        return apellidos;
-    }
-
-    public void setApellidos(String apellidos) {
-        this.apellidos = apellidos;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-  */
 
     public String getPassword() {
         return password;

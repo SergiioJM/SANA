@@ -15,19 +15,19 @@ public class FakeUserProvider implements UserDao {
     public FakeUserProvider() {
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
         UserDetails userAlice = new UserDetails();
-        userAlice.setNombre("alice");
+        userAlice.setNif("alice");
         userAlice.setPassword(passwordEncryptor.encryptPassword("alice"));
         knownUsers.put("alice", userAlice);
 
         UserDetails userBob = new UserDetails();
-        userBob.setNombre("bob");
+        userBob.setNif("bob");
         userBob.setPassword(passwordEncryptor.encryptPassword("bob"));
         knownUsers.put("bob", userBob);
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username, String password) {
-        UserDetails user = knownUsers.get(username.trim());
+    public UserDetails loadUserByUsername(String nif, String password) {
+        UserDetails user = knownUsers.get(nif.trim());
         if (user == null)
             return null;
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
