@@ -97,5 +97,17 @@ public class ReservaDAO {
         }
     }
 
+    public List<Reserva> getReservasPorNif(String ciudadano) {
+        try {
+            List<Reserva> reservas = jdbcTemplate.query(
+                    "SELECT * FROM Reserva WHERE Ciudadano=?",
+                    new es.uji.ei1027.SANA.dao.ReservaRowMapper(), ciudadano);
+            return reservas;
+        }
+        catch (EmptyResultDataAccessException e){
+            return new ArrayList<>();
+        }
+    }
+
 
 }

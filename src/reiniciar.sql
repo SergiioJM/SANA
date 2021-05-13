@@ -146,8 +146,7 @@ CREATE TABLE Reserva(
 	fecha		Date,
 	numeroPersonas	INTEGER,
 	estado		VARCHAR(20),
-
-	ciudadano   VARCHAR(9),
+	ciudadano   VARCHAR(50),
 
 	CONSTRAINT cp_reserva PRIMARY KEY(identificador),
 	CONSTRAINT ca_ciudadano FOREIGN KEY (ciudadano) REFERENCES Ciudadano(nif) ON DELETE RESTRICT ON UPDATE CASCADE,

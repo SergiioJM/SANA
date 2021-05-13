@@ -1,5 +1,6 @@
 package es.uji.ei1027.SANA.controller;
 
+import es.uji.ei1027.SANA.dao.CiudadanoDAO;
 import es.uji.ei1027.SANA.dao.ReservaDAO;
 import es.uji.ei1027.SANA.dao.ReservaZonaDAO;
 import es.uji.ei1027.SANA.dao.ZonaDAO;
@@ -25,6 +26,7 @@ public class ReservaController {
     private ZonaDAO zonaDAO;
     private ReservaZonaDAO reservaZonaDAO;
     private ReservaZonaController reservaZonaController;
+    private CiudadanoDAO ciudadanoDAO;
 
     @Autowired
     public void setReservaDAO(ReservaDAO reservaDAO) {
@@ -42,11 +44,19 @@ public class ReservaController {
     public void setReservaZonaController(ReservaZonaController reservaZonaController) {
         this.reservaZonaController = reservaZonaController;
     }
+    @Autowired
+    public void setCiudadanoDAO(CiudadanoDAO ciudadanoDAO) { this.ciudadanoDAO = ciudadanoDAO; }
 
     @RequestMapping("/list")
     public String listaDeReservas(Model model){
         model.addAttribute("reservas", reservaDAO.getReservas());
         return "reserva/list";
+    }
+
+    @RequestMapping(value = "/reservas{ciudadano}", method = RequestMethod.GET)
+    public String listaDeReservasIndividual(Model model, @PathVariable String ciudadano){
+        model.addAttribute("reservas", reservaDAO.getReservasPorNif(ciudadano));
+        return "../reservas";
     }
 
     @RequestMapping(value="/add")

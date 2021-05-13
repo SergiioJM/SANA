@@ -12,15 +12,15 @@
       th:object="${reserva}" method="post">
     <table>
         <tr>
-            <td><label>Hora</label></td>
-            <td><input type="text" th:field="*{hora}"
-            placeholder="HH:mm"/></td>
-        </tr>
-        <tr>
             <td><label>Fecha</label></td>
             <td><input type="text" th:field="*{fecha}"
-            placeholder="D/M/YY"/></td>
+                       placeholder="D/M/YY"/></td>
             <td th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}" class="error"></td>
+        </tr>
+        <tr>
+            <td><label>Hora</label></td>
+            <td><input type="time" th:field="*{hora}"
+            placeholder="HH:mm"/></td>
         </tr>
         <tr>
             <td><label>Numero de Personas</label></td>

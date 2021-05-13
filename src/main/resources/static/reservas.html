@@ -1,21 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>SANA- Reservas</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
-  <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
-  <link rel="preconnect" href="https://fonts.gstatic.com">
-  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+    <title>Gestionar Reservas</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 </head>
-<body class="center">
-<h4>
-    <div th:replace="fragments/logininfo" >...</div>
-</h4>
+<body>
+<h1>Lista de Reservas</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Identificador</th>
+        <th>Hora</th>
+        <th>Fecha</th>
+        <th>Numero de Personas</th>
+        <th>Estado</th>
+        <th>Identificador de la Zona</th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reserva: ${reservas}">
+        <td th:text="${reserva.identificador}"></td>
+        <td th:text="${reserva.hora}"></td>
+        <td th:text="${reserva.fecha}"></td>
+        <td th:text="${reserva.numeroPersonas}"></td>
+        <td th:text="${reserva.estado}"></td>
+        <td th:text="${reserva.getListreserva()}"></td>
+        <td><a th:href="@{/reserva/update/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
+        </td>
+        <td><a th:href="@{/reserva/delete/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        </td>
+        <td><a th:href="@{/reserva/listadodetallado/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-warning">Ver detalles de las zonas</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="reserva/add"><button class=" btn btn-primary butto btn-lg">Realizar una reserva</button></a>
+<br>
+<br>
+<a href="reserva/update"><button class=" btn btn-primary butto btn-lg">Modificar una reserva</button></a>
 
-<h2> RESERVAS </h2>
-
-<a href="reserva/add"><button class="btn btn-primary">Realizar una reserva</button></a>
 
 
 
