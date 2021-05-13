@@ -47,7 +47,7 @@ public class CiudadanoController {
         catch (DuplicateKeyException e ){
             throw new ClaveDuplicadaException("Ya existe el NIF " + ciudadano.getNif(),"CPduplicada");
         }
-        return "redirect:list";
+        return "/login";
     }
 
     @RequestMapping(value="/update/{nif}", method = RequestMethod.GET)

@@ -12,7 +12,7 @@
   <div class="col-sm-8 main-section">
     <div class="modal-content">
       <div class="col-12 user-img">
-        <img src="static/images/usuarios.png" th:src="@{/images/usuarios.png}"/>
+        <img src="static/images/lock.png" th:src="@{/images/lock.png}"/>
       </div>
       <form class="col-12" th:action="@{/login}" method="post">
         <div class="form-group" id="user-group">
@@ -23,7 +23,7 @@
         </div>
         <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Iniciar Sesion </button>
         <br>
-        <a href="/ciudadano/add">No estas registrado? Registrate</a>
+        <a class="enlace" href="/ciudadano/add">¿No estás registrado?<u>Registrate</u></a>
       </form>
       </div>
     </div>
