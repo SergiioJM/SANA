@@ -5,7 +5,9 @@
 .needcorrection {
      color: red;
 }
-
+body{
+	background-image: url('/image/fondo.png');
+}
 .center {
      text-align: center;
 }
@@ -47,3 +49,14 @@ img {
 	margin-right: 10pt;
 }
 
+.main{
+  margin: 150px;
+}
+
+.butt{
+   width:300px;
+}
+
+.butto{
+   width:200px;
+}
