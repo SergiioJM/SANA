@@ -47,16 +47,6 @@ public class CiudadanoDAO {
         }
     }
 
-    public Ciudadano getPassword(String nif) {
-        try{
-            return jdbcTemplate.queryForObject("SELECT password FROM Ciudadano WHERE nif =?",
-                    new CiudadanoRowMapper(),nif);
-        }
-        catch (EmptyResultDataAccessException e) {
-            return null;
-        }
-    }
-
     public List<Ciudadano> getCiudadanos(){
         try{
             return jdbcTemplate.query(

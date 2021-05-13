@@ -24,7 +24,7 @@ class UserValidator implements Validator {
     public void validate(Object obj, Errors errors) {
         UserDetails userDetails = (UserDetails)obj;
         if (userDetails.getNif().trim().equals(""))
-            errors.rejectValue("nombre", "obligatori",
+            errors.rejectValue("nif", "obligatori",
                     "El campo usuario no puede estar vacio");
         if (userDetails.getPassword().trim().equals(""))
             errors.rejectValue("password", "obligatori",
@@ -48,18 +48,17 @@ public class LoginController {
                              BindingResult bindingResult, HttpSession session) {
         UserValidator userValidator = new UserValidator();
         userValidator.validate(user, bindingResult);
-        System.out.println(session.getAttribute(user.getPassword()));
+        //System.out.println(user.getNif()+user.getPassword()); Aqui el usuario y contraseña llegan bien
         if (bindingResult.hasErrors()) {
             return "login";
         }
+        //System.out.println(user.getNif()+user.getPassword()); Aqui bien solo que lo muestra dos veces
         user = userDao.loadUserByUsername(user.getNif(), user.getPassword());
         if (user == null) {
             bindingResult.rejectValue("password", "badpw", "Contraseña incorrecta");
-            return "login";
+            return "redirect:/index.html";
         }
-
         session.setAttribute("user", user);
-
         return "redirect:/user/ciudadano";
     }
 

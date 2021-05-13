@@ -1,5 +1,6 @@
 package es.uji.ei1027.SANA.dao;
 
+import es.uji.ei1027.SANA.model.Ciudadano;
 import es.uji.ei1027.SANA.model.UserDetails;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.stereotype.Repository;
@@ -23,24 +24,19 @@ public class FakeUserProvider implements UserDao {
         userBob.setNif("bob");
         userBob.setPassword(passwordEncryptor.encryptPassword("bob"));
         knownUsers.put("bob", userBob);
+
     }
 
     @Override
     public UserDetails loadUserByUsername(String nif, String password) {
-        UserDetails user = knownUsers.get(nif.trim());
-        if (user == null)
-            return null;
-        BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
-        if (passwordEncryptor.checkPassword(password, user.getPassword())) {
+        UserDetails user = new UserDetails();
+        user.setNif(nif);
+        user.setPassword(password);
+        if (user.getPassword().equals(password)) {
             return user;
         }
         else {
             return null;
         }
-    }
-
-    @Override
-    public Collection<UserDetails> listAllUsers() {
-        return knownUsers.values();
     }
 }
