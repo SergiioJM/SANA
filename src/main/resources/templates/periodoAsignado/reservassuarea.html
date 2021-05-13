@@ -1,25 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Gestionar Reservas en Area</title>
+    <title>Gestionar Reservas</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 </head>
 <body>
-<h1>Lista de Reservas en Area</h1>
+<h1>Lista de Reservas</h1>
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>Reserva</th>
-        <th>Zona</th>
+        <th>Identificador</th>
+        <th>Hora</th>
+        <th>Fecha</th>
+        <th>Numero de Personas</th>
+        <th>Estado</th>
+        <th>Identificador de la Zonas</th>
+        <th>Ciudadano</th>
         <th></th>
     </tr>
     </thead>
     <tbody>
-    <tr th:each="reservazon: ${listaDeReservasEnZona}">
-        <td th:text="${reservazon.reserva}"></td>
-        <td th:text="${reservazon.zona}"></td>
-        <td><a th:href="@{/reservazona/delete/{nom}/{nombre}(nom=${reservazon.reserva}, nombre=${reservazon.zona})}"><button type="button" class="btn btn-danger">Borra</button></a>
+    <tr th:each="reserva: ${listaDeReservasEnZona}">
+        <td th:text="${reserva.identificador}"></td>
+        <td th:text="${reserva.hora}"></td>
+        <td th:text="${reserva.fecha}"></td>
+        <td th:text="${reserva.numeroPersonas}"></td>
+        <td th:text="${reserva.estado}"></td>
+        <td th:text="${reserva.getListreserva()}"></td>
+        <td th:text="${reserva.ciudadano}"></td>
+        <td><a th:href="@{/reserva/update2/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
     </tr>
     </tbody>

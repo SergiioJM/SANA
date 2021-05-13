@@ -146,11 +146,10 @@ CREATE TABLE Reserva(
 	fecha		Date,
 	numeroPersonas	INTEGER,
 	estado		VARCHAR(20),
-	zona		VARCHAR(9) NOT NULL,
+
 	ciudadano   VARCHAR(9),
 
 	CONSTRAINT cp_reserva PRIMARY KEY(identificador),
-	CONSTRAINT ca_reserva_zona FOREIGN KEY (zona) REFERENCES Zona(identificador) ON DELETE RESTRICT ON UPDATE CASCADE,
 	CONSTRAINT ca_ciudadano FOREIGN KEY (ciudadano) REFERENCES Ciudadano(nif) ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT ri_numeroPersonas CHECK (numeroPersonas>0),
     CONSTRAINT ri_estado CHECK (estado IN('usada','cancelada', 'disponible'))
@@ -171,10 +170,8 @@ CREATE TABLE Ciudadano(
 	email		VARCHAR(50),
 	residencia	VARCHAR(50),
 	fechaRegistro	Date,
-	reserva	VARCHAR(9),
 
 	CONSTRAINT cp_ciudadano PRIMARY KEY(nif),
-	CONSTRAINT ca_ciudadano_reserva FOREIGN KEY (reserva)
 REFERENCES Reserva(identificador) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 

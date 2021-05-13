@@ -40,14 +40,6 @@
             </td>
         </tr>
         <tr>
-            <td><label>Identificador de la Zona</label></td>
-            <td>
-                <select class="form_control" type="text" th:field="*{zona}">
-                    <option th:each="idZona: ${zonalista}" th:value="${idZona}" th:text="${idZona}"></option>
-                </select>
-            </td>
-        </tr>
-        <tr>
             <td><label>Ciudadano</label></td>
             <td><input type="text" th:field="*{ciudadano}" /></td>
         </tr>

@@ -19,6 +19,7 @@
         <th>Ciudadano</th>
         <th></th>
         <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -28,11 +29,13 @@
         <td th:text="${reserva.fecha}"></td>
         <td th:text="${reserva.numeroPersonas}"></td>
         <td th:text="${reserva.estado}"></td>
-        <td th:text="${reserva.zona}"></td>
+        <td th:text="${reserva.getListreserva()}"></td>
         <td th:text="${reserva.ciudadano}"></td>
         <td><a th:href="@{/reserva/update/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
         <td><a th:href="@{/reserva/delete/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        </td>
+        <td><a th:href="@{/reserva/listadodetallado/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-warning">Ver detalles de las zonas</button></a>
         </td>
     </tr>
     </tbody>

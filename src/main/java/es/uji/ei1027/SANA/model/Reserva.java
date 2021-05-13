@@ -13,7 +13,6 @@ public class Reserva {
     LocalDate fecha;
     int numeroPersonas;
     String estado;
-    String zona;
     String ciudadano;
     List<String> listreserva;
 
@@ -22,14 +21,13 @@ public class Reserva {
         this.fecha = fecha;
         this.numeroPersonas = numeroPersonas;
         this.estado = estado;
-        this.zona = zona;
         this.ciudadano = ciudadano;
     }
 
     public Reserva() {
     }
 
-    public int getIdentificador() {
+    public Integer getIdentificador() {
         return identificador;
     }
 
@@ -69,10 +67,6 @@ public class Reserva {
         this.estado = estado;
     }
 
-    public String getZona() { return zona;}
-
-    public void setZona(String zona) { this.zona = zona;}
-
     public String getCiudadano(){
         return ciudadano;
     }
@@ -98,7 +92,6 @@ public class Reserva {
                 ", fecha=" + fecha +
                 ", numeroPersonas=" + numeroPersonas +
                 ", estado='" + estado +
-                ", zona='" + zona +
                 ", ciudadano='" + ciudadano + '\'' +
                 '}';
     }

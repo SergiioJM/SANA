@@ -1,9 +1,10 @@
 package es.uji.ei1027.SANA.controller;
 
 import es.uji.ei1027.SANA.dao.MunicipioDAO;
+import es.uji.ei1027.SANA.dao.ReservaDAO;
 import es.uji.ei1027.SANA.dao.ResponsableMunicipioDAO;
 import es.uji.ei1027.SANA.model.Municipio;
-import es.uji.ei1027.SANA.model.ReservaZona;
+import es.uji.ei1027.SANA.model.Reserva;
 import es.uji.ei1027.SANA.model.ResponsableMunicipio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -24,6 +25,7 @@ public class ResponsableMunicipioController {
 
     private ResponsableMunicipioDAO responsableMunicipioDAO;
     private MunicipioDAO MunicipioDAO;
+    private ReservaDAO reservaDAO;
 
 
     @Autowired
@@ -123,14 +125,26 @@ public class ResponsableMunicipioController {
         return "redirect:../list";
     }
     @RequestMapping("/reservasmunicipio/{municipio}")
-    public String listaDeReservasEnPeriodosAsignados(@PathVariable String municipio ,Model model){
+    public String listaDeReservasDeMunicipios(@PathVariable String municipio ,Model model){
         List<Integer> areas= responsableMunicipioDAO.getAreaMunicipio(municipio);
-        List<ReservaZona> resevaEnMunicipio = new ArrayList<>();
-        for(Integer e : areas){
-            for (Integer i: responsableMunicipioDAO.getZonasArea(e))
-                resevaEnMunicipio.addAll(responsableMunicipioDAO.getreservas(i));
+        List<Integer> resevaEnMunicipio = new ArrayList<>();
+        for(Integer e : areas) {
+            for (Integer i : responsableMunicipioDAO.getZonasArea(e)) {
+                List<Integer> a=responsableMunicipioDAO.getReservasDeUnaZona(i);
+                for (Integer ide: a){
+                    if(!resevaEnMunicipio.contains(ide)){
+                        resevaEnMunicipio.add(ide);
+                    }
+                }
+            }
         }
-        model.addAttribute("reservasmunicipioo", resevaEnMunicipio);
+        List<Reserva> res= new ArrayList<>();
+        for (Integer w: resevaEnMunicipio){
+                    Reserva reserva= responsableMunicipioDAO.getReserva(w);
+                    reserva.setListreserva(responsableMunicipioDAO.getZonasDeReserva(reserva.getIdentificador()));
+                    res.add(reserva);
+        }
+        model.addAttribute("reservasmunicipioo", res);
         return "responsable/reservasmunicipio";
     }
 }

@@ -23,8 +23,8 @@ public class ReservaDAO {
 
     public void addReserva(Reserva reserva) {
         int ide=obtenerR();
-        jdbcTemplate.update("INSERT INTO Reserva VALUES(?,?,?,?,?,?,?)",
-                ide,reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getZona() ,reserva.getCiudadano());
+        jdbcTemplate.update("INSERT INTO Reserva VALUES(?,?,?,?,?,?)",
+                ide,reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getCiudadano());
                 reserva.setIdentificador(ide);
     }
 
@@ -40,7 +40,7 @@ public class ReservaDAO {
 
     public void updateReserva(Reserva reserva) {
         jdbcTemplate.update("UPDATE Reserva SET hora =?, fecha =?, numeroPersonas =?, estado =?,zona=?, ciudadano =? WHERE identificador =?",
-                reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getZona(),reserva.getCiudadano(),reserva.getIdentificador());
+                reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getCiudadano(),reserva.getIdentificador());
     }
 
     public void deleteReserva(int identificador) {
@@ -65,7 +65,7 @@ public class ReservaDAO {
                     new es.uji.ei1027.SANA.dao.ReservaRowMapper());
 
             for (Reserva e : res){
-                e.toString();
+                e.setListreserva(getZonasDeReserva(e.getIdentificador()));
             }
             return res;
         }catch(EmptyResultDataAccessException e) {
@@ -86,4 +86,16 @@ public class ReservaDAO {
             return new ArrayList<>();
         }
     }
+    public List<ReservaZona> getReservaZonasDeMiReserva(int reserva){
+        try {
+            List<ReservaZona> zonas = jdbcTemplate.query(
+                    "SELECT * FROM ReservaZonas WHERE id_reserva=?",
+                    new es.uji.ei1027.SANA.dao.ReservaZonaRowMapper(),reserva);
+            return zonas;
+        }catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+
+
 }

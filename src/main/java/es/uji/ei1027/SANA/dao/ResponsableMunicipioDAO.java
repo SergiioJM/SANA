@@ -1,5 +1,6 @@
 package es.uji.ei1027.SANA.dao;
 
+import es.uji.ei1027.SANA.model.Reserva;
 import es.uji.ei1027.SANA.model.ReservaZona;
 import es.uji.ei1027.SANA.model.ResponsableMunicipio;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,7 +71,6 @@ public class ResponsableMunicipioDAO {
         try{
             List<Integer> zonas= jdbcTemplate.queryForList(
                     "SELECT idArea FROM Area WHERE municipio =?", Integer.class,municipio);
-            System.out.println(zonas.size());
             return zonas;
         }
         catch(EmptyResultDataAccessException e) {
@@ -81,23 +81,51 @@ public class ResponsableMunicipioDAO {
         try{
             List<Integer> zonas= jdbcTemplate.queryForList(
                     "SELECT identificador FROM Zona WHERE idArea =?", Integer.class,area);
-            System.out.println(zonas.size());
             return zonas;
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();
         }
     }
-    public List<ReservaZona> getreservas(int zona){
+    public List<Integer> getReservasDeUnaZona(int zona){
         String zona1= String.valueOf(zona);
         try{
             List<ReservaZona> reservas= jdbcTemplate.query(
                     "SELECT * FROM ReservaZonas WHERE id_zona=?", new ReservaZonaRowMapper(),zona1);
-            System.out.println(reservas.size());
-            return reservas;
+            List<Integer> res=new ArrayList<>();
+            for (ReservaZona e: reservas){
+                if (!res.contains(e.getReserva())) {
+                    res.add(e.getReserva());
+                }
+            }
+            System.out.println(res);
+            return res;
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();
+        }
+    }
+    public List<String> getZonasDeReserva(int reserva){
+        try {
+            List<ReservaZona> zonas = jdbcTemplate.query(
+                    "SELECT * FROM ReservaZonas WHERE id_reserva=?",
+                    new es.uji.ei1027.SANA.dao.ReservaZonaRowMapper(),reserva);
+            List<String> zonas2= new ArrayList<>();
+            for (ReservaZona e : zonas){
+                zonas2.add(e.getZona());
+            }
+            return zonas2;
+        }catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+    public Reserva getReserva(int identificador) {
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM Reserva WHERE identificador =?",
+                    new ReservaRowMapper(), identificador);
+        }
+        catch(EmptyResultDataAccessException e) {
+            return null;
         }
     }
 }

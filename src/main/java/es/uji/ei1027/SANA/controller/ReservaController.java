@@ -52,32 +52,25 @@ public class ReservaController {
     @RequestMapping(value="/add")
     public String addReserva(Model model) {
         model.addAttribute("reserva", new Reserva());
-        List<Zona> lista2 = zonaDAO.getZonas();
-        ArrayList<String> lista = new ArrayList<>();
-        for (Zona e : lista2)
-            lista.add(e.getIdentificador());
-        model.addAttribute("zonalista",lista);
         return "reserva/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reserva") Reserva reserva,
                                    BindingResult bindingResult,Model model) {
+        System.out.println(reserva.getNumeroPersonas());
         ReservaValidator reservaValidator =new ReservaValidator();
-        reservaValidator.validate(reserva,zonaDAO,bindingResult);
+        //reservaValidator.validate(reserva,zonaDAO,bindingResult);
+        reservaValidator.validate(reserva,bindingResult);
         if (bindingResult.hasErrors()) {
-            List<Zona> lista2 = zonaDAO.getZonas();
-            ArrayList<String> lista = new ArrayList<>();
-            for (Zona e : lista2)
-                lista.add(e.getIdentificador());
-            model.addAttribute("zonalista", lista);
             return "reserva/add";
         }
         reserva.setListreserva(reservaDAO.getZonasDeReserva(reserva.getIdentificador()));
+        System.out.println(reserva.getNumeroPersonas());
         //estamos comprobando que la reserva no se pueda hacer si no hay sitio en la zona
-        int capacidadActual = zonaDAO.getZona(reserva.getZona()).getCapacidad();
+        //int capacidadActual = zonaDAO.getZona(reserva.getZona()).getCapacidad();
         reservaDAO.addReserva(reserva);
-        zonaDAO.setZona(reserva.getZona(),capacidadActual-reserva.getNumeroPersonas());
+        //zonaDAO.setZona(reserva.getZona(),capacidadActual-reserva.getNumeroPersonas());
 
         return "redirect:../reservazona/add/" + reserva.getIdentificador();
         //return "redirect:list";
@@ -99,7 +92,35 @@ public class ReservaController {
             @ModelAttribute("reserva") Reserva reserva,
             BindingResult bindingResult, Model model) {
         ReservaValidator reservaValidator =new ReservaValidator();
-        reservaValidator.validate(reserva,zonaDAO,bindingResult);
+        //reservaValidator.validate(reserva,zonaDAO,bindingResult);
+        reservaValidator.validate(reserva,bindingResult);
+        if (bindingResult.hasErrors()) {
+            List<Zona> lista2 = zonaDAO.getZonas();
+            ArrayList<String> lista = new ArrayList<>();
+            for (Zona e : lista2)
+                lista.add(e.getIdentificador());
+            model.addAttribute("zonalista", lista);
+            return "reserva/update";
+        }
+
+        reservaDAO.updateReserva(reserva);
+        return "redirect:list";
+    }
+    @RequestMapping(value="/update2/{identificador}", method = RequestMethod.GET)
+    public String editReserva2(Model model, @PathVariable int identificador) {
+        model.addAttribute("reserva", reservaDAO.getReserva(identificador));
+        List<Zona> lista2 = zonaDAO.getZonas();
+        ArrayList<String> lista = new ArrayList<>();
+        for (Zona e : lista2)
+            lista.add(e.getIdentificador());
+        model.addAttribute("zonalista",lista);
+        return "reserva/update2";
+    }
+
+    @RequestMapping(value="/update2", method = RequestMethod.POST)
+    public String processUpdate2Submit(
+            @ModelAttribute("reserva") Reserva reserva,
+            BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             List<Zona> lista2 = zonaDAO.getZonas();
             ArrayList<String> lista = new ArrayList<>();
@@ -117,5 +138,10 @@ public class ReservaController {
     public String processDelete(@PathVariable int identificador) {
         reservaDAO.deleteReserva(identificador);
         return "redirect:../list";
+    }
+    @RequestMapping("/listadodetallado/{reserva}")
+    public String listaDeZonasDeReserva(@PathVariable int reserva,Model model){
+        model.addAttribute("reservazonas", reservaDAO.getReservaZonasDeMiReserva(reserva));
+        return "reserva/listadodetallado";
     }
 }

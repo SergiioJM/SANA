@@ -15,7 +15,7 @@ public class ReservaValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         Reserva reserva = (Reserva) o;
-        if (reserva.getNumeroPersonas() > 0){
+        if (reserva.getNumeroPersonas() <= 0){
             errors.rejectValue("numeroPersonas", "obligatorio", "La capacidad seleccionada debe ser mayor que 0 ");
         }
         if (reserva.getFecha() == null){
@@ -24,12 +24,12 @@ public class ReservaValidator implements Validator {
         }
     }
 
-    public void validate(Object obj, ZonaDAO zonaDAO , Errors errors) {
+    /*public void validate(Object obj, ZonaDAO zonaDAO , Errors errors) {
         Reserva reserva = (Reserva) obj;
         int capacidad = zonaDAO.getZona(reserva.getZona()).getCapacidad();
         if (reserva.getNumeroPersonas() >= capacidad){
             errors.rejectValue("numeroPersonas", "obligatorio", "La capacidad seleccionada es mayor que la capacidad de esta, maxima de : " + capacidad );
 
         }
-    }
+    }*/
 }

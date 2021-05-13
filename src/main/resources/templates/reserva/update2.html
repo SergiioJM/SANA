@@ -1,32 +1,32 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Crear Reserva</title>
+    <title>Modificar Reserva</title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
 </head>
 <body>
-<h2>Nueva Reserva</h2>
-<form action="#" th:action="@{/reserva/add}"
+<h2>Modifica la Reserva</h2>
+<form action="#" th:action="@{/reserva/update}"
       th:object="${reserva}" method="post">
     <table>
         <tr>
+            <td><label>Identificador</label></td>
+            <td><input type="text" th:field="*{identificador}"
+                       readonly = "readonly"/></td>
+        </tr>
+        <tr>
             <td><label>Hora</label></td>
-            <td><input type="text" th:field="*{hora}"
-            placeholder="HH:mm"/></td>
+            <td><input type="text" th:field="*{hora}" readonly = "readonly"/></td>
         </tr>
         <tr>
             <td><label>Fecha</label></td>
-            <td><input type="text" th:field="*{fecha}"
-            placeholder="D/M/YY"/></td>
-            <td th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}" class="error"></td>
+            <td><input type="text" th:field="*{fecha}" readonly = "readonly"/></td>
         </tr>
         <tr>
             <td><label>Numero de Personas</label></td>
             <td><input type="number" th:field="*{numeroPersonas}" /></td>
-            <td th:if="${#fields.hasErrors('numeroPersonas')}" th:errors="*{numeroPersonas}" class="error"></td>
-
         </tr>
         <tr>
             <td><label>Estado</label></td>
@@ -40,12 +40,12 @@
         </tr>
         <tr>
             <td><label>Ciudadano</label></td>
-            <td><input type="text" th:field="*{ciudadano}" /></td>
+            <td><input type="text" th:field="*{ciudadano}" readonly="readonly"/></td>
         </tr>
     </table>
-    <a href="add"><button type="submit" class="btn btn-success">Añade una Reserva</button></a>
+    <a href="add"><button type="submit" class="btn btn-success">Modifica una Reserva</button></a>
     <a href="/reserva/list"><button type="button" class="btn btn-secondary">Volver</button></a>
-    <a href="/"> <button type="button" class="btn btn-outline-secondary">Menu Princpial</button></a></form>
+    <a href="/"><button type="button" class="btn btn-outline-secondary">Menu Principal</button></a>
 </form>
 </body>
 </html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Reservas de una reserva</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<h1>Lista de Zonas de una reserva</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Reserva</th>
+        <th>Zona</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reservazon: ${reservazonas}">
+        <td th:text="${reservazon.reserva}"></td>
+        <td th:text="${reservazon.zona}"></td>
+        <td><a th:href="@{/reservazona/delete/{nom}/{nombre}(nom=${reservazon.reserva}, nombre=${reservazon.zona})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/reserva/list"><button type="button" class="btn btn-secondary">Volver</button></a>
+<a href="/"><button type="button" class="btn btn-outline-secondary">Menu Principal</button></a>
+</body>
+</html>

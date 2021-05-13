@@ -147,11 +147,22 @@ public class PeriodoAsignadoController {
     @RequestMapping("/reservassuarea/{area}")
     public String listaDeReservasEnPeriodosAsignados(@PathVariable int area ,Model model){
         List<Integer> zonas= periodoAsignadoDAO.getZonasArea(area);
-        List<ReservaZona> resevaEnArea = new ArrayList<>();
+        List<Integer> resevaEnArea = new ArrayList<>();
         for(Integer e : zonas){
-            resevaEnArea.addAll(periodoAsignadoDAO.getreservas(e));
+            List<Integer> a= periodoAsignadoDAO.getReservasDeUnaZona(e);
+            for (Integer ide: a){
+                if(!resevaEnArea.contains(ide)){
+                    resevaEnArea.add(ide);
+                }
+            }
         }
-        model.addAttribute("listaDeReservasEnZona", resevaEnArea);
+        List<Reserva> res= new ArrayList<>();
+        for (Integer w: resevaEnArea){
+            Reserva reserva= periodoAsignadoDAO.getReserva(w);
+            reserva.setListreserva(periodoAsignadoDAO.getZonasDeReserva(reserva.getIdentificador()));
+            res.add(reserva);
+        }
+        model.addAttribute("listaDeReservasEnZona", res);
         return "periodoAsignado/reservassuarea";
     }
 }
