@@ -135,6 +135,7 @@ CREATE TABLE Ciudadano(
 	email		VARCHAR(50),
 	residencia	VARCHAR(50),
 	fechaRegistro	Date,
+	password VARCHAR,
 
 	CONSTRAINT cp_ciudadano PRIMARY KEY(nif)
 );
