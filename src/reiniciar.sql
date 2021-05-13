@@ -131,7 +131,7 @@ CONSTRAINT ri_capacidad CHECK (capacidad>0)
 
 CREATE TABLE Ciudadano(
 	nombre 	VARCHAR(50),
-	nif 		VARCHAR(9),
+	nif 		VARCHAR(15),
 	email		VARCHAR(50),
 	residencia	VARCHAR(50),
 	fechaRegistro	Date,
