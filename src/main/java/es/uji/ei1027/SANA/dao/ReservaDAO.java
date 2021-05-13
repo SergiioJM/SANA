@@ -1,6 +1,7 @@
 package es.uji.ei1027.SANA.dao;
 
 import es.uji.ei1027.SANA.model.Reserva;
+import es.uji.ei1027.SANA.model.ReservaZona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -67,6 +68,20 @@ public class ReservaDAO {
                 e.toString();
             }
             return res;
+        }catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+    public List<String> getZonasDeReserva(int reserva){
+        try {
+            List<ReservaZona> zonas = jdbcTemplate.query(
+                    "SELECT * FROM ReservaZonas WHERE id_reserva=?",
+                    new es.uji.ei1027.SANA.dao.ReservaZonaRowMapper(),reserva);
+            List<String> zonas2= new ArrayList<>();
+            for (ReservaZona e : zonas){
+               zonas2.add(e.getZona());
+            }
+            return zonas2;
         }catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();
         }

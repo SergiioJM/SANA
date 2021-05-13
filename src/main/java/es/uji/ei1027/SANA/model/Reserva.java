@@ -4,6 +4,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 public class Reserva {
     int identificador;
@@ -14,6 +15,7 @@ public class Reserva {
     String estado;
     String zona;
     String ciudadano;
+    List<String> listreserva;
 
     public Reserva(LocalTime hora, LocalDate fecha, int numeroPersonas, String estado,String zona, String ciudadano) {
         this.hora = hora;
@@ -77,6 +79,14 @@ public class Reserva {
 
     public void setCiudadano(String ciudadano){
         this.ciudadano = ciudadano;
+    }
+
+    public List<String> getListreserva() {
+        return listreserva;
+    }
+
+    public void setListreserva(List<String> listreserva) {
+        this.listreserva = listreserva;
     }
 
 

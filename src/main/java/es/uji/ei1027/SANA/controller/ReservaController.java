@@ -71,6 +71,7 @@ public class ReservaController {
             model.addAttribute("zonalista", lista);
             return "reserva/add";
         }
+        reserva.setListreserva(reservaDAO.getZonasDeReserva(reserva.getIdentificador()));
         reservaDAO.addReserva(reserva);
         //return "redirect:list";
         return "redirect:../reservazona/add/"+ reserva.getIdentificador();
