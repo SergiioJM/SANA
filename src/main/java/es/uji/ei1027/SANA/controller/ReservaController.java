@@ -63,6 +63,8 @@ public class ReservaController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reserva") Reserva reserva,
                                    BindingResult bindingResult,Model model) {
+        ReservaValidator reservaValidator =new ReservaValidator();
+        reservaValidator.validate(reserva,zonaDAO,bindingResult);
         if (bindingResult.hasErrors()) {
             List<Zona> lista2 = zonaDAO.getZonas();
             ArrayList<String> lista = new ArrayList<>();
@@ -72,9 +74,13 @@ public class ReservaController {
             return "reserva/add";
         }
         reserva.setListreserva(reservaDAO.getZonasDeReserva(reserva.getIdentificador()));
+        //estamos comprobando que la reserva no se pueda hacer si no hay sitio en la zona
+        int capacidadActual = zonaDAO.getZona(reserva.getZona()).getCapacidad();
         reservaDAO.addReserva(reserva);
+        zonaDAO.setZona(reserva.getZona(),capacidadActual-reserva.getNumeroPersonas());
+
+        return "redirect:../reservazona/add/" + reserva.getIdentificador();
         //return "redirect:list";
-        return "redirect:../reservazona/add/"+ reserva.getIdentificador();
     }
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
@@ -92,6 +98,8 @@ public class ReservaController {
     public String processUpdateSubmit(
             @ModelAttribute("reserva") Reserva reserva,
             BindingResult bindingResult, Model model) {
+        ReservaValidator reservaValidator =new ReservaValidator();
+        reservaValidator.validate(reserva,zonaDAO,bindingResult);
         if (bindingResult.hasErrors()) {
             List<Zona> lista2 = zonaDAO.getZonas();
             ArrayList<String> lista = new ArrayList<>();

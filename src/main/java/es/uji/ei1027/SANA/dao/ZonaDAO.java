@@ -65,4 +65,10 @@ public class ZonaDAO {
         }
     }
 
+    public void setZona(String identificador , int capacidad) {
+        jdbcTemplate.update("UPDATE Zona SET capacidad =? WHERE identificador =?",
+                capacidad,identificador);
+
+    }
+
 }
