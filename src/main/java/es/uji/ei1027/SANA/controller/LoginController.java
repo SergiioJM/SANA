@@ -2,6 +2,7 @@ package es.uji.ei1027.SANA.controller;
 
 import javax.servlet.http.HttpSession;
 
+import es.uji.ei1027.SANA.dao.CiudadanoDAO;
 import es.uji.ei1027.SANA.dao.UserDao;
 import es.uji.ei1027.SANA.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,12 @@ public class LoginController {
     @Autowired
     private UserDao userDao;
 
+    private CiudadanoDAO ciudadanoDAO;
+    @Autowired
+    public void setCiudadanoDAO(CiudadanoDAO ciudadanoDAO) { this.ciudadanoDAO = ciudadanoDAO; }
+
+
+
     @RequestMapping("/login")
     public String login(Model model) {
         model.addAttribute("user", new UserDetails());
@@ -53,7 +60,7 @@ public class LoginController {
             return "login";
         }
         //System.out.println(user.getNif()+user.getPassword()); Aqui bien solo que lo muestra dos veces
-        user = userDao.loadUserByUsername(user.getNif(), user.getPassword());
+        user = userDao.loadUserByUsername(user.getNif(), user.getPassword(), ciudadanoDAO);
         if (user == null) {
             bindingResult.rejectValue("password", "badpw", "Contraseña incorrecta");
             return "redirect:/index.html";
