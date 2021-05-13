@@ -43,7 +43,7 @@ public class ReservaZonaController {
         ReservaZona reservaZona= new ReservaZona();
         reservaZona.setReserva(id);
         List<Zona> lista2 = zonaDAO.getZonas();
-        ArrayList<Integer> lista = new ArrayList<>();
+        ArrayList<String> lista = new ArrayList<>();
         for (Zona e : lista2)
             lista.add(e.getIdentificador());
         model.addAttribute("zonalista",lista);
@@ -63,7 +63,7 @@ public class ReservaZonaController {
             reservaZonaValidator.validate(reservaZona1, bindingResult);
             if (bindingResult.hasErrors()) {
                 List<Zona> lista2 = zonaDAO.getZonas();
-                ArrayList<Integer> lista = new ArrayList<>();
+                ArrayList<String> lista = new ArrayList<>();
                 for (Zona e : lista2)
                     lista.add(e.getIdentificador());
                 model.addAttribute("zonalista", lista);

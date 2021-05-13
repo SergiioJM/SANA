@@ -67,7 +67,7 @@ public class ZonaController {
     }
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
-    public String editZona(Model model, @PathVariable int identificador) {
+    public String editZona(Model model, @PathVariable String identificador) {
         model.addAttribute("zona", zonaDAO.getZona(identificador));
         List<Area> lista2 = areaDAO.getAreas();
         ArrayList<Integer> lista = new ArrayList<>();
@@ -102,7 +102,7 @@ public class ZonaController {
     }
 
     @RequestMapping(value="/delete/{cp}")
-    public String processDelete(@PathVariable int cp) {
+    public String processDelete(@PathVariable String cp) {
         zonaDAO.deleteZona(cp);
         return "redirect:../list";
     }

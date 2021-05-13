@@ -39,12 +39,12 @@ public class ZonaDAO {
                 zona.getCapacidad(),zona.getIdArea(),zona.getIdentificador());
     }
 
-    public void deleteZona(int identificador) {
+    public void deleteZona(String identificador) {
         jdbcTemplate.update("DELETE FROM Zona WHERE identificador =?",
                 identificador);
     }
 
-    public Zona getZona(int identificador) {
+    public Zona getZona(String identificador) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM Zona WHERE identificador =?",
                     new es.uji.ei1027.SANA.dao.ZonaRowMapper(), identificador);

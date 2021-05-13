@@ -53,7 +53,7 @@ public class ReservaController {
     public String addReserva(Model model) {
         model.addAttribute("reserva", new Reserva());
         List<Zona> lista2 = zonaDAO.getZonas();
-        ArrayList<Integer> lista = new ArrayList<>();
+        ArrayList<String> lista = new ArrayList<>();
         for (Zona e : lista2)
             lista.add(e.getIdentificador());
         model.addAttribute("zonalista",lista);
@@ -65,7 +65,7 @@ public class ReservaController {
                                    BindingResult bindingResult,Model model) {
         if (bindingResult.hasErrors()) {
             List<Zona> lista2 = zonaDAO.getZonas();
-            ArrayList<Integer> lista = new ArrayList<>();
+            ArrayList<String> lista = new ArrayList<>();
             for (Zona e : lista2)
                 lista.add(e.getIdentificador());
             model.addAttribute("zonalista", lista);
@@ -80,7 +80,7 @@ public class ReservaController {
     public String editReserva(Model model, @PathVariable int identificador) {
         model.addAttribute("reserva", reservaDAO.getReserva(identificador));
         List<Zona> lista2 = zonaDAO.getZonas();
-        ArrayList<Integer> lista = new ArrayList<>();
+        ArrayList<String> lista = new ArrayList<>();
         for (Zona e : lista2)
             lista.add(e.getIdentificador());
         model.addAttribute("zonalista",lista);
@@ -93,7 +93,7 @@ public class ReservaController {
             BindingResult bindingResult, Model model) {
         if (bindingResult.hasErrors()) {
             List<Zona> lista2 = zonaDAO.getZonas();
-            ArrayList<Integer> lista = new ArrayList<>();
+            ArrayList<String> lista = new ArrayList<>();
             for (Zona e : lista2)
                 lista.add(e.getIdentificador());
             model.addAttribute("zonalista", lista);
