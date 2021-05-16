@@ -18,9 +18,9 @@ public class ReservaValidator implements Validator {
         if (reserva.getNumeroPersonas() <= 0){
             errors.rejectValue("numeroPersonas", "obligatorio", "La capacidad seleccionada debe ser mayor que 0 ");
         }
-        if (reserva.getFecha() == null){
-            errors.rejectValue("fecha", "obligatorio", "Debe poner una fecha");
 
+        if (reserva.getFecha() == null){
+            errors.rejectValue("fecha", "obligatorio", "Debe poner una fecha ");
         }
     }
 

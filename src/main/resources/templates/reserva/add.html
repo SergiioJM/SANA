@@ -13,8 +13,8 @@
     <table>
         <tr>
             <td><label>Fecha</label></td>
-            <td><input type="text" th:field="*{fecha}"
-                       placeholder="D/M/YY"/></td>
+            <td><input type="date" th:field="*{fecha}"
+                       placeholder="D/M/YY"/> </td>
             <td th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}" class="error"></td>
         </tr>
         <tr>

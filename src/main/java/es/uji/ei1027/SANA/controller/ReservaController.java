@@ -68,7 +68,7 @@ public class ReservaController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reserva") Reserva reserva,
                                    BindingResult bindingResult,Model model) {
-        System.out.println(reserva.getNumeroPersonas());
+
         ReservaValidator reservaValidator =new ReservaValidator();
         //reservaValidator.validate(reserva,zonaDAO,bindingResult);
         reservaValidator.validate(reserva,bindingResult);
@@ -76,7 +76,6 @@ public class ReservaController {
             return "reserva/add";
         }
         reserva.setListreserva(reservaDAO.getZonasDeReserva(reserva.getIdentificador()));
-        System.out.println(reserva.getNumeroPersonas());
         //estamos comprobando que la reserva no se pueda hacer si no hay sitio en la zona
         //int capacidadActual = zonaDAO.getZona(reserva.getZona()).getCapacidad();
         reservaDAO.addReserva(reserva);

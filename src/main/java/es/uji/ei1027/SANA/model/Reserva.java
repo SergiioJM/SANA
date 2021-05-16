@@ -10,6 +10,7 @@ public class Reserva {
     int identificador;
     @DateTimeFormat(pattern = "HH:mm")
     LocalTime hora;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate fecha;
     int numeroPersonas;
     String estado;
@@ -47,9 +48,7 @@ public class Reserva {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
-        this.fecha = fecha;
-    }
+    public void setFecha(LocalDate fecha) { this.fecha = fecha;    }
 
     public int getNumeroPersonas() {
         return numeroPersonas;
