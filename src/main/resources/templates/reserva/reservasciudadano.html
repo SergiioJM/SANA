@@ -8,6 +8,8 @@
 </head>
 <body>
 <h1>Lista de Reservas</h1>
+
+
 <table class="table table-striped">
     <thead>
     <tr>
@@ -39,7 +41,7 @@
     </tr>
     </tbody>
 </table>
-<a href="reserva/add"><button class=" btn btn-primary butto btn-lg">Realizar una reserva</button></a>
+<a th:href="@{../../reserva/add/{nif}(nif=${nif})}"><button class=" btn btn-primary butto btn-lg">Realizar una reserva</button></a>
 <br>
 <br>
 

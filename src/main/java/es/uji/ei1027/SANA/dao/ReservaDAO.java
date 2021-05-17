@@ -27,7 +27,7 @@ public class ReservaDAO {
     public void addReserva(Reserva reserva) {
         int ide=obtenerR();
         jdbcTemplate.update("INSERT INTO Reserva VALUES(?,?,?,?,?,?)",
-                ide,reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),userDetails.getNif());
+                ide,reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getCiudadano());
                 reserva.setIdentificador(ide);
     }
 

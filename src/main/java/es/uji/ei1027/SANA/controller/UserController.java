@@ -22,10 +22,11 @@ public class UserController {
     @RequestMapping("/ciudadano")
     public String listSocis(HttpSession session, Model model) {
         if (session.getAttribute("user") == null) {
-            model.addAttribute("user", new UserDetails());
+            UserDetails a= new UserDetails();
+            model.addAttribute("user", a);
             return "login";
         }
-        model.addAttribute("user", new UserDetails());
+        model.addAttribute("user", session.getAttribute("user"));
         return "user/ciudadano";
     }
 }

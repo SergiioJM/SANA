@@ -53,8 +53,9 @@ public class ReservaController {
         return "reserva/list";
     }
 
-    @RequestMapping(value = "/reserva/{ciudadano}", method = RequestMethod.GET)
+    @RequestMapping(value = "/reservasciudadano/{ciudadano}", method = RequestMethod.GET)
     public String listaDeReservasIndividual(Model model, @PathVariable String ciudadano){
+        model.addAttribute("nif",ciudadano);
         model.addAttribute("reservas", reservaDAO.getReservasporCiudadano(ciudadano));
         return "reserva/reservasciudadano";
     }
@@ -62,6 +63,14 @@ public class ReservaController {
     @RequestMapping(value="/add")
     public String addReserva(Model model) {
         model.addAttribute("reserva", new Reserva());
+        return "reserva/add";
+    }
+
+    @RequestMapping(value="/add/{nif}")
+    public String addReservaNif(Model model, @PathVariable String nif) {
+        Reserva r = new Reserva();
+        r.setCiudadano(nif);
+        model.addAttribute("reserva", r);
         return "reserva/add";
     }
 
@@ -78,12 +87,17 @@ public class ReservaController {
         reserva.setListreserva(reservaDAO.getZonasDeReserva(reserva.getIdentificador()));
         //estamos comprobando que la reserva no se pueda hacer si no hay sitio en la zona
         //int capacidadActual = zonaDAO.getZona(reserva.getZona()).getCapacidad();
+
         reservaDAO.addReserva(reserva);
         //zonaDAO.setZona(reserva.getZona(),capacidadActual-reserva.getNumeroPersonas());
 
         return "redirect:../reservazona/add/" + reserva.getIdentificador();
         //return "redirect:list";
     }
+
+
+
+
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
     public String editReserva(Model model, @PathVariable int identificador) {
