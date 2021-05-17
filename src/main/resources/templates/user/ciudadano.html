@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org">
+
 <head>
     <title>SANA - Usuario</title>
+    <link rel="icon" type="image/png" href="/images/LogoSana.png" />
     <meta charset="UTF-8"/>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
     <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
@@ -21,6 +24,13 @@
 <a href="/area/list"><button class="btn btn-primary butto btn-lg">Consultar Areas</button></a>
 <br>
 <br>
-
+<tr th:each="ciudadano: ${ciudadanos}">
+    <td th:text="${ciudadano.nombre}"></td>
+    <td th:text="${ciudadano.nif}"></td>
+    <td th:text="${ciudadano.email}"></td>
+    <td th:text="${ciudadano.residencia}"></td>
+    <td th:text="${ciudadano.fechaRegistro}"></td>
+    <a th:href="@{/ciudadano/update/{nif}(nif=${ciudadano.nif})}"><button type="button" class="btn btn-warning">Edita</button></a>
+</tr>
 </body>
 </html>

@@ -3,12 +3,7 @@ package es.uji.ei1027.SANA.dao;
 import es.uji.ei1027.SANA.model.Ciudadano;
 import es.uji.ei1027.SANA.model.UserDetails;
 import org.jasypt.util.password.BasicPasswordEncryptor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
-
-import javax.sql.DataSource;
 import java.util.*;
 
 @Repository

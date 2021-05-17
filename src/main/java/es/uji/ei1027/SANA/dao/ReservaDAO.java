@@ -1,5 +1,6 @@
 package es.uji.ei1027.SANA.dao;
 
+import es.uji.ei1027.SANA.model.Ciudadano;
 import es.uji.ei1027.SANA.model.Reserva;
 import es.uji.ei1027.SANA.model.ReservaZona;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -97,14 +98,20 @@ public class ReservaDAO {
         }
     }
 
-    public List<Reserva> getReservasPorNif(String ciudadano) {
-        try {
-            List<Reserva> reservas = jdbcTemplate.query(
-                    "SELECT * FROM Reserva WHERE Ciudadano=?",
-                    new es.uji.ei1027.SANA.dao.ReservaRowMapper(), ciudadano);
-            return reservas;
+    public List<String> getReservasporCiudadano(String ciudadano){
+        try{
+            List<Ciudadano> ciudadanos= jdbcTemplate.query(
+                    "SELECT * FROM Ciudadanos WHERE id_zona=?", new CiudadanoRowMapper(),ciudadano);
+            List<String > listaCiudadanos=new ArrayList<>();
+            for (Ciudadano e: ciudadanos){
+                if (!listaCiudadanos.contains(e.getNif())) {
+                    listaCiudadanos.add(e.getNif());
+                }
+            }
+            System.out.println(listaCiudadanos);
+            return listaCiudadanos;
         }
-        catch (EmptyResultDataAccessException e){
+        catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();
         }
     }

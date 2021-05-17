@@ -55,7 +55,7 @@ public class ReservaController {
 
     @RequestMapping(value = "/reservas{ciudadano}", method = RequestMethod.GET)
     public String listaDeReservasIndividual(Model model, @PathVariable String ciudadano){
-        model.addAttribute("reservas", reservaDAO.getReservasPorNif(ciudadano));
+        model.addAttribute("reservas", reservaDAO.getReservasporCiudadano(ciudadano));
         return "../reservas";
     }
 
