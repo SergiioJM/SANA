@@ -17,12 +17,13 @@
                        readonly = "readonly"/></td>
         </tr>
         <tr>
-            <td><label>Hora</label></td>
-            <td><input type="text" th:field="*{hora}" /></td>
-        </tr>
-        <tr>
             <td><label>Fecha</label></td>
             <td><input type="date" th:field="*{fecha}" /></td>
+            <td th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}" class="error"></td>
+        </tr>
+        <tr>
+            <td><label>Hora</label></td>
+            <td><input type="text" th:field="*{hora}" /></td>
         </tr>
         <tr>
             <td><label>Numero de Personas</label></td>
@@ -41,7 +42,8 @@
         </tr>
         <tr>
             <td><label>Ciudadano</label></td>
-            <td><input type="text" th:field="*{ciudadano}" /></td>
+            <td><input type="text" th:field="*{ciudadano}"
+            readonly="readonly"/></td>
         </tr>
     </table>
     <a href="add"><button type="submit" class="btn btn-success">Modifica una Reserva</button></a>

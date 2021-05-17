@@ -38,6 +38,12 @@ public class AreaController {
         return "area/list";
     }
 
+    @RequestMapping("/areasVisiblesCiudadanos")
+    public String listaDeAreasCiudadano(Model model){
+        model.addAttribute("areas", areaDao.getAreas());
+        return "area/areasVisiblesCiudadano";
+    }
+
     @RequestMapping(value="/add")
     public String addArea(Model model) {
         model.addAttribute("area", new Area());

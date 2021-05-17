@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>SANA - Areas</title>
+  <link rel="icon" type="image/png" href="/images/LogoSana.png" />
+  <meta charset="UTF-8" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<h1>Lista de Areas</h1>
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>idArea</th>
+    <th>Nombre</th>
+    <th>Descripcion</th>
+    <th>Caracteristicas</th>
+    <th>Localizacion</th>
+    <th>Tipo de Acceso</th>
+    <th>Municipio</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="area: ${areas}">
+    <td th:text="${area.idArea}"></td>
+    <td th:text="${area.nombre}"></td>
+    <td th:text="${area.descripcion}"></td>
+    <td th:text="${area.getCaracteristicas()}"></td>
+    <td th:text="${area.localizacion}"></td>
+    <td th:text="${area.tipoAcceso}"></td>
+    <td th:text="${area.municipio}"></td>
+  </tr>
+  </tbody>
+</table>
+<a href="/user/ciudadano"><button type="button" class="btn btn-secondary">Volver</button></a>
+
+</body>
+</html>
