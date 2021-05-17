@@ -15,7 +15,7 @@
 <h6>
 <div class="user" th:replace="fragments/logininfo" >...</div>
 </h6>
-
+<div th:object="${session}">
 <h2>¿Qué desea hacer?</h2>
 <br>
 <a href="/reserva/*{user.nif}"><button class="btn btn-primary butto btn-lg">Reservas</button></a>
@@ -24,6 +24,6 @@
 <a href="/area/list"><button class="btn btn-primary butto btn-lg">Consultar Areas</button></a>
 <br>
 <br>
-
+</div>
 </body>
 </html>
