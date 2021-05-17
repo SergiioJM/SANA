@@ -18,19 +18,12 @@
 
 <h2>¿Qué desea hacer?</h2>
 <br>
-<a href="../reservas.html"><button class="btn btn-primary butto btn-lg">Reservas</button></a>
+<a href="/reserva/*{user.nif}"><button class="btn btn-primary butto btn-lg">Reservas</button></a>
 <br>
 <br>
 <a href="/area/list"><button class="btn btn-primary butto btn-lg">Consultar Areas</button></a>
 <br>
 <br>
-<tr th:each="ciudadano: ${ciudadanos}">
-    <td th:text="${ciudadano.nombre}"></td>
-    <td th:text="${ciudadano.nif}"></td>
-    <td th:text="${ciudadano.email}"></td>
-    <td th:text="${ciudadano.residencia}"></td>
-    <td th:text="${ciudadano.fechaRegistro}"></td>
-    <a th:href="@{/ciudadano/update/{nif}(nif=${ciudadano.nif})}"><button type="button" class="btn btn-warning">Edita</button></a>
-</tr>
+
 </body>
 </html>

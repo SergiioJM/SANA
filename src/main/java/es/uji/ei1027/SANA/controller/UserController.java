@@ -25,6 +25,7 @@ public class UserController {
             model.addAttribute("user", new UserDetails());
             return "login";
         }
+        model.addAttribute("user", new UserDetails());
         return "user/ciudadano";
     }
 }

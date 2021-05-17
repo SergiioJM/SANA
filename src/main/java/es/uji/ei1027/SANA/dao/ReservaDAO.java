@@ -3,6 +3,7 @@ package es.uji.ei1027.SANA.dao;
 import es.uji.ei1027.SANA.model.Ciudadano;
 import es.uji.ei1027.SANA.model.Reserva;
 import es.uji.ei1027.SANA.model.ReservaZona;
+import es.uji.ei1027.SANA.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -15,6 +16,7 @@ import java.util.List;
 public class ReservaDAO {
 
     private JdbcTemplate jdbcTemplate;
+    private UserDetails userDetails;
 
     @Autowired
     public void setDataSource(DataSource dataSource) {
@@ -25,7 +27,7 @@ public class ReservaDAO {
     public void addReserva(Reserva reserva) {
         int ide=obtenerR();
         jdbcTemplate.update("INSERT INTO Reserva VALUES(?,?,?,?,?,?)",
-                ide,reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),reserva.getCiudadano());
+                ide,reserva.getHora(),reserva.getFecha(),reserva.getNumeroPersonas(),reserva.getEstado(),userDetails.getNif());
                 reserva.setIdentificador(ide);
     }
 
@@ -98,18 +100,14 @@ public class ReservaDAO {
         }
     }
 
-    public List<String> getReservasporCiudadano(String ciudadano){
+    public List<Reserva> getReservasporCiudadano(String nif){
         try{
-            List<Ciudadano> ciudadanos= jdbcTemplate.query(
-                    "SELECT * FROM Ciudadanos WHERE id_zona=?", new CiudadanoRowMapper(),ciudadano);
-            List<String > listaCiudadanos=new ArrayList<>();
-            for (Ciudadano e: ciudadanos){
-                if (!listaCiudadanos.contains(e.getNif())) {
-                    listaCiudadanos.add(e.getNif());
-                }
+            List<Reserva> ciudadanos= jdbcTemplate.query(
+                    "SELECT * FROM Reserva WHERE ciudadano=?", new ReservaRowMapper(),nif);
+            for (Reserva e : ciudadanos){
+                e.setListreserva(getZonasDeReserva(e.getIdentificador()));
             }
-            System.out.println(listaCiudadanos);
-            return listaCiudadanos;
+            return ciudadanos;
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();
