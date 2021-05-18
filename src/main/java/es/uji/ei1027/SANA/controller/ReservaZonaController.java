@@ -3,6 +3,7 @@ package es.uji.ei1027.SANA.controller;
 import es.uji.ei1027.SANA.dao.ReservaZonaDAO;
 import es.uji.ei1027.SANA.dao.ZonaDAO;
 import es.uji.ei1027.SANA.model.ReservaZona;
+import es.uji.ei1027.SANA.model.UserDetails;
 import es.uji.ei1027.SANA.model.Zona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -48,7 +50,6 @@ public class ReservaZonaController {
             lista.add(e.getIdentificador());
         model.addAttribute("zonalista",lista);
          */
-        model.addAttribute("nif",nif);
         model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(area));
         model.addAttribute("reservazona", reservaZona);
         return "reservazona/add";
@@ -56,9 +57,8 @@ public class ReservaZonaController {
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reservazona") ReservaZona reservaZona,
-                                   @ModelAttribute("zonalista") ArrayList<String> zonalista,
-                                   @ModelAttribute("nif") String nif,
-                                   BindingResult bindingResult, Model model) {
+                                   BindingResult bindingResult, Model model, HttpSession session) {
+        System.out.println(reservaZona);
         for (String zona: reservaZona.getZona().split(",")) {
             ReservaZona reservaZona1= new ReservaZona();
             reservaZona1.setZona(zona);
@@ -66,12 +66,14 @@ public class ReservaZonaController {
             ReservaZonaValidator reservaZonaValidator = new ReservaZonaValidator();
             reservaZonaValidator.validate(reservaZona1, bindingResult);
             if (bindingResult.hasErrors()) {
+                /*
                 List<Zona> lista2 = zonaDAO.getZonas();
                 ArrayList<String> lista = new ArrayList<>();
                 for (Zona e : lista2)
                     lista.add(e.getIdentificador());
                 //model.addAttribute("zonalista", lista);
-                model.addAttribute("zonalista",zonalista);
+                //model.addAttribute("zonalista",zonalista);
+                 */
                 return "reservazona/add";
 
             }
@@ -81,8 +83,8 @@ public class ReservaZonaController {
                 throw new ClaveDuplicadaException("Ya existe la reserva: " + reservaZona.getReserva(), "CPduplicada");
             }
         }
-
-        return "redirect:../reserva/reservasciudadano/" + nif;
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        return "redirect:../reserva/reservasciudadano/" + user.getNif();
     }
 
     @RequestMapping(value="/delete/{reserva}/{zona}")

@@ -5,6 +5,7 @@ import es.uji.ei1027.SANA.dao.ReservaDAO;
 import es.uji.ei1027.SANA.dao.ReservaZonaDAO;
 import es.uji.ei1027.SANA.dao.ZonaDAO;
 import es.uji.ei1027.SANA.model.Reserva;
+import es.uji.ei1027.SANA.model.UserDetails;
 import es.uji.ei1027.SANA.model.Zona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -163,8 +165,10 @@ public class ReservaController {
         return "redirect:../list";
     }
     @RequestMapping("/listadodetallado/{reserva}")
-    public String listaDeZonasDeReserva(@PathVariable int reserva,Model model){
+    public String listaDeZonasDeReserva(@PathVariable int reserva, Model model, HttpSession session){
         model.addAttribute("reservazonas", reservaDAO.getReservaZonasDeMiReserva(reserva));
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        model.addAttribute("nif",user.getNif());
         return "reserva/listadodetallado";
     }
 }

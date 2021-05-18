@@ -41,7 +41,7 @@
         <tr>
             <td><label class="negrita">Area</label></td>
             <td>
-                <select class="form_control" type="text" th:field="*{area}" multiple>
+                <select class="form_control" type="text" th:field="*{area}">
                     <option th:each="nombrearea: ${listaarea}" th:value="${nombrearea}" th:text="${nombrearea}"></option>
                 </select>
             </td>

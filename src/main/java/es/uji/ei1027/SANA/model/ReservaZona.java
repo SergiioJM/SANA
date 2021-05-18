@@ -4,6 +4,7 @@ public class ReservaZona {
     int reserva;
     String zona;
 
+
     public ReservaZona(){}
 
     public int getReserva() {
