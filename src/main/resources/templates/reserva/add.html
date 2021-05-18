@@ -39,6 +39,14 @@
             </td>
         </tr>
         <tr>
+            <td><label class="negrita">Area</label></td>
+            <td>
+                <select class="form_control" type="text" th:field="*{area}" multiple>
+                    <option th:each="nombrearea: ${listaarea}" th:value="${nombrearea}" th:text="${nombrearea}"></option>
+                </select>
+            </td>
+        </tr>
+        <tr>
             <td><label class="negrita">Ciudadano</label></td>
             <td><input type="text" th:field="*{ciudadano}"
                        readonly="readonly"/></td>

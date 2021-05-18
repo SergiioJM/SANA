@@ -38,23 +38,25 @@ public class ReservaZonaController {
         return "reservazona/list";
     }
 
-    @RequestMapping(value="/add/{id}")
-    public String addArea(Model model, @PathVariable int id) {
+    @RequestMapping(value="/add/{id}/{area}")
+    public String addArea(Model model, @PathVariable int id,@PathVariable String area) {
         ReservaZona reservaZona= new ReservaZona();
         reservaZona.setReserva(id);
-        List<Zona> lista2 = zonaDAO.getZonas();
+        /*List<Zona> lista2 = zonaDAO.getZonas();
         ArrayList<String> lista = new ArrayList<>();
         for (Zona e : lista2)
             lista.add(e.getIdentificador());
         model.addAttribute("zonalista",lista);
+         */
+        model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(area));
         model.addAttribute("reservazona", reservaZona);
         return "reservazona/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reservazona") ReservaZona reservaZona,
+                                   @ModelAttribute("zonalista") ArrayList<String> zonalista,
                                    BindingResult bindingResult, Model model) {
-
         for (String zona: reservaZona.getZona().split(",")) {
             ReservaZona reservaZona1= new ReservaZona();
             reservaZona1.setZona(zona);
@@ -66,7 +68,8 @@ public class ReservaZonaController {
                 ArrayList<String> lista = new ArrayList<>();
                 for (Zona e : lista2)
                     lista.add(e.getIdentificador());
-                model.addAttribute("zonalista", lista);
+                //model.addAttribute("zonalista", lista);
+                model.addAttribute("zonalista",zonalista);
                 return "reservazona/add";
 
             }

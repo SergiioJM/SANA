@@ -50,4 +50,14 @@ public class ReservaZonaDAO {
             return new ArrayList<>();
         }
     }
+    public List<String> getZonasArea(String nomarea){
+        try{
+            List<String> zonas= jdbcTemplate.queryForList(
+                    "SELECT identificador FROM Zona WHERE idArea IN (SELECT id_area FROM AREA WHERE nombre=?)", String.class, nomarea);
+            return zonas;
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
 }

@@ -16,8 +16,10 @@ public class Reserva {
     String estado;
     String ciudadano;
     List<String> listreserva;
+    int area;
 
-    public Reserva(LocalTime hora, LocalDate fecha, int numeroPersonas, String estado,String zona, String ciudadano) {
+
+    public Reserva(LocalTime hora, LocalDate fecha, int numeroPersonas, String estado, String zona, String ciudadano) {
         this.hora = hora;
         this.fecha = fecha;
         this.numeroPersonas = numeroPersonas;
@@ -80,6 +82,13 @@ public class Reserva {
 
     public void setListreserva(List<String> listreserva) {
         this.listreserva = listreserva;
+    }
+    public int getArea() {
+        return area;
+    }
+
+    public void setArea(int area) {
+        this.area = area;
     }
 
 
