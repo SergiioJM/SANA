@@ -38,8 +38,8 @@ public class ReservaZonaController {
         return "reservazona/list";
     }
 
-    @RequestMapping(value="/add/{id}/{area}")
-    public String addArea(Model model, @PathVariable int id,@PathVariable String area) {
+    @RequestMapping(value="/add/{id}/{area}/{nif}")
+    public String addArea(Model model, @PathVariable int id,@PathVariable String area,@PathVariable String nif) {
         ReservaZona reservaZona= new ReservaZona();
         reservaZona.setReserva(id);
         /*List<Zona> lista2 = zonaDAO.getZonas();
@@ -48,6 +48,7 @@ public class ReservaZonaController {
             lista.add(e.getIdentificador());
         model.addAttribute("zonalista",lista);
          */
+        model.addAttribute("nif",nif);
         model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(area));
         model.addAttribute("reservazona", reservaZona);
         return "reservazona/add";
@@ -56,6 +57,7 @@ public class ReservaZonaController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reservazona") ReservaZona reservaZona,
                                    @ModelAttribute("zonalista") ArrayList<String> zonalista,
+                                   @ModelAttribute("nif") String nif,
                                    BindingResult bindingResult, Model model) {
         for (String zona: reservaZona.getZona().split(",")) {
             ReservaZona reservaZona1= new ReservaZona();
@@ -80,7 +82,7 @@ public class ReservaZonaController {
             }
         }
 
-        return "redirect:list";
+        return "reserva/reservasciudadano/" + nif;
     }
 
     @RequestMapping(value="/delete/{reserva}/{zona}")

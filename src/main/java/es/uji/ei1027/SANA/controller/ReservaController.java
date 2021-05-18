@@ -71,6 +71,7 @@ public class ReservaController {
     public String addReservaNif(Model model, @PathVariable String nif) {
         Reserva r = new Reserva();
         r.setCiudadano(nif);
+        model.addAttribute("nif",nif);
         model.addAttribute("reserva", r);
         model.addAttribute("listaarea",reservaDAO.getAreas());
         return "reserva/add";
@@ -94,13 +95,9 @@ public class ReservaController {
         reservaDAO.addReserva(reserva);
         //zonaDAO.setZona(reserva.getZona(),capacidadActual-reserva.getNumeroPersonas());
 
-        return "redirect:../reservazona/add/" + reserva.getIdentificador() + "/"+ reserva.getArea();
+        return "redirect:../reservazona/add/" + reserva.getIdentificador() + "/"+ reserva.getArea() +"/" + reserva.getCiudadano();
         //return "redirect:list";
     }
-
-
-
-
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
     public String editReserva(Model model, @PathVariable int identificador) {

@@ -53,7 +53,7 @@ public class ReservaZonaDAO {
     public List<String> getZonasArea(String nomarea){
         try{
             List<String> zonas= jdbcTemplate.queryForList(
-                    "SELECT identificador FROM Zona WHERE idArea IN (SELECT id_area FROM AREA WHERE nombre=?)", String.class, nomarea);
+                    "SELECT identificador FROM Zona WHERE idArea IN (SELECT idarea FROM AREA WHERE nombre=?)", String.class, nomarea);
             return zonas;
         }
         catch(EmptyResultDataAccessException e) {
