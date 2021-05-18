@@ -24,13 +24,12 @@ public class ReservaValidator implements Validator {
         if (reserva.getFecha() == null){
             errors.rejectValue("fecha", "obligatorio", "Debe poner una fecha ");
         }
-/*
-        if(reserva.getFecha().isBefore(LocalDate.now())){
-            errors.rejectValue("fecha","obligatorio", "La fecha no puede ser anterior a hoy ");
-
+        else{
+            if(reserva.getFecha().isBefore(LocalDate.now())) {
+                errors.rejectValue("fecha", "obligatorio", "Debes introducir una fecha valida ");
+            }
         }
 
- */
     }
 
     /*public void validate(Object obj, ZonaDAO zonaDAO , Errors errors) {
