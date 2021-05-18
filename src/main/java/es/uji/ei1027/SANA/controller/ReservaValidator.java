@@ -29,15 +29,5 @@ public class ReservaValidator implements Validator {
                 errors.rejectValue("fecha", "obligatorio", "Debes introducir una fecha valida ");
             }
         }
-
     }
-
-    /*public void validate(Object obj, ZonaDAO zonaDAO , Errors errors) {
-        Reserva reserva = (Reserva) obj;
-        int capacidad = zonaDAO.getZona(reserva.getZona()).getCapacidad();
-        if (reserva.getNumeroPersonas() >= capacidad){
-            errors.rejectValue("numeroPersonas", "obligatorio", "La capacidad seleccionada es mayor que la capacidad de esta, maxima de : " + capacidad );
-
-        }
-    }*/
 }
