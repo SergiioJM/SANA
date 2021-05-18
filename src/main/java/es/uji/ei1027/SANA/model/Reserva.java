@@ -16,7 +16,7 @@ public class Reserva {
     String estado;
     String ciudadano;
     List<String> listreserva;
-    int area;
+    String area;
 
 
     public Reserva(LocalTime hora, LocalDate fecha, int numeroPersonas, String estado, String zona, String ciudadano) {
@@ -83,11 +83,12 @@ public class Reserva {
     public void setListreserva(List<String> listreserva) {
         this.listreserva = listreserva;
     }
-    public int getArea() {
+
+    public String getArea() {
         return area;
     }
 
-    public void setArea(int area) {
+    public void setArea(String area) {
         this.area = area;
     }
 
