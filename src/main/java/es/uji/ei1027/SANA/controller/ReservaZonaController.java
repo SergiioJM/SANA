@@ -82,7 +82,7 @@ public class ReservaZonaController {
             }
         }
 
-        return "reserva/reservasciudadano/" + nif;
+        return "redirect:../reserva/reservasciudadano/" + nif;
     }
 
     @RequestMapping(value="/delete/{reserva}/{zona}")
