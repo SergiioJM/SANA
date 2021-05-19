@@ -102,8 +102,10 @@ public class ReservaController {
     }
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
-    public String editReserva(Model model, @PathVariable int identificador) {
+    public String editReserva(Model model, @PathVariable int identificador, HttpSession session) {
         model.addAttribute("reserva", reservaDAO.getReserva(identificador));
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        model.addAttribute("nif", user.getNif());
         List<Zona> lista2 = zonaDAO.getZonas();
         ArrayList<String> lista = new ArrayList<>();
         for (Zona e : lista2)

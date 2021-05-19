@@ -51,7 +51,7 @@
         </tr>
     </table>
     <a href="add"><button type="submit" class="btn btn-success">Modifica una Reserva</button></a>
-    <a href="/reserva/list"><button type="button" class="btn btn-secondary">Volver</button></a>
+    <a th:href="@{/reserva/reservasciudadano/{nif}(nif=${nif})}"><button type="button" class="btn btn-secondary">Volver</button></a>
 </form>
 </body>
 </html>
