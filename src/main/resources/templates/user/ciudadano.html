@@ -12,15 +12,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
 </head>
 <body class="center">
-<h6>
 <div class="user" th:replace="fragments/logininfo" >...</div>
-</h6>
 
 <h2>¿Qué desea hacer?</h2>
 <br>
-
-    <a th:href="@{/reserva/reservasciudadano/{nif}(nif=${user.nif})}"><button class="btn btn-primary butto btn-lg">Reservas</button></a>
-
+<a th:href="@{/reserva/reservasciudadano/{nif}(nif=${user.nif})}"><button class="btn btn-primary butto btn-lg">Reservas</button></a>
 <br>
 <br>
 <a href="/area/areasVisiblesCiudadanos"><button class="btn btn-primary butto btn-lg">Consultar Areas</button></a>

@@ -2,16 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Gestionar Reservas</title>
-    <link rel="icon" type="image/png" href="/images/LogoSana.png" />
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="icon" type="image/png" href="/images/LogoSana.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+
 </head>
-<body>
-<h1>Lista de Reservas</h1>
-
-
-<table class="table table-striped">
-    <thead>
+<body class="center">
+<div th:replace="fragments/nav"></div>
+<h1 class="negrita">Reservas</h1>
+<table class="table">
+    <thead class="thead-dark">
     <tr>
         <th>Identificador</th>
         <th>Hora</th>
@@ -36,13 +39,13 @@
         </td>
         <td><a th:href="@{/reserva/delete/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
         </td>
-        <td><a th:href="@{/reserva/listadodetallado/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-warning">Ver detalles de las zonas</button></a>
+        <td><a th:href="@{/reserva/listadodetallado/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-info">Ver detalles de las zonas</button></a>
         </td>
     </tr>
     </tbody>
 </table>
-<a th:href="@{../../reserva/add/{nif}(nif=${nif})}"><button class=" btn btn-primary butto btn-lg">Realizar una reserva</button></a>
-<a href="/user/ciudadano"><button type="button" class="btn btn-secondary">Volver</button></a>
+<a th:href="@{../../reserva/add/{nif}(nif=${nif})}"><button class=" btn btn-success butto btn-lg">Realizar una reserva</button></a>
+<a href="/user/ciudadano"><button type="button" class="btn btn-secondary butto btn-lg">Volver</button></a>
 <br>
 <br>
 </body>

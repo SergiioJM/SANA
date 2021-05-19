@@ -2,14 +2,19 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <title>SANA - Areas</title>
-  <link rel="icon" type="image/png" href="/images/LogoSana.png" />
   <meta charset="UTF-8" />
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+  <link rel="icon" type="image/png" href="/images/LogoSana.png" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+
 </head>
-<body>
-<h1>Lista de Areas</h1>
-<table class="table table-striped">
-  <thead>
+<body class="center">
+<div th:replace="fragments/nav"></div>
+<h1 class="negrita">Lista de Areas</h1>
+<table class="table">
+  <thead class="thead-dark">
   <tr>
     <th>idArea</th>
     <th>Nombre</th>
@@ -34,7 +39,7 @@
   </tr>
   </tbody>
 </table>
-<a href="/user/ciudadano"><button type="button" class="btn btn-secondary">Volver</button></a>
+<a href="/user/ciudadano"><button type="button" class="btn btn-secondary butto btn-lg">Volver</button></a>
 
 </body>
 </html>
