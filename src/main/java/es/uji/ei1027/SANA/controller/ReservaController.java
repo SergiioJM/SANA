@@ -113,9 +113,8 @@ public class ReservaController {
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
-    public String processUpdateSubmit(
-            @ModelAttribute("reserva") Reserva reserva,
-            BindingResult bindingResult, Model model) {
+    public String processUpdateSubmit( @ModelAttribute("reserva") Reserva reserva, BindingResult bindingResult, Model model,HttpSession session) {
+        UserDetails user= (UserDetails) session.getAttribute("user");
         ReservaValidator reservaValidator =new ReservaValidator();
         //reservaValidator.validate(reserva,zonaDAO,bindingResult);
         reservaValidator.validate(reserva,bindingResult);
@@ -129,7 +128,8 @@ public class ReservaController {
         }
 
         reservaDAO.updateReserva(reserva);
-        return "redirect:list";
+        //return "redirect:lis";
+        return "redirect:../reserva/reservasciudadano/" + user.getNif();
     }
     @RequestMapping(value="/update2/{identificador}", method = RequestMethod.GET)
     public String editReserva2(Model model, @PathVariable int identificador) {
@@ -143,9 +143,8 @@ public class ReservaController {
     }
 
     @RequestMapping(value="/update2", method = RequestMethod.POST)
-    public String processUpdate2Submit(
-            @ModelAttribute("reserva") Reserva reserva,
-            BindingResult bindingResult, Model model) {
+    public String processUpdate2Submit( @ModelAttribute("reserva") Reserva reserva, BindingResult bindingResult, Model model,HttpSession session) {
+        UserDetails user= (UserDetails) session.getAttribute("user");
         if (bindingResult.hasErrors()) {
             List<Zona> lista2 = zonaDAO.getZonas();
             ArrayList<String> lista = new ArrayList<>();
@@ -156,13 +155,15 @@ public class ReservaController {
         }
 
         reservaDAO.updateReserva(reserva);
-        return "redirect:list";
+        //return "redirect:list";
+        return "redirect:../reserva/reservasciudadano/" + user.getNif();
     }
 
     @RequestMapping(value="/delete/{identificador}")
-    public String processDelete(@PathVariable int identificador) {
+    public String processDelete(@PathVariable int identificador,HttpSession session) {
+        UserDetails user= (UserDetails) session.getAttribute("user");
         reservaDAO.deleteReserva(identificador);
-        return "redirect:../list";
+        return "redirect:../reserva/reservasciudadano/" + user.getNif();
     }
     @RequestMapping("/listadodetallado/{reserva}")
     public String listaDeZonasDeReserva(@PathVariable int reserva, Model model, HttpSession session){
