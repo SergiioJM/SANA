@@ -97,6 +97,6 @@ public class ReservaZonaController {
         modificarzona.setOcupada(false);
         zonaDAO.updateZona(modificarzona);
        reservaZonaDAO.deleteReservaZona(reserva,zona);
-        return "redirect:../../list";
+       return "redirect:../../list";
     }
 }

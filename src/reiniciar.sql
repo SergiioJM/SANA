@@ -123,6 +123,7 @@ CREATE TABLE Zona(
 	identificador	VARCHAR ,
 	capacidad	INTEGER,
 	idArea		INTEGER  NOT NULL,
+	ocupada BOOLEAN,
 
 	CONSTRAINT cp_zona PRIMARY KEY(identificador),
 	CONSTRAINT ca_zona_area FOREIGN KEY (idArea) REFERENCES Area(idArea) ON DELETE RESTRICT ON UPDATE CASCADE,
