@@ -67,6 +67,7 @@ public class ReservaZonaController {
 
             Zona modificarzona=zonaDAO.getZona(zona);
             modificarzona.setOcupada(true);
+            zonaDAO.updateZona(modificarzona);
 
             if (bindingResult.hasErrors()) {
                 /*
@@ -92,6 +93,9 @@ public class ReservaZonaController {
 
     @RequestMapping(value="/delete/{reserva}/{zona}")
     public String processDelete(@PathVariable int reserva,@PathVariable String zona) {
+        Zona modificarzona=zonaDAO.getZona(zona);
+        modificarzona.setOcupada(false);
+        zonaDAO.updateZona(modificarzona);
        reservaZonaDAO.deleteReservaZona(reserva,zona);
         return "redirect:../../list";
     }

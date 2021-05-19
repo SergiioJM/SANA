@@ -36,7 +36,7 @@ public class ZonaDAO {
 
     public void updateZona(Zona zona) {
         jdbcTemplate.update("UPDATE Zona SET capacidad =?, idArea=?, ocupada =? WHERE identificador =?",
-                zona.getCapacidad(),zona.getIdArea(),zona.getIdentificador(),zona.isOcupada());
+                zona.getCapacidad(),zona.getIdArea(),zona.isOcupada(),zona.getIdentificador());
     }
 
     public void deleteZona(String identificador) {
