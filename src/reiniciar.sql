@@ -149,7 +149,7 @@ CREATE TABLE Reserva(
 	ciudadano   VARCHAR(50),
 
 	CONSTRAINT cp_reserva PRIMARY KEY(identificador),
-	CONSTRAINT ca_ciudadano FOREIGN KEY (ciudadano) REFERENCES Ciudadano(nif) ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT ca_ciudadano FOREIGN KEY (ciudadano) REFERENCES Ciudadano(nif) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT ri_numeroPersonas CHECK (numeroPersonas>0),
     CONSTRAINT ri_estado CHECK (estado IN('usada','cancelada', 'disponible'))
 );
@@ -160,7 +160,7 @@ CREATE TABLE ReservaZonas(
 
 	CONSTRAINT cp_reserva2 PRIMARY KEY(id_reserva,id_zona),
 	CONSTRAINT cp_zona FOREIGN KEY (id_zona) REFERENCES Zona(identificador) ON DELETE RESTRICT ON UPDATE CASCADE,
-	CONSTRAINT cp_reservaAux FOREIGN KEY (id_reserva) REFERENCES Reserva(identificador) ON DELETE RESTRICT ON UPDATE CASCADE
+	CONSTRAINT cp_reservaAux FOREIGN KEY (id_reserva) REFERENCES Reserva(identificador) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 CREATE TABLE Ciudadano(

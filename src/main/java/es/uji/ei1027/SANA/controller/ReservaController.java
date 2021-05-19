@@ -163,7 +163,7 @@ public class ReservaController {
     public String processDelete(@PathVariable int identificador,HttpSession session) {
         UserDetails user= (UserDetails) session.getAttribute("user");
         reservaDAO.deleteReserva(identificador);
-        return "redirect:../reserva/reservasciudadano/" + user.getNif();
+        return "redirect:../reservasciudadano/" + user.getNif();
     }
     @RequestMapping("/listadodetallado/{reserva}")
     public String listaDeZonasDeReserva(@PathVariable int reserva, Model model, HttpSession session){

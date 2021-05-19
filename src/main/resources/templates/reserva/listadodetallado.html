@@ -3,12 +3,17 @@
 <head>
     <title>Reservas de una reserva</title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="icon" type="image/png" href="/images/LogoSana.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+
 </head>
-<body>
-<h1>Lista de Zonas de una reserva</h1>
-<table class="table table-striped">
-    <thead>
+<body class="center">
+<h1 class="negrita">Lista de Zonas de una reserva</h1>
+<table class="table">
+    <thead class="thead-dark">
     <tr>
         <th>Reserva</th>
         <th>Zona</th>
@@ -25,6 +30,5 @@
     </tbody>
 </table>
 <a th:href="@{/reserva/reservasciudadano/{nif}(nif=${nif})}"><button type="button" class="btn btn-secondary">Volver</button></a>
-<a href="/"><button type="button" class="btn btn-outline-secondary">Menu Principal</button></a>
 </body>
 </html>
