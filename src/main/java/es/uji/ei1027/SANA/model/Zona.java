@@ -4,6 +4,7 @@ public class Zona {
         String identificador;
         int capacidad;
         int idArea;
+        boolean ocupada= false;
 
         public Zona(String identificador, int capacidad, int idArea) {
             this.identificador = identificador;
@@ -39,7 +40,15 @@ public class Zona {
             this.idArea = idArea;
         }
 
-        @Override
+        public boolean isOcupada() {
+        return ocupada;
+    }
+
+        public void setOcupada(boolean ocupada) {
+        this.ocupada = ocupada;
+    }
+
+    @Override
         public String toString() {
             return "Zone{" +
                     "identificador='" + identificador + '\'' +

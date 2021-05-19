@@ -1,6 +1,7 @@
 package es.uji.ei1027.SANA.dao;
 
 import es.uji.ei1027.SANA.model.ReservaZona;
+import es.uji.ei1027.SANA.model.Zona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -52,9 +53,14 @@ public class ReservaZonaDAO {
     }
     public List<String> getZonasArea(String nomarea){
         try{
-            List<String> zonas= jdbcTemplate.queryForList(
-                    "SELECT identificador FROM Zona WHERE idArea IN (SELECT idarea FROM AREA WHERE nombre=?)", String.class, nomarea);
-            return zonas;
+            List<Zona> zonas= jdbcTemplate.query(
+                    "SELECT * FROM Zona WHERE idArea IN (SELECT idarea FROM AREA WHERE nombre=?)", new ZonaRowMapper(), nomarea);
+            List<String> zonasfinal=new ArrayList<>();
+            for (Zona e: zonas){
+                if (!e.isOcupada())
+                    zonasfinal.add(e.getIdentificador());
+            }
+            return zonasfinal;
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();

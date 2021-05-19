@@ -58,13 +58,16 @@ public class ReservaZonaController {
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reservazona") ReservaZona reservaZona,
                                    BindingResult bindingResult, Model model, HttpSession session) {
-        System.out.println(reservaZona);
         for (String zona: reservaZona.getZona().split(",")) {
             ReservaZona reservaZona1= new ReservaZona();
             reservaZona1.setZona(zona);
             reservaZona1.setReserva(reservaZona.getReserva());
             ReservaZonaValidator reservaZonaValidator = new ReservaZonaValidator();
             reservaZonaValidator.validate(reservaZona1, bindingResult);
+
+            Zona modificarzona=zonaDAO.getZona(zona);
+            modificarzona.setOcupada(true);
+
             if (bindingResult.hasErrors()) {
                 /*
                 List<Zona> lista2 = zonaDAO.getZonas();
