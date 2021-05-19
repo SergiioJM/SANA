@@ -37,6 +37,11 @@ public class AreaController {
         model.addAttribute("areas", areaDao.getAreas());
         return "area/list";
     }
+    @RequestMapping("/zonasarea/{area}")
+    public String listaDeZonasenAreas(@PathVariable int area,Model model){
+        model.addAttribute("zonas", areaDao.getZonasArea(area));
+        return "area/zonasarea";
+    }
 
     @RequestMapping("/areasVisiblesCiudadanos")
     public String listaDeAreasCiudadano(Model model){
