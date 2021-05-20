@@ -43,10 +43,11 @@ public class ReservaZonaController {
     }
 
     @RequestMapping(value="/add/{id}/{cantidadPersonas}/{area}/{nif}")
-    public String addArea(Model model, @PathVariable int id, @PathVariable int cantidadPersonas , @PathVariable String area,@PathVariable String nif) {
+    public String addArea(Model model, @PathVariable int id, @PathVariable int cantidadPersonas , @PathVariable String area,@PathVariable String nif,HttpSession session) {
         ReservaZona reservaZona= new ReservaZona();
         reservaZona.setReserva(id);
         reservaZona.setPersonas(cantidadPersonas);
+        session.setAttribute("area",area);
 
         /*List<Zona> lista2 = zonaDAO.getZonas();
         ArrayList<String> lista = new ArrayList<>();
@@ -64,56 +65,33 @@ public class ReservaZonaController {
     public String processAddSubmit(@ModelAttribute("reservazona") ReservaZona reservaZona,
                                    BindingResult bindingResult, Model model, HttpSession session) {
         int capacidadTotalSeleccionada = 0;
-
-
-
-
+        String area= (String) session.getAttribute("area");
+        session.removeAttribute("area");
 
         for (String zona: reservaZona.getZona().split(",")) {
+            System.out.println(zona);
+            zona=zona.split("#Capacidad:")[0];
             /** cogemos cada zona que ha seleccionado el usuario y creamos cada una de las reservas de las zonas **/
-            ReservaZona reservaZona1= new ReservaZona();
-            reservaZona1.setZona(zona);
-            reservaZona1.setReserva(reservaZona.getReserva());
-
             int capacidadZona = zonaDAO.getZona(zona).getCapacidad();
             capacidadTotalSeleccionada +=capacidadZona;
-
-
-
-
-            Zona modificarzona=zonaDAO.getZona(zona);
-            modificarzona.setOcupada(true);
-            zonaDAO.updateZona(modificarzona);
-
-            /**if (bindingResult.hasErrors()) {
-
-                List<Zona> lista2 = zonaDAO.getZonas();
-                ArrayList<String> lista = new ArrayList<>();
-                for (Zona e : lista2)
-                    lista.add(e.getIdentificador());
-                //model.addAttribute("zonalista", lista);
-                //model.addAttribute("zonalista",zonalista);
-
-                return "reservazona/add";
-            }*/
-            try {
-                reservaZonaDAO.addReservaZona(reservaZona1);
-            } catch (DuplicateKeyException e) {
-                throw new ClaveDuplicadaException("Ya existe la reserva: " + reservaZona.getReserva(), "CPduplicada");
-            }
         }
 
         ReservaZonaValidator reservaValidator =new ReservaZonaValidator();
         reservaValidator.validate(reservaZona , capacidadTotalSeleccionada ,bindingResult);
         if (bindingResult.hasErrors()) {
-            String[] zonas = reservaZona.getZona().split(",");
-
-
-
-            //model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(zonas));
+            model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(area));
             return "reservazona/add";
         }
-
+        for (String zona: reservaZona.getZona().split(",")) {
+            zona=zona.split("#Capacidad:")[0];
+            ReservaZona reservaZona1= new ReservaZona();
+            reservaZona1.setZona(zona);
+            reservaZona1.setReserva(reservaZona.getReserva());
+            reservaZonaDAO.addReservaZona(reservaZona1);
+            Zona modificarzona=zonaDAO.getZona(zona);
+            modificarzona.setOcupada(true);
+            zonaDAO.updateZona(modificarzona);
+        }
         UserDetails user= (UserDetails) session.getAttribute("user");
         return "redirect:../reserva/reservasciudadano/" + user.getNif();
     }
