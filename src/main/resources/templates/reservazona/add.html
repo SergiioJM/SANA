@@ -18,7 +18,11 @@
         <tr>
             <td><label class="negrita">Reserva</label></td>
             <td><input type="text" th:field="*{reserva}" readonly="readonly"/></td>
-            <!--<td th:if="${#fields.hasErrors('reserva')}" th:errors="*{reserva}" class="error"></td>-->
+        </tr>
+        <tr>
+            <td><label class="negrita">Personas deseadas</label></td>
+            <td><input type="text" th:field="*{personas}" readonly="readonly"/></td>
+
         </tr>
         <tr>
             <td><label class="negrita">Identificador de la Zona</label></td>
@@ -26,10 +30,14 @@
                 <select class="form_control" type="text" th:field="*{zona}" multiple>
                     <option th:each="idZona: ${zonalista}" th:value="${idZona}" th:text="${idZona}"></option>
                 </select>
+
             </td>
+            <td th:if="${#fields.hasErrors('zona')}" th:errors="*{zona}" class="error"></td>
+
         </tr>
     </table>
-    <a>Para seleccionar varias shift y seleccionas todas las que quieras</a>
+
+    <a>Para seleccionar varias,presione shift y seleccione todas las que quieras</a>
     <br>
     <a href="add"><button type="submit" class="btn btn-success">Añade una Reserva en una Zona</button></a>
 </form>

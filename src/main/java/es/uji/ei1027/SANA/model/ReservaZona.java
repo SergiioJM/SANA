@@ -3,6 +3,8 @@ package es.uji.ei1027.SANA.model;
 public class ReservaZona {
     int reserva;
     String zona;
+    int personas;
+
 
 
 
@@ -22,6 +24,14 @@ public class ReservaZona {
 
     public void setZona(String zona) {
         this.zona = zona;
+    }
+
+    public int getPersonas() {
+        return personas;
+    }
+
+    public void setPersonas(int personas) {
+        this.personas = personas;
     }
 
     @Override

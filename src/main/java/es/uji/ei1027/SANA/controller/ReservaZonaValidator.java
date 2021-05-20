@@ -14,4 +14,11 @@ public class ReservaZonaValidator implements Validator {
     public void validate(Object o, Errors errors) {
         ReservaZona reservaZona=(ReservaZona) o;
     }
+
+    public void validate(Object o, int capacidadTotalSeleccionada ,Errors errors) {
+        ReservaZona reservaZona=(ReservaZona) o;
+        if(reservaZona.getPersonas() >  capacidadTotalSeleccionada){
+            errors.rejectValue("zona", "obligatorio", "No hay espacio suficiente con esas areas");
+        }
+    }
 }

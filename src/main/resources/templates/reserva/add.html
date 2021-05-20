@@ -41,6 +41,7 @@
                 <option value="disponible">Disponible</option>
             </select>
             </td>
+            <td th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" class="error"></td>
         </tr>
         <tr>
             <td><label class="negrita">Area</label></td>

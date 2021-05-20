@@ -84,7 +84,6 @@ public class ReservaController {
                                    BindingResult bindingResult,Model model) {
 
         ReservaValidator reservaValidator =new ReservaValidator();
-        //reservaValidator.validate(reserva,zonaDAO,bindingResult);
         reservaValidator.validate(reserva,bindingResult);
         if (bindingResult.hasErrors()) {
             model.addAttribute("listaarea",reservaDAO.getAreas());
@@ -97,7 +96,7 @@ public class ReservaController {
         reservaDAO.addReserva(reserva);
         //zonaDAO.setZona(reserva.getZona(),capacidadActual-reserva.getNumeroPersonas());
 
-        return "redirect:../reservazona/add/" + reserva.getIdentificador() + "/"+ reserva.getArea() +"/" + reserva.getCiudadano();
+        return "redirect:../reservazona/add/" + reserva.getIdentificador() + "/"+ reserva.getNumeroPersonas() + "/"+ reserva.getArea() +"/" + reserva.getCiudadano();
         //return "redirect:list";
     }
 

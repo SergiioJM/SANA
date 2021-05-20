@@ -76,9 +76,9 @@ public class LoginController {
                 }
                 session.setAttribute("user", user);
                 return "redirect:/user/ciudadano";
-            }else if(responsable.get(i).){
+            }/**else if(responsable.get(i).){
 
-            }
+            }**/
         }
         user = userDao.loadUserByUsername(user.getNif(), user.getPassword(), ciudadanoDAO);
         if (user == null) {
