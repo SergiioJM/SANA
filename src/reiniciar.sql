@@ -97,11 +97,14 @@ CREATE TABLE Servicio(
 	nombre VARCHAR(20) NOT NULL,
 	descripcion VARCHAR(20),
 	estado	VARCHAR(20),
-	nombreArea		VARCHAR(50) NOT NULL,
+	nombreArea		INTEGER NOT NULL,
+	tipoServicio VARCHAR(50) NOT NULL,
 
     CONSTRAINT 	cp_servicio PRIMARY KEY (nombre),
     CONSTRAINT ca_area_periodo FOREIGN KEY (nombreArea) REFERENCES
-   Area(idArea) ON DELETE RESTRICT ON UPDATE CASCADE
+   Area(idArea) ON DELETE RESTRICT ON UPDATE CASCADE,
+   CONSTRAINT ca_tipoServicio FOREIGN KEY (tipoServicio) REFERENCES
+      tipoServicio(nombre) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE ServicioTemporal(
@@ -111,12 +114,17 @@ CREATE TABLE ServicioTemporal(
 	horaInicio Time,
 	horaFin Time,
 	nombreArea	VARCHAR(20) NULL,
+	tipoServicio VARCHAR(50) NOT NULL,
+
 
     CONSTRAINT 	cp_servicioTemporal PRIMARY KEY (nombre),
     CONSTRAINT ca_area_servicioTemporal FOREIGN KEY (nombreArea) REFERENCES
    Area(idArea) ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT ri_fechaFin CHECK (fechaFin>fechaInicio),
-    CONSTRAINT ri_horaFin CHECK (horaFin>horaInicio)
+    CONSTRAINT ri_horaFin CHECK (horaFin>horaInicio),
+    CONSTRAINT ca_tipServicio FOREIGN KEY (tipoServicio) REFERENCES
+          tipoServicio(nombre) ON DELETE RESTRICT ON UPDATE CASCADE
+
 );
 
 CREATE TABLE Zona(
@@ -173,6 +181,11 @@ CREATE TABLE Ciudadano(
 
 	CONSTRAINT cp_ciudadano PRIMARY KEY(nif),
 REFERENCES Reserva(identificador) ON DELETE RESTRICT ON UPDATE CASCADE
+);
+
+CREATE TABLE tipoServicio(
+    nombre VARCHAR(50) NOT NULL,
+    CONSTRAINT nombre_tipo PRIMARY KEY(nombre)
 );
 
 INSERT INTO Municipio VALUES('12590','Castellon','C/Jaume I','castellon@caste.com','12345678');

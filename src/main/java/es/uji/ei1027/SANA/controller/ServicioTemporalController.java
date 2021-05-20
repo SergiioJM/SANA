@@ -43,6 +43,7 @@ public class ServicioTemporalController {
     @RequestMapping(value="/add")
     public String addserviciotemporal(Model model) {
         model.addAttribute("serviciotemporal", new ServicioTemporal());
+        model.addAttribute("tipoServicio",servicioTemporalDAO.getTipoServicio());
         List<Area> lista2 = areaDAO.getAreas();
         ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2)
@@ -62,6 +63,7 @@ public class ServicioTemporalController {
             for (Area e : lista2)
                 lista.add(e.getIdArea());
             model.addAttribute("arealista", lista);
+            model.addAttribute("tipoServicio",servicioTemporalDAO.getTipoServicio());
             return "serviciotemporal/add";
         }
         try {
@@ -81,6 +83,7 @@ public class ServicioTemporalController {
         for (Area e : lista2)
             lista.add(e.getIdArea());
         model.addAttribute("arealista",lista);
+        model.addAttribute("tipoServicio",servicioTemporalDAO.getTipoServicio());
         return "serviciotemporal/update";
     }
 
@@ -96,6 +99,7 @@ public class ServicioTemporalController {
             for (Area e : lista2)
                 lista.add(e.getIdArea());
             model.addAttribute("arealista", lista);
+            model.addAttribute("tipoServicio",servicioTemporalDAO.getTipoServicio());
             return "serviciotemporal/update";
         }
         servicioTemporalDAO.updateServicioTemporal(servicioTemporal);

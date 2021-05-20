@@ -7,7 +7,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalTime;
 
 public final class ServicioTemporalRowMapper implements RowMapper<ServicioTemporal> {
     public ServicioTemporal mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -19,7 +18,8 @@ public final class ServicioTemporalRowMapper implements RowMapper<ServicioTempor
         servicioTemporal.setHoraInicio(t1.toLocalTime());
         Time t12 = rs.getTime("horaFin");
         servicioTemporal.setHoraFin(t12.toLocalTime());
-        servicioTemporal.setNombreArea(rs.getString("nombreArea"));
+        servicioTemporal.setIdArea(rs.getInt("nombreArea"));
+        servicioTemporal.setTipoServicio(rs.getString("tipoServicio"));
         return servicioTemporal;
     }
 }

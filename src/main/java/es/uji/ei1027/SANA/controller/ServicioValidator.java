@@ -16,8 +16,9 @@ public class ServicioValidator implements Validator {
         Servicio servicio=(Servicio) o;
         if (servicio.getNombre().trim().equals("")) errors.rejectValue("nombre", "obligatori",
                 "El nombre es obligatorio");
+        /*
         if (servicio.getArea().trim().equals("")) errors.rejectValue("area", "obligatori",
                 "El area es obligatorio");
-
+*/
     }
 }

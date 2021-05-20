@@ -12,7 +12,8 @@ public final class ServicioRowMapper implements RowMapper<Servicio> {
         servicio.setNombre(rs.getString("nombre"));
         servicio.setDescripcion(rs.getString("descripcion"));
         servicio.setEstado(rs.getString("estado"));
-        servicio.setArea(rs.getString("nombreArea"));
+        servicio.setArea(rs.getInt("nombreArea"));
+        servicio.setTipoServicio(rs.getString("tipoServicio"));
         return servicio;
     }
 }

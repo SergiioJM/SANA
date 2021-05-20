@@ -21,13 +21,13 @@ public class ServicioDAO {
 
 
     public void addServicio(Servicio servicio) {
-        jdbcTemplate.update("INSERT INTO  Servicio VALUES(?,?,?,?)",
-                servicio.getNombre(),servicio.getDescripcion(),servicio.getEstado(),servicio.getArea());
+        jdbcTemplate.update("INSERT INTO  Servicio VALUES(?,?,?,?,?)",
+                servicio.getNombre(),servicio.getDescripcion(),servicio.getEstado(),servicio.getArea(),servicio.getTipoServicio());
     }
 
     public void updateServicio(Servicio servicio) {
-        jdbcTemplate.update("UPDATE  Servicio SET descripcion =?, estado =?, nombreArea =?  WHERE nombre =?",
-                servicio.getDescripcion(),servicio.getEstado(),servicio.getArea(),servicio.getNombre());
+        jdbcTemplate.update("UPDATE  Servicio SET descripcion =?, estado =?, nombreArea =?, tipoServicio=?  WHERE nombre =?",
+                servicio.getDescripcion(),servicio.getEstado(),servicio.getArea(),servicio.getTipoServicio(),servicio.getNombre());
     }
 
     public void deleteServicio(String nombre) {
@@ -50,6 +50,15 @@ public class ServicioDAO {
             return jdbcTemplate.query(
                     "SELECT * FROM  Servicio",
                     new es.uji.ei1027.SANA.dao.ServicioRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+    public List<String> getTipoServicio(){
+        try{
+            return jdbcTemplate.queryForList(
+                    "SELECT nombre FROM  tipoServicio", String.class);
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();

@@ -21,6 +21,7 @@
         <th>Hora de Inicio</th>
         <th>Hora de Fin</th>
         <th>Nombre de Area</th>
+        <th>Tipo de Servicio</th>
         <th></th>
         <th></th>
     </tr>
@@ -33,6 +34,7 @@
         <td th:text="${servicio.horaInicio}"></td>
         <td th:text="${servicio.horaFin}"></td>
         <td th:text="${servicio.nombreArea}"></td>
+        <td th:text="${servicio.tipoServicio}"></td>
         <td><a th:href="@{/serviciotemporal/update/{nombre}(nombre=${servicio.nombre})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
         <td><a th:href="@{/serviciotemporal/delete/{nombre}(nombre=${servicio.nombre})}"><button type="button" class="btn btn-danger">Borra</button></a>

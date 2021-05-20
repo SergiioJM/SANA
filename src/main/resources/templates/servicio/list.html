@@ -19,6 +19,7 @@
         <th>Descripción</th>
         <th>Estado</th>
         <th>Nombre de Area</th>
+        <th>Tipo de servicio</th>
         <th></th>
         <th></th>
     </tr>
@@ -29,6 +30,7 @@
         <td th:text="${servicio.descripcion}"></td>
         <td th:text="${servicio.estado}"></td>
         <td th:text="${servicio.area}"></td>
+        <td th:text="${servicio.tipoServicio}"></td>
         <td><a th:href="@{/servicio/update/{nombre}(nombre=${servicio.nombre})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
         <td><a th:href="@{/servicio/delete/{nombre}(nombre=${servicio.nombre})}"><button type="button" class="btn btn-danger">Borra</button></a>
