@@ -3,8 +3,10 @@ package es.uji.ei1027.SANA.controller;
 import javax.servlet.http.HttpSession;
 
 import es.uji.ei1027.SANA.dao.CiudadanoDAO;
+import es.uji.ei1027.SANA.dao.ResponsableMunicipioDAO;
 import es.uji.ei1027.SANA.dao.UserDao;
 import es.uji.ei1027.SANA.model.Ciudadano;
+import es.uji.ei1027.SANA.model.ResponsableMunicipio;
 import es.uji.ei1027.SANA.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,12 +42,14 @@ class UserValidator implements Validator {
 public class LoginController {
     @Autowired
     private UserDao userDao;
-
+    private ResponsableMunicipioDAO responsableMunicipioDAO;
     private CiudadanoDAO ciudadanoDAO;
+
     @Autowired
     public void setCiudadanoDAO(CiudadanoDAO ciudadanoDAO) { this.ciudadanoDAO = ciudadanoDAO; }
 
-
+    @Autowired
+    public void setResponsableMunicipioDAO(ResponsableMunicipioDAO responsableMunicipioDAO) { this.responsableMunicipioDAO = responsableMunicipioDAO;}
 
     @RequestMapping("/login")
     public String login(Model model) {
@@ -62,9 +66,19 @@ public class LoginController {
             return "login";
         }
         List<Ciudadano> ciudadano = ciudadanoDAO.getCiudadanos();
-        String[] nifCiudadanos = new String[ciudadano.size()];
+        List<ResponsableMunicipio> responsable = responsableMunicipioDAO.getResponsablesMunicipios();
         for (int i = 0; i < ciudadano.size(); i++){
-            System.out.println(ciudadano.get(i).getNif());
+            if (ciudadano.get(i).getNif().equals(user.getNif())){
+                user = userDao.loadUserByUsername(user.getNif(), user.getPassword(), ciudadanoDAO);
+                if (user == null) {
+                    bindingResult.rejectValue("password", "badpw", "Contraseña incorrecta");
+                    return "redirect:/index.html";
+                }
+                session.setAttribute("user", user);
+                return "redirect:/user/ciudadano";
+            }else if(responsable.get(i).){
+
+            }
         }
         user = userDao.loadUserByUsername(user.getNif(), user.getPassword(), ciudadanoDAO);
         if (user == null) {
