@@ -13,7 +13,8 @@ public class ServicioTemporal {
     LocalTime horaInicio;
     @DateTimeFormat(pattern = "HH:mm:ss")
     LocalTime horaFin;
-    String nombreArea;
+    int idArea;
+    String tipoServicio;
 
 
     public ServicioTemporal() {
@@ -60,12 +61,20 @@ public class ServicioTemporal {
         this.horaFin = horaFin;
     }
 
-    public String getNombreArea() {
-        return nombreArea;
+    public int getIdArea() {
+        return idArea;
     }
 
-    public void setNombreArea(String nombreArea) {
-        this.nombreArea = nombreArea;
+    public void setIdArea(int idArea) {
+        this.idArea = idArea;
+    }
+
+    public String getTipoServicio() {
+        return tipoServicio;
+    }
+
+    public void setTipoServicio(String tipoServicio) {
+        this.tipoServicio = tipoServicio;
     }
 
     @Override
@@ -76,7 +85,7 @@ public class ServicioTemporal {
                 ", fechaFin=" + fechaFin +
                 ", horaInicio=" + horaInicio +
                 ", horaFin=" + horaFin +
-                ", area=" + nombreArea +
+                ", area=" + idArea +
                 '}';
     }
 }

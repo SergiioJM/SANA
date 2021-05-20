@@ -4,9 +4,10 @@ public class Servicio {
     String nombre;
     String descripcion;
     String estado;
-    String area;
+    int area;
+    String tipoServicio;
 
-    public Servicio(String nombre, String descripcion, String estado, String area) {
+    public Servicio(String nombre, String descripcion, String estado, int area) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.estado = estado;
@@ -41,12 +42,20 @@ public class Servicio {
         this.estado = estado;
     }
 
-    public String getArea() {
+    public int getArea() {
         return area;
     }
 
-    public void setArea(String area) {
+    public void setArea(int area) {
         this.area = area;
+    }
+
+    public String getTipoServicio() {
+        return tipoServicio;
+    }
+
+    public void setTipoServicio(String tipoServicio) {
+        this.tipoServicio = tipoServicio;
     }
 
     @Override

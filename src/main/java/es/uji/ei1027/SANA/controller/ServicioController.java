@@ -41,7 +41,7 @@ public class ServicioController {
     @RequestMapping(value="/add")
     public String addServicios(Model model) {
         model.addAttribute("servicio", new Servicio());
-
+        model.addAttribute("tipoServicio",servicioDAO.getTipoServicio());
         List<Area> lista2 = areaDAO.getAreas();
         ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2)
@@ -62,6 +62,7 @@ public class ServicioController {
                 lista.add(e.getIdArea());
 
             }
+            model.addAttribute("tipoServicio",servicioDAO.getTipoServicio());
             model.addAttribute("arealista",lista);
             return "servicio/add";
         }
@@ -77,7 +78,7 @@ public class ServicioController {
     @RequestMapping(value="/update/{nombre}", method = RequestMethod.GET)
     public String editServicio(Model model, @PathVariable String nombre) {
         model.addAttribute("servicio", servicioDAO.getServicio(nombre));
-
+        model.addAttribute("tipoServicio",servicioDAO.getTipoServicio());
         List<Area> lista2 = areaDAO.getAreas();
         ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2) {
@@ -104,6 +105,7 @@ public class ServicioController {
 
             }
             model.addAttribute("arealista",lista);
+            model.addAttribute("tipoServicio",servicioDAO.getTipoServicio());
             return "servicio/update";
         }
         servicioDAO.updateServicio(servicio);

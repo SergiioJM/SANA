@@ -1,6 +1,7 @@
 package es.uji.ei1027.SANA.dao;
 
 import es.uji.ei1027.SANA.model.Area;
+import es.uji.ei1027.SANA.model.Zona;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -67,10 +68,10 @@ public class AreaDAO {
             return new ArrayList<>();
         }
     }
-    public List<Integer> getZonasArea(int area){
+    public List<Zona> getZonasArea(int area){
         try{
-            List<Integer> zonas= jdbcTemplate.queryForList(
-                    "SELECT identificador FROM Zonas WHERE idArea =?", Integer.class,area);
+            List<Zona> zonas= jdbcTemplate.query(
+                    "SELECT * FROM Zona WHERE idArea =?", new ZonaRowMapper(),area);
             return zonas;
         }
         catch(EmptyResultDataAccessException e) {

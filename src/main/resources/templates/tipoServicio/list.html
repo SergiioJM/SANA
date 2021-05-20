@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Reservas en Zonas</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+</head>
+<body>
+<h1>Lista de Tipos de Servicio</h1>
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>Nombre</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="tipo: ${tiposServicio}">
+        <td th:text="${tipo.nombre}"></td>
+        <td><a th:href="@{/tipoServicio/delete/{nom}(nom=${tipo.nombre})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="add"><button type="button" class="btn btn-success">Añade Tipo</button></a>
+<a href="/"><button type="button" class="btn btn-outline-secondary">Menu Principal</button></a>
+</body>
+</html>

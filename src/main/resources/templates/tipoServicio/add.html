@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear tipo de Servicio</title>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/images/LogoSana.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+
+</head>
+<body class="center">
+<h2 class="negrita">Nuevo tipo de servicio </h2>
+<form class="form" action="#" th:action="@{/tipoServicio/add}"
+      th:object="${tipoServicio}" method="post">
+    <table>
+        <tr>
+            <td><label class="negrita">Nombre</label></td>
+            <td><input type="text" th:field="*{nombre}"/></td>
+            <!--<td th:if="${#fields.hasErrors('reserva')}" th:errors="*{reserva}" class="error"></td>-->
+        </tr>
+
+    </table>
+    <br>
+    <a href="add"><button type="submit" class="btn btn-success">Añade un tipo de servicio</button></a>
+</form>
+</body>
+</html>
