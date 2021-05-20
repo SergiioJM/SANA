@@ -1,6 +1,7 @@
 package es.uji.ei1027.SANA.dao;
 
 import es.uji.ei1027.SANA.model.Ciudadano;
+import es.uji.ei1027.SANA.model.Municipio;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -39,8 +40,16 @@ public class CiudadanoDAO {
 
     public Ciudadano getCiudadano(String Nif) {
         try {
+            /*List<Ciudadano> mun = jdbcTemplate.query("SELECT * FROM Ciudadano",
+                    new CiudadanoRowMapper());
+
+            for (int i = 0; i < mun.size(); i++){
+                System.out.println(mun.get(i).getNif());
+            }
+             */
             return jdbcTemplate.queryForObject("SELECT * FROM Ciudadano WHERE nif =?",
                     new CiudadanoRowMapper(), Nif);
+
         }
         catch(EmptyResultDataAccessException e) {
             return null;

@@ -39,8 +39,13 @@ public class MunicipioDAO {
 
     public Municipio getMunicipio(String cp) {
         try {
+
+
             return jdbcTemplate.queryForObject("SELECT * FROM Municipio WHERE cp =?",
                     new MunicipioRowMapper(), cp);
+
+
+
         }
         catch(EmptyResultDataAccessException e) {
             return null;

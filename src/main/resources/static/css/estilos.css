@@ -98,3 +98,11 @@ input, textarea, select, button {
 	-moz-box-sizing: border-box; /* For legacy (Firefox <29) Gecko based browsers */
 	box-sizing: border-box;
 }
+
+h1{
+	color: #ff8c00;
+}
+
+h2{
+	color: #948D8B;
+}

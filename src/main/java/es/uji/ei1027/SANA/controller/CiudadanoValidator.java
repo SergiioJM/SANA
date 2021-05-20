@@ -8,8 +8,6 @@ public class CiudadanoValidator implements Validator {
         @Override
         public boolean supports(Class<?> cls) {
             return Ciudadano.class.equals(cls);
-            // o, si volguérem tractar també les subclasses:
-            // return Nadador.class.isAssignableFrom(cls);
         }
 
         @Override
@@ -19,5 +17,7 @@ public class CiudadanoValidator implements Validator {
                         "El nif es obligatorio");
                 if (ciudadano.getNombre().trim().equals("")) errors.rejectValue("nombre", "obligatori",
                     "El nombre es obligatorio");
+                if (ciudadano.getPassword().trim().equals("")) errors.rejectValue("password", "obligatori",
+                        "Tienes que poner una contraseña");
         }
 }

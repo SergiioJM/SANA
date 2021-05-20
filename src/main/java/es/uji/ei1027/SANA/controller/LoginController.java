@@ -4,6 +4,7 @@ import javax.servlet.http.HttpSession;
 
 import es.uji.ei1027.SANA.dao.CiudadanoDAO;
 import es.uji.ei1027.SANA.dao.UserDao;
+import es.uji.ei1027.SANA.model.Ciudadano;
 import es.uji.ei1027.SANA.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
+import java.util.List;
 
 
 class UserValidator implements Validator {
@@ -55,11 +58,14 @@ public class LoginController {
                              BindingResult bindingResult, HttpSession session) {
         UserValidator userValidator = new UserValidator();
         userValidator.validate(user, bindingResult);
-        //System.out.println(user.getNif()+user.getPassword()); Aqui el usuario y contraseña llegan bien
         if (bindingResult.hasErrors()) {
             return "login";
         }
-        //System.out.println(user.getNif()+user.getPassword()); Aqui bien solo que lo muestra dos veces
+        List<Ciudadano> ciudadano = ciudadanoDAO.getCiudadanos();
+        String[] nifCiudadanos = new String[ciudadano.size()];
+        for (int i = 0; i < ciudadano.size(); i++){
+            System.out.println(ciudadano.get(i).getNif());
+        }
         user = userDao.loadUserByUsername(user.getNif(), user.getPassword(), ciudadanoDAO);
         if (user == null) {
             bindingResult.rejectValue("password", "badpw", "Contraseña incorrecta");
