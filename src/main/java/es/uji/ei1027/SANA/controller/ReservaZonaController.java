@@ -43,19 +43,15 @@ public class ReservaZonaController {
     }
 
     @RequestMapping(value="/add/{id}/{cantidadPersonas}/{area}/{nif}")
-    public String addArea(Model model, @PathVariable int id, @PathVariable int cantidadPersonas , @PathVariable String area,@PathVariable String nif,HttpSession session) {
+    public String addArea(Model model, @PathVariable int id, @PathVariable int cantidadPersonas ,
+                          @PathVariable String area,@PathVariable String nif,HttpSession session) {
+
         ReservaZona reservaZona= new ReservaZona();
         reservaZona.setReserva(id);
         reservaZona.setPersonas(cantidadPersonas);
-        session.setAttribute("area",area);
+        session.setAttribute("area",area);//guardamos el id area para despues en el siguiente metodo utilizarlo y borrarlo
 
-        /*List<Zona> lista2 = zonaDAO.getZonas();
-        ArrayList<String> lista = new ArrayList<>();
-        for (Zona e : lista2)
-            lista.add(e.getIdentificador());
-        model.addAttribute("zonalista",lista);
-         */
-        model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(area));
+        //model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(area));
         model.addAttribute("reservazona", reservaZona);
 
         return "reservazona/add";
@@ -65,23 +61,26 @@ public class ReservaZonaController {
     public String processAddSubmit(@ModelAttribute("reservazona") ReservaZona reservaZona,
                                    BindingResult bindingResult, Model model, HttpSession session) {
         int capacidadTotalSeleccionada = 0;
+        //cogemos de la sesion el id del area que queremos coger sus zonas
         String area= (String) session.getAttribute("area");
         session.removeAttribute("area");
 
+        // recorremos las zonas como tambien tenemos la capacidad hacemos los dos split para sumar las capacidades deseadas
         for (String zona: reservaZona.getZona().split(",")) {
             System.out.println(zona);
             zona=zona.split("#Capacidad:")[0];
-            /** cogemos cada zona que ha seleccionado el usuario y creamos cada una de las reservas de las zonas **/
             int capacidadZona = zonaDAO.getZona(zona).getCapacidad();
             capacidadTotalSeleccionada +=capacidadZona;
         }
 
+        //validamos que la capacidad deseada y las zonas escogidas concuerdan
         ReservaZonaValidator reservaValidator =new ReservaZonaValidator();
         reservaValidator.validate(reservaZona , capacidadTotalSeleccionada ,bindingResult);
         if (bindingResult.hasErrors()) {
             model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(area));
             return "reservazona/add";
         }
+        // ponemos todas las zonas escogidas a true para que no se puedan seleccionar en esa franja
         for (String zona: reservaZona.getZona().split(",")) {
             zona=zona.split("#Capacidad:")[0];
             ReservaZona reservaZona1= new ReservaZona();
