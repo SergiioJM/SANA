@@ -15,13 +15,15 @@
       <div class="col-12 user-img">
         <img src="static/images/lock.png" th:src="@{/images/lock.png}"/>
       </div>
-      <form class="col-12" th:action="@{/login}" method="post">
+      <form class="col-12" th:action="@{/login}" th:object="${user}" method="post">
         <div class="form-group" id="user-group">
           <input type="text" class="form-control" placeholder="Usuario (DNI)" name="nif"/>
+          <td th:if="${#fields.hasErrors('nif')}" th:errors="*{nif}" class="error"></td>
 
         </div>
         <div class="form-group" id="contrasena-group">
           <input type="password" class="form-control" placeholder="Contraseña" name="password"/>
+          <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></td>
 
         </div>
         <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i>  Iniciar Sesion </button>
