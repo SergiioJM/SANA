@@ -51,7 +51,7 @@ public class ReservaZonaController {
         reservaZona.setPersonas(cantidadPersonas);
         session.setAttribute("area",area);//guardamos el id area para despues en el siguiente metodo utilizarlo y borrarlo
 
-        //model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(area));
+        model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(area));
         model.addAttribute("reservazona", reservaZona);
 
         return "reservazona/add";
@@ -63,15 +63,18 @@ public class ReservaZonaController {
         int capacidadTotalSeleccionada = 0;
         //cogemos de la sesion el id del area que queremos coger sus zonas
         String area= (String) session.getAttribute("area");
-        session.removeAttribute("area");
 
-        // recorremos las zonas como tambien tenemos la capacidad hacemos los dos split para sumar las capacidades deseadas
-        for (String zona: reservaZona.getZona().split(",")) {
-            System.out.println(zona);
-            zona=zona.split("#Capacidad:")[0];
-            int capacidadZona = zonaDAO.getZona(zona).getCapacidad();
-            capacidadTotalSeleccionada +=capacidadZona;
+
+        if (reservaZona.getZona() != null){//Comprobamos que ha seleccionado almenos una zona
+            // recorremos las zonas como tambien tenemos la capacidad hacemos los dos split para sumar las capacidades deseadas
+            for (String zona: reservaZona.getZona().split(",")) {
+
+                zona=zona.split("#Capacidad:")[0];
+                int capacidadZona = zonaDAO.getZona(zona).getCapacidad();
+                capacidadTotalSeleccionada +=capacidadZona;
+            }
         }
+
 
         //validamos que la capacidad deseada y las zonas escogidas concuerdan
         ReservaZonaValidator reservaValidator =new ReservaZonaValidator();
@@ -80,17 +83,24 @@ public class ReservaZonaController {
             model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(area));
             return "reservazona/add";
         }
-        // ponemos todas las zonas escogidas a true para que no se puedan seleccionar en esa franja
-        for (String zona: reservaZona.getZona().split(",")) {
-            zona=zona.split("#Capacidad:")[0];
-            ReservaZona reservaZona1= new ReservaZona();
-            reservaZona1.setZona(zona);
-            reservaZona1.setReserva(reservaZona.getReserva());
-            reservaZonaDAO.addReservaZona(reservaZona1);
-            Zona modificarzona=zonaDAO.getZona(zona);
-            modificarzona.setOcupada(true);
-            zonaDAO.updateZona(modificarzona);
+
+        if (reservaZona.getZona() != null){//Comprobamos que ha seleccionado almenos una zona
+            // ponemos todas las zonas escogidas a true para que no se puedan seleccionar en esa franja
+            for (String zona: reservaZona.getZona().split(",")) {
+                zona=zona.split("#Capacidad:")[0];
+                ReservaZona reservaZona1= new ReservaZona();
+                reservaZona1.setZona(zona);
+                reservaZona1.setReserva(reservaZona.getReserva());
+                reservaZonaDAO.addReservaZona(reservaZona1);
+                Zona modificarzona=zonaDAO.getZona(zona);
+                modificarzona.setOcupada(true);
+                zonaDAO.updateZona(modificarzona);
+
+            }
+            session.removeAttribute("area");
+
         }
+
         UserDetails user= (UserDetails) session.getAttribute("user");
         return "redirect:../reserva/reservasciudadano/" + user.getNif();
     }
