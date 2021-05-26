@@ -28,7 +28,15 @@
             <td><label class="negrita">Identificador de la Zona</label></td>
             <td>
                 <select class="form_control" type="text" th:field="*{zona}" multiple>
-                    <option th:each="idZona: ${zonalista}" th:value="${idZona}" th:text="${idZona}"></option>
+                    <option th:each="idZona: ${zonalista}" th:value="${idZona}" >
+                        Zona: <span  th:text="${#strings.arraySplit(idZona,'#Capacidad:')[0]}">
+
+                        </span> | Capacidad:
+                        <span  th:text="${#strings.arraySplit(idZona,'#Capacidad:')[1]}">
+
+                        </span>
+                    </option>
+
                 </select>
 
             </td>
