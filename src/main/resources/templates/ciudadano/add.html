@@ -3,50 +3,46 @@
 <head>
     <title>Fromulario de Registro</title>
     <meta charset="UTF-8" />
+    <link rel="stylesheet"
+          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css"
+          th:href="@{/css/estilos.css}"/>
     <link rel="icon" type="image/png" href="/images/LogoSana.png" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+
 </head>
 <body class="center">
 <h2 class="negrita">Registro en SANA</h2>
-<div>
-<form class="form" action="#" th:action="@{/ciudadano/add}"
-      th:object="${ciudadano}" method="post">
-    <table>
-        <tr>
-            <td><label>Nombre</label></td>
-            <td><input type="text" th:field="*{nombre}" maxlength="50"/></td>
-            <td th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></td>
-        </tr>
-        <tr>
-            <td><label>Contraseña</label></td>
-            <td><input type="password" th:field="*{password}" maxlength="100"/></td>
-            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></td>
+<div class="center" >
+    <form class="form" action="#" th:action="@{/ciudadano/add}"
+          th:object="${ciudadano}" method="post">
+        <table>
+            <tr>
+                <td><label>Nombre</label></td>
+                <td><input type="text" th:field="*{nombre}" maxlength="50"/></td>
+                <td th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error"></td>
+            </tr>
+            <tr>
+                <td><label>Contraseña</label></td>
+                <td><input type="password" th:field="*{password}" maxlength="100"/></td>
+                <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></td>
 
-        </tr>
-        <tr>
-            <td><label>NIF</label></td>
-            <td><input type="text" th:field="*{nif}" /></td>
-            <td th:if="${#fields.hasErrors('nif')}" th:errors="*{nif}" class="error"></td>
-        </tr>
-        <tr>
-            <td><label>Email</label></td>
-            <td><input type="text" th:field="*{email}" placeholder="...@..."/></td>
-        </tr>
-        <tr>
-            <td><label>Residencia</label></td>
-            <td><input type="text" th:field="*{residencia}" /></td>
-        </tr>
-        <tr>
-            <td><label>Fecha de Registro</label></td>
-            <td><input type="date" th:field="*{fechaRegistro}" placeholder="D/M/YY"/></td>
-        </tr>
-    </table>
-    <button type="submit" class="btn btn-success">Registrarse</button></a>
-
-</form>
+            </tr>
+            <tr>
+                <td><label>NIF</label></td>
+                <td><input type="text" th:field="*{nif}" /></td>
+                <td th:if="${#fields.hasErrors('nif')}" th:errors="*{nif}" class="error"></td>
+            </tr>
+            <tr>
+                <td><label>Email</label></td>
+                <td><input type="text" th:field="*{email}" placeholder="...@..."/></td>
+            </tr>
+            <tr>
+                <td><label>Residencia</label></td>
+                <td><input type="text" th:field="*{residencia}" /></td>
+            </tr>
+        </table>
+        <button type="submit" class="btn btn-success">Registrarse</button></a>
+    </form>
 </div>
 </body>
 </html>

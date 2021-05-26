@@ -42,10 +42,14 @@ class UserValidator implements Validator {
 public class LoginController {
     @Autowired
     private UserDao userDao;
+    private ResponsableMunicipioDAO responsableMunicipioDAO;
     private CiudadanoDAO ciudadanoDAO;
 
     @Autowired
     public void setCiudadanoDAO(CiudadanoDAO ciudadanoDAO) { this.ciudadanoDAO = ciudadanoDAO; }
+
+    @Autowired
+    public void setResponsableMunicipioDAO(ResponsableMunicipioDAO responsableMunicipioDAO) { this.responsableMunicipioDAO = responsableMunicipioDAO;}
 
     @RequestMapping("/login")
     public String login(Model model) {
@@ -62,21 +66,24 @@ public class LoginController {
             return "login";
         }
         List<Ciudadano> ciudadano = ciudadanoDAO.getCiudadanos();
+        List<ResponsableMunicipio> responsable = responsableMunicipioDAO.getResponsablesMunicipios();
         for (int i = 0; i < ciudadano.size(); i++){
             if (ciudadano.get(i).getNif().equals(user.getNif())){
                 user = userDao.loadUserByUsername(user.getNif(), user.getPassword(), ciudadanoDAO);
                 if (user == null) {
-                    bindingResult.rejectValue("password", "password", "Contraseña incorrecta");
-                    return "login";
+                    bindingResult.rejectValue("password", "badpw", "Contraseña incorrecta");
+                    return "redirect:/index.html";
                 }
                 session.setAttribute("user", user);
                 return "redirect:/user/ciudadano";
-            }
+            }/**else if(responsable.get(i).){
+
+             }**/
         }
         user = userDao.loadUserByUsername(user.getNif(), user.getPassword(), ciudadanoDAO);
         if (user == null) {
-            bindingResult.rejectValue("password", "password", "Contraseña incorrecta");
-            return "login";
+            bindingResult.rejectValue("password", "badpw", "Contraseña incorrecta");
+            return "redirect:/index.html";
         }
         session.setAttribute("user", user);
         return "redirect:/user/ciudadano";

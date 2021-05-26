@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,7 +27,7 @@ public class CiudadanoDAO {
 
     public void addCiudadano(Ciudadano ciudadano) {
         jdbcTemplate.update("INSERT INTO Ciudadano VALUES(?,?,?,?,?,?)",
-                ciudadano.getNombre(),ciudadano.getNif(),ciudadano.getEmail(),ciudadano.getResidencia(),ciudadano.getFechaRegistro(),passwordEncryptor.encryptPassword(ciudadano.getPassword()));
+                ciudadano.getNombre(),ciudadano.getNif(),ciudadano.getEmail(),ciudadano.getResidencia(), LocalDate.now(),passwordEncryptor.encryptPassword(ciudadano.getPassword()));
     }
 
     public void updateCiudadano(Ciudadano ciudadano) {
