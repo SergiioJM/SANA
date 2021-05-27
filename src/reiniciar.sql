@@ -78,7 +78,16 @@ CREATE TABLE FranjaHoraria(
     CONSTRAINT ri_horaFin CHECK (horaFin>horaInicio)
 );
 
-CREATE TABLE Z
+CREATE TABLE ZonaReservada (
+    identificador INTEGER,
+    idarea INTEGER,
+    idzona VARCHAR,
+    fecha Date,
+    franja VARCHAR,
+    CONSTRAINT cp_zona_reservada PRIMARY KEY(identificador),
+    CONSTRAINT ca_zonareservada_area FOREIGN KEY(idarea) REFERENCES Area(idArea) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CONSTRAINT ca_zonareservada_zona FOREIGN KEY(idzona) REFERENCES Zona(identificador) ON DELETE RESTRICT ON UPDATE CASCADE
+);
 
 CREATE TABLE PeriodoAsignado(
 identificador    	 INTEGER ,
