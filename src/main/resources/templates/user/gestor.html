@@ -12,22 +12,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
 </head>
 <body class="center">
+<div class="user" th:replace="fragments/loginGestorInfo" >...</div>
+
 <main class="main">
     <h3 class="negrita"> Bienvenido Gestor Municipal </h3>
     <br><br>
-    <a href="area/list"><button class="btn btn-primary butt" type="submit">Gestión de Areas</button></a>
+    <a href="/area/list"><button class="btn btn-primary butt" type="submit">Gestión de Areas</button></a>
     <br><br>
-    <a href="controlador/list"><button class="btn btn-primary butt" type="submit">Gestión de Controladores</button></a>
+    <a href="/controlador/list"><button class="btn btn-primary butt" type="submit">Gestión de Controladores</button></a>
     <br><br>
-    <a href="periodoAsignado/list"><button class="btn btn-primary butt" type="submit">Gestión de Periodos Asignados</button></a>
+    <a href="/periodoAsignado/list"><button class="btn btn-primary butt" type="submit">Gestión de Periodos Asignados</button></a>
     <br><br>
     <a href="/tipoServicio/list"><button class="btn btn-primary butt" type="submit">Gestión de Tipos de Servicios</button></a>
     <br><br>
-    <a href="servicio/list"><button class="btn btn-primary butt" type="submit">Gestión de Servicios Permanentes</button></a>
+    <a href="/servicio/list"><button class="btn btn-primary butt" type="submit">Gestión de Servicios Permanentes</button></a>
     <br><br>
-    <a href="serviciotemporal/list"><button class="btn btn-primary butt" type="submit">Gestión de Servicios Temporales</button></a>
+    <a href="/serviciotemporal/list"><button class="btn btn-primary butt" type="submit">Gestión de Servicios Temporales</button></a>
     <br><br>
-    <a href="zona/list"><button class="btn btn-primary butt" type="submit">Gestión de Zonas</button></a>
+    <a href="/zona/list"><button class="btn btn-primary butt" type="submit">Gestión de Zonas</button></a>
 </main>
 </body>
 </html>

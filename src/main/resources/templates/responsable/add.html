@@ -22,6 +22,10 @@
             <td><label>Email</label></td>
             <td><input type="text" th:field="*{email}" /></td>
         </tr>
+        <td><label>Contraseña</label></td>
+        <td><input type="password" th:field="*{password}" maxlength="100"/></td>
+        <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></td>
+        </tr>
         <tr>
             <td><label>Teléfono</label></td>
             <td><input type="text" th:field="*{numerotelefono}" /></td>

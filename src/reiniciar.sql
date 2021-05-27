@@ -52,6 +52,7 @@ CREATE TABLE Controlador (
 CREATE TABLE ResponsableMunicipio(
 	nombre	VARCHAR(50) NOT NULL,
 	email		VARCHAR(50),
+	password VARCHAR(50),
 	numerotelefono	INTEGER,
 	fechaInicio	DATE,
 	fechaFin	DATE,
@@ -180,7 +181,7 @@ CREATE TABLE ReservaZonas(
 
 	CONSTRAINT cp_reserva2 PRIMARY KEY(id_reserva,id_zona),
 	CONSTRAINT cp_zona FOREIGN KEY (id_zona) REFERENCES Zona(identificador) ON DELETE RESTRICT ON UPDATE CASCADE,
-	CONSTRAINT cp_reservaAux FOREIGN KEY (id_reserva) REFERENCES Reserva(identificador) ON DELETE CASCADE ON UPDATE CASCADE
+	CONSTRAINT cp_reservaAux FOREIGN KEY (id_reserva) REFERENCES Reserva(identificador) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE Ciudadano(

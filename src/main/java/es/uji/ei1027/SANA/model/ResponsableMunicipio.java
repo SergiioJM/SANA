@@ -3,6 +3,7 @@ package es.uji.ei1027.SANA.model;
 public class ResponsableMunicipio {
     private String nombre;
     private String email;
+    String password;
     private int numerotelefono;
     java.time.LocalDate fechaInicioo;
     java.time.LocalDate fechaFin;
@@ -27,6 +28,14 @@ public class ResponsableMunicipio {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public int getNumerotelefono() {

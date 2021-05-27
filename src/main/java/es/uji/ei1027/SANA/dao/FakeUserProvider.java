@@ -1,6 +1,7 @@
 package es.uji.ei1027.SANA.dao;
 
 import es.uji.ei1027.SANA.model.Ciudadano;
+import es.uji.ei1027.SANA.model.ResponsableMunicipio;
 import es.uji.ei1027.SANA.model.UserDetails;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.stereotype.Repository;
@@ -27,6 +28,26 @@ public class FakeUserProvider implements UserDao {
             return user;
         }
         else {
+            return null;
+        }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername2(String email, String password, ResponsableMunicipioDAO responsableMunicipioDAO) {
+        List<ResponsableMunicipio> responsables = responsableMunicipioDAO.getResponsablesMunicipios();
+        for (int i = 0; i < responsables.size(); i++) {
+            UserDetails usuario = new UserDetails();
+            usuario.setEmail(responsables.get(i).getEmail());
+            usuario.setPassword(responsables.get(i).getPassword());
+            knownUsers.put(responsables.get(i).getEmail(), usuario);
+        }
+        UserDetails user = knownUsers.get(email.trim());
+        if (user == null)
+            return null;
+        BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+        if (passwordEncryptor.checkPassword(password, user.getPassword())) {
+            return user;
+        } else {
             return null;
         }
     }
