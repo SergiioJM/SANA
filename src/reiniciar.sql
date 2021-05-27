@@ -64,19 +64,21 @@ CREATE TABLE ResponsableMunicipio(
 
 );
 
-CREATE TABLE Periodo(
+CREATE TABLE FranjaHoraria(
 	identificador 		INTEGER ,
 	fechaInicio		Date,
 	fechaFin		Date	NULL,
 	horaInicio		Time,
 	horaFin		Time,
-	idArea			INTEGER  NOT NULL,
+	idarea			INTEGER  NOT NULL,
 
 	CONSTRAINT cp_periodo PRIMARY KEY(identificador),
-	CONSTRAINT ca_periodo_area FOREIGN KEY(idArea) REFERENCES Area(idArea) ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT ca_periodo_area FOREIGN KEY(idarea) REFERENCES Area(idArea) ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT ri_fechaFin CHECK (fechaFin>fechaInicio),
     CONSTRAINT ri_horaFin CHECK (horaFin>horaInicio)
 );
+
+CREATE TABLE Z
 
 CREATE TABLE PeriodoAsignado(
 identificador    	 INTEGER ,

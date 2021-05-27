@@ -1,11 +1,14 @@
 package es.uji.ei1027.SANA.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class ReservaZona {
     int reserva;
     String zona;
     int personas;
-
-
 
 
     public ReservaZona(){}
@@ -33,6 +36,7 @@ public class ReservaZona {
     public void setPersonas(int personas) {
         this.personas = personas;
     }
+
 
     @Override
     public String toString() {

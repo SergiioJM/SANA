@@ -17,7 +17,7 @@ public final class PeriodoRowMapper implements RowMapper<Periodo> {
         periodo.setfechaFin(rs.getObject("fechaFin", LocalDate.class));
         periodo.setHoraInicio(rs.getObject("horaInicio", LocalTime.class));
         periodo.setHoraFin(rs.getObject("horaFin", LocalTime.class));
-        periodo.setIdArea(rs.getInt("idArea"));
+        periodo.setIdZona(rs.getString("idZona"));
         return periodo;
     }
 }

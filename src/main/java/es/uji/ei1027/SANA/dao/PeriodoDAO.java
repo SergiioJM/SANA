@@ -22,7 +22,7 @@ public class PeriodoDAO {
 
     public void addPeriodo(Periodo periodo) {
         jdbcTemplate.update("INSERT INTO Periodo VALUES(?,?,?,?,?,?)",
-                obtenerP(),periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdArea());
+                obtenerP(),periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdZona());
     }
 
     public int obtenerP(){
@@ -41,7 +41,7 @@ public class PeriodoDAO {
 
     public void updatePeriodo(Periodo periodo) {
         jdbcTemplate.update("UPDATE Periodo SET fechaInicio =?, fechaFin =?, horaInicio =?, horaFin =?, idArea =? WHERE identificador=?" ,
-                periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdArea(),periodo.getIdentificador());
+                periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdZona(),periodo.getIdentificador());
     }
 
     public Periodo getPeriodo(int identificador) {

@@ -12,6 +12,5 @@ public class ReservaZonaRowMapper implements RowMapper<ReservaZona> {
         reservaZona.setReserva(rs.getInt("id_reserva"));
         reservaZona.setZona(rs.getString("id_zona"));
         return reservaZona;
-
     }
 }

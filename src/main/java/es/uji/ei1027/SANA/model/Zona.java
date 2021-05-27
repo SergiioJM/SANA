@@ -1,5 +1,10 @@
 package es.uji.ei1027.SANA.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
 public class Zona {
         String identificador;
         int capacidad;

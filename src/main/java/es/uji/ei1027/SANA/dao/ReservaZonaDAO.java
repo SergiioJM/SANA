@@ -1,13 +1,17 @@
 package es.uji.ei1027.SANA.dao;
 
+import es.uji.ei1027.SANA.model.Periodo;
 import es.uji.ei1027.SANA.model.ReservaZona;
 import es.uji.ei1027.SANA.model.Zona;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +60,15 @@ public class ReservaZonaDAO {
             List<Zona> zonas= jdbcTemplate.query(
                     "SELECT * FROM Zona WHERE idArea IN (SELECT idarea FROM AREA WHERE nombre=?)", new ZonaRowMapper(), nomarea);
             List<String> zonasfinal=new ArrayList<>();
+            /*
+            for (Zona e : zonas){
+                List<Periodo> zonas1= jdbcTemplate.query(
+                        "SELECT * FROM PERIODO WHERE idZona=? AND fechaInicio=? AND horaInicio=?", new PeriodoRowMapper(),e.getIdentificador(), fecha, hora);
+                if (zonas1.size()>0){
+                    zonasfinal.add(e.getIdentificador() + "#Capacidad:" + e.getCapacidad());
+                }
+            }
+            */
             for (Zona e: zonas){
                 if (!e.isOcupada())
                     zonasfinal.add(e.getIdentificador() + "#Capacidad:" + e.getCapacidad());

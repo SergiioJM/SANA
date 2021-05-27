@@ -68,7 +68,6 @@ public class ReservaZonaController {
         if (reservaZona.getZona() != null){//Comprobamos que ha seleccionado almenos una zona
             // recorremos las zonas como tambien tenemos la capacidad hacemos los dos split para sumar las capacidades deseadas
             for (String zona: reservaZona.getZona().split(",")) {
-
                 zona=zona.split("#Capacidad:")[0];
                 int capacidadZona = zonaDAO.getZona(zona).getCapacidad();
                 capacidadTotalSeleccionada +=capacidadZona;

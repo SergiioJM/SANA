@@ -9,10 +9,9 @@ public class Periodo {
     LocalDate fechaFin;
     LocalTime horaInicio;
     LocalTime horaFin;
-    int idArea;
+    String idZona;
 
     public Periodo() {
-
     }
 
     public int getIdentificador(){return identificador;}
@@ -51,12 +50,12 @@ public class Periodo {
         this.horaFin = horaFin;
     }
 
-    public int getIdArea() {
-        return idArea;
+    public String getIdZona() {
+        return idZona;
     }
 
-    public void setIdArea(int idArea) {
-        this.idArea = idArea;
+    public void setIdZona(String idArea) {
+        this.idZona = idArea;
     }
 
     @Override
@@ -67,7 +66,7 @@ public class Periodo {
                 ", fechaFin=" + fechaFin +
                 ", horaInicio=" + horaInicio +
                 ", horaFin=" + horaFin +
-                ", idArea='" + idArea + '\'' +
+                ", idZona='" + idZona + '\'' +
                 '}';
     }
 }
