@@ -76,13 +76,15 @@ public class ReservaController {
         model.addAttribute("nif",nif);
         model.addAttribute("reserva", r);
         model.addAttribute("listaarea",reservaDAO.getAreas());
+        System.out.println(reservaDAO.getAreas());
         return "reserva/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reserva") Reserva reserva,
-                                   BindingResult bindingResult,Model model) {
-
+                                   BindingResult bindingResult,Model model,HttpSession session) {
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        reserva.setCiudadano(user.getNif());
         ReservaValidator reservaValidator =new ReservaValidator();
         reservaValidator.validate(reserva,bindingResult);
         if (bindingResult.hasErrors()) {
@@ -94,9 +96,10 @@ public class ReservaController {
         //int capacidadActual = zonaDAO.getZona(reserva.getZona()).getCapacidad();
 
         reservaDAO.addReserva(reserva);
+        System.out.println(reserva);
         //zonaDAO.setZona(reserva.getZona(),capacidadActual-reserva.getNumeroPersonas());
 
-        return "redirect:../reservazona/add/" + reserva.getIdentificador() + "/"+ reserva.getNumeroPersonas() + "/"+ reserva.getArea() +"/" + reserva.getCiudadano();
+        return "redirect:../reservazona/add/" + reserva.getIdentificador() + "/"+ reserva.getNumeroPersonas() + "/"+ reserva.getArea() +"/" + user.getNif();
         //return "redirect:list";
     }
 
@@ -116,6 +119,7 @@ public class ReservaController {
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit( @ModelAttribute("reserva") Reserva reserva, BindingResult bindingResult, Model model,HttpSession session) {
         UserDetails user= (UserDetails) session.getAttribute("user");
+        reserva.setCiudadano(user.getNif());
         ReservaValidator reservaValidator =new ReservaValidator();
         //reservaValidator.validate(reserva,zonaDAO,bindingResult);
         reservaValidator.validate(reserva,bindingResult);
@@ -170,6 +174,20 @@ public class ReservaController {
             zonaDAO.updateZona(modificarzona);
         }
         reservaDAO.deleteReserva(identificador);
+        return "redirect:../reservasciudadano/" + user.getNif();
+    }
+    @RequestMapping(value="/cancelar/{identificador}")
+    public String processCancelar(@PathVariable int identificador,HttpSession session) {
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        List<String> zonasreserva=reservaZonaDAO.getReservaZona(identificador);
+        for(String e : zonasreserva){
+            Zona modificarzona=zonaDAO.getZona(e);
+            modificarzona.setOcupada(false);
+            zonaDAO.updateZona(modificarzona);
+        }
+        Reserva reserva= reservaDAO.getReserva(identificador);
+        reserva.setEstado("cancelada");
+        reservaDAO.updateReserva(reserva);
         return "redirect:../reservasciudadano/" + user.getNif();
     }
     @RequestMapping("/listadodetallado/{reserva}")

@@ -49,6 +49,7 @@ public class ReservaZonaController {
         ReservaZona reservaZona= new ReservaZona();
         reservaZona.setReserva(id);
         reservaZona.setPersonas(cantidadPersonas);
+        reservaZona.setArea(area);
         session.setAttribute("area",area);//guardamos el id area para despues en el siguiente metodo utilizarlo y borrarlo
 
         model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(area));

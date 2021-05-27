@@ -16,12 +16,12 @@
 <table class="table">
     <thead class="thead-dark">
     <tr>
-        <th>Identificador</th>
-        <th>Hora</th>
         <th>Fecha</th>
+        <th>Franja horaria</th>
         <th>Numero de Personas</th>
         <th>Estado</th>
-        <th>Identificador de la Zona</th>
+        <th>Zonas reservadas</th>
+        <th>Area reservada</th>
         <th></th>
         <th></th>
         <th></th>
@@ -29,15 +29,15 @@
     </thead>
     <tbody>
     <tr th:each="reserva: ${reservas}">
-        <td th:text="${reserva.identificador}"></td>
-        <td th:text="${reserva.hora}"></td>
         <td th:text="${reserva.fecha}"></td>
+        <td th:text="${reserva.hora}"></td>
         <td th:text="${reserva.numeroPersonas}"></td>
         <td th:text="${reserva.estado}"></td>
         <td th:text="${reserva.getListreserva()}"></td>
+        <td th:text="${reserva.getArea()}"></td>
         <td><a th:href="@{/reserva/update/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
-        <td><a th:href="@{/reserva/delete/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        <td><a th:href="@{/reserva/cancelar/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Cancelar</button></a>
         </td>
         <td><a th:href="@{/reserva/listadodetallado/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-info">Ver detalles de las zonas</button></a>
         </td>
