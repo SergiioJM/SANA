@@ -65,7 +65,8 @@ public class ReservaDAO {
                     new es.uji.ei1027.SANA.dao.ReservaRowMapper());
 
             for (Reserva e : res){
-                e.setListreserva(getZonasDeReserva(e.getIdentificador()));
+                List<String> lista=getZonasDeReserva(e.getIdentificador());
+                e.setListreserva(lista);
             }
             return res;
         }catch(EmptyResultDataAccessException e) {
@@ -102,7 +103,16 @@ public class ReservaDAO {
             List<Reserva> ciudadanos= jdbcTemplate.query(
                     "SELECT * FROM Reserva WHERE ciudadano=?", new ReservaRowMapper(),nif);
             for (Reserva e : ciudadanos){
-                e.setListreserva(getZonasDeReserva(e.getIdentificador()));
+                List<String> lista=getZonasDeReserva(e.getIdentificador());
+                e.setListreserva(lista);
+                if (lista.size()!=0) {
+                    String area = jdbcTemplate.queryForObject("SELECT nombre FROM AREA WHERE idArea IN (SELECT idArea FROM Zona WHERE identificador=?)", String.class, lista.get(0));
+                    e.setArea(area);
+                }
+                else {
+                    e.setArea(" ");
+                }
+
             }
             return ciudadanos;
         }

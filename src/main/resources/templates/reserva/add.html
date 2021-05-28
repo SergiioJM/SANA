@@ -35,10 +35,9 @@
         <tr>
             <td><label class="negrita">Estado</label></td>
             <td><select class="form_control" type="text" th:field="*{estado}">
-                <option value="No seleccionado">Selecciona el estado de la reserva</option>
+                <option  value="disponible">Disponible</option>
                 <option value="usada">Usada</option>
                 <option value="cancelada">Cancelada</option>
-                <option value="disponible">Disponible</option>
             </select>
             </td>
             <td th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" class="error"></td>
@@ -50,11 +49,6 @@
                     <option th:each="nombrearea: ${listaarea}" th:value="${nombrearea}" th:text="${nombrearea}"></option>
                 </select>
             </td>
-        </tr>
-        <tr>
-            <td><label class="negrita">Ciudadano</label></td>
-            <td><input type="text" th:field="*{ciudadano}"
-                       readonly="readonly"/></td>
         </tr>
     </table>
     <br><br>

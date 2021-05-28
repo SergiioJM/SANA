@@ -9,7 +9,7 @@ public class ReservaZona {
     int reserva;
     String zona;
     int personas;
-
+    String area;
 
     public ReservaZona(){}
 
@@ -35,6 +35,14 @@ public class ReservaZona {
 
     public void setPersonas(int personas) {
         this.personas = personas;
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area;
     }
 
 

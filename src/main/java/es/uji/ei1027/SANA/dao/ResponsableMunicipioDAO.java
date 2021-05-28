@@ -3,6 +3,7 @@ package es.uji.ei1027.SANA.dao;
 import es.uji.ei1027.SANA.model.Reserva;
 import es.uji.ei1027.SANA.model.ReservaZona;
 import es.uji.ei1027.SANA.model.ResponsableMunicipio;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -21,10 +22,11 @@ public class ResponsableMunicipioDAO {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
+    BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
 
     public void addResponsableMunicipio(ResponsableMunicipio responsableMunicipio) {
-        jdbcTemplate.update("INSERT INTO ResponsableMunicipio VALUES(?,?,?,?,?,?,?)",
-                responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),responsableMunicipio.getNumerotelefono(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),obtenerRM(),responsableMunicipio.getMunicipio());
+        jdbcTemplate.update("INSERT INTO ResponsableMunicipio VALUES(?,?,?,?,?,?,?,?)",
+                responsableMunicipio.getNombre(),responsableMunicipio.getEmail(),passwordEncryptor.encryptPassword(responsableMunicipio.getPassword()),responsableMunicipio.getNumerotelefono(),responsableMunicipio.getfechaInicio(),responsableMunicipio.getfechaFin(),obtenerRM(),responsableMunicipio.getMunicipio());
     }
 
     public int obtenerRM(){
