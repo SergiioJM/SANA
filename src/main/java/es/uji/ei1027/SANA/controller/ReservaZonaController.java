@@ -107,10 +107,17 @@ public class ReservaZonaController {
 
     @RequestMapping(value="/delete/{reserva}/{zona}")
     public String processDelete(@PathVariable int reserva,@PathVariable String zona) {
-        Zona modificarzona=zonaDAO.getZona(zona);
-        modificarzona.setOcupada(false);
-        zonaDAO.updateZona(modificarzona);
-       reservaZonaDAO.deleteReservaZona(reserva,zona);
-       return "redirect:../../list";
+
+        List<String> zonas =reservaZonaDAO.getReservaZona(reserva);
+
+        if(zonas.size() > 1){
+
+            Zona modificarzona=zonaDAO.getZona(zona);
+            modificarzona.setOcupada(false);
+            zonaDAO.updateZona(modificarzona);
+            reservaZonaDAO.deleteReservaZona(reserva,zona);
+        }
+
+       return "redirect:/reserva/listadodetallado/" + reserva;
     }
 }

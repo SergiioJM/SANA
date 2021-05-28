@@ -13,6 +13,9 @@ public class ReservaZonaValidator implements Validator {
     @Override
     public void validate(Object o, Errors errors) {
         ReservaZona reservaZona=(ReservaZona) o;
+        if (reservaZona.getZona().length() > 3){
+            errors.rejectValue("zona", "obligatorio", "Necesitas almenos 1 zona");
+        }
     }
 
     public void validate(Object o, int capacidadTotalSeleccionada ,Errors errors) {
@@ -23,5 +26,7 @@ public class ReservaZonaValidator implements Validator {
         }else if(reservaZona.getPersonas() >  capacidadTotalSeleccionada){
             errors.rejectValue("zona", "obligatorio", "No hay espacio suficiente con esas areas");
         }
+
+
     }
 }
