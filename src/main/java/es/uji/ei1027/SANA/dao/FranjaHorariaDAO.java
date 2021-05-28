@@ -20,13 +20,13 @@ public class FranjaHorariaDAO {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void addPeriodo(FranjaHoraria franjaHoraria) {
-        jdbcTemplate.update("INSERT INTO Periodo VALUES(?,?,?,?,?,?)",
+    public void addFranjaHoraria(FranjaHoraria franjaHoraria) {
+        jdbcTemplate.update("INSERT INTO FranjaHorario VALUES(?,?,?,?,?,?)",
                 obtenerP(), franjaHoraria.getfechaInicio(), franjaHoraria.getfechaFin(), franjaHoraria.getHoraInicio(), franjaHoraria.getHoraFin(), franjaHoraria.getidArea());
     }
 
     public int obtenerP(){
-        String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Periodo", String.class);
+        String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM FranjaHorario", String.class);
         if (consulta == null){
             return 1;
         }
@@ -34,19 +34,19 @@ public class FranjaHorariaDAO {
         return p;
     }
 
-    public void deletePeriodo(int identificador) {
-        jdbcTemplate.update("DELETE FROM Periodo WHERE identificador =?",
+    public void deleteFranjaHoraria(int identificador) {
+        jdbcTemplate.update("DELETE FROM FranjaHorario WHERE identificador =?",
                 identificador);
     }
 
-    public void updatePeriodo(FranjaHoraria franjaHoraria) {
-        jdbcTemplate.update("UPDATE Periodo SET fechaInicio =?, fechaFin =?, horaInicio =?, horaFin =?, idArea =? WHERE identificador=?" ,
+    public void updateFranjaHoraria(FranjaHoraria franjaHoraria) {
+        jdbcTemplate.update("UPDATE FranjaHorario SET fechaInicio =?, fechaFin =?, horaInicio =?, horaFin =?, idArea =? WHERE identificador=?" ,
                 franjaHoraria.getfechaInicio(), franjaHoraria.getfechaFin(), franjaHoraria.getHoraInicio(), franjaHoraria.getHoraFin(), franjaHoraria.getidArea(), franjaHoraria.getIdentificador());
     }
 
-    public FranjaHoraria getPeriodo(int identificador) {
+    public FranjaHoraria getFranjaHoraria(int identificador) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM Periodo WHERE identificador =?",
+            return jdbcTemplate.queryForObject("SELECT * FROM FranjaHorario WHERE identificador =?",
                     new FranjaHorariaRowMapper(), identificador);
         }
         catch(EmptyResultDataAccessException e) {
@@ -54,10 +54,10 @@ public class FranjaHorariaDAO {
         }
     }
 
-    public List<FranjaHoraria> getPeriodos(){
+    public List<FranjaHoraria> getFranjasHorarias(){
         try{
             return jdbcTemplate.query(
-                    "SELECT * FROM Periodo",
+                    "SELECT * FROM FranjaHorario",
                     new FranjaHorariaRowMapper());
         }
         catch(EmptyResultDataAccessException e) {

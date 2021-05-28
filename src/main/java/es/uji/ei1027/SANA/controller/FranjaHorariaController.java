@@ -38,7 +38,7 @@ public class FranjaHorariaController {
 
     @RequestMapping("/list")
     public String listaDePeriodos(Model model){
-        model.addAttribute("periodos", franjaHorariaDAO.getPeriodos());
+        model.addAttribute("periodos", franjaHorariaDAO.getFranjasHorarias());
         return "periodo/list";
     }
 
@@ -69,7 +69,7 @@ public class FranjaHorariaController {
             return "periodo/add";
         }
         try {
-            franjaHorariaDAO.addPeriodo(franjaHoraria);
+            franjaHorariaDAO.addFranjaHoraria(franjaHoraria);
         }
         catch (DuplicateKeyException e ){
             throw new ClaveDuplicadaException("Ya existe el identificador " + franjaHoraria.getIdentificador() + " para un periodo","CPduplicada");
@@ -79,7 +79,7 @@ public class FranjaHorariaController {
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
     public String editPeriodo(Model model, @PathVariable int identificador) {
-        model.addAttribute("periodo", franjaHorariaDAO.getPeriodo(identificador));
+        model.addAttribute("periodo", franjaHorariaDAO.getFranjaHoraria(identificador));
         List<Area> lista2 = areaDAO.getAreas();
         ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2)
@@ -102,13 +102,13 @@ public class FranjaHorariaController {
             model.addAttribute("arealista",lista);
             return "periodo/update";
         }
-            franjaHorariaDAO.updatePeriodo(franjaHoraria);
+            franjaHorariaDAO.updateFranjaHoraria(franjaHoraria);
         return "redirect:list";
     }
 
     @RequestMapping(value="/delete/{identificador}")
     public String processDelete(@PathVariable int identificador) {
-        franjaHorariaDAO.deletePeriodo(identificador);
+        franjaHorariaDAO.deleteFranjaHoraria(identificador);
         return "redirect:../list";
     }
 
