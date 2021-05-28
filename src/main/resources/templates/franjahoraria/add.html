@@ -14,7 +14,7 @@
       th:object="${franjahoraria}" method="post">
     <table>
         <tr>
-            <td><label>Fecha de Inicio</label></td>
+            <td><label>Fecha de Inicio </label></td>
             <td><input type="date" th:field="*{fechaInicio}"
                        placeholder="D/M/YY"/></td>
             <td th:if="${#fields.hasErrors('fechaInicio')}" th:errors="*{fechaInicio}" class="error"></td>
