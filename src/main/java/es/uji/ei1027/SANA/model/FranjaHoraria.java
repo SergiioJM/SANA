@@ -1,15 +1,22 @@
 package es.uji.ei1027.SANA.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public class FranjaHoraria {
     int identificador;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate fechaInicio;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate fechaFin;
+    @DateTimeFormat(pattern = "HH:mm")
     LocalTime horaInicio;
+    @DateTimeFormat(pattern = "HH:mm")
     LocalTime horaFin;
-    String idArea;
+    int idArea;
+    String nombrearea;
 
     public FranjaHoraria() {
     }
@@ -50,12 +57,44 @@ public class FranjaHoraria {
         this.horaFin = horaFin;
     }
 
-    public String getidArea() {
+    public int getidArea() {
         return idArea;
     }
 
-    public void setidArea(String idArea) {
+    public void setidArea(int idArea) {
         this.idArea = idArea;
+    }
+
+    public LocalDate getFechaInicio() {
+        return fechaInicio;
+    }
+
+    public void setFechaInicio(LocalDate fechaInicio) {
+        this.fechaInicio = fechaInicio;
+    }
+
+    public LocalDate getFechaFin() {
+        return fechaFin;
+    }
+
+    public void setFechaFin(LocalDate fechaFin) {
+        this.fechaFin = fechaFin;
+    }
+
+    public int getIdArea() {
+        return idArea;
+    }
+
+    public void setIdArea(int idArea) {
+        this.idArea = idArea;
+    }
+
+    public String getNombrearea() {
+        return nombrearea;
+    }
+
+    public void setNombrearea(String nombrearea) {
+        this.nombrearea = nombrearea;
     }
 
     @Override
@@ -67,6 +106,7 @@ public class FranjaHoraria {
                 ", horaInicio=" + horaInicio +
                 ", horaFin=" + horaFin +
                 ", idArea='" + idArea + '\'' +
+                ", nombreArea= " + nombrearea +
                 '}';
     }
 }

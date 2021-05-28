@@ -20,5 +20,13 @@ public class FranjaHorariaValidator implements Validator {
             if (franjaHoraria.getfechaInicio().isAfter(franjaHoraria.getfechaFin()))
                 errors.rejectValue("fechaFin", "obligatorio", "La fecha de fin tiene que ser posterior a la de inicio");
         }
+        if (franjaHoraria.getHoraInicio() == null)
+            errors.rejectValue("horaInicio", "obligatorio", "Tienes que introducir una hora de inicio");
+
+        if (franjaHoraria.getHoraFin() != null) {
+            if (franjaHoraria.getHoraInicio().isAfter(franjaHoraria.getHoraFin()))
+                errors.rejectValue("horaFin", "obligatorio", "La hora de fin tiene que ser posterior a la de inicio");
+        }
+
     }
 }

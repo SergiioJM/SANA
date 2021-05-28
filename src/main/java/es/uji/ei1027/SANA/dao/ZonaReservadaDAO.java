@@ -1,7 +1,7 @@
 package es.uji.ei1027.SANA.dao;
 
 
-import es.uji.ei1027.SANA.model.Servicio;
+
 import es.uji.ei1027.SANA.model.ZonaReservada;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;

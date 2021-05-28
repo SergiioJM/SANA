@@ -32,16 +32,13 @@
             <td th:if="${#fields.hasErrors('numeroPersonas')}" th:errors="*{numeroPersonas}" class="error"></td>
 
         </tr>
-        <tr>
+        <!--<tr>
             <td><label class="negrita">Estado</label></td>
-            <td><select class="form_control" type="text" th:field="*{estado}">
-                <option  value="disponible">Disponible</option>
-                <option value="usada">Usada</option>
-                <option value="cancelada">Cancelada</option>
-            </select>
+            <td>
+                <label th:field="*{estado}" value="disponible" >Disponible</label>
             </td>
-            <td th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" class="error"></td>
-        </tr>
+
+        </tr>-->
         <tr>
             <td><label class="negrita">Area</label></td>
             <td>

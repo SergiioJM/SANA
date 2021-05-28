@@ -76,7 +76,7 @@ public class ReservaController {
         model.addAttribute("nif",nif);
         model.addAttribute("reserva", r);
         model.addAttribute("listaarea",reservaDAO.getAreas());
-        System.out.println(reservaDAO.getAreas());
+
         return "reserva/add";
     }
 
@@ -85,6 +85,7 @@ public class ReservaController {
                                    BindingResult bindingResult,Model model,HttpSession session) {
         UserDetails user= (UserDetails) session.getAttribute("user");
         reserva.setCiudadano(user.getNif());
+        reserva.setEstado("disponible"); // Cada vez que añadimos siempre el estado
         ReservaValidator reservaValidator =new ReservaValidator();
         reservaValidator.validate(reserva,bindingResult);
         if (bindingResult.hasErrors()) {
@@ -120,9 +121,10 @@ public class ReservaController {
     public String processUpdateSubmit( @ModelAttribute("reserva") Reserva reserva, BindingResult bindingResult, Model model,HttpSession session) {
         UserDetails user= (UserDetails) session.getAttribute("user");
         reserva.setCiudadano(user.getNif());
+
         ReservaValidator reservaValidator =new ReservaValidator();
-        //reservaValidator.validate(reserva,zonaDAO,bindingResult);
         reservaValidator.validate(reserva,bindingResult);
+
         if (bindingResult.hasErrors()) {
             List<Zona> lista2 = zonaDAO.getZonas();
             ArrayList<String> lista = new ArrayList<>();
@@ -133,7 +135,7 @@ public class ReservaController {
         }
 
         reservaDAO.updateReserva(reserva);
-        //return "redirect:lis";
+
         return "redirect:../reserva/reservasciudadano/" + user.getNif();
     }
     @RequestMapping(value="/update2/{identificador}", method = RequestMethod.GET)
