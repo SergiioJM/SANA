@@ -29,7 +29,8 @@ public class ReservaValidator implements Validator {
                 errors.rejectValue("fecha", "obligatorio", "Debes introducir una fecha valida ");
             }
         }
-        if (reserva.getEstado().equals("No seleccionado")){
+
+        if (reserva.getEstado() == null || reserva.getEstado().equals("No seleccionado")){
             errors.rejectValue("estado", "obligatorio", "Debe seleccionar un estado ");
         }
     }

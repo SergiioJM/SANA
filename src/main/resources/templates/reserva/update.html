@@ -37,12 +37,13 @@
         <tr>
             <td><label>Estado</label></td>
             <td><select class="form_control" type="text" th:field="*{estado}">
-                <option value="No seleccionado">Selecciona el estado de la reserva</option>
-                <option value="usada">Usada</option>
+                <option value="No seleccionado" >Selecciona el estado de la reserva</option>
+                <option value="usada" >Usada</option>
                 <option value="cancelada">Cancelada</option>
                 <option value="disponible">Disponible</option>
             </select>
             </td>
+            <td th:if="${#fields.hasErrors('estado')}" th:errors="*{estado}" class="error"></td>
         </tr>
     </table>
     <br><br>
