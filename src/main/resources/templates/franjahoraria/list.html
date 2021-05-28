@@ -6,11 +6,10 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 </head>
 <body>
-<h1>Lista de Periodos</h1>
+<h1>Lista de Franjas horarias</h1>
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>Identificador</th>
         <th>Fecha de Inicio</th>
         <th>Fecha de Fin</th>
         <th>Hora de Inicio</th>
@@ -22,7 +21,6 @@
     </thead>
     <tbody>
     <tr th:each="franjaHoraria: ${periodos}">
-        <td th:text="${franjaHoraria.getIdentificador()}"></td>
         <td th:text="${franjaHoraria.getfechaInicio()}"></td>
         <td th:text="${franjaHoraria.getfechaFin()}"></td>
         <td th:text="${franjaHoraria.getHoraInicio()}"></td>
@@ -35,7 +33,7 @@
     </tr>
     </tbody>
 </table>
-<a href="add"><button type="button" class="btn btn-success">Añade Periodo</button></a>
+<a href="add"><button type="button" class="btn btn-success">Añade Franja Horaria</button></a>
 <a href="/"><button type="button" class="btn btn-outline-secondary">Menu Princpial</button></a>
 
 </body>

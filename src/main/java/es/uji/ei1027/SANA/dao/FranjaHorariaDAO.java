@@ -35,18 +35,18 @@ public class FranjaHorariaDAO {
     }
 
     public void deleteFranjaHoraria(int identificador) {
-        jdbcTemplate.update("DELETE FROM FranjaHorario WHERE identificador =?",
+        jdbcTemplate.update("DELETE FROM FranjaHoraria WHERE identificador =?",
                 identificador);
     }
 
     public void updateFranjaHoraria(FranjaHoraria franjaHoraria) {
-        jdbcTemplate.update("UPDATE FranjaHorario SET fechaInicio =?, fechaFin =?, horaInicio =?, horaFin =?, idArea =? WHERE identificador=?" ,
+        jdbcTemplate.update("UPDATE FranjaHoraria SET fechaInicio =?, fechaFin =?, horaInicio =?, horaFin =?, idArea =? WHERE identificador=?" ,
                 franjaHoraria.getfechaInicio(), franjaHoraria.getfechaFin(), franjaHoraria.getHoraInicio(), franjaHoraria.getHoraFin(), franjaHoraria.getidArea(), franjaHoraria.getIdentificador());
     }
 
     public FranjaHoraria getFranjaHoraria(int identificador) {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM FranjaHorario WHERE identificador =?",
+            return jdbcTemplate.queryForObject("SELECT * FROM FranjaHoraria WHERE identificador =?",
                     new FranjaHorariaRowMapper(), identificador);
         }
         catch(EmptyResultDataAccessException e) {
@@ -57,7 +57,7 @@ public class FranjaHorariaDAO {
     public List<FranjaHoraria> getFranjasHorarias(){
         try{
             return jdbcTemplate.query(
-                    "SELECT * FROM FranjaHorario",
+                    "SELECT * FROM FranjaHoraria",
                     new FranjaHorariaRowMapper());
         }
         catch(EmptyResultDataAccessException e) {

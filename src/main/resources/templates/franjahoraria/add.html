@@ -1,39 +1,42 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Edita un franjaHoraria</title>
+    <title>Añadir franjaHoraria</title>
     <meta charset="UTF-8" />
     <link rel="stylesheet"
           href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css"
+          th:href="@{/css/estilos.css}"/>
 </head>
 <body>
-<h2>Edita franjaHoraria</h2>
-<form action="#" th:action="@{/franjaHoraria/update}"
-      th:object="${franjaHoraria}" method="post">
+<h2>Nuevo Franja Horaria</h2>
+<form action="#" th:action="@{/franjaHoraria/add}"
+      th:object="${franjahoraria}" method="post">
     <table>
         <tr>
-            <td><label>Identificador</label></td>
-            <td><input type="text" th:field="*{identificador}"
-                       readonly="readonly"/></td>
-        </tr>
-        <tr>
             <td><label>Fecha de Inicio</label></td>
-            <td><input type="text" th:field="*{fechaInicio}" /></td>
+            <td><input type="date" th:field="*{fechaInicio}"
+                       placeholder="D/M/YY"/></td>
             <td th:if="${#fields.hasErrors('fechaInicio')}" th:errors="*{fechaInicio}" class="error"></td>
+
+
         </tr>
         <tr>
             <td><label>Fecha de Fin</label></td>
-            <td><input type="text" th:field="*{fechaFin}"></td>
+            <td><input type="date" th:field="*{fechaFin}"
+                       placeholder="D/M/YY"/></td>
             <td th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}" class="error"></td>
 
         </tr>
         <tr>
             <td><label>Hora de Inicio</label></td>
-            <td><input type="text" th:field="*{horaInicio}" /></td>
+            <td><input type="time" th:field="*{horaInicio}"
+                       placeholder="HH/MM/ss"/></td>
         </tr>
         <tr>
             <td><label>Hora de Fin</label></td>
-            <td><input type="text" th:field="*{horaFin}" /></td>
+            <td><input type="time" th:field="*{horaFin}"
+                       placeholder="HH/MM/ss"/></td>
         </tr>
         <tr>
             <td><label>Identificador del Area</label></td>
@@ -44,10 +47,8 @@
             </td>
         </tr>
     </table>
-    <a href="add"><button type="submit" class="btn btn-success">Modifica un Periodo</button></a>
-    <a href="/franjaHoraria/list"><button type="button" class="btn btn-secondary">Volver</button></a>
-    <a href="/"><button type="button" class="btn btn-outline-secondary">Menu Principal</button></a>
-
-</form>
+    <a href="add"><button type="submit" class="btn btn-success">Añade un Franja Horaria</button></a>
+    <a href="/franjahoraria/list"><button type="button" class="btn btn-secondary">Volver</button></a>
+    <a href="/"> <button type="button" class="btn btn-outline-secondary">Menu Princpial</button></a></form>
 </body>
 </html>

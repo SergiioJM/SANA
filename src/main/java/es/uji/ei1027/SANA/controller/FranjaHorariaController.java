@@ -20,7 +20,7 @@ import java.util.List;
 
 
 @Controller
-@RequestMapping("/periodo")
+@RequestMapping("/franjahoraria")
 public class FranjaHorariaController {
 
     private FranjaHorariaDAO franjaHorariaDAO;
@@ -39,25 +39,25 @@ public class FranjaHorariaController {
     @RequestMapping("/list")
     public String listaDePeriodos(Model model){
         model.addAttribute("periodos", franjaHorariaDAO.getFranjasHorarias());
-        return "periodo/list";
+        return "franjahoraria/list";
     }
 
     @RequestMapping(value="/add")
     public String addPeriodo(Model model) {
-        model.addAttribute("periodo", new FranjaHoraria());
+        model.addAttribute("franjahoraria", new FranjaHoraria());
         List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<Integer> lista = new ArrayList<>();
+        ArrayList<String> lista = new ArrayList<>();
         for (Area e : lista2)
-            lista.add(e.getIdArea());
+            lista.add(e.getNombre());
         model.addAttribute("arealista",lista);
-        return "periodo/add";
+        return "franjahoraria/add";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
-    public String processAddSubmit(@ModelAttribute("periodo") FranjaHoraria franjaHoraria,
+    public String processAddSubmit(@ModelAttribute("franjahoraria") FranjaHoraria franjahoraria,
                                    BindingResult bindingResult, Model model) {
         FranjaHorariaValidator franjaHorariaValidator = new FranjaHorariaValidator();
-        franjaHorariaValidator.validate(franjaHoraria,bindingResult);
+        franjaHorariaValidator.validate(franjahoraria,bindingResult);
         if (bindingResult.hasErrors()) {
             List<Area> lista2 = areaDAO.getAreas();
             ArrayList<Integer> lista = new ArrayList<>();
@@ -66,13 +66,13 @@ public class FranjaHorariaController {
 
             }
             model.addAttribute("arealista", lista);
-            return "periodo/add";
+            return "franjahoraria/add";
         }
         try {
-            franjaHorariaDAO.addFranjaHoraria(franjaHoraria);
+            franjaHorariaDAO.addFranjaHoraria(franjahoraria);
         }
         catch (DuplicateKeyException e ){
-            throw new ClaveDuplicadaException("Ya existe el identificador " + franjaHoraria.getIdentificador() + " para un periodo","CPduplicada");
+            throw new ClaveDuplicadaException("Ya existe el identificador " + franjahoraria.getIdentificador() + " para un periodo","CPduplicada");
         }
         return "redirect:list";
     }
@@ -85,7 +85,7 @@ public class FranjaHorariaController {
         for (Area e : lista2)
             lista.add(e.getIdArea());
         model.addAttribute("arealista",lista);
-        return "periodo/update";
+        return "franjahoraria/update";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
@@ -100,7 +100,7 @@ public class FranjaHorariaController {
             for (Area e : lista2)
                 lista.add(e.getIdArea());
             model.addAttribute("arealista",lista);
-            return "periodo/update";
+            return "franjahoraria/update";
         }
             franjaHorariaDAO.updateFranjaHoraria(franjaHoraria);
         return "redirect:list";
