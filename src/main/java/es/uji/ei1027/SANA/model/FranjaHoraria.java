@@ -3,15 +3,15 @@ package es.uji.ei1027.SANA.model;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class Periodo {
+public class FranjaHoraria {
     int identificador;
     LocalDate fechaInicio;
     LocalDate fechaFin;
     LocalTime horaInicio;
     LocalTime horaFin;
-    String idZona;
+    String idArea;
 
-    public Periodo() {
+    public FranjaHoraria() {
     }
 
     public int getIdentificador(){return identificador;}
@@ -50,12 +50,12 @@ public class Periodo {
         this.horaFin = horaFin;
     }
 
-    public String getIdZona() {
-        return idZona;
+    public String getidArea() {
+        return idArea;
     }
 
-    public void setIdZona(String idArea) {
-        this.idZona = idArea;
+    public void setidArea(String idArea) {
+        this.idArea = idArea;
     }
 
     @Override
@@ -66,7 +66,7 @@ public class Periodo {
                 ", fechaFin=" + fechaFin +
                 ", horaInicio=" + horaInicio +
                 ", horaFin=" + horaFin +
-                ", idZona='" + idZona + '\'' +
+                ", idArea='" + idArea + '\'' +
                 '}';
     }
 }

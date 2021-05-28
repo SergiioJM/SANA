@@ -1,6 +1,6 @@
 package es.uji.ei1027.SANA.dao;
 
-import es.uji.ei1027.SANA.model.Periodo;
+import es.uji.ei1027.SANA.model.FranjaHoraria;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository
-public class PeriodoDAO {
+public class FranjaHorariaDAO {
 
     private JdbcTemplate jdbcTemplate;
 
@@ -20,9 +20,9 @@ public class PeriodoDAO {
         jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
-    public void addPeriodo(Periodo periodo) {
+    public void addPeriodo(FranjaHoraria franjaHoraria) {
         jdbcTemplate.update("INSERT INTO Periodo VALUES(?,?,?,?,?,?)",
-                obtenerP(),periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdZona());
+                obtenerP(), franjaHoraria.getfechaInicio(), franjaHoraria.getfechaFin(), franjaHoraria.getHoraInicio(), franjaHoraria.getHoraFin(), franjaHoraria.getidArea());
     }
 
     public int obtenerP(){
@@ -39,26 +39,26 @@ public class PeriodoDAO {
                 identificador);
     }
 
-    public void updatePeriodo(Periodo periodo) {
+    public void updatePeriodo(FranjaHoraria franjaHoraria) {
         jdbcTemplate.update("UPDATE Periodo SET fechaInicio =?, fechaFin =?, horaInicio =?, horaFin =?, idArea =? WHERE identificador=?" ,
-                periodo.getfechaInicio(),periodo.getfechaFin(),periodo.getHoraInicio(),periodo.getHoraFin(),periodo.getIdZona(),periodo.getIdentificador());
+                franjaHoraria.getfechaInicio(), franjaHoraria.getfechaFin(), franjaHoraria.getHoraInicio(), franjaHoraria.getHoraFin(), franjaHoraria.getidArea(), franjaHoraria.getIdentificador());
     }
 
-    public Periodo getPeriodo(int identificador) {
+    public FranjaHoraria getPeriodo(int identificador) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM Periodo WHERE identificador =?",
-                    new PeriodoRowMapper(), identificador);
+                    new FranjaHorariaRowMapper(), identificador);
         }
         catch(EmptyResultDataAccessException e) {
             return null;
         }
     }
 
-    public List<Periodo> getPeriodos(){
+    public List<FranjaHoraria> getPeriodos(){
         try{
             return jdbcTemplate.query(
                     "SELECT * FROM Periodo",
-                    new es.uji.ei1027.SANA.dao.PeriodoRowMapper());
+                    new FranjaHorariaRowMapper());
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();
