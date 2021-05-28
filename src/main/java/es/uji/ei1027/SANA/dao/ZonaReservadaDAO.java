@@ -1,6 +1,7 @@
 package es.uji.ei1027.SANA.dao;
 
 
+import es.uji.ei1027.SANA.model.Servicio;
 import es.uji.ei1027.SANA.model.ZonaReservada;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -8,6 +9,9 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 @Repository
 public class ZonaReservadaDAO {
@@ -20,11 +24,20 @@ public class ZonaReservadaDAO {
 
     }
     public void addZonaReservada(ZonaReservada zonaReservada) {
+        int ide=obtenerR();
         jdbcTemplate.update("INSERT INTO ZonaReservada VALUES(?,?,?,?,?)",
-                zonaReservada.getIdentificador(),zonaReservada.getIdarea(),zonaReservada.getIdzona()
-                ,zonaReservada.getFecha(),zonaReservada.getFranja());
+                ide,zonaReservada.getIdarea(),zonaReservada.getIdzona(),zonaReservada.getFecha(),zonaReservada.getFranja());
+        zonaReservada.setIdentificador(ide);
     }
+    public int obtenerR(){
+        String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Reserva", String.class);
+        if (consulta == null){
+            return 1;
+        }
 
+        int r = Integer.parseInt(consulta) + 1;
+        return r;
+    }
 
     public void updateZonaReservada(ZonaReservada zonaReservada) {
         jdbcTemplate.update("UPDATE Zona SET identificador =?, idarea=?, idzona =?, fecha =? " +
@@ -41,10 +54,29 @@ public class ZonaReservadaDAO {
     public ZonaReservada getZonaReservada(int identificador) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM ZonaReservada WHERE identificador =?",
-                    new es.uji.ei1027.SANA.dao.ZonaReservadaRowMapper(), identificador);
+                    new ZonaReservadaRowMapper(), identificador);
         }
         catch(EmptyResultDataAccessException e) {
             return null;
         }
     }
+    public List<ZonaReservada> getZonasReservadas() {
+        try {
+            return jdbcTemplate.query("SELECT * FROM ZonaReservada",
+                    new ZonaReservadaRowMapper());
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+    public ZonaReservada getZonaReservada2(int zona, String frnaja, Date fecha) {
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM ZonaReservada WHERE idzona =? AND fecha=? AND franja=?",
+                    new ZonaReservadaRowMapper(), zona,frnaja, fecha);
+        }
+        catch(EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+
 }
