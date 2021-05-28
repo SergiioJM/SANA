@@ -6,6 +6,7 @@
     <link rel="icon" type="image/png" href="/images/LogoSana.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+    <link rel="stylesheet" type="text/css" href="/css/popup.css" th:href="@{/css/popup.css}"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
 
@@ -37,7 +38,16 @@
         <td th:text="${reserva.getArea()}"></td>
         <td><a th:href="@{/reserva/update/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
-        <td><a th:href="@{/reserva/cancelar/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Cancelar</button></a>
+        <td><p><a href="#popup"><button type="button" class="btn btn-danger">Cancelar</button></a></p>
+            <div id="popup" class="overlay">
+                <div id="popupBody">
+                    <h2>¿Está seguro que desea cancelar la reserva?</h2>
+                    <a id="cerrar" href="#">&times;</a>
+                    <div class="popupContent">
+                        <a th:href="@{/reserva/cancelar/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Aceptar</button></a>
+                    </div>
+                </div>
+            </div>
         </td>
         <td><a th:href="@{/reserva/listadodetallado/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-info">Ver detalles de las zonas</button></a>
         </td>

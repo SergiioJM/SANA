@@ -6,36 +6,34 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
 </head>
 <body>
-<h1>Lista de Periodos</h1>
+<h1>Lista de Franjas horarias</h1>
 <table class="table table-striped">
     <thead>
     <tr>
-        <th>Identificador</th>
         <th>Fecha de Inicio</th>
         <th>Fecha de Fin</th>
         <th>Hora de Inicio</th>
         <th>Hora de Fin</th>
-        <th>Identificador del Area</th>
+        <th>Nombre del Area</th>
         <th></th>
         <th></th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="franjaHoraria: ${periodos}">
-        <td th:text="${franjaHoraria.getIdentificador()}"></td>
         <td th:text="${franjaHoraria.getfechaInicio()}"></td>
         <td th:text="${franjaHoraria.getfechaFin()}"></td>
         <td th:text="${franjaHoraria.getHoraInicio()}"></td>
         <td th:text="${franjaHoraria.getHoraFin()}"></td>
-        <td th:text="${franjaHoraria.getIdArea()}"></td>
-        <td><a th:href="@{/franjaHoraria/update/{identificador}(identificador=${franjaHoraria.getIdentificador()})}"><button type="button" class="btn btn-warning">Edita</button></a>
+        <td th:text="${franjaHoraria.getNombrearea()}"></td>
+        <td><a th:href="@{/franjahoraria/update/{identificador}(identificador=${franjaHoraria.getIdentificador()})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
-        <td><a th:href="@{/franjaHoraria/delete/{identificador}(identificador=${franjaHoraria.getIdentificador()})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        <td><a th:href="@{/franjahoraria/delete/{identificador}(identificador=${franjaHoraria.getIdentificador()})}"><button type="button" class="btn btn-danger">Borra</button></a>
         </td>
     </tr>
     </tbody>
 </table>
-<a href="add"><button type="button" class="btn btn-success">Añade Periodo</button></a>
+<a href="add"><button type="button" class="btn btn-success">Añade Franja Horaria</button></a>
 <a href="/"><button type="button" class="btn btn-outline-secondary">Menu Princpial</button></a>
 
 </body>

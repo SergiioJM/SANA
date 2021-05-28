@@ -8,40 +8,37 @@
 </head>
 <body>
 <h2>Edita franjaHoraria</h2>
-<form action="#" th:action="@{/franjaHoraria/update}"
-      th:object="${franjaHoraria}" method="post">
+<form action="#" th:action="@{/franjahoraria/update}"
+      th:object="${franjahoraria}" method="post">
     <table>
         <tr>
             <td><label>Identificador</label></td>
-            <td><input type="text" th:field="*{identificador}"
-                       readonly="readonly"/></td>
+            <td><input type="text" th:field="*{identificador}" readonly="readonly"/></td>
         </tr>
         <tr>
             <td><label>Fecha de Inicio</label></td>
-            <td><input type="text" th:field="*{fechaInicio}" /></td>
+            <td><input type="date" th:field="*{fechaInicio}" /></td>
             <td th:if="${#fields.hasErrors('fechaInicio')}" th:errors="*{fechaInicio}" class="error"></td>
         </tr>
         <tr>
             <td><label>Fecha de Fin</label></td>
-            <td><input type="text" th:field="*{fechaFin}"></td>
+            <td><input type="date" th:field="*{fechaFin}"></td>
             <td th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}" class="error"></td>
 
         </tr>
         <tr>
             <td><label>Hora de Inicio</label></td>
-            <td><input type="text" th:field="*{horaInicio}" /></td>
+            <td><input type="time" th:field="*{horaInicio}" /></td>
+            <td th:if="${#fields.hasErrors('horaInicio')}" th:errors="*{horaInicio}" class="error"></td>
         </tr>
         <tr>
             <td><label>Hora de Fin</label></td>
-            <td><input type="text" th:field="*{horaFin}" /></td>
+            <td><input type="time" th:field="*{horaFin}" /></td>
+            <td th:if="${#fields.hasErrors('horaFin')}" th:errors="*{horaFin}" class="error"></td>
         </tr>
         <tr>
             <td><label>Identificador del Area</label></td>
-            <td>
-                <select class="form_control" type="text" th:field="*{idArea}">
-                    <option th:each="idArea: ${arealista}" th:value="${idArea}" th:text="${idArea}"></option>
-                </select>
-            </td>
+            <td><input type="text" th:field="*{nombrearea}" readonly="readonly"/></td>
         </tr>
     </table>
     <a href="add"><button type="submit" class="btn btn-success">Modifica un Periodo</button></a>
