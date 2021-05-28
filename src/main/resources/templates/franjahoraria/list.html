@@ -14,7 +14,7 @@
         <th>Fecha de Fin</th>
         <th>Hora de Inicio</th>
         <th>Hora de Fin</th>
-        <th>Identificador del Area</th>
+        <th>Nombre del Area</th>
         <th></th>
         <th></th>
     </tr>
@@ -25,10 +25,10 @@
         <td th:text="${franjaHoraria.getfechaFin()}"></td>
         <td th:text="${franjaHoraria.getHoraInicio()}"></td>
         <td th:text="${franjaHoraria.getHoraFin()}"></td>
-        <td th:text="${franjaHoraria.getIdArea()}"></td>
-        <td><a th:href="@{/franjaHoraria/update/{identificador}(identificador=${franjaHoraria.getIdentificador()})}"><button type="button" class="btn btn-warning">Edita</button></a>
+        <td th:text="${franjaHoraria.getNombrearea()}"></td>
+        <td><a th:href="@{/franjahoraria/update/{identificador}(identificador=${franjaHoraria.getIdentificador()})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
-        <td><a th:href="@{/franjaHoraria/delete/{identificador}(identificador=${franjaHoraria.getIdentificador()})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        <td><a th:href="@{/franjahoraria/delete/{identificador}(identificador=${franjaHoraria.getIdentificador()})}"><button type="button" class="btn btn-danger">Borra</button></a>
         </td>
     </tr>
     </tbody>

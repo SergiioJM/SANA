@@ -10,7 +10,7 @@
 </head>
 <body>
 <h2>Nuevo Franja Horaria</h2>
-<form action="#" th:action="@{/franjaHoraria/add}"
+<form action="#" th:action="@{/franjahoraria/add}"
       th:object="${franjahoraria}" method="post">
     <table>
         <tr>
@@ -32,16 +32,17 @@
             <td><label>Hora de Inicio</label></td>
             <td><input type="time" th:field="*{horaInicio}"
                        placeholder="HH/MM/ss"/></td>
+            <td th:if="${#fields.hasErrors('horaInicio')}" th:errors="*{fechaFin}" class="error"></td>
         </tr>
         <tr>
             <td><label>Hora de Fin</label></td>
-            <td><input type="time" th:field="*{horaFin}"
-                       placeholder="HH/MM/ss"/></td>
+            <td><input type="time" th:field="*{horaFin}" placeholder="HH/MM/ss"/></td>
+            <td th:if="${#fields.hasErrors('horaFin')}" th:errors="*{fechaFin}" class="error"></td>
         </tr>
         <tr>
             <td><label>Identificador del Area</label></td>
             <td>
-                <select class="form_control" type="text" th:field="*{idArea}">
+                <select class="form_control" type="text" th:field="*{nombrearea}">
                     <option th:each="idArea: ${arealista}" th:value="${idArea}" th:text="${idArea}"></option>
                 </select>
             </td>

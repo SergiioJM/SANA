@@ -63,7 +63,6 @@ public class FranjaHorariaController {
             ArrayList<Integer> lista = new ArrayList<>();
             for (Area e : lista2) {
                 lista.add(e.getIdArea());
-
             }
             model.addAttribute("arealista", lista);
             return "franjahoraria/add";
@@ -79,18 +78,21 @@ public class FranjaHorariaController {
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
     public String editPeriodo(Model model, @PathVariable int identificador) {
-        model.addAttribute("periodo", franjaHorariaDAO.getFranjaHoraria(identificador));
+        FranjaHoraria franja= franjaHorariaDAO.getFranjaHoraria(identificador);
+        franja.setIdentificador(identificador);
+        franja.setNombrearea(franjaHorariaDAO.idnombrearea(franja.getidArea()));
+        model.addAttribute("franjahoraria", franja);
         List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<Integer> lista = new ArrayList<>();
+        ArrayList<String> lista = new ArrayList<>();
         for (Area e : lista2)
-            lista.add(e.getIdArea());
+            lista.add(e.getNombre());
         model.addAttribute("arealista",lista);
         return "franjahoraria/update";
     }
 
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
-            @ModelAttribute("periodo") FranjaHoraria franjaHoraria,
+            @ModelAttribute("franjahoraria") FranjaHoraria franjaHoraria,
             BindingResult bindingResult, Model model) {
         FranjaHorariaValidator franjaHorariaValidator = new FranjaHorariaValidator();
         franjaHorariaValidator.validate(franjaHoraria,bindingResult);
