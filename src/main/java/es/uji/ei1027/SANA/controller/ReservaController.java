@@ -176,8 +176,20 @@ public class ReservaController {
         reservaDAO.deleteReserva(identificador);
         return "redirect:../reservasciudadano/" + user.getNif();
     }
-    @RequestMapping(value="/cancelar/{identificador}")
-    public String processCancelar(@PathVariable int identificador,HttpSession session) {
+
+    @RequestMapping(value="/popup/{identificador}", method = RequestMethod.GET)
+    public String abrirPopup(Model model, @PathVariable int identificador, HttpSession session) {
+        System.out.println(identificador);
+        session.setAttribute("idReserva", identificador);
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        return "redirect:../reservasciudadano/" + user.getNif() + "#popup";
+    }
+
+    @RequestMapping(value="/cancelar")
+    public String processCancelar(HttpSession session) {
+        int identificador = (int) session.getAttribute("idReserva");
+        session.removeAttribute("idReserva");
+        System.out.println(identificador);
         UserDetails user= (UserDetails) session.getAttribute("user");
         List<String> zonasreserva=reservaZonaDAO.getReservaZona(identificador);
         for(String e : zonasreserva){
@@ -188,7 +200,7 @@ public class ReservaController {
         Reserva reserva= reservaDAO.getReserva(identificador);
         reserva.setEstado("cancelada");
         reservaDAO.updateReserva(reserva);
-        return "redirect:../reservasciudadano/" + user.getNif();
+        return "redirect:../reserva/reservasciudadano/" + user.getNif();
     }
     @RequestMapping("/listadodetallado/{reserva}")
     public String listaDeZonasDeReserva(@PathVariable int reserva, Model model, HttpSession session){

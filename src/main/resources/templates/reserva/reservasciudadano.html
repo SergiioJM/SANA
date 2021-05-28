@@ -38,13 +38,13 @@
         <td th:text="${reserva.getArea()}"></td>
         <td><a th:href="@{/reserva/update/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
-        <td><p><a href="#popup"><button type="button" class="btn btn-danger">Cancelar</button></a></p>
+        <td><p><a th:href="@{/reserva/popup/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Cancelar</button></a></p>
             <div id="popup" class="overlay">
                 <div id="popupBody">
                     <h2>¿Está seguro que desea cancelar la reserva?</h2>
                     <a id="cerrar" href="#">&times;</a>
                     <div class="popupContent">
-                        <a th:href="@{/reserva/cancelar/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Aceptar</button></a>
+                        <a href="/reserva/cancelar"><button type="button" class="btn btn-danger">Aceptar</button></a>
                     </div>
                 </div>
             </div>
