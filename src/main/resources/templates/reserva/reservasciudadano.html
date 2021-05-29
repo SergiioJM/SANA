@@ -51,6 +51,8 @@
         </td>
         <td><a th:href="@{/reserva/listadodetallado/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-info">Ver detalles de las zonas</button></a>
         </td>
+        <td><a th:href="@{/qr/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-info">Ver Codigo QR</button></a>
+        </td>
     </tr>
     </tbody>
 </table>
