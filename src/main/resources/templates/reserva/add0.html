@@ -12,20 +12,20 @@
 </head>
 <body class="center">
 <h2 class="negrita">Nueva Reserva</h2>
-<form class="form"action="#" th:action="@{/reserva/add1}"
+<form class="form"action="#" th:action="@{/reserva/add0}"
       th:object="${reserva}" method="post">
     <table>
         <tr>
-            <td><label>Fecha</label></td>
-            <td><input type="date" th:field="*{fecha}" readonly = "readonly"/></td>
+            <td><label class="negrita">Fecha</label></td>
+            <td><input type="date" th:field="*{fecha}"
+                       placeholder="D/M/YY"/> </td>
+            <td th:if="${#fields.hasErrors('fecha')}" th:errors="*{fecha}" class="error"></td>
         </tr>
         <tr>
-            <td><label>Numero de Personas</label></td>
-            <td><input type="number" th:field="*{numeroPersonas}" readonly="readonly"/></td>
-        </tr>
-        <tr>
-            <td><label>Municipio</label></td>
-            <td><input type="text" th:field="*{municipio}" readonly="readonly"/></td>
+            <td><label class="negrita">Numero de Personas</label></td>
+            <td><input type="number" th:field="*{numeroPersonas}" /></td>
+            <td th:if="${#fields.hasErrors('numeroPersonas')}" th:errors="*{numeroPersonas}" class="error"></td>
+
         </tr>
         <!--<tr>
             <td><label class="negrita">Estado</label></td>
@@ -35,10 +35,10 @@
 
         </tr>-->
         <tr>
-            <td><label class="negrita">Area</label></td>
+            <td><label class="negrita">Municipio</label></td>
             <td>
-                <select class="form_control" type="text" th:field="*{area}">
-                    <option th:each="nombrearea: ${listaarea}" th:value="${nombrearea}" th:text="${nombrearea}"></option>
+                <select class="form_control" type="text" th:field="*{municipio}">
+                    <option th:each="municipio: ${listamunicipios}" th:value="${municipio}" th:text="${municipio}"></option>
                 </select>
             </td>
         </tr>

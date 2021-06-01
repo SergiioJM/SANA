@@ -1,12 +1,7 @@
 package es.uji.ei1027.SANA.controller;
 
-import es.uji.ei1027.SANA.dao.CiudadanoDAO;
-import es.uji.ei1027.SANA.dao.ReservaDAO;
-import es.uji.ei1027.SANA.dao.ReservaZonaDAO;
-import es.uji.ei1027.SANA.dao.ZonaDAO;
-import es.uji.ei1027.SANA.model.Reserva;
-import es.uji.ei1027.SANA.model.UserDetails;
-import es.uji.ei1027.SANA.model.Zona;
+import es.uji.ei1027.SANA.dao.*;
+import es.uji.ei1027.SANA.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,12 +22,17 @@ public class ReservaController {
     private ReservaDAO reservaDAO;
     private ZonaDAO zonaDAO;
     private ReservaZonaDAO reservaZonaDAO;
+    private FranjaHorariaDAO franjaHorariaDAO;
     private ReservaZonaController reservaZonaController;
     private CiudadanoDAO ciudadanoDAO;
 
     @Autowired
     public void setReservaDAO(ReservaDAO reservaDAO) {
         this.reservaDAO = reservaDAO;
+    }
+    @Autowired
+    public void setFranjaHorariaDAO(FranjaHorariaDAO franjaHorariaDAO) {
+        this.franjaHorariaDAO=franjaHorariaDAO;
     }
     @Autowired
     public void setReservaZonaDAO(ReservaZonaDAO reservaZonaDAO) {
@@ -62,46 +62,114 @@ public class ReservaController {
         return "reserva/reservasciudadano";
     }
 
-    @RequestMapping(value="/add")
-    public String addReserva(Model model) {
-        model.addAttribute("reserva", new Reserva());
-        model.addAttribute("listaarea",reservaDAO.getAreas());
-        return "reserva/add";
-    }
-
     @RequestMapping(value="/add/{nif}")
     public String addReservaNif(Model model, @PathVariable String nif) {
         Reserva r = new Reserva();
         r.setCiudadano(nif);
         model.addAttribute("nif",nif);
         model.addAttribute("reserva", r);
-        model.addAttribute("listaarea",reservaDAO.getAreas());
+        model.addAttribute("listamunicipios",reservaDAO.getMunicipios());
 
-        return "reserva/add";
+        return "reserva/add0";
+    }
+    @RequestMapping(value="/add0", method= RequestMethod.POST)
+    public String processAddSubmit0(@ModelAttribute("reserva") Reserva reserva,
+                                   BindingResult bindingResult,Model model,HttpSession session) {
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        reserva.setCiudadano(user.getNif());
+        reserva.setEstado("disponible"); // Cada vez que añadimos siempre el estado
+        ReservaValidatorAdd reservaValidatorAdd = new ReservaValidatorAdd();
+        reservaValidatorAdd.validate(reserva, bindingResult);
+        if (bindingResult.hasErrors()) {
+            model.addAttribute("listamunicipios", reservaDAO.getMunicipios());
+            return "reserva/add0";
+        }
+        reserva.setListreserva(reservaDAO.getZonasDeReserva(reserva.getIdentificador()));
+        reserva.setIdentificador(reservaDAO.obtenerR());
+        session.setAttribute("reserva", reserva);
+
+        //reservaDAO.addReserva(reserva);
+        return "redirect:../reserva/add1";
+        //return "redirect:../reservazona/add/" + reserva.getIdentificador() + "/"+ reserva.getNumeroPersonas() + "/"+ reserva.getArea() +"/" + user.getNif();
     }
 
-    @RequestMapping(value="/add", method= RequestMethod.POST)
+    @RequestMapping(value="/add1")
+    public String addReservaNif1(Model model,HttpSession session) {
+        Reserva reserva= (Reserva) session.getAttribute("reserva");
+        session.removeAttribute("reserva");
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        model.addAttribute("nif",user.getNif());
+        model.addAttribute("reserva", reserva);
+        model.addAttribute("listaarea",reservaDAO.getAreas(reserva.getMunicipio()));
+        return "reserva/add1";
+    }
+
+    @RequestMapping(value="/add1", method= RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("reserva") Reserva reserva,
                                    BindingResult bindingResult,Model model,HttpSession session) {
         UserDetails user= (UserDetails) session.getAttribute("user");
         reserva.setCiudadano(user.getNif());
         reserva.setEstado("disponible"); // Cada vez que añadimos siempre el estado
-        ReservaValidator reservaValidator =new ReservaValidator();
-        reservaValidator.validate(reserva,bindingResult);
+        ReservaValidatorAdd reservaValidatorAdd =new ReservaValidatorAdd();
+        reservaValidatorAdd.validate(reserva,bindingResult);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("listaarea",reservaDAO.getAreas());
-            return "reserva/add";
+            model.addAttribute("listaarea",reservaDAO.getAreas(reserva.getMunicipio()));
+            return "reserva/add1";
         }
         reserva.setListreserva(reservaDAO.getZonasDeReserva(reserva.getIdentificador()));
-        //estamos comprobando que la reserva no se pueda hacer si no hay sitio en la zona
-        //int capacidadActual = zonaDAO.getZona(reserva.getZona()).getCapacidad();
+        reserva.setIdentificador(reservaDAO.obtenerR());
+        session.setAttribute("reserva",reserva);
 
-        reservaDAO.addReserva(reserva);
-        System.out.println(reserva);
-        //zonaDAO.setZona(reserva.getZona(),capacidadActual-reserva.getNumeroPersonas());
+        //reservaDAO.addReserva(reserva);
+        return "redirect:../reserva/add2";
+        //return "redirect:../reservazona/add/" + reserva.getIdentificador() + "/"+ reserva.getNumeroPersonas() + "/"+ reserva.getArea() +"/" + user.getNif();
 
-        return "redirect:../reservazona/add/" + reserva.getIdentificador() + "/"+ reserva.getNumeroPersonas() + "/"+ reserva.getArea() +"/" + user.getNif();
-        //return "redirect:list";
+    }
+    @RequestMapping(value="/add2")
+    public String addReservaNif2(Model model,HttpSession session) {
+        Reserva reserva= (Reserva) session.getAttribute("reserva");
+        session.removeAttribute("reserva");
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        model.addAttribute("nif",user.getNif());
+        model.addAttribute("reserva", reserva);
+        List<FranjaHoraria> franjas= franjaHorariaDAO.getFranjasHorariasDeArea(reserva.getArea());
+        List<String> franjasfinales= new ArrayList<>();
+        for (FranjaHoraria e: franjas){
+            if (reserva.getFecha().isAfter(e.getFechaInicio()) && reserva.getFecha().isBefore(e.getFechaFin())){
+                String res= e.getHoraInicio() + " - " + e.getHoraFin();
+                franjasfinales.add(res);
+            }
+        }
+        model.addAttribute("franjas",franjasfinales);
+        return "reserva/add2";
+    }
+    @RequestMapping(value="/add2", method= RequestMethod.POST)
+    public String processAddSubmit2(@ModelAttribute("reserva") Reserva reserva,
+                                   BindingResult bindingResult,Model model,HttpSession session) {
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        reserva.setCiudadano(user.getNif());
+        reserva.setEstado("disponible"); // Cada vez que añadimos siempre el estado
+        ReservaValidatorAdd reservaValidatorAdd =new ReservaValidatorAdd();
+        reservaValidatorAdd.validate(reserva,bindingResult);
+        if (bindingResult.hasErrors()) {
+            List<FranjaHoraria> franjas= franjaHorariaDAO.getFranjasHorariasDeArea(reserva.getArea());
+            List<String> franjasfinales= new ArrayList<>();
+            for (FranjaHoraria e: franjas){
+                if (reserva.getFecha().isAfter(e.getFechaInicio()) && reserva.getFecha().isBefore(e.getFechaFin())){
+                    String res= e.getHoraInicio() + " - " + e.getHoraFin();
+                    franjasfinales.add(res);
+                }
+            }
+            model.addAttribute("franjas",franjasfinales);
+            return "reserva/add2";
+        }
+        reserva.setIdentificador(reservaDAO.obtenerR());
+        System.out.println(reserva.getIdentificador());
+        reserva.setListreserva(reservaDAO.getZonasDeReserva(reserva.getIdentificador()));
+        session.setAttribute("reserva",reserva);
+
+        //reservaDAO.addReserva(reserva);
+        return "redirect:../reservazona/add/" + reserva.getIdentificador() + "/"+ reserva.getNumeroPersonas() + "/"+ reserva.getArea();
     }
 
     @RequestMapping(value="/update/{identificador}", method = RequestMethod.GET)
@@ -121,9 +189,12 @@ public class ReservaController {
     public String processUpdateSubmit( @ModelAttribute("reserva") Reserva reserva, BindingResult bindingResult, Model model,HttpSession session) {
         UserDetails user= (UserDetails) session.getAttribute("user");
         reserva.setCiudadano(user.getNif());
+        reserva.setListreserva(reservaDAO.getZonasDeReserva(reserva.getIdentificador()));
+        int capacidadTotalZonas=reservaDAO.cantidadZonas(reserva.getListreserva());
+        ReservaValidatorUpdate reservaValidatorAdd =new ReservaValidatorUpdate();
+        ReservaCantidad reservaCantidad= new ReservaCantidad(reserva,capacidadTotalZonas);
+        reservaValidatorAdd.validate(reservaCantidad,bindingResult);
 
-        ReservaValidator reservaValidator =new ReservaValidator();
-        reservaValidator.validate(reserva,bindingResult);
 
         if (bindingResult.hasErrors()) {
             List<Zona> lista2 = zonaDAO.getZonas();
@@ -170,18 +241,12 @@ public class ReservaController {
     public String processDelete(@PathVariable int identificador,HttpSession session) {
         UserDetails user= (UserDetails) session.getAttribute("user");
         List<String> zonasreserva=reservaZonaDAO.getReservaZona(identificador);
-        for(String e : zonasreserva){
-            Zona modificarzona=zonaDAO.getZona(e);
-            modificarzona.setOcupada(false);
-            zonaDAO.updateZona(modificarzona);
-        }
         reservaDAO.deleteReserva(identificador);
         return "redirect:../reservasciudadano/" + user.getNif();
     }
 
     @RequestMapping(value="/popup/{identificador}", method = RequestMethod.GET)
     public String abrirPopup(Model model, @PathVariable int identificador, HttpSession session) {
-        System.out.println(identificador);
         session.setAttribute("idReserva", identificador);
         UserDetails user= (UserDetails) session.getAttribute("user");
         return "redirect:../reservasciudadano/" + user.getNif() + "#popup";
@@ -191,16 +256,12 @@ public class ReservaController {
     public String processCancelar(HttpSession session) {
         int identificador = (int) session.getAttribute("idReserva");
         session.removeAttribute("idReserva");
-        System.out.println(identificador);
         UserDetails user= (UserDetails) session.getAttribute("user");
         List<String> zonasreserva=reservaZonaDAO.getReservaZona(identificador);
-        for(String e : zonasreserva){
-            Zona modificarzona=zonaDAO.getZona(e);
-            modificarzona.setOcupada(false);
-            zonaDAO.updateZona(modificarzona);
-        }
         Reserva reserva= reservaDAO.getReserva(identificador);
         reserva.setEstado("cancelada");
+        for (String e: zonasreserva)
+            reservaDAO.eliminarZonasReservadas(reserva.getFecha(),reserva.getHora(),e);
         reservaDAO.updateReserva(reserva);
         return "redirect:../reserva/reservasciudadano/" + user.getNif();
     }

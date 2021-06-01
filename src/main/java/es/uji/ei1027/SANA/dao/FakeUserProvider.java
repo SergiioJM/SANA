@@ -33,12 +33,13 @@ public class FakeUserProvider implements UserDao {
     }
 
     @Override
-    public UserDetails loadUserByUsername2(String email, String password, ResponsableMunicipioDAO responsableMunicipioDAO) {
+    public UserDetails loadUserByUsername2(String email, String password, String cp, ResponsableMunicipioDAO responsableMunicipioDAO) {
         List<ResponsableMunicipio> responsables = responsableMunicipioDAO.getResponsablesMunicipios();
         for (int i = 0; i < responsables.size(); i++) {
             UserDetails usuario = new UserDetails();
             usuario.setEmail(responsables.get(i).getEmail());
             usuario.setPassword(responsables.get(i).getPassword());
+            usuario.setMunicipio(responsables.get(i).getMunicipio());
             knownUsers.put(responsables.get(i).getEmail(), usuario);
         }
         UserDetails user = knownUsers.get(email.trim());

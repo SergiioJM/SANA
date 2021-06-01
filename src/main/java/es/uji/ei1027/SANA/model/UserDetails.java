@@ -5,6 +5,7 @@ public class UserDetails {
     String contraseña;
     String email;
     String password;
+    String municipio;
 
 
     public String getNif() {
@@ -37,6 +38,14 @@ public class UserDetails {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    public String getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
     }
 
     @Override

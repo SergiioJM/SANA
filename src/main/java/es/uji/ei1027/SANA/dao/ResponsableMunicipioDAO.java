@@ -130,4 +130,14 @@ public class ResponsableMunicipioDAO {
             return null;
         }
     }
+
+    public String dameMunicipioPorEmail(String email){
+        try {
+            return jdbcTemplate.queryForObject("SELECT municipio FROM ResponsableMunicipio WHERE email =?",
+                    String.class, email);
+        }
+        catch(EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
 }

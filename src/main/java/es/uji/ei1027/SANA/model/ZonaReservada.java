@@ -1,16 +1,19 @@
 package es.uji.ei1027.SANA.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
 import java.util.Date;
 
 public class ZonaReservada {
-    int identificador ;
+    int identificador;
     int idarea;
     String idzona;
-    Date fecha;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    LocalDate fecha;
     String franja;
 
-    public ZonaReservada(int identificador, int idarea, String idzona, Date fecha, String franja) {
-        this.identificador = identificador;
+    public ZonaReservada( int idarea, String idzona, LocalDate fecha, String franja) {
         this.idarea = idarea;
         this.idzona = idzona;
         this.fecha = fecha;
@@ -56,11 +59,11 @@ public class ZonaReservada {
         this.idzona = idzona;
     }
 
-    public Date getFecha() {
+    public LocalDate getFecha() {
         return fecha;
     }
 
-    public void setFecha(Date fecha) {
+    public void setFecha(LocalDate fecha) {
         this.fecha = fecha;
     }
 

@@ -1,10 +1,10 @@
 package es.uji.ei1027.SANA.controller;
 
+import es.uji.ei1027.SANA.dao.ReservaDAO;
 import es.uji.ei1027.SANA.dao.ReservaZonaDAO;
 import es.uji.ei1027.SANA.dao.ZonaDAO;
-import es.uji.ei1027.SANA.model.ReservaZona;
-import es.uji.ei1027.SANA.model.UserDetails;
-import es.uji.ei1027.SANA.model.Zona;
+import es.uji.ei1027.SANA.dao.ZonaReservadaDAO;
+import es.uji.ei1027.SANA.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import javax.swing.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -26,6 +27,8 @@ import java.util.List;
 public class ReservaZonaController {
     private ReservaZonaDAO reservaZonaDAO;
     private ZonaDAO zonaDAO;
+    private ReservaDAO reservaDAO;
+    private ZonaReservadaDAO zonaReservadaDAO;
 
     @Autowired
     public void setReservaZonaDAO(ReservaZonaDAO reservaZonaDAO) {
@@ -35,6 +38,14 @@ public class ReservaZonaController {
     public void setZonaDAO(ZonaDAO zonaDAO) {
         this.zonaDAO = zonaDAO;
     }
+    @Autowired
+    public void setReservaDAO(ReservaDAO reservaDAO) {
+        this.reservaDAO=reservaDAO;
+    }
+    @Autowired
+    public void setZonaReservadaDAO(ZonaReservadaDAO zonaReservadaDAO) {
+        this.zonaReservadaDAO=zonaReservadaDAO;
+    }
 
     @RequestMapping("/list")
     public String listaDeReservaZonas(Model model){
@@ -42,19 +53,35 @@ public class ReservaZonaController {
         return "reservazona/list";
     }
 
-    @RequestMapping(value="/add/{id}/{cantidadPersonas}/{area}/{nif}")
+    @RequestMapping(value="/add/{id}/{cantidadPersonas}/{area}")
     public String addArea(Model model, @PathVariable int id, @PathVariable int cantidadPersonas ,
-                          @PathVariable String area,@PathVariable String nif,HttpSession session) {
+                          @PathVariable String area,HttpSession session) {
 
         ReservaZona reservaZona= new ReservaZona();
         reservaZona.setReserva(id);
         reservaZona.setPersonas(cantidadPersonas);
         reservaZona.setArea(area);
-        session.setAttribute("area",area);//guardamos el id area para despues en el siguiente metodo utilizarlo y borrarlo
+        session.setAttribute("area",area);
+        Reserva reserva= (Reserva) session.getAttribute("reserva");
+        session.setAttribute("fecha",reserva.getFecha());
 
-        model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(area));
+        //De el area seleccionada, que zonas si que tienen ya alguna reserva
+        List<ZonaReservada> zonascojidas= zonaReservadaDAO.getZonaReservada3(zonaReservadaDAO.getArea(area),reserva.getFecha());
+        List<String> zonascojidas2= new ArrayList<>();
+        for (ZonaReservada e: zonascojidas){
+            zonascojidas2.add(e.getIdzona());
+        }
+        List<String> zonastotales=reservaZonaDAO.getZonasArea(area);
+        List<String> zonasdisponibles= new ArrayList<>();
+        for(String e: zonastotales){
+            String[] z= e.split("#Capacidad:");
+            if (!zonascojidas2.contains(z[0]))
+                zonasdisponibles.add(e);
+        }
+        model.addAttribute("zonalista",zonasdisponibles);
         model.addAttribute("reservazona", reservaZona);
-
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        model.addAttribute("nif",user.getNif());
         return "reservazona/add";
     }
 
@@ -74,13 +101,24 @@ public class ReservaZonaController {
                 capacidadTotalSeleccionada +=capacidadZona;
             }
         }
-
-
         //validamos que la capacidad deseada y las zonas escogidas concuerdan
         ReservaZonaValidator reservaValidator =new ReservaZonaValidator();
         reservaValidator.validate(reservaZona , capacidadTotalSeleccionada ,bindingResult);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("zonalista",reservaZonaDAO.getZonasArea(area));
+            List<ZonaReservada> zonascojidas= zonaReservadaDAO.getZonaReservada3(zonaReservadaDAO.getArea(area), (LocalDate) session.getAttribute("fecha"));
+            session.removeAttribute("fecha");
+            List<String> zonascojidas2= new ArrayList<>();
+            for (ZonaReservada e: zonascojidas){
+                zonascojidas2.add(e.getIdzona());
+            }
+            List<String> zonastotales=reservaZonaDAO.getZonasArea(area);
+            List<String> zonasdisponibles= new ArrayList<>();
+            for(String e: zonastotales){
+                String[] z= e.split("#Capacidad:");
+                if (!zonascojidas2.contains(z[0]))
+                    zonasdisponibles.add(e);
+            }
+            model.addAttribute("zonalista",zonasdisponibles);
             return "reservazona/add";
         }
 
@@ -92,29 +130,28 @@ public class ReservaZonaController {
                 reservaZona1.setZona(zona);
                 reservaZona1.setReserva(reservaZona.getReserva());
                 reservaZonaDAO.addReservaZona(reservaZona1);
-                Zona modificarzona=zonaDAO.getZona(zona);
-                modificarzona.setOcupada(true);
-                zonaDAO.updateZona(modificarzona);
 
             }
             session.removeAttribute("area");
 
         }
-
+        Reserva reserva= (Reserva) session.getAttribute("reserva");
+        session.removeAttribute("reserva");
+        reservaDAO.addReserva(reserva);
+        for (String zona: reservaZona.getZona().split(",")) {
+            zona=zona.split("#Capacidad:")[0];
+            ZonaReservada zonaReservada = new ZonaReservada(zonaReservadaDAO.getArea(area),zona,reserva.getFecha(),reserva.getHora());
+            zonaReservadaDAO.addZonaReservada(zonaReservada);
+        }
         UserDetails user= (UserDetails) session.getAttribute("user");
+        model.addAttribute("nif",user.getNif());
         return "redirect:../reserva/reservasciudadano/" + user.getNif();
     }
 
     @RequestMapping(value="/delete/{reserva}/{zona}")
     public String processDelete(@PathVariable int reserva,@PathVariable String zona) {
-
         List<String> zonas =reservaZonaDAO.getReservaZona(reserva);
-
         if(zonas.size() > 1){
-
-            Zona modificarzona=zonaDAO.getZona(zona);
-            modificarzona.setOcupada(false);
-            zonaDAO.updateZona(modificarzona);
             reservaZonaDAO.deleteReservaZona(reserva,zona);
         }
 

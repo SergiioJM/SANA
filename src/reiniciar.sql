@@ -143,7 +143,6 @@ CREATE TABLE Zona(
 	identificador	VARCHAR ,
 	capacidad	INTEGER,
 	idArea		INTEGER  NOT NULL,
-	ocupada BOOLEAN,
 
 	CONSTRAINT cp_zona PRIMARY KEY(identificador),
 	CONSTRAINT ca_zona_area FOREIGN KEY (idArea) REFERENCES Area(idArea) ON DELETE RESTRICT ON UPDATE CASCADE,
@@ -163,7 +162,7 @@ CREATE TABLE Ciudadano(
 
 CREATE TABLE Reserva(
 	identificador 	INTEGER,
-	hora		Time,
+	hora		VARCHAR,
 	fecha		Date,
 	numeroPersonas	INTEGER,
 	estado		VARCHAR(20),

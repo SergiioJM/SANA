@@ -21,8 +21,9 @@
         <th>Franja horaria</th>
         <th>Numero de Personas</th>
         <th>Estado</th>
-        <th>Zonas reservadas</th>
+        <th>Municipio</th>
         <th>Area reservada</th>
+        <th>Zonas reservadas</th>
         <th></th>
         <th></th>
         <th></th>
@@ -34,8 +35,9 @@
         <td th:text="${reserva.hora}"></td>
         <td th:text="${reserva.numeroPersonas}"></td>
         <td th:text="${reserva.estado}"></td>
-        <td th:text="${reserva.getListreserva()}"></td>
+        <td th:text="${reserva.getMunicipio()}"></td>
         <td th:text="${reserva.getArea()}"></td>
+        <td th:text="${reserva.getListreserva()}"></td>
         <td><a th:href="@{/reserva/update/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
         <td><p><a th:href="@{/reserva/popup/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Cancelar</button></a></p>

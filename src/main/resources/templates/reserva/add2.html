@@ -1,1 +1,55 @@
-aqui las franjas horarias de esa area
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear Reserva</title>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/images/LogoSana.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+
+</head>
+<body class="center">
+<h2 class="negrita">Nueva Reserva</h2>
+<form class="form"action="#" th:action="@{/reserva/add2}"
+      th:object="${reserva}" method="post">
+    <table>
+        <tr>
+            <td><label>Fecha</label></td>
+            <td><input type="date" th:field="*{fecha}" readonly = "readonly"/></td>
+        </tr>
+        <tr>
+            <td><label>Numero de Personas</label></td>
+            <td><input type="number" th:field="*{numeroPersonas}" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td><label>Municipio</label></td>
+            <td><input type="text" th:field="*{municipio}" readonly="readonly"/></td>
+        </tr>
+        <!--<tr>
+            <td><label class="negrita">Estado</label></td>
+            <td>
+                <label th:field="*{estado}" value="disponible" >Disponible</label>
+            </td>
+
+        </tr>-->
+        <tr>
+            <td><label>Area</label></td>
+            <td><input type="text" th:field="*{area}" readonly="readonly"/></td>
+        </tr>
+        <tr>
+            <td><label>Franjas horarias de la zona seleccionada</label></td>
+            <td>
+                <select class="form_control" type="text" th:field="*{hora}">
+                    <option th:each="franja: ${franjas}" th:value="${franja}" th:text="${franja}"></option>
+                </select>
+            </td>
+        </tr>
+    </table>
+    <br><br>
+    <a href="add2"><button type="submit" class="btn btn-success">Seguir con la realización de la reserva</button></a><br><br>
+    <a th:href="@{/reserva/reservasciudadano/{nif}(nif=${nif})}"><button type="button" class="btn btn-secondary">Volver</button></a>
+</form>
+</body>
+</html>

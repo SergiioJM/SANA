@@ -6,6 +6,7 @@ import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,6 +106,10 @@ public class ReservaDAO {
             for (Reserva e : ciudadanos){
                 List<String> lista=getZonasDeReserva(e.getIdentificador());
                 e.setListreserva(lista);
+                String zona=lista.get(0);
+                String municipio=jdbcTemplate.queryForObject(
+                        "SELECT nombre FROM Municipio WHERE cp IN (SELECT municipio FROM Area WHERE idarea IN (SELECT idarea FROM Zona WHERE identificador=?))",String.class, zona);
+                e.setMunicipio(municipio);
                 if (lista.size()!=0) {
                     String area = jdbcTemplate.queryForObject("SELECT nombre FROM AREA WHERE idArea IN (SELECT idArea FROM Zona WHERE identificador=?)", String.class, lista.get(0));
                     e.setArea(area);
@@ -120,14 +125,49 @@ public class ReservaDAO {
             return new ArrayList<>();
         }
     }
-    public List<String> getAreas(){
+    public List<String> getAreas(String municipio){
         try{
             List<String> area= jdbcTemplate.queryForList(
-                    "SELECT nombre FROM Area", String.class);
+                    "SELECT nombre FROM Area WHERE municipio IN (SELECT cp FROM Municipio WHERE nombre=?)", String.class, municipio);
             return area;
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();
         }
     }
+    public void eliminarZonasReservadas(LocalDate fecha, String franja, String zona){
+        jdbcTemplate.update("DELETE FROM ZonaReservada WHERE fecha =? AND franja=? AND idzona=?",
+                fecha,franja,zona);
+    }
+    public List<String> getMunicipios(){
+        try {
+            return jdbcTemplate.queryForList("SELECT nombre FROM Municipio", String.class);
+
+        }catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+    public String getMunicipio(String nombre){
+        try {
+            return jdbcTemplate.queryForObject("SELECT cp FROM Municipios WHERE nombre=?", String.class,nombre);
+
+        }catch(EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+    public int cantidadZonas(List<String> zonas){
+        try {
+            int cantidad = 0;
+            for (String e : zonas) {
+                int c = jdbcTemplate.queryForObject("SELECT capacidad FROM Zona WHERE identificador=?", Integer.class, e);
+                cantidad += c;
+            }
+            return cantidad;
+        }catch(EmptyResultDataAccessException e) {
+            return 0;
+        }
+    }
+
+
+
 }

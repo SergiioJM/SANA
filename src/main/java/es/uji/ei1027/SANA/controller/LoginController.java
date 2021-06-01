@@ -79,7 +79,8 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             return "loginGestor";
         }
-        user = userDao.loadUserByUsername2(user.getEmail(), user.getPassword(), responsableMunicipioDAO);
+
+        user = userDao.loadUserByUsername2(user.getEmail(), user.getPassword(),responsableMunicipioDAO.dameMunicipioPorEmail(user.getEmail()), responsableMunicipioDAO);
         if (user == null) {
             bindingResult.rejectValue("password", "password", "Contraseña incorrecta");
             return "loginGestor";

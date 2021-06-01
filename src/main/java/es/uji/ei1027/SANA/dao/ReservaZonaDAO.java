@@ -66,7 +66,6 @@ public class ReservaZonaDAO {
             }
             */
             for (Zona e: zonas){
-                if (!e.isOcupada())
                     zonasfinal.add(e.getIdentificador() + "#Capacidad:" + e.getCapacidad());
             }
             return zonasfinal;

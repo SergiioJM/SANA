@@ -8,8 +8,7 @@ import java.util.List;
 
 public class Reserva {
     int identificador;
-    @DateTimeFormat(pattern = "HH:mm")
-    LocalTime hora;
+    String hora;
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate fecha;
     int numeroPersonas;
@@ -17,9 +16,10 @@ public class Reserva {
     String ciudadano;
     List<String> listreserva;
     String area;
+    String municipio;
 
 
-    public Reserva(LocalTime hora, LocalDate fecha, int numeroPersonas, String estado, String zona, String ciudadano) {
+    public Reserva(String hora, LocalDate fecha, int numeroPersonas, String estado, String zona, String ciudadano) {
         this.hora = hora;
         this.fecha = fecha;
         this.numeroPersonas = numeroPersonas;
@@ -38,11 +38,11 @@ public class Reserva {
         this.identificador = identificador;
     }
 
-    public LocalTime getHora() {
+    public String getHora() {
         return hora;
     }
 
-    public void setHora(LocalTime hora) {
+    public void setHora(String hora) {
         this.hora = hora;
     }
 
@@ -92,6 +92,13 @@ public class Reserva {
         this.area = area;
     }
 
+    public String getMunicipio() {
+        return municipio;
+    }
+
+    public void setMunicipio(String municipio) {
+        this.municipio = municipio;
+    }
 
     @Override
     public String toString() {

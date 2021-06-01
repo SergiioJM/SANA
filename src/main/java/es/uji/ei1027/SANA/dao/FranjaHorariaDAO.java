@@ -78,4 +78,15 @@ public class FranjaHorariaDAO {
             return new ArrayList<>();
         }
     }
+    public List<FranjaHoraria> getFranjasHorariasDeArea(String area){
+        try{
+            List<FranjaHoraria> frna= jdbcTemplate.query(
+                    "SELECT * FROM FranjaHoraria WHERE idArea IN (SELECT idArea FROM Area WHERE nombre=?)",
+                    new FranjaHorariaRowMapper(), area);
+            return frna;
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
 }

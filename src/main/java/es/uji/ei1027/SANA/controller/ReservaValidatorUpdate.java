@@ -2,12 +2,14 @@ package es.uji.ei1027.SANA.controller;
 
 import es.uji.ei1027.SANA.dao.ZonaDAO;
 import es.uji.ei1027.SANA.model.Reserva;
+import es.uji.ei1027.SANA.model.ReservaCantidad;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
 
 import java.time.LocalDate;
 
-public class ReservaValidator implements Validator {
+public class ReservaValidatorUpdate implements Validator {
+
 
     @Override
     public boolean supports(Class<?> cls) {
@@ -16,10 +18,10 @@ public class ReservaValidator implements Validator {
 
     @Override
     public void validate(Object o, Errors errors) {
-        Reserva reserva = (Reserva) o;
-        if (reserva.getNumeroPersonas() <= 0){
-            errors.rejectValue("numeroPersonas", "obligatorio", "El numero de personas debe ser mayor que 0 ");
-        }
+        ReservaCantidad reservaCantidad = (ReservaCantidad) o;
+        int cantidad= reservaCantidad.getCantidad();
+        Reserva reserva = reservaCantidad.getReserva();
+        System.out.println(cantidad);
 
         if (reserva.getFecha() == null){
             errors.rejectValue("fecha", "obligatorio", "Debe poner una fecha ");
@@ -33,5 +35,10 @@ public class ReservaValidator implements Validator {
         if (reserva.getEstado() == null || reserva.getEstado().equals("No seleccionado")){
             errors.rejectValue("estado", "obligatorio", "Debe seleccionar un estado ");
         }
+
+        if (reserva.getNumeroPersonas() > cantidad || reserva.getNumeroPersonas() <= 0){
+            errors.rejectValue("numeroPersonas", "obligatorio", "La cantidad de personas tiene que ser menos a la capacidad de tus zonas y mayor  que 0");
+        }
+
     }
 }

@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.sql.DataSource;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,7 @@ public class ZonaReservadaDAO {
         zonaReservada.setIdentificador(ide);
     }
     public int obtenerR(){
-        String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Reserva", String.class);
+        String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM ZonaReservada", String.class);
         if (consulta == null){
             return 1;
         }
@@ -40,14 +41,14 @@ public class ZonaReservadaDAO {
     }
 
     public void updateZonaReservada(ZonaReservada zonaReservada) {
-        jdbcTemplate.update("UPDATE Zona SET identificador =?, idarea=?, idzona =?, fecha =? " +
+        jdbcTemplate.update("UPDATE ZonaReservada SET identificador =?, idarea=?, idzona =?, fecha =? " +
                         ",franja =? WHERE identificador =?",
                 zonaReservada.getIdentificador(),zonaReservada.getIdarea(),zonaReservada.getIdzona()
                 ,zonaReservada.getFecha(),zonaReservada.getFranja());
     }
 
     public void deleteZonaReservada(int identificador) {
-        jdbcTemplate.update("DELETE FROM Zona WHERE identificador =?",
+        jdbcTemplate.update("DELETE FROM ZonaReservada WHERE identificador =?",
                 identificador);
     }
 
@@ -69,10 +70,29 @@ public class ZonaReservadaDAO {
             return new ArrayList<>();
         }
     }
-    public ZonaReservada getZonaReservada2(int zona, String frnaja, Date fecha) {
+    public ZonaReservada getZonaReservada2(int zona, String frnaja, LocalDate fecha) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM ZonaReservada WHERE idzona =? AND fecha=? AND franja=?",
                     new ZonaReservadaRowMapper(), zona,frnaja, fecha);
+        }
+        catch(EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
+    public List<ZonaReservada> getZonaReservada3(int area, LocalDate fecha) {
+        try {
+            return jdbcTemplate.query("SELECT * FROM ZonaReservada WHERE idarea =? AND fecha=?",
+                    new ZonaReservadaRowMapper(), area, fecha);
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+
+    public Integer getArea(String nombre){
+        try {
+            return jdbcTemplate.queryForObject("SELECT idArea FROM Area WHERE nombre =?",
+                    Integer.class, nombre);
         }
         catch(EmptyResultDataAccessException e) {
             return null;

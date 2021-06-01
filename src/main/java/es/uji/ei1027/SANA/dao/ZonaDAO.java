@@ -20,8 +20,8 @@ public class ZonaDAO {
 
     }
     public void addZona(Zona zona) {
-        jdbcTemplate.update("INSERT INTO Zona VALUES(?,?,?,?)",
-                obtenerZ(),zona.getCapacidad(),zona.getIdArea(),false);
+        jdbcTemplate.update("INSERT INTO Zona VALUES(?,?,?)",
+                obtenerZ(),zona.getCapacidad(),zona.getIdArea());
     }
 
     public int obtenerZ(){
@@ -35,8 +35,8 @@ public class ZonaDAO {
     }
 
     public void updateZona(Zona zona) {
-        jdbcTemplate.update("UPDATE Zona SET capacidad =?, idArea=?, ocupada =? WHERE identificador =?",
-                zona.getCapacidad(),zona.getIdArea(),zona.isOcupada(),zona.getIdentificador());
+        jdbcTemplate.update("UPDATE Zona SET capacidad =?, idArea=? WHERE identificador =?",
+                zona.getCapacidad(),zona.getIdArea(),zona.getIdentificador());
     }
 
     public void deleteZona(String identificador) {
