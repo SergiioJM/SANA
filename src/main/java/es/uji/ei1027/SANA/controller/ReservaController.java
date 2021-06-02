@@ -74,7 +74,7 @@ public class ReservaController {
             return "reserva/add0";
         }
         else
-            return "reserva/noreserva";
+            return "reserva/noreservaMunicipios";
     }
     @RequestMapping(value="/add0", method= RequestMethod.POST)
     public String processAddSubmit0(@ModelAttribute("reserva") Reserva reserva,
@@ -91,7 +91,7 @@ public class ReservaController {
                 return "reserva/add0";
             }
             else
-                return "reserva/noreserva";
+                return "reserva/noreservaMunicipios";
         }
         reserva.setListreserva(reservaDAO.getZonasDeReserva(reserva.getIdentificador()));
         reserva.setIdentificador(reservaDAO.obtenerR());
@@ -115,7 +115,7 @@ public class ReservaController {
             return "reserva/add1";
         }
         else
-            return "reserva/noreserva";
+            return "reserva/noreservaArea";
     }
 
     @RequestMapping(value="/add1", method= RequestMethod.POST)
@@ -133,7 +133,7 @@ public class ReservaController {
                 return "reserva/add1";
             }
             else
-                return "reserva/noreserva";
+                return "reserva/noreservaArea";
         }
         reserva.setListreserva(reservaDAO.getZonasDeReserva(reserva.getIdentificador()));
         reserva.setIdentificador(reservaDAO.obtenerR());
@@ -164,7 +164,7 @@ public class ReservaController {
             return "reserva/add2";
         }
         else
-            return "reserva/noreserva";
+            return "reserva/noreservaFranja";
     }
     @RequestMapping(value="/add2", method= RequestMethod.POST)
     public String processAddSubmit2(@ModelAttribute("reserva") Reserva reserva,
@@ -188,7 +188,7 @@ public class ReservaController {
                 return "reserva/add2";
             }
             else
-                return "reserva/noreserva";
+                return "reserva/noreservaFranja";
         }
         reserva.setIdentificador(reservaDAO.obtenerR());
         System.out.println(reserva.getIdentificador());

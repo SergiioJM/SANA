@@ -87,7 +87,7 @@ public class ReservaZonaController {
             return "reservazona/add";
         }
         else
-            return "reserva/noreserva";
+            return "reservazona/noreservaZona";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
@@ -128,7 +128,7 @@ public class ReservaZonaController {
                 return "reservazona/add";
             }
             else
-                return "reserva/noreserva";
+                return "reservazona/noreservaZona";
         }
 
         if (reservaZona.getZona() != null){//Comprobamos que ha seleccionado almenos una zona

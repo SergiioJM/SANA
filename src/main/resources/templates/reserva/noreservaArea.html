@@ -13,6 +13,7 @@
 <body class="center">
 <h2 class="negrita">Nueva Reserva</h2>
 <h1 text-align: center>No se puede hacer una reserva con los datos introducidos</h1>
+<h3 text-align: center>NO hay areas del municipio seleccionado disponibles</h3>
 <a th:href="@{../../../../../reserva/add/{nif}(nif=${nif})}"><button type="submit" class="btn btn-success">Hacer una reserva de nuevo</button></a><br><br>
 <a th:href="@{/reserva/reservasciudadano/{nif}(nif=${nif})}"><button type="button" class="btn btn-secondary">Volver a ver tus reservas</button></a>
 </body>
