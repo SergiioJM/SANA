@@ -1,6 +1,7 @@
 package es.uji.ei1027.SANA.dao;
 
 import es.uji.ei1027.SANA.model.Controlador;
+import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -20,10 +21,12 @@ public class ControladorDAO {
 
     }
 
+    BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+
     public void addControlador(Controlador controlador) {
-        jdbcTemplate.update("INSERT INTO Controlador VALUES(?,?,?,?,?,?,?)",
+        jdbcTemplate.update("INSERT INTO Controlador VALUES(?,?,?,?,?,?,?,?)",
             obtenerC(),controlador.getNombre(),controlador.getDireccion(),
-                controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin());
+                controlador.getEmail(),passwordEncryptor.encryptPassword(controlador.getPassword()),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin());
     }
     public int obtenerC(){
         String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Controlador", String.class);

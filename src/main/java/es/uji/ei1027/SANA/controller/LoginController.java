@@ -2,6 +2,7 @@ package es.uji.ei1027.SANA.controller;
 
 import javax.servlet.http.HttpSession;
 import es.uji.ei1027.SANA.dao.CiudadanoDAO;
+import es.uji.ei1027.SANA.dao.ControladorDAO;
 import es.uji.ei1027.SANA.dao.ResponsableMunicipioDAO;
 import es.uji.ei1027.SANA.dao.UserDao;
 import es.uji.ei1027.SANA.model.UserDetails;
@@ -35,12 +36,20 @@ public class LoginController {
     private UserDao userDao;
     private ResponsableMunicipioDAO responsableMunicipioDAO;
     private CiudadanoDAO ciudadanoDAO;
+    private ControladorDAO controladorDAO;
 
     @Autowired
     public void setCiudadanoDAO(CiudadanoDAO ciudadanoDAO) { this.ciudadanoDAO = ciudadanoDAO; }
 
     @Autowired
     public void setResponsableMunicipioDAO(ResponsableMunicipioDAO responsableMunicipioDAO) { this.responsableMunicipioDAO = responsableMunicipioDAO;}
+
+    @Autowired
+    public void setControladorDao(ControladorDAO controladorDAO) { this.controladorDAO = controladorDAO; }
+
+    /**
+     * LOGIN DEL USUARIO
+     */
 
     @RequestMapping("/login")
     public String login(Model model) {
@@ -65,6 +74,10 @@ public class LoginController {
         return "redirect:/user/ciudadano";
     }
 
+    /**
+     * LOGIN DEL GESTOR MUNICIPAL
+     */
+
     @RequestMapping("/loginGestor")
     public String login2(Model model) {
         model.addAttribute("user", new UserDetails());
@@ -88,6 +101,38 @@ public class LoginController {
         session.setAttribute("user", user);
         return "redirect:/user/gestor";
     }
+
+    /**
+     * LOGIN DEL CONTROLADOR
+     */
+
+    @RequestMapping("/loginControlador")
+    public String login3(Model model) {
+        model.addAttribute("user", new UserDetails());
+        return "loginControlador";
+    }
+
+    @RequestMapping(value="/loginControlador", method=RequestMethod.POST)
+    public String checkLogin3(@ModelAttribute("user") UserDetails user,
+                              BindingResult bindingResult, HttpSession session) {
+        UserValidator userValidator = new UserValidator();
+        userValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "loginControlador";
+        }
+
+        user = userDao.loadUserByUsername3(user.getEmail(), user.getPassword(), controladorDAO);
+        if (user == null) {
+            bindingResult.rejectValue("password", "password", "Contraseña incorrecta");
+            return "loginControlador";
+        }
+        session.setAttribute("user", user);
+        return "redirect:/user/controlador";
+    }
+
+    /**
+     * CERRAR SESION
+     */
 
     @RequestMapping("/logout")
     public String logout(HttpSession session) {

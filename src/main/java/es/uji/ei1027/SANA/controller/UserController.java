@@ -35,11 +35,24 @@ public class UserController {
         if (session.getAttribute("user") == null) {
             UserDetails a= new UserDetails();
             model.addAttribute("user", a);
-            return "login";
+            return "loginGestor";
         }
         model.addAttribute("user", session.getAttribute("user"));
         return "user/gestor";
     }
+
+    @RequestMapping("/controlador")
+    public String listSocis3(HttpSession session, Model model) {
+        if (session.getAttribute("user") == null) {
+            UserDetails a= new UserDetails();
+            model.addAttribute("user", a);
+            return "loginControlador";
+        }
+        model.addAttribute("user", session.getAttribute("user"));
+        return "user/controlador";
+    }
+
+
 }
 
 

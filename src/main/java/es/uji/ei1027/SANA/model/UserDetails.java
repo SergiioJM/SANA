@@ -2,10 +2,10 @@ package es.uji.ei1027.SANA.model;
 
 public class UserDetails {
     String nif;
-    String contraseña;
     String email;
     String password;
     String municipio;
+    String identificador;
 
 
     public String getNif() {
@@ -32,20 +32,20 @@ public class UserDetails {
         this.email = email;
     }
 
-    public String getContraseña() {
-        return contraseña;
-    }
-
-    public void setContraseña(String contraseña) {
-        this.contraseña = contraseña;
-    }
-
     public String getMunicipio() {
         return municipio;
     }
 
     public void setMunicipio(String municipio) {
         this.municipio = municipio;
+    }
+
+    public String getIdentificador() {
+        return identificador;
+    }
+
+    public void setIdentificador(String identificador) {
+        this.identificador = identificador;
     }
 
     @Override

@@ -41,6 +41,7 @@ CREATE TABLE Controlador (
     nombre   		 VARCHAR(50) NOT NULL,
     direccion   	 	 VARCHAR(50),
     email   		 VARCHAR(50),
+    password         VARCHAR,
     telefono   	   	 INTEGER,
     fechaInicio  	 	 DATE,
     fechaFin   		 DATE	NULL,
