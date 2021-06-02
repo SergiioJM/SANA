@@ -1,6 +1,7 @@
 package es.uji.ei1027.SANA.dao;
 
 import es.uji.ei1027.SANA.model.Ciudadano;
+import es.uji.ei1027.SANA.model.Controlador;
 import es.uji.ei1027.SANA.model.ResponsableMunicipio;
 import es.uji.ei1027.SANA.model.UserDetails;
 import org.jasypt.util.password.BasicPasswordEncryptor;
@@ -19,6 +20,7 @@ public class FakeUserProvider implements UserDao {
             usuario.setNif(ciudadanos.get(i).getNif());
             usuario.setPassword(ciudadanos.get(i).getPassword());
             knownUsers.put(ciudadanos.get(i).getNif(),usuario);
+            System.out.println(ciudadanos.get(i).getNif() + ciudadanos.get(i).getPassword());
         }
         UserDetails user = knownUsers.get(nif.trim());
         if (user == null)
@@ -43,6 +45,26 @@ public class FakeUserProvider implements UserDao {
             knownUsers.put(responsables.get(i).getEmail(), usuario);
         }
         UserDetails user = knownUsers.get(email.trim());
+        if (user == null)
+            return null;
+        BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+        if (passwordEncryptor.checkPassword(password, user.getPassword())) {
+            return user;
+        } else {
+            return null;
+        }
+    }
+
+    @Override
+    public UserDetails loadUserByUsername3(String emailControlador, String password, ControladorDAO controladorDAO) {
+        List<Controlador> coontroladores = controladorDAO.getControladores();
+        for (int i = 0; i < coontroladores.size(); i++) {
+            UserDetails usuario = new UserDetails();
+            usuario.setEmail(coontroladores.get(i).getEmail());
+            usuario.setPassword(coontroladores.get(i).getPassword());
+            knownUsers.put(String.valueOf(coontroladores.get(i).getEmail()), usuario);
+        }
+        UserDetails user = knownUsers.get(emailControlador.trim());
         if (user == null)
             return null;
         BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();

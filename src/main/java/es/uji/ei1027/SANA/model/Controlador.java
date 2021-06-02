@@ -1,5 +1,7 @@
 package es.uji.ei1027.SANA.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class Controlador {
@@ -7,8 +9,11 @@ public class Controlador {
     String nombre;
     String direccion;
     String email;
+    String password;
     int telefono;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate fechaInicio;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate fechaFin;
 
     public Controlador(){
@@ -41,6 +46,10 @@ public class Controlador {
 
     public int getTelefono() {
         return telefono;
+    }
+
+    public String getPassword() {
+        return password;
     }
 
     @Override
@@ -82,6 +91,10 @@ public class Controlador {
 
     public void setTelefono(int telefono) {
         this.telefono = telefono;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
 

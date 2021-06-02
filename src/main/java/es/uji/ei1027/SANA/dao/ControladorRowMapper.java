@@ -13,6 +13,7 @@ public final class ControladorRowMapper implements RowMapper<Controlador> {
         controlStaff.setNombre(rs.getString("nombre"));
         controlStaff.setDireccion(rs.getString("direccion"));
         controlStaff.setEmail(rs.getString("email"));
+        controlStaff.setPassword(rs.getString("password"));
         controlStaff.setTelefono(rs.getInt("telefono"));
         controlStaff.setFechaInicio(rs.getObject("fechaInicio", LocalDate.class));
         controlStaff.setFechaFin(rs.getObject("fechaFin", LocalDate.class));

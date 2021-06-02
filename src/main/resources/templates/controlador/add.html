@@ -28,17 +28,22 @@
             <td><input type="text" th:field="*{email}" /></td>
         </tr>
         <tr>
+            <td><label>Contraseña</label></td>
+            <td><input type="password" th:field="*{password}" maxlength="100"/></td>
+            <td th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="error"></td>
+        </tr>
+        <tr>
             <td><label>Telefono</label></td>
             <td><input type="number" th:field="*{telefono}" /></td>
         </tr>
         <tr>
             <td><label>Fecha de inicio (D/M/YY)</label></td>
-            <td><input type="text" th:field="*{fechaInicio}" /></td>
+            <td><input type="date" th:field="*{fechaInicio}" /></td>
             <td th:if="${#fields.hasErrors('fechaInicio')}" th:errors="*{fechaInicio}" class="error"></td>
         </tr>
         <tr>
             <td><label>Fecha de fin (D/M/YY)</label></td>
-            <td><input type="text" th:field="*{fechaFin}" /></td>
+            <td><input type="date" th:field="*{fechaFin}" /></td>
             <td th:if="${#fields.hasErrors('fechaFin')}" th:errors="*{fechaFin}" class="error"></td>
         </tr>
     </table>
