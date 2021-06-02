@@ -68,9 +68,13 @@ public class ReservaController {
         r.setCiudadano(nif);
         model.addAttribute("nif",nif);
         model.addAttribute("reserva", r);
-        model.addAttribute("listamunicipios",reservaDAO.getMunicipios());
-
-        return "reserva/add0";
+        List<String> municipios=reservaDAO.getMunicipios();
+        if (municipios.size()>0) {
+            model.addAttribute("listamunicipios", municipios);
+            return "reserva/add0";
+        }
+        else
+            return "reserva/noreserva";
     }
     @RequestMapping(value="/add0", method= RequestMethod.POST)
     public String processAddSubmit0(@ModelAttribute("reserva") Reserva reserva,
@@ -81,8 +85,13 @@ public class ReservaController {
         ReservaValidatorAdd reservaValidatorAdd = new ReservaValidatorAdd();
         reservaValidatorAdd.validate(reserva, bindingResult);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("listamunicipios", reservaDAO.getMunicipios());
-            return "reserva/add0";
+            List<String> municipios=reservaDAO.getMunicipios();
+            if (municipios.size()>0) {
+                model.addAttribute("listamunicipios", municipios);
+                return "reserva/add0";
+            }
+            else
+                return "reserva/noreserva";
         }
         reserva.setListreserva(reservaDAO.getZonasDeReserva(reserva.getIdentificador()));
         reserva.setIdentificador(reservaDAO.obtenerR());
@@ -100,8 +109,13 @@ public class ReservaController {
         UserDetails user= (UserDetails) session.getAttribute("user");
         model.addAttribute("nif",user.getNif());
         model.addAttribute("reserva", reserva);
-        model.addAttribute("listaarea",reservaDAO.getAreas(reserva.getMunicipio()));
-        return "reserva/add1";
+        List<String> areas= reservaDAO.getAreas(reserva.getMunicipio());
+        if (areas.size()>0){
+            model.addAttribute("listaarea",areas);
+            return "reserva/add1";
+        }
+        else
+            return "reserva/noreserva";
     }
 
     @RequestMapping(value="/add1", method= RequestMethod.POST)
@@ -113,8 +127,13 @@ public class ReservaController {
         ReservaValidatorAdd reservaValidatorAdd =new ReservaValidatorAdd();
         reservaValidatorAdd.validate(reserva,bindingResult);
         if (bindingResult.hasErrors()) {
-            model.addAttribute("listaarea",reservaDAO.getAreas(reserva.getMunicipio()));
-            return "reserva/add1";
+            List<String> areas= reservaDAO.getAreas(reserva.getMunicipio());
+            if (areas.size()>0){
+                model.addAttribute("listaarea",areas);
+                return "reserva/add1";
+            }
+            else
+                return "reserva/noreserva";
         }
         reserva.setListreserva(reservaDAO.getZonasDeReserva(reserva.getIdentificador()));
         reserva.setIdentificador(reservaDAO.obtenerR());
@@ -140,8 +159,12 @@ public class ReservaController {
                 franjasfinales.add(res);
             }
         }
-        model.addAttribute("franjas",franjasfinales);
-        return "reserva/add2";
+        if (franjasfinales.size()>0) {
+            model.addAttribute("franjas", franjasfinales);
+            return "reserva/add2";
+        }
+        else
+            return "reserva/noreserva";
     }
     @RequestMapping(value="/add2", method= RequestMethod.POST)
     public String processAddSubmit2(@ModelAttribute("reserva") Reserva reserva,
@@ -160,8 +183,12 @@ public class ReservaController {
                     franjasfinales.add(res);
                 }
             }
-            model.addAttribute("franjas",franjasfinales);
-            return "reserva/add2";
+            if (franjasfinales.size()>0) {
+                model.addAttribute("franjas", franjasfinales);
+                return "reserva/add2";
+            }
+            else
+                return "reserva/noreserva";
         }
         reserva.setIdentificador(reservaDAO.obtenerR());
         System.out.println(reserva.getIdentificador());

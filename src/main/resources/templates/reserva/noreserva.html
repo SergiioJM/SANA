@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:text-align="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Crear Reserva</title>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/images/LogoSana.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+
+</head>
+<body class="center">
+<h2 class="negrita">Nueva Reserva</h2>
+<h1 text-align: center>No se puede hacer una reserva con los datos introducidos</h1>
+<a th:href="@{../../../../../reserva/add/{nif}(nif=${nif})}"><button type="submit" class="btn btn-success">Hacer una reserva de nuevo</button></a><br><br>
+<a th:href="@{/reserva/reservasciudadano/{nif}(nif=${nif})}"><button type="button" class="btn btn-secondary">Volver a ver tus reservas</button></a>
+</body>
+</html>

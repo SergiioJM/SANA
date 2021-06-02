@@ -78,11 +78,16 @@ public class ReservaZonaController {
             if (!zonascojidas2.contains(z[0]))
                 zonasdisponibles.add(e);
         }
-        model.addAttribute("zonalista",zonasdisponibles);
         model.addAttribute("reservazona", reservaZona);
         UserDetails user= (UserDetails) session.getAttribute("user");
         model.addAttribute("nif",user.getNif());
-        return "reservazona/add";
+
+        if (zonasdisponibles.size()>0) {
+            model.addAttribute("zonalista", zonasdisponibles);
+            return "reservazona/add";
+        }
+        else
+            return "reserva/noreserva";
     }
 
     @RequestMapping(value="/add", method= RequestMethod.POST)
@@ -118,8 +123,12 @@ public class ReservaZonaController {
                 if (!zonascojidas2.contains(z[0]))
                     zonasdisponibles.add(e);
             }
-            model.addAttribute("zonalista",zonasdisponibles);
-            return "reservazona/add";
+            if (zonasdisponibles.size()>0) {
+                model.addAttribute("zonalista", zonasdisponibles);
+                return "reservazona/add";
+            }
+            else
+                return "reserva/noreserva";
         }
 
         if (reservaZona.getZona() != null){//Comprobamos que ha seleccionado almenos una zona
