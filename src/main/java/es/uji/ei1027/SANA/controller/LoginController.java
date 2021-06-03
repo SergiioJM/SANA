@@ -51,12 +51,6 @@ public class LoginController {
      * LOGIN DEL USUARIO
      */
 
-    @RequestMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("user", new UserDetails());
-        return "login";
-    }
-
     @RequestMapping(value="/login", method=RequestMethod.POST)
     public String checkLogin(@ModelAttribute("user") UserDetails user,
                              BindingResult bindingResult, HttpSession session) {
@@ -78,12 +72,6 @@ public class LoginController {
     /**
      * LOGIN DEL GESTOR MUNICIPAL
      */
-
-    @RequestMapping("/loginGestor")
-    public String login2(Model model) {
-        model.addAttribute("user", new UserDetails());
-        return "loginGestor";
-    }
 
     @RequestMapping(value="/loginGestor", method=RequestMethod.POST)
     public String checkLogin2(@ModelAttribute("user") UserDetails user,
