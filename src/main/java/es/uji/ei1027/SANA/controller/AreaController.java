@@ -4,6 +4,7 @@ import es.uji.ei1027.SANA.dao.AreaDAO;
 import es.uji.ei1027.SANA.dao.MunicipioDAO;
 import es.uji.ei1027.SANA.model.Area;
 import es.uji.ei1027.SANA.model.Municipio;
+import es.uji.ei1027.SANA.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -81,6 +83,12 @@ public class AreaController {
         return "area/update";
     }
 
+    @RequestMapping(value="/popup/{idArea}", method = RequestMethod.GET)
+    public String abrirPopup(Model model, @PathVariable int idArea, HttpSession session) {
+        session.setAttribute("idArea", idArea);
+        return "redirect:../list/#popup";
+    }
+
     @RequestMapping(value="/update", method = RequestMethod.POST)
     public String processUpdateSubmit(
             @ModelAttribute("area") Area area,
@@ -91,8 +99,10 @@ public class AreaController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/delete/{idArea}")
-    public String processDelete(@PathVariable int idArea) {
+    @RequestMapping(value="/delete")
+    public String processDelete(HttpSession session) {
+        int idArea = (int) session.getAttribute("idArea");
+        session.removeAttribute("idArea");
         areaDao.deleteArea(idArea);
         return "redirect:../list";
     }

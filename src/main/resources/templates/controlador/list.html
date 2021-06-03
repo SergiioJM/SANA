@@ -6,6 +6,7 @@
     <link rel="icon" type="image/png" href="/images/LogoSana.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+    <link rel="stylesheet" type="text/css" href="/css/popup.css" th:href="@{/css/popup.css}"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
 
@@ -35,9 +36,17 @@
         <td th:text="${controlador.telefono}"></td>
         <td th:text="${controlador.fechaInicio}"></td>
         <td th:text="${controlador.fechaFin}"></td>
-        <td><a th:href="@{/controlador/update/{identificador}(identificador=${controlador.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
-        </td>
-        <td><a th:href="@{/controlador/delete/{identificador}(identificador=${controlador.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        <td><a th:href="@{/controlador/update/{identificador}(identificador=${controlador.identificador})}"><button type="button" class="btn btn-warning">Editar</button></a>
+        <td><p><a th:href="@{/controlador/popup/{identificador}(identificador=${controlador.identificador})}"><button type="button" class="btn btn-danger">Borrar</button></a></p>
+            <div id="popup" class="overlay">
+                <div id="popupBody">
+                    <h2>¿Está seguro que desea eliminar este controlador?</h2>
+                    <a id="cerrar" href="#">&times;</a>
+                    <div class="popupContent">
+                        <a href="/controlador/delete"><button type="button" class="btn btn-danger">Aceptar</button></a>
+                    </div>
+                </div>
+            </div>
         </td>
     </tr>
     </tbody>

@@ -6,6 +6,7 @@
     <link rel="icon" type="image/png" href="/images/LogoSana.png" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
     <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+    <link rel="stylesheet" type="text/css" href="/css/popup.css" th:href="@{/css/popup.css}"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
 
@@ -37,8 +38,16 @@
         <td th:text="${area.tipoAcceso}"></td>
         <td th:text="${area.municipio}"></td>
         <td><a th:href="@{/area/update/{idArea}(idArea=${area.idArea})}"><button type="button" class="btn btn-warning">Edita</button></a>
-        </td>
-        <td><a th:href="@{/area/delete/{idArea}(idArea=${area.idArea})}"><button type="button" class="btn btn-danger">Borra</button></a>
+        <td><p><a th:href="@{/area/popup/{idArea}(idArea=${area.idArea})}"><button type="button" class="btn btn-danger">Borrar</button></a></p>
+            <div id="popup" class="overlay">
+                <div id="popupBody">
+                    <h2>¿Está seguro que desea Eliminar esta área?</h2>
+                    <a id="cerrar" href="#">&times;</a>
+                    <div class="popupContent">
+                        <a href="/area/delete"><button type="button" class="btn btn-danger">Aceptar</button></a>
+                    </div>
+                </div>
+            </div>
         </td>
         <td><a th:href="@{/area/zonasarea/{idArea}(idArea=${area.idArea})}"><button type="button" class="btn btn-warning">Ver zonas de area</button></a>
         </td>

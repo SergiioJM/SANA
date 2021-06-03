@@ -2,6 +2,7 @@ package es.uji.ei1027.SANA.controller;
 
 import es.uji.ei1027.SANA.dao.ControladorDAO;
 import es.uji.ei1027.SANA.model.Controlador;
+import es.uji.ei1027.SANA.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpSession;
 
 @Controller
 @RequestMapping("/controlador")
@@ -69,10 +72,18 @@ public class ControladorController {
         return "redirect:list";
     }
 
-    @RequestMapping(value="/delete/{identificador}")
-    public String processDelete(@PathVariable int identificador) {
+    @RequestMapping(value="/popup/{identificador}", method = RequestMethod.GET)
+    public String abrirPopup(Model model, @PathVariable int identificador, HttpSession session) {
+        session.setAttribute("idControlador", identificador);
+        return "redirect:../list#popup";
+    }
+
+    @RequestMapping(value="/delete")
+    public String processDelete(HttpSession session) {
+        int identificador = (int) session.getAttribute("idControlador");
+        session.removeAttribute("idControlador");
         controladorDAO.deleteControlador(identificador);
-        return "redirect:../list";
+        return "redirect:/controlador/list";
     }
 
 }
