@@ -22,11 +22,11 @@ public class ReservaZonaDAO {
 
     public void addReservaZona(ReservaZona reservaZona) {
         jdbcTemplate.update("INSERT INTO ReservaZonas VALUES(?,?)",
-                reservaZona.getReserva(),reservaZona.getZona());
+                reservaZona.getReserva(),Integer.parseInt(reservaZona.getZona()));
     }
 
     public void deleteReservaZona(int reserva,String zona) {
-        jdbcTemplate.update("DELETE FROM ReservaZonas WHERE id_reserva =? AND id_zona=?",reserva,zona );
+        jdbcTemplate.update("DELETE FROM ReservaZonas WHERE id_reserva =? AND id_zona=?",reserva,Integer.parseInt(zona));
     }
 
 

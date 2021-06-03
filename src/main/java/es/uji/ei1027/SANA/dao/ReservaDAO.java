@@ -105,19 +105,21 @@ public class ReservaDAO {
                     "SELECT * FROM Reserva WHERE ciudadano=?", new ReservaRowMapper(),nif);
             for (Reserva e : ciudadanos){
                 List<String> lista=getZonasDeReserva(e.getIdentificador());
-                e.setListreserva(lista);
-                String zona=lista.get(0);
-                String municipio=jdbcTemplate.queryForObject(
-                        "SELECT nombre FROM Municipio WHERE cp IN (SELECT municipio FROM Area WHERE idarea IN (SELECT idarea FROM Zona WHERE identificador=?))",String.class, zona);
-                e.setMunicipio(municipio);
-                if (lista.size()!=0) {
-                    String area = jdbcTemplate.queryForObject("SELECT nombre FROM AREA WHERE idArea IN (SELECT idArea FROM Zona WHERE identificador=?)", String.class, lista.get(0));
-                    e.setArea(area);
-                }
-                else {
-                    e.setArea(" ");
-                }
+                if (lista.size()>0){
+                    e.setListreserva(lista);
+                    String zona=lista.get(0);
+                    String municipio=jdbcTemplate.queryForObject(
+                            "SELECT nombre FROM Municipio WHERE cp IN (SELECT municipio FROM Area WHERE idarea IN (SELECT idarea FROM Zona WHERE identificador=?))",String.class, Integer.parseInt(zona));
+                    e.setMunicipio(municipio);
+                    if (lista.size()!=0) {
+                        String area = jdbcTemplate.queryForObject("SELECT nombre FROM AREA WHERE idArea IN (SELECT idArea FROM Zona WHERE identificador=?)", String.class, Integer.parseInt(lista.get(0)));
+                        e.setArea(area);
+                    }
+                    else {
+                        e.setArea(" ");
+                    }
 
+                }
             }
             return ciudadanos;
         }
@@ -159,7 +161,8 @@ public class ReservaDAO {
         try {
             int cantidad = 0;
             for (String e : zonas) {
-                int c = jdbcTemplate.queryForObject("SELECT capacidad FROM Zona WHERE identificador=?", Integer.class, e);
+                int ee=Integer.parseInt(e);
+                int c = jdbcTemplate.queryForObject("SELECT capacidad FROM Zona WHERE identificador=?", Integer.class, ee);
                 cantidad += c;
             }
             return cantidad;

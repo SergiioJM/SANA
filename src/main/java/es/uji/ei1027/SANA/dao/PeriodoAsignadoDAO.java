@@ -76,10 +76,9 @@ public class PeriodoAsignadoDAO {
         }
     }
     public List<Integer> getReservasDeUnaZona(int zona){
-        String zona1= String.valueOf(zona);
         try{
             List<ReservaZona> reservas= jdbcTemplate.query(
-                    "SELECT * FROM ReservaZonas WHERE id_zona=?", new ReservaZonaRowMapper(),zona1);
+                    "SELECT * FROM ReservaZonas WHERE id_zona=?", new ReservaZonaRowMapper(),zona);
             List<Integer> res=new ArrayList<>();
             for (ReservaZona e: reservas){
                 if (!res.contains(e.getReserva())) {

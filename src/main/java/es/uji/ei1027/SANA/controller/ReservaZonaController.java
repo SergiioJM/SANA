@@ -132,25 +132,21 @@ public class ReservaZonaController {
         }
 
         if (reservaZona.getZona() != null){//Comprobamos que ha seleccionado almenos una zona
-            // ponemos todas las zonas escogidas a true para que no se puedan seleccionar en esa franja
+            Reserva reserva= (Reserva) session.getAttribute("reserva");
+            session.removeAttribute("reserva");
+            reservaDAO.addReserva(reserva);
             for (String zona: reservaZona.getZona().split(",")) {
                 zona=zona.split("#Capacidad:")[0];
                 ReservaZona reservaZona1= new ReservaZona();
                 reservaZona1.setZona(zona);
                 reservaZona1.setReserva(reservaZona.getReserva());
                 reservaZonaDAO.addReservaZona(reservaZona1);
+                ZonaReservada zonaReservada = new ZonaReservada(zonaReservadaDAO.getArea(area),zona,reserva.getFecha(),reserva.getHora());
+                zonaReservadaDAO.addZonaReservada(zonaReservada);
 
             }
             session.removeAttribute("area");
 
-        }
-        Reserva reserva= (Reserva) session.getAttribute("reserva");
-        session.removeAttribute("reserva");
-        reservaDAO.addReserva(reserva);
-        for (String zona: reservaZona.getZona().split(",")) {
-            zona=zona.split("#Capacidad:")[0];
-            ZonaReservada zonaReservada = new ZonaReservada(zonaReservadaDAO.getArea(area),zona,reserva.getFecha(),reserva.getHora());
-            zonaReservadaDAO.addZonaReservada(zonaReservada);
         }
         UserDetails user= (UserDetails) session.getAttribute("user");
         model.addAttribute("nif",user.getNif());

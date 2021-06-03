@@ -25,29 +25,29 @@ public class ZonaDAO {
     }
 
     public int obtenerZ(){
-        String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Zona", String.class);
+        Integer consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Zona", Integer.class);
         if (consulta == null){
             return 1;
         }
 
-        int z = Integer.parseInt(consulta) + 1;
+        int z = consulta + 1;
         return z;
     }
 
     public void updateZona(Zona zona) {
         jdbcTemplate.update("UPDATE Zona SET capacidad =?, idArea=? WHERE identificador =?",
-                zona.getCapacidad(),zona.getIdArea(),zona.getIdentificador());
+                zona.getCapacidad(),zona.getIdArea(),Integer.parseInt(zona.getIdentificador()));
     }
 
     public void deleteZona(String identificador) {
         jdbcTemplate.update("DELETE FROM Zona WHERE identificador =?",
-                identificador);
+                Integer.parseInt(identificador));
     }
 
     public Zona getZona(String identificador) {
         try {
             return jdbcTemplate.queryForObject("SELECT * FROM Zona WHERE identificador =?",
-                    new es.uji.ei1027.SANA.dao.ZonaRowMapper(), identificador);
+                    new es.uji.ei1027.SANA.dao.ZonaRowMapper(), Integer.parseInt(identificador));
         }
         catch(EmptyResultDataAccessException e) {
             return null;
@@ -67,7 +67,7 @@ public class ZonaDAO {
 
     public void setZona(String identificador , int capacidad) {
         jdbcTemplate.update("UPDATE Zona SET capacidad =? WHERE identificador =?",
-                capacidad,identificador);
+                capacidad,Integer.parseInt(identificador));
 
     }
 

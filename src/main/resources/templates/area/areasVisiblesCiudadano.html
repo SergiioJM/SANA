@@ -16,7 +16,6 @@
 <table class="table">
   <thead class="thead-dark">
   <tr>
-    <th>idArea</th>
     <th>Nombre</th>
     <th>Descripcion</th>
     <th>Caracteristicas</th>
@@ -29,7 +28,6 @@
   </thead>
   <tbody>
   <tr th:each="area: ${areas}">
-    <td th:text="${area.idArea}"></td>
     <td th:text="${area.nombre}"></td>
     <td th:text="${area.descripcion}"></td>
     <td th:text="${area.getCaracteristicas()}"></td>
