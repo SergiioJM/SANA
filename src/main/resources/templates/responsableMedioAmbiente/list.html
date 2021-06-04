@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Gestionar Zonas</title>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/png" href="/images/LogoSana.png" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+
+</head>
+<body class="center">
+<h1 class="negrita">Lista de Zonas</h1>
+<table class="table">
+  <thead class="thead-dark">
+  <tr>
+    <th>Usuario</th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="responsableMedioAmbiente: ${responsables}">
+    <td th:text="${responsableMedioAmbiente.usuario}"></td>
+  </tr>
+  </tbody>
+</table>
+<a href="add"><button type="button" class="btn btn-success">Añade Responsable Medio Ambiente</button></a>
+<a href="/user/gestor"><button type="button" class="btn btn-outline-secondary">Volver</button></a>
+
+</body>
+</html>

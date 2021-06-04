@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Crear Responsable de Medio Ambiente</title>
+  <meta charset="UTF-8" />
+  <link rel="stylesheet"
+        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
+  <link rel="stylesheet" type="text/css" href="/css/estilos.css"
+        th:href="@{/css/estilos.css}"/>
+</head>
+<body>
+<h2>Nuevo Responsable de Medio Ambiente</h2>
+<form action="#" th:action="@{/responsableMedioAmbiente/add}"
+      th:object="${responsableMedioAmbiente}" method="post">
+  <table>
+    <tr>
+      <td><label>Nombre</label></td>
+      <td><input type="text" th:field="*{usuario}" /></td>
+    </tr>
+    <tr>
+      <td><label>Contraseña</label></td>
+      <td><input type="password" th:field="*{password}" maxlength="100"/></td>
+    </tr>
+  </table>
+  <a href="add"><button type="submit" class="btn btn-success">Añade un Responsable de Medio Ambiente</button></a>
+  <a href="/responsable/list"><button type="button" class="btn btn-secondary">Volver</button></a>
+  <a href="/"> <button type="button" class="btn btn-outline-secondary">Menu Princpial</button></a></form>
+</form>
+</body>
+</html>

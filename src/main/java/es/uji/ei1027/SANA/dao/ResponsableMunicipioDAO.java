@@ -69,6 +69,7 @@ public class ResponsableMunicipioDAO {
             return new ArrayList<>();
         }
     }
+
     public List<Integer> getAreaMunicipio(String municipio){
         try{
             List<Integer> zonas= jdbcTemplate.queryForList(

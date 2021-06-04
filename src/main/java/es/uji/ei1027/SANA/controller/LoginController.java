@@ -1,10 +1,9 @@
 package es.uji.ei1027.SANA.controller;
 
 import javax.servlet.http.HttpSession;
-import es.uji.ei1027.SANA.dao.CiudadanoDAO;
-import es.uji.ei1027.SANA.dao.ControladorDAO;
-import es.uji.ei1027.SANA.dao.ResponsableMunicipioDAO;
-import es.uji.ei1027.SANA.dao.UserDao;
+
+import es.uji.ei1027.SANA.dao.*;
+import es.uji.ei1027.SANA.model.ResponsableMedioAmbiente;
 import es.uji.ei1027.SANA.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -37,6 +36,7 @@ public class LoginController {
     private ResponsableMunicipioDAO responsableMunicipioDAO;
     private CiudadanoDAO ciudadanoDAO;
     private ControladorDAO controladorDAO;
+    private ResponsableMedioAmbienteDAO responsableMedioAmbienteDAO;
 
     @Autowired
     public void setCiudadanoDAO(CiudadanoDAO ciudadanoDAO) { this.ciudadanoDAO = ciudadanoDAO; }
@@ -47,9 +47,17 @@ public class LoginController {
     @Autowired
     public void setControladorDao(ControladorDAO controladorDAO) { this.controladorDAO = controladorDAO; }
 
+    @Autowired
+    public void setResponsableMedioAmbiente(ResponsableMedioAmbienteDAO responsableMedioAmbiente) { this.responsableMedioAmbienteDAO = responsableMedioAmbienteDAO; }
     /**
      * LOGIN DEL USUARIO
      */
+
+    @RequestMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("user", new UserDetails());
+        return "login";
+    }
 
     @RequestMapping(value="/login", method=RequestMethod.POST)
     public String checkLogin(@ModelAttribute("user") UserDetails user,
@@ -59,7 +67,6 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             return "login";
         }
-
         user = userDao.loadUserByUsername(user.getNif(), user.getPassword(), ciudadanoDAO);
         if (user == null) {
             bindingResult.rejectValue("password", "password", "Contraseña incorrecta");
@@ -73,9 +80,15 @@ public class LoginController {
      * LOGIN DEL GESTOR MUNICIPAL
      */
 
+    @RequestMapping("/loginGestor")
+    public String login2(Model model) {
+        model.addAttribute("user", new UserDetails());
+        return "loginGestor";
+    }
+
     @RequestMapping(value="/loginGestor", method=RequestMethod.POST)
     public String checkLogin2(@ModelAttribute("user") UserDetails user,
-                             BindingResult bindingResult, HttpSession session) {
+                              BindingResult bindingResult, HttpSession session) {
         UserValidator userValidator = new UserValidator();
         userValidator.validate(user, bindingResult);
         if (bindingResult.hasErrors()) {
@@ -117,6 +130,34 @@ public class LoginController {
         }
         session.setAttribute("user", user);
         return "redirect:/user/controlador";
+    }
+
+    /**
+     * LOGIN DEL RESPONSABLE DE MEDIO AMBIENTE
+     */
+
+    @RequestMapping("/loginResponsableMedioAmbiente")
+    public String login4(Model model) {
+        model.addAttribute("user", new UserDetails());
+        return "loginResponsableMedioAmbiente";
+    }
+
+    @RequestMapping(value="/loginResponsableMedioAmbiente", method=RequestMethod.POST)
+    public String checkLogin4(@ModelAttribute("user") UserDetails user,
+                              BindingResult bindingResult, HttpSession session) {
+        UserValidator userValidator = new UserValidator();
+        userValidator.validate(user, bindingResult);
+        if (bindingResult.hasErrors()) {
+            return "loginResponsableMedioAmbiente";
+        }
+
+        user = userDao.loadUserByUsername4(user.getIdentificador(), user.getPassword(), responsableMedioAmbienteDAO);
+        if (user == null) {
+            bindingResult.rejectValue("password", "password", "Contraseña incorrecta");
+            return "loginResponsableMedioAmbiente";
+        }
+        session.setAttribute("user", user);
+        return "redirect:/user/medioAmbiente";
     }
 
     /**

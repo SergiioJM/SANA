@@ -5,7 +5,7 @@ public class UserDetails {
     String email;
     String password;
     String municipio;
-    String identificador;
+    String usuario;
 
 
     public String getNif() {
@@ -41,11 +41,11 @@ public class UserDetails {
     }
 
     public String getIdentificador() {
-        return identificador;
+        return usuario;
     }
 
-    public void setIdentificador(String identificador) {
-        this.identificador = identificador;
+    public void setIdentificador(String usuario) {
+        this.usuario = usuario;
     }
 
     @Override

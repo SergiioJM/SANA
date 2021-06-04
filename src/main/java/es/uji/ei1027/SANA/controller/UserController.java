@@ -52,6 +52,16 @@ public class UserController {
         return "user/controlador";
     }
 
+    @RequestMapping("/medioAmbiente")
+    public String listSocis4(HttpSession session, Model model) {
+        if (session.getAttribute("user") == null) {
+            UserDetails a= new UserDetails();
+            model.addAttribute("user", a);
+            return "loginResponsableMedioAmbiente";
+        }
+        model.addAttribute("user", session.getAttribute("user"));
+        return "user/medioAmbiente";
+    }
 
 }
 
