@@ -63,6 +63,7 @@ button{
 
 .enlace {
     color: white;
+    padding: 10px;
 }
 .modal-contenido{
   background-color:aqua;

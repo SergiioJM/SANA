@@ -87,8 +87,16 @@ public class ReservaController {
         if (bindingResult.hasErrors()) {
             List<String> municipios=reservaDAO.getMunicipios();
             if (municipios.size()>0) {
-                model.addAttribute("listamunicipios", municipios);
-                return "reserva/add0";
+                /**Comprobamos que en el municipio haya algun area para poder seguir la reserva**/
+                List<String> areas= reservaDAO.getAreas(reserva.getMunicipio());
+                if (areas.size()>0){
+                    model.addAttribute("listamunicipios", municipios);
+                    return "reserva/add0";
+                }
+                else
+                    return "reserva/noreservaArea";
+
+
             }
             else
                 return "reserva/noreservaMunicipios";
@@ -128,9 +136,23 @@ public class ReservaController {
         reservaValidatorAdd.validate(reserva,bindingResult);
         if (bindingResult.hasErrors()) {
             List<String> areas= reservaDAO.getAreas(reserva.getMunicipio());
-            if (areas.size()>0){
-                model.addAttribute("listaarea",areas);
-                return "reserva/add1";
+            if (areas.size()>0){/**Comprobamos que ha elegido algun area**/
+                /**Comprobamos que cuando elegimos un areas haya franjas horarias para reservar**/
+                List<FranjaHoraria> franjas= franjaHorariaDAO.getFranjasHorariasDeArea(reserva.getArea());
+                List<String> franjasfinales= new ArrayList<>();
+                for (FranjaHoraria e: franjas){
+                    if (reserva.getFecha().isAfter(e.getFechaInicio()) && reserva.getFecha().isBefore(e.getFechaFin())){
+                        String res= e.getHoraInicio() + " - " + e.getHoraFin();
+                        franjasfinales.add(res);
+                    }
+                }
+                if (franjasfinales.size()>0) {
+                    model.addAttribute("listaarea",areas);
+                    return "reserva/add1";
+                }
+                else
+                    return "reserva/noreservaFranja";
+
             }
             else
                 return "reserva/noreservaArea";
