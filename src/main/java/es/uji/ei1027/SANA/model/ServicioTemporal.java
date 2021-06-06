@@ -7,11 +7,13 @@ import java.time.LocalTime;
 
 public class ServicioTemporal {
     String nombre;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate fechaInicio;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate fechaFin;
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     LocalTime horaInicio;
-    @DateTimeFormat(pattern = "HH:mm:ss")
+    @DateTimeFormat(pattern = "HH:mm")
     LocalTime horaFin;
     int idArea;
     String tipoServicio;

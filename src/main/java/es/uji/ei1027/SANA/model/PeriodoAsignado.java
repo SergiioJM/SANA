@@ -1,10 +1,14 @@
 package es.uji.ei1027.SANA.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.time.LocalDate;
 
 public class PeriodoAsignado {
     int identificador;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate fechaInicio;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate fechaFin;
     int nombreControlador;
     int nombreArea;

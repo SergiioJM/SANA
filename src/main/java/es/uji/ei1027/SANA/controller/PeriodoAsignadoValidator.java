@@ -14,7 +14,6 @@ public class PeriodoAsignadoValidator implements Validator {
     public void validate(Object obj, Errors errors) {
         PeriodoAsignado periodoAsignado = (PeriodoAsignado) obj;
 
-
         if (periodoAsignado.getFechaInicio() == null)
             errors.rejectValue("fechaInicio", "obligatorio", "Tienes que introducir una fecha de inicio");
 
@@ -22,14 +21,5 @@ public class PeriodoAsignadoValidator implements Validator {
             if (periodoAsignado.getFechaInicio().isAfter(periodoAsignado.getFechaFin()))
                 errors.rejectValue("fechaFin", "obligatorio", "La fecha de fin tiene que ser posterior a la de inicio");
         }
-
-        /* List<String> controladores = new ArrayList<>();
-        for (Controlador c: controladorDAO.getControladores()){
-            controladores.add(c.getIdentificador());
-        }
-        if (!controladores.contains(periodoAsignado.getControlador()))
-            errors.rejectValue("controlador","obligatorio","El controlador debe de existir");
-*/
-
     }
 }
