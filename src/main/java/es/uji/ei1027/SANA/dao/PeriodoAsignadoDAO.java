@@ -115,4 +115,17 @@ public class PeriodoAsignadoDAO {
             return new ArrayList<>();
         }
     }
+
+    public List<String> getAreas(){
+        try{
+            List<String> area= jdbcTemplate.queryForList(
+                    "SELECT nombre FROM Area", String.class);
+            return area;
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+
+
 }

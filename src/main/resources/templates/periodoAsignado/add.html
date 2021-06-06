@@ -40,7 +40,7 @@
       <td><label>Identificador del Area</label></td>
       <td>
         <select class="form_control" type="text" th:field="*{area}">
-          <option th:each="idArea: ${arealista}" th:value="${idArea}" th:text="${idArea}"></option>
+          <option th:each="nombre: ${arealista}" th:value="${nombre}" th:text="${nombre}"></option>
         </select>
       </td>
     </tr>
@@ -48,5 +48,6 @@
   <br><br>
   <a href="add"><button type="submit" class="btn btn-success">Añade un Periodo Asignado</button></a><br><br>
   <a href="/periodoAsignado/list"><button type="button" class="btn btn-secondary">Volver</button></a>
+</form>
 </body>
 </html>

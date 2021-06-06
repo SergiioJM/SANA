@@ -51,10 +51,18 @@ public class PeriodoAsignadoController {
     public String addPeriodoAsignado(Model model) {
         model.addAttribute("periodoAsignado", new PeriodoAsignado());
         List<Area> lista2 = areaDAO.getAreas();
+
+        List<String> areas= periodoAsignadoDAO.getAreas();
+        for(int i = 0; i< areas.size();i++)
+            System.out.println(areas.get(i));
+        if (areas.size()>0){
+            model.addAttribute("arealista",areas);
+        }
+
         ArrayList<Integer> lista = new ArrayList<>();
         for (Area e : lista2)
             lista.add(e.getIdArea());
-        model.addAttribute("arealista",lista);
+        //model.addAttribute("arealista",lista);
 
         List<Controlador> lista3 = controladorDAO.getControladores();
         ArrayList<Integer> listaAux = new ArrayList<>();
