@@ -7,6 +7,5 @@ public interface UserDao {
     UserDetails loadUserByUsername(String nif, String contraseña, CiudadanoDAO ciudadanoDAO);
     UserDetails loadUserByUsername2(String email, String password,String cp, ResponsableMunicipioDAO responsableMunicipioDAO);
     UserDetails loadUserByUsername3(String emailControlador, String password,ControladorDAO controladorDAO);
-    UserDetails loadUserByUsername4(String usuario, String password, ResponsableMedioAmbienteDAO responsableMedioAmbienteDAO);
-
+    UserDetails loadUserByUsername4(String nomUsuario, String password);
 }

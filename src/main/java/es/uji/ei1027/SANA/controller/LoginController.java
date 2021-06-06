@@ -151,7 +151,7 @@ public class LoginController {
             return "loginResponsableMedioAmbiente";
         }
 
-        user = userDao.loadUserByUsername4(user.getIdentificador(), user.getPassword(), responsableMedioAmbienteDAO);
+        user = userDao.loadUserByUsername4(user.getUsuario(), user.getPassword());
         if (user == null) {
             bindingResult.rejectValue("password", "password", "Contraseña incorrecta");
             return "loginResponsableMedioAmbiente";

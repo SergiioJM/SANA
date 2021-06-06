@@ -1,10 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+    <title>SANA - Responsable de Medio Ambiente</title>
+    <link rel="icon" type="image/png" href="/images/LogoSana.png" />
 
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+</head>
+<body class="center">
+<div class="user" th:replace="fragments/loginMedioAmbienteInfo" >...</div>
+
+<main class="main">
+
+    <a href="/responsable/list"><button class="btn btn-primary butt" type="submit">Gestión de Gestores Municipales</button></a>
+    <br><br>
+    <a href="/municipio/list"><button class="btn btn-primary butt" type="submit">Gestión de Municipios</button></a>
+
+</main>
 </body>
 </html>

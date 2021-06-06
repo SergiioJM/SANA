@@ -1,14 +1,20 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Gestionar Responsables de Municipios</title>
+    <title>Lista de Gestores Municipales</title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" />
+    <link rel="icon" type="image/png" href="/images/LogoSana.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+    <link rel="stylesheet" type="text/css" href="/css/popup.css" th:href="@{/css/popup.css}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+
 </head>
-<body>
-<h1>Lista de Responsables de Municipios</h1>
-<table class="table table-striped">
-    <thead>
+<body class="center">
+<h1 class="negrita">Lista de Responsables de Municipios</h1>
+<table class="table">
+    <thead class="thead-dark">
     <tr>
         <th>Nombre</th>
         <th>Email</th>
@@ -41,7 +47,7 @@
     </tbody>
 </table>
 <a href="add"><button type="button" class="btn btn-success">Añade Responsable de Municipio</button></a>
-<a href="/"><button type="button" class="btn btn-outline-secondary">Menu Principal</button></a>
+<a href="/user/medioAmbiente"><button type="button" class="btn btn-outline-secondary">Menu Principal</button></a>
 
 </body>
 </html>

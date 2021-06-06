@@ -1,0 +1,9 @@
+<div class="loggeduser" th:object="${session}" xmlns:th="http://www.w3.org/1999/xhtml">
+  <p th:if="*{user == null}">
+    No autenticat <a href="/loginGestorMedioAmbiente" th:href="@{/loginGestorMedioAmbiente}">Entrar</a>
+  </p>
+  <p th:unless="*{user == null}">
+    <span th:text="*{user.getUsuario()}"></span>
+    <a href="/logout" th:href="@{/logout}">Cerrar sesión</a>
+  </p>
+</div>

@@ -32,6 +32,14 @@ public class UserDetails {
         this.email = email;
     }
 
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
     public String getMunicipio() {
         return municipio;
     }

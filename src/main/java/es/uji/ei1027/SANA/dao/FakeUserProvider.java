@@ -17,7 +17,6 @@ public class FakeUserProvider implements UserDao {
             usuario.setNif(ciudadanos.get(i).getNif());
             usuario.setPassword(ciudadanos.get(i).getPassword());
             knownUsers.put(ciudadanos.get(i).getNif(),usuario);
-            System.out.println(ciudadanos.get(i).getNif() + ciudadanos.get(i).getPassword());
         }
         UserDetails user = knownUsers.get(nif.trim());
         if (user == null)
@@ -72,15 +71,16 @@ public class FakeUserProvider implements UserDao {
         }
     }
 
+    public FakeUserProvider() {
+        BasicPasswordEncryptor passwordEncryptor = new BasicPasswordEncryptor();
+        UserDetails userei102720jamdd = new UserDetails();
+        userei102720jamdd.setEmail("ei102720jamdd");
+        userei102720jamdd.setPassword(passwordEncryptor.encryptPassword("ei102720jamdd"));
+        knownUsers.put("ei102720jamdd", userei102720jamdd);
+    }
+
     @Override
-    public UserDetails loadUserByUsername4(String nomUsuario, String password, ResponsableMedioAmbienteDAO responsableMedioAmbienteDAO) {
-        List<ResponsableMedioAmbiente> medioAmbientes = responsableMedioAmbienteDAO.getResponsablesMedioAmbiente();
-        for (int i = 0; i < medioAmbientes.size(); i++) {
-            UserDetails usuario = new UserDetails();
-            usuario.setEmail(medioAmbientes.get(i).getUsuario());
-            usuario.setPassword(medioAmbientes.get(i).getPassword());
-            knownUsers.put(medioAmbientes.get(i).getUsuario(), usuario);
-        }
+    public UserDetails loadUserByUsername4(String nomUsuario, String password) {
         UserDetails user = knownUsers.get(nomUsuario.trim());
         if (user == null)
             return null;
