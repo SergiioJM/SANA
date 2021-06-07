@@ -7,7 +7,6 @@ public class UserDetails {
     String municipio;
     Integer area;
     String usuario;
-    Integer area;
 
 
     public String getNif() {
