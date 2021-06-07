@@ -44,11 +44,10 @@ public class ServicioTemporalController {
     public String addserviciotemporal(Model model) {
         model.addAttribute("serviciotemporal", new ServicioTemporal());
         model.addAttribute("tipoServicio",servicioTemporalDAO.getTipoServicio());
-        List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<Integer> lista = new ArrayList<>();
-        for (Area e : lista2)
-            lista.add(e.getIdArea());
-        model.addAttribute("arealista",lista);
+        List<String> lista2 = areaDAO.getNombreAreas();
+        if (lista2.size()>0){
+            model.addAttribute("arealista",lista2);
+        }
         return "serviciotemporal/add";
     }
 
@@ -58,15 +57,15 @@ public class ServicioTemporalController {
         ServicioTemporalValidator servicioTemporalValidatorValidator= new ServicioTemporalValidator();
         servicioTemporalValidatorValidator.validate(servicioTemporal,bindingResult);
         if (bindingResult.hasErrors()) {
-            List<Area> lista2 = areaDAO.getAreas();
-            ArrayList<Integer> lista = new ArrayList<>();
-            for (Area e : lista2)
-                lista.add(e.getIdArea());
-            model.addAttribute("arealista", lista);
+            List<String> lista2 = areaDAO.getNombreAreas();
+            if (lista2.size()>0) {
+                model.addAttribute("arealista", lista2);
+            }
             model.addAttribute("tipoServicio",servicioTemporalDAO.getTipoServicio());
             return "serviciotemporal/add";
         }
         try {
+            servicioTemporal.setIdArea(servicioTemporalDAO.getIdentificadorArea(servicioTemporal.getNomArea()));
             servicioTemporalDAO.addServicioTemporal(servicioTemporal);
         }
         catch (DuplicateKeyException e ) {

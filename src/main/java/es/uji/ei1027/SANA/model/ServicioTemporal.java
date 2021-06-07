@@ -17,6 +17,7 @@ public class ServicioTemporal {
     LocalTime horaFin;
     int idArea;
     String tipoServicio;
+    String nomArea;
 
 
     public ServicioTemporal() {
@@ -77,6 +78,14 @@ public class ServicioTemporal {
 
     public void setTipoServicio(String tipoServicio) {
         this.tipoServicio = tipoServicio;
+    }
+
+    public String getNomArea() {
+        return nomArea;
+    }
+
+    public void setNomArea(String nomArea) {
+        this.nomArea = nomArea;
     }
 
     @Override

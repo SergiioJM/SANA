@@ -45,12 +45,36 @@ public class ServicioTemporalDAO {
         }
     }
 
+
+    public int getIdentificadorArea(String area){
+        try{
+            return jdbcTemplate.queryForObject(
+                    "SELECT idArea FROM Area WHERE nombre=?",Integer.class,area);
+        }catch(Exception e) {
+            return 0;
+        }
+    }
+
+    public String getNombreArea(int area){
+        try{
+            return jdbcTemplate.queryForObject(
+                    "SELECT nombre FROM Area WHERE idArea=?",String.class,area);
+        }catch(Exception e) {
+            return "";
+        }
+    }
+
     public List<ServicioTemporal> getServiciosTemporal(){
         try{
-            return jdbcTemplate.query(
+            List<ServicioTemporal> aux = jdbcTemplate.query(
                     "SELECT * FROM ServicioTemporal",
                     new ServicioTemporalRowMapper());
+            for(int i = 0; i < aux.size(); i++){
+                aux.get(i).setNomArea(getNombreArea(aux.get(i).getIdArea()));
+            }
+            return aux;
         }
+
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();
         }

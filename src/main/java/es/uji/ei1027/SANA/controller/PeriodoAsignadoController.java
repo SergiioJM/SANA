@@ -53,8 +53,7 @@ public class PeriodoAsignadoController {
         List<Area> lista2 = areaDAO.getAreas();
 
         List<String> areas= periodoAsignadoDAO.getAreas();
-        for(int i = 0; i< areas.size();i++)
-            System.out.println(areas.get(i));
+
         if (areas.size()>0){
             model.addAttribute("arealista",areas);
         }
