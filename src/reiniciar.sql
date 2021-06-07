@@ -50,13 +50,6 @@ CREATE TABLE Controlador (
     CONSTRAINT ri_fechaFin CHECK (fechaFin>fechaInicio)
 );
 
-CREATE TABLE ResponsableMedioAmbiente (
-    usuario VARCHAR,
-    password VARCHAR,
-
-    CONSTRAINT cp_responsableMedioAmbiente PRIMARY KEY(usuario)
-);
-
 CREATE TABLE ResponsableMunicipio(
 	nombre	VARCHAR(50) NOT NULL,
 	email		VARCHAR(50),

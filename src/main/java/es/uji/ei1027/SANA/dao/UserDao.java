@@ -1,6 +1,5 @@
 package es.uji.ei1027.SANA.dao;
 
-import es.uji.ei1027.SANA.model.ResponsableMedioAmbiente;
 import es.uji.ei1027.SANA.model.UserDetails;
 
 public interface UserDao {

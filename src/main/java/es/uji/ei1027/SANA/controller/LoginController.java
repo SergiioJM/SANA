@@ -3,7 +3,6 @@ package es.uji.ei1027.SANA.controller;
 import javax.servlet.http.HttpSession;
 
 import es.uji.ei1027.SANA.dao.*;
-import es.uji.ei1027.SANA.model.ResponsableMedioAmbiente;
 import es.uji.ei1027.SANA.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +35,6 @@ public class LoginController {
     private ResponsableMunicipioDAO responsableMunicipioDAO;
     private CiudadanoDAO ciudadanoDAO;
     private ControladorDAO controladorDAO;
-    private ResponsableMedioAmbienteDAO responsableMedioAmbienteDAO;
 
     @Autowired
     public void setCiudadanoDAO(CiudadanoDAO ciudadanoDAO) { this.ciudadanoDAO = ciudadanoDAO; }
@@ -47,8 +45,6 @@ public class LoginController {
     @Autowired
     public void setControladorDao(ControladorDAO controladorDAO) { this.controladorDAO = controladorDAO; }
 
-    @Autowired
-    public void setResponsableMedioAmbiente(ResponsableMedioAmbienteDAO responsableMedioAmbiente) { this.responsableMedioAmbienteDAO = responsableMedioAmbienteDAO; }
     /**
      * LOGIN DEL USUARIO
      */
