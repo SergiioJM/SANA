@@ -94,6 +94,7 @@ public class PeriodoAsignadoController {
             return "periodoAsignado/add";
         }
         try {
+            periodoAsignado.setArea(periodoAsignadoDAO.getIdentificadorArea(periodoAsignado.getNomArea()));
             periodoAsignadoDAO.addPeriodoAsignado(periodoAsignado);
         }
         catch (DuplicateKeyException e ) {

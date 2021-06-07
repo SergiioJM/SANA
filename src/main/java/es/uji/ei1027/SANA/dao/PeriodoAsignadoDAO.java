@@ -116,6 +116,15 @@ public class PeriodoAsignadoDAO {
         }
     }
 
+    public int getIdentificadorArea(String area){
+        try{
+            return jdbcTemplate.queryForObject(
+                    "SELECT idArea FROM Area WHERE nombre=?",Integer.class,area);
+        }catch(Exception e) {
+            return 0;
+        }
+    }
+
     public List<String> getAreas(){
         try{
             List<String> area= jdbcTemplate.queryForList(
