@@ -42,11 +42,10 @@ public class ServicioController {
     public String addServicios(Model model) {
         model.addAttribute("servicio", new Servicio());
         model.addAttribute("tipoServicio",servicioDAO.getTipoServicio());
-        List<Area> lista2 = areaDAO.getAreas();
-        ArrayList<Integer> lista = new ArrayList<>();
-        for (Area e : lista2)
-            lista.add(e.getIdArea());
-        model.addAttribute("arealista",lista);
+        List<String> areas= areaDAO.getNombreAreas();
+        if (areas.size()>0){
+            model.addAttribute("arealista",areas);
+        }
         return "servicio/add";
     }
 
@@ -67,6 +66,7 @@ public class ServicioController {
             return "servicio/add";
         }
         try {
+            servicio.setArea(servicioDAO.getIdentificadorArea(servicio.getNomArea()));
             servicioDAO.addServicio(servicio);
         }
         catch (DuplicateKeyException e ){

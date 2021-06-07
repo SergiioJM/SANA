@@ -44,6 +44,14 @@ public class ServicioDAO {
             return null;
         }
     }
+    public int getIdentificadorArea(String area){
+        try{
+            return jdbcTemplate.queryForObject(
+                    "SELECT idArea FROM Area WHERE nombre=?",Integer.class,area);
+        }catch(Exception e) {
+            return 0;
+        }
+    }
 
     public List<Servicio> getServicios(){
         try{
