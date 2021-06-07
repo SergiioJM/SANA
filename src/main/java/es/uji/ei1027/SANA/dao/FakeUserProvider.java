@@ -52,7 +52,7 @@ public class FakeUserProvider implements UserDao {
     }
 
     @Override
-    public UserDetails loadUserByUsername3(String emailControlador, String password, Integer area, ControladorDAO controladorDAO) {
+    public UserDetails loadUserByUsername3(String emailControlador, String password,Integer area, ControladorDAO controladorDAO) {
         List<Controlador> coontroladores = controladorDAO.getControladores();
         for (int i = 0; i < coontroladores.size(); i++) {
             UserDetails usuario = new UserDetails();

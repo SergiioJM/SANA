@@ -6,6 +6,7 @@ public class Servicio {
     String estado;
     int area;
     String tipoServicio;
+    String nomArea;
 
     public Servicio(String nombre, String descripcion, String estado, int area) {
         this.nombre = nombre;
@@ -55,6 +56,14 @@ public class Servicio {
 
     public void setTipoServicio(String tipoServicio) {
         this.tipoServicio = tipoServicio;
+    }
+
+    public String getNomArea() {
+        return nomArea;
+    }
+
+    public void setNomArea(String nomArea) {
+        this.nomArea = nomArea;
     }
 
     @Override

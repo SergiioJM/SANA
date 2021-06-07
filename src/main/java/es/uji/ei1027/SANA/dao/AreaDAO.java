@@ -68,6 +68,18 @@ public class AreaDAO {
             return new ArrayList<>();
         }
     }
+
+    public List<String> getNombreAreas(){
+        try{
+            List<String> area= jdbcTemplate.queryForList(
+                    "SELECT nombre FROM Area", String.class);
+            return area;
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+
     public List<Zona> getZonasArea(int area){
         try{
             List<Zona> zonas= jdbcTemplate.query(

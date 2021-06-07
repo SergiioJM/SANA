@@ -5,6 +5,7 @@ public class UserDetails {
     String email;
     String password;
     String municipio;
+    Integer area;
     String usuario;
     Integer area;
 
