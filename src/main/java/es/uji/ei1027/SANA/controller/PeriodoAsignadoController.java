@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -153,7 +154,9 @@ public class PeriodoAsignadoController {
         return "redirect:../list";
     }
     @RequestMapping("/reservassuarea/{area}")
-    public String listaDeReservasEnPeriodosAsignados(@PathVariable int area ,Model model){
+    public String listaDeReservasEnPeriodosAsignados(@PathVariable int area , Model model, HttpSession session){
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        session.setAttribute("area",area);
         List<Integer> zonas= periodoAsignadoDAO.getZonasArea(area);
         List<Integer> resevaEnArea = new ArrayList<>();
         for(Integer e : zonas){

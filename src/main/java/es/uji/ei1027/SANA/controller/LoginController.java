@@ -118,8 +118,7 @@ public class LoginController {
         if (bindingResult.hasErrors()) {
             return "loginControlador";
         }
-        System.out.println(controladorDAO.dameIdAreaPorEmail(user.getEmail()));
-        user = userDao.loadUserByUsername3(user.getEmail(), user.getPassword(),controladorDAO.dameIdAreaPorEmail(user.getEmail()), controladorDAO);
+        user = userDao.loadUserByUsername3(user.getEmail(), user.getPassword(),0, controladorDAO);
         if (user == null) {
             bindingResult.rejectValue("password", "password", "Contraseña incorrecta");
             return "loginControlador";

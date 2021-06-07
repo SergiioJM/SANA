@@ -1,6 +1,7 @@
 package es.uji.ei1027.SANA.dao;
 
 import es.uji.ei1027.SANA.model.Controlador;
+import es.uji.ei1027.SANA.model.PeriodoAsignado;
 import org.jasypt.util.password.BasicPasswordEncryptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -69,11 +70,17 @@ public class ControladorDAO {
         }
     }
 
-    public Integer dameIdAreaPorEmail(String email){
+    public List<Integer> dameIdAreaPorEmail(String email){
         try{
-            return jdbcTemplate.queryForObject(
-                    "SELECT nombrearea FROM PeriodoAsignado WHERE nombrecontrolador = (SELECT identificador FROM Controlador WHERE email=?)",
-                    Integer.class,email);
+            List<PeriodoAsignado>res= jdbcTemplate.query(
+                    "SELECT * FROM PeriodoAsignado WHERE nombrecontrolador = (SELECT identificador FROM Controlador WHERE email=?)",
+                    new PeriodoAsignadoRowMapper(),email);
+            List<Integer>resfinal= new ArrayList<>();
+            for(PeriodoAsignado e: res){
+                if (!resfinal.contains(e.getArea()))
+                    resfinal.add(e.getArea());
+            }
+            return resfinal;
         }
         catch(EmptyResultDataAccessException e) {
             return null;

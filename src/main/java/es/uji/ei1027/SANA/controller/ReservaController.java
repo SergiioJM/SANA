@@ -25,6 +25,7 @@ public class ReservaController {
     private FranjaHorariaDAO franjaHorariaDAO;
     private ReservaZonaController reservaZonaController;
     private CiudadanoDAO ciudadanoDAO;
+    private ControladorDAO controladorDAO;
 
     @Autowired
     public void setReservaDAO(ReservaDAO reservaDAO) {
@@ -48,6 +49,8 @@ public class ReservaController {
     }
     @Autowired
     public void setCiudadanoDAO(CiudadanoDAO ciudadanoDAO) { this.ciudadanoDAO = ciudadanoDAO; }
+    @Autowired
+    public void setControladorDAO(ControladorDAO controladorDAO){ this.controladorDAO=controladorDAO;}
 
     @RequestMapping("/list")
     public String listaDeReservas(Model model){
@@ -62,15 +65,17 @@ public class ReservaController {
         return "reserva/reservasciudadano";
     }
 
-    @RequestMapping(value = "/reservasControlador/{area}", method = RequestMethod.GET)
-    public String listaDeReservasControlador(Model model, @PathVariable Integer area){
-        model.addAttribute("area",area);
-        model.addAttribute("reservas", reservaDAO.getReservasporControlador(area));
-        return "reserva/reservasControlador";
-    }
+
     @RequestMapping(value = "/reservasControlador", method = RequestMethod.GET)
-    public String listaDeReservasControlador(Model model){
-        model.addAttribute("reservas", reservaDAO.getReservasporControlador(-1));
+    public String listaDeReservasControlador(Model model,HttpSession session){
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        List<Integer> areas= controladorDAO.dameIdAreaPorEmail(user.getEmail());
+        List<Reserva> reservas=new ArrayList<>();
+        for (Integer a: areas){
+            if(reservaDAO.getReservasporControlador(a).size()>0)
+                reservas.addAll(reservaDAO.getReservasporControlador(a));
+        }
+        model.addAttribute("reservas", reservas);
         return "reserva/reservasControlador";
     }
 
@@ -271,8 +276,10 @@ public class ReservaController {
         return "redirect:../reserva/reservasciudadano/" + user.getNif();
     }
     @RequestMapping(value="/update2/{identificador}", method = RequestMethod.GET)
-    public String editReserva2(Model model, @PathVariable int identificador) {
+    public String editReserva2(Model model, @PathVariable int identificador,HttpSession session) {
         model.addAttribute("reserva", reservaDAO.getReserva(identificador));
+        int area= (int) session.getAttribute("area");
+        model.addAttribute("area",area);
         List<Zona> lista2 = zonaDAO.getZonas();
         ArrayList<String> lista = new ArrayList<>();
         for (Zona e : lista2)
@@ -284,18 +291,20 @@ public class ReservaController {
     @RequestMapping(value="/update2", method = RequestMethod.POST)
     public String processUpdate2Submit( @ModelAttribute("reserva") Reserva reserva, BindingResult bindingResult, Model model,HttpSession session) {
         UserDetails user= (UserDetails) session.getAttribute("user");
+        int area= (int) session.getAttribute("area");
+        model.addAttribute("area",area);
         if (bindingResult.hasErrors()) {
             List<Zona> lista2 = zonaDAO.getZonas();
             ArrayList<String> lista = new ArrayList<>();
             for (Zona e : lista2)
                 lista.add(e.getIdentificador());
             model.addAttribute("zonalista", lista);
-            return "reserva/update";
+            return "reserva/update2";
         }
 
         reservaDAO.updateReserva(reserva);
         //return "redirect:list";
-        return "redirect:../reserva/reservasciudadano/" + user.getNif();
+        return "redirect:../periodoAsignado/reservassuarea/" + area;
     }
 
     @RequestMapping(value="/delete/{identificador}")
@@ -325,6 +334,25 @@ public class ReservaController {
             reservaDAO.eliminarZonasReservadas(reserva.getFecha(),reserva.getHora(),e);
         reservaDAO.updateReserva(reserva);
         return "redirect:../reserva/reservasciudadano/" + user.getNif();
+    }
+    @RequestMapping(value="/popupC/{identificador}", method = RequestMethod.GET)
+    public String abrirPopupC(Model model, @PathVariable int identificador, HttpSession session) {
+        session.setAttribute("idReserva", identificador);
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        return "redirect:../reservasControlador/" + "#popup";
+    }
+    @RequestMapping(value="/cancelarC")
+    public String processCancelarC(HttpSession session) {
+        int identificador = (int) session.getAttribute("idReserva");
+        session.removeAttribute("idReserva");
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        List<String> zonasreserva=reservaZonaDAO.getReservaZona(identificador);
+        Reserva reserva= reservaDAO.getReserva(identificador);
+        reserva.setEstado("cancelada");
+        for (String e: zonasreserva)
+            reservaDAO.eliminarZonasReservadas(reserva.getFecha(),reserva.getHora(),e);
+        reservaDAO.updateReserva(reserva);
+        return "redirect:../reserva/reservasControlador";
     }
     @RequestMapping("/listadodetallado/{reserva}")
     public String listaDeZonasDeReserva(@PathVariable int reserva, Model model, HttpSession session){

@@ -174,25 +174,30 @@ public class ReservaDAO {
         try{
             List<Reserva> reservas= jdbcTemplate.query(
                     "SELECT * FROM Reserva WHERE identificador IN (SELECT id_reserva FROM ReservaZonas WHERE id_zona IN (SELECT identificador FROM Zona WHERE idarea=?))", new ReservaRowMapper(),area);
-            for (Reserva e : reservas){
-                List<String> lista=getZonasDeReserva(e.getIdentificador());
-                if (lista.size()>0){
-                    e.setListreserva(lista);
-                    String zona=lista.get(0);
-                    String municipio=jdbcTemplate.queryForObject(
-                            "SELECT nombre FROM Municipio WHERE cp IN (SELECT municipio FROM Area WHERE idarea IN (SELECT idarea FROM Zona WHERE identificador=?))",String.class, Integer.parseInt(zona));
-                    e.setMunicipio(municipio);
-                    if (lista.size()!=0) {
-                        String areaa = jdbcTemplate.queryForObject("SELECT nombre FROM AREA WHERE idArea IN (SELECT idArea FROM Zona WHERE identificador=?)", String.class, Integer.parseInt(lista.get(0)));
-                        e.setArea(areaa);
+            List<Reserva> reservaFinal= new ArrayList<>();
+            if (reservas.size()>0) {
+                System.out.println(reservas.size());
+                for (Reserva e : reservas) {
+                    if (e.getFecha().isAfter(LocalDate.now())) {
+                        List<String> lista = getZonasDeReserva(e.getIdentificador());
+                        if (lista.size() > 0) {
+                            e.setListreserva(lista);
+                            String zona = lista.get(0);
+                            String municipio = jdbcTemplate.queryForObject(
+                                    "SELECT nombre FROM Municipio WHERE cp IN (SELECT municipio FROM Area WHERE idarea IN (SELECT idarea FROM Zona WHERE identificador=?))", String.class, Integer.parseInt(zona));
+                            e.setMunicipio(municipio);
+                            if (lista.size() != 0) {
+                                String areaa = jdbcTemplate.queryForObject("SELECT nombre FROM AREA WHERE idArea IN (SELECT idArea FROM Zona WHERE identificador=?)", String.class, Integer.parseInt(lista.get(0)));
+                                e.setArea(areaa);
+                            } else {
+                                e.setArea(" ");
+                            }
+                        }
                     }
-                    else {
-                        e.setArea(" ");
-                    }
-
+                    reservaFinal.add(e);
                 }
             }
-            return reservas;
+            return reservaFinal;
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();

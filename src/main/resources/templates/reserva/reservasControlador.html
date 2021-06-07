@@ -25,7 +25,6 @@
         <th>Area reservada</th>
         <th>Zonas reservadas</th>
         <th></th>
-        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -37,18 +36,17 @@
         <td th:text="${reserva.getMunicipio()}"></td>
         <td th:text="${reserva.getArea()}"></td>
         <td th:text="${reserva.getListreserva()}"></td>
-        <td><p><a th:href="@{/reserva/popup/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Cancelar</button></a></p>
+        <td><p><a th:href="@{/reserva/popupC/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Cancelar</button></a></p>
             <div id="popup" class="overlay">
                 <div id="popupBody">
                     <h2>¿Está seguro que desea cancelar la reserva?</h2>
                     <a id="cerrar" href="#">&times;</a>
                     <div class="popupContent">
-                        <a href="/reserva/cancelar"><button type="button" class="btn btn-danger">Aceptar</button></a>
+                        <a href="/reserva/cancelarC"><button type="button" class="btn btn-danger">Aceptar</button></a>
                     </div>
                 </div>
             </div>
         </td>
-        <td><a th:href="@{/reserva/listadodetallado/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-info">Ver detalles de las zonas</button></a>
         </td>
     </tr>
     </tbody>
