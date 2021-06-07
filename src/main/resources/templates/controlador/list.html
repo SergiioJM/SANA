@@ -34,7 +34,7 @@
         <td th:text="${controlador.direccion}"></td>
         <td th:text="${controlador.email}"></td>
         <td th:text="${controlador.telefono}"></td>
-        <td th:text="${controlador.fechaInicio}"></td>
+        <td th:text="${controlador.fecha}"></td>
         <td th:text="${controlador.fechaFin}"></td>
         <td><a th:href="@{/controlador/update/{identificador}(identificador=${controlador.identificador})}"><button type="button" class="btn btn-warning">Editar</button></a>
         <td><p><a th:href="@{/controlador/popup/{identificador}(identificador=${controlador.identificador})}"><button type="button" class="btn btn-danger">Borrar</button></a></p>

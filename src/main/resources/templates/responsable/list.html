@@ -21,9 +21,7 @@
         <th>Teléfono</th>
         <th>Fecha de Inicio</th>
         <th>Fecha de Fin</th>
-        <th>Identificador</th>
         <th>Municipio</th>
-        <th></th>
         <th></th>
         <th></th>
     </tr>
@@ -35,13 +33,10 @@
         <td th:text="${responsable.numerotelefono}"></td>
         <td th:text="${responsable.getfechaInicio()}"></td>
         <td th:text="${responsable.getfechaFin()}"></td>
-        <td th:text="${responsable.identificador}"></td>
         <td th:text="${responsable.municipio}"></td>
         <td><a th:href="@{/responsable/update/{identificador}(identificador=${responsable.identificador})}"><button type="button" class="btn btn-warning">Edita</button></a>
         </td>
         <td><a th:href="@{/responsable/delete/{identificador}(identificador=${responsable.identificador})}"><button type="button" class="btn btn-danger">Borra</button></a>
-        </td>
-        <td><a th:href="@{/responsable/reservasmunicipio/{identificador}(identificador=${responsable.municipio})}"><button type="button" class="btn btn-warning">Ver reservas de un municipio</button></a>
         </td>
     </tr>
     </tbody>

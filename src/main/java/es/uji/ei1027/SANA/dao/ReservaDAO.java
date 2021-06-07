@@ -170,6 +170,35 @@ public class ReservaDAO {
             return 0;
         }
     }
+    public List<Reserva> getReservasporControlador(Integer area){
+        try{
+            List<Reserva> reservas= jdbcTemplate.query(
+                    "SELECT * FROM Reserva WHERE identificador IN (SELECT id_reserva FROM ReservaZonas WHERE id_zona IN (SELECT identificador FROM Zona WHERE idarea=?))", new ReservaRowMapper(),area);
+            for (Reserva e : reservas){
+                List<String> lista=getZonasDeReserva(e.getIdentificador());
+                if (lista.size()>0){
+                    e.setListreserva(lista);
+                    String zona=lista.get(0);
+                    String municipio=jdbcTemplate.queryForObject(
+                            "SELECT nombre FROM Municipio WHERE cp IN (SELECT municipio FROM Area WHERE idarea IN (SELECT idarea FROM Zona WHERE identificador=?))",String.class, Integer.parseInt(zona));
+                    e.setMunicipio(municipio);
+                    if (lista.size()!=0) {
+                        String areaa = jdbcTemplate.queryForObject("SELECT nombre FROM AREA WHERE idArea IN (SELECT idArea FROM Zona WHERE identificador=?)", String.class, Integer.parseInt(lista.get(0)));
+                        e.setArea(areaa);
+                    }
+                    else {
+                        e.setArea(" ");
+                    }
+
+                }
+            }
+            return reservas;
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+
 
 
 

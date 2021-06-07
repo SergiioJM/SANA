@@ -119,12 +119,13 @@ public class LoginController {
             return "loginControlador";
         }
 
-        user = userDao.loadUserByUsername3(user.getEmail(), user.getPassword(), controladorDAO);
+        user = userDao.loadUserByUsername3(user.getEmail(), user.getPassword(),controladorDAO.dameIdAreaPorEmail(user.getEmail()), controladorDAO);
         if (user == null) {
             bindingResult.rejectValue("password", "password", "Contraseña incorrecta");
             return "loginControlador";
         }
         session.setAttribute("user", user);
+        System.out.println(controladorDAO.dameIdAreaPorEmail(user.getEmail()));
         return "redirect:/user/controlador";
     }
 

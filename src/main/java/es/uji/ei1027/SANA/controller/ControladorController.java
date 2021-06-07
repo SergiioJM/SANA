@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 
 @Controller
 @RequestMapping("/controlador")
@@ -43,6 +44,8 @@ public class ControladorController {
     @RequestMapping(value="/add", method=RequestMethod.POST)
     public String processAddSubmit(@ModelAttribute("controlador") Controlador controlador,
                                    BindingResult bindingResult) {
+        controlador.setFecha(LocalDate.now());
+        System.out.println(controlador);
         ControladorValidator controladorValidator = new ControladorValidator();
         controladorValidator.validate(controlador, bindingResult);
         if (bindingResult.hasErrors())

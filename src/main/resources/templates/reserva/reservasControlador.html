@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Gestionar Reservas</title>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/png" href="/images/LogoSana.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+    <link rel="stylesheet" type="text/css" href="/css/popup.css" th:href="@{/css/popup.css}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+
+</head>
+<body class="center">
+<div th:replace="fragments/nav"></div>
+<h1 class="negrita">Reservas</h1>
+<table class="table">
+    <thead class="thead-dark">
+    <tr>
+        <th>Fecha</th>
+        <th>Franja horaria</th>
+        <th>Numero de Personas</th>
+        <th>Estado</th>
+        <th>Municipio</th>
+        <th>Area reservada</th>
+        <th>Zonas reservadas</th>
+        <th></th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reserva: ${reservas}">
+        <td th:text="${reserva.fecha}"></td>
+        <td th:text="${reserva.hora}"></td>
+        <td th:text="${reserva.numeroPersonas}"></td>
+        <td th:text="${reserva.estado}"></td>
+        <td th:text="${reserva.getMunicipio()}"></td>
+        <td th:text="${reserva.getArea()}"></td>
+        <td th:text="${reserva.getListreserva()}"></td>
+        <td><p><a th:href="@{/reserva/popup/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-danger">Cancelar</button></a></p>
+            <div id="popup" class="overlay">
+                <div id="popupBody">
+                    <h2>¿Está seguro que desea cancelar la reserva?</h2>
+                    <a id="cerrar" href="#">&times;</a>
+                    <div class="popupContent">
+                        <a href="/reserva/cancelar"><button type="button" class="btn btn-danger">Aceptar</button></a>
+                    </div>
+                </div>
+            </div>
+        </td>
+        <td><a th:href="@{/reserva/listadodetallado/{identificador}(identificador=${reserva.identificador})}"><button type="button" class="btn btn-info">Ver detalles de las zonas</button></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<a href="/user/controlador"><button type="button" class="btn btn-secondary butto btn-lg">Volver</button></a>
+<br>
+<br>
+</body>
+</html>

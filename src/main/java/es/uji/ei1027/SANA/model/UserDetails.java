@@ -6,6 +6,7 @@ public class UserDetails {
     String password;
     String municipio;
     String usuario;
+    Integer area;
 
 
     public String getNif() {
@@ -54,6 +55,14 @@ public class UserDetails {
 
     public void setIdentificador(String usuario) {
         this.usuario = usuario;
+    }
+
+    public Integer getArea() {
+        return area;
+    }
+
+    public void setArea(Integer area) {
+        this.area = area;
     }
 
     @Override

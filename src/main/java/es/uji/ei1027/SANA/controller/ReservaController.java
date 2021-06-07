@@ -62,6 +62,18 @@ public class ReservaController {
         return "reserva/reservasciudadano";
     }
 
+    @RequestMapping(value = "/reservasControlador/{area}", method = RequestMethod.GET)
+    public String listaDeReservasControlador(Model model, @PathVariable Integer area){
+        model.addAttribute("area",area);
+        model.addAttribute("reservas", reservaDAO.getReservasporControlador(area));
+        return "reserva/reservasControlador";
+    }
+    @RequestMapping(value = "/reservasControlador", method = RequestMethod.GET)
+    public String listaDeReservasControlador(Model model){
+        model.addAttribute("reservas", reservaDAO.getReservasporControlador(-1));
+        return "reserva/reservasControlador";
+    }
+
     @RequestMapping(value="/add/{nif}")
     public String addReservaNif(Model model, @PathVariable String nif) {
         Reserva r = new Reserva();

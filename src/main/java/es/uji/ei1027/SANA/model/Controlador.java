@@ -11,9 +11,9 @@ public class Controlador {
     String email;
     String password;
     int telefono;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    LocalDate fechaInicio;
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    @DateTimeFormat(pattern = "yy-M-d")
+    LocalDate fecha;
+    @DateTimeFormat(pattern = "yy-M-d")
     LocalDate fechaFin;
 
     public Controlador(){
@@ -28,8 +28,8 @@ public class Controlador {
         return email;
     }
 
-    public LocalDate getFechaInicio() {
-        return fechaInicio;
+    public LocalDate getFecha() {
+        return fecha;
     }
 
     public LocalDate getFechaFin() {
@@ -60,13 +60,13 @@ public class Controlador {
                 ", direccion='" + direccion + '\'' +
                 ", email='" + email + '\'' +
                 ", telefono=" + telefono +
-                ", fechaInicio=" + fechaInicio +
+                ", fechaInicio=" + fecha +
                 ", fechaFin=" + fechaFin +
                 '}';
     }
 
-    public void setFechaInicio(LocalDate fechaInicio) {
-        this.fechaInicio = fechaInicio;
+    public void setFecha(LocalDate fecha) {
+        this.fecha = fecha;
     }
 
     public void setFechaFin(LocalDate fechaFin) {

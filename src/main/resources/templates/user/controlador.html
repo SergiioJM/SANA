@@ -15,7 +15,12 @@
 <div class="user" th:replace="fragments/loginGestorInfo" >...</div>
 
 <main class="main">
-
+    <h2>¿Qué desea hacer?</h2>
+    <br>
+    <a th:href="@{/reserva/reservasControlador/{nif}(nif=${user.area})}"><button class="btn btn-primary butto btn-lg">Reservas</button></a>
+    <br>
+    <br>
+    <br>
 </main>
 </body>
 </html>

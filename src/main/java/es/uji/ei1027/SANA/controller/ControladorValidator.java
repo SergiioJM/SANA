@@ -15,10 +15,10 @@ public class ControladorValidator implements Validator {
     public void validate(Object o, Errors errors) {
         Controlador con =(Controlador) o;
 
-        if (con.getFechaInicio() == null)
-            errors.rejectValue("fechaInicio", "obligatorio", "Tienes que introducir una fecha de inicio");
+        if (con.getFecha() == null)
+            errors.rejectValue("fecha", "obligatorio", "Tienes que introducir una fecha de inicio");
         if (con.getFechaFin() != null) {
-            if (con.getFechaInicio().isAfter(con.getFechaFin()))
+            if (con.getFecha().isAfter(con.getFechaFin()))
                 errors.rejectValue("fechaFin", "obligatorio", "La fecha de fin tiene que ser posterior a la de inicio");
         }
     }

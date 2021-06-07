@@ -26,21 +26,21 @@ public class ControladorDAO {
     public void addControlador(Controlador controlador) {
         jdbcTemplate.update("INSERT INTO Controlador VALUES(?,?,?,?,?,?,?,?)",
             obtenerC(),controlador.getNombre(),controlador.getDireccion(),
-                controlador.getEmail(),passwordEncryptor.encryptPassword(controlador.getPassword()),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin());
+                controlador.getEmail(),passwordEncryptor.encryptPassword(controlador.getPassword()),controlador.getTelefono(),controlador.getFecha(),controlador.getFechaFin());
     }
     public int obtenerC(){
-        String consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Controlador", String.class);
+        Integer consulta = jdbcTemplate.queryForObject("SELECT MAX(identificador) AS id FROM Controlador", Integer.class);
         if (consulta == null){
             return 1;
         }
-        int c = Integer.parseInt(consulta) + 1;
+        int c = consulta + 1;
         return  c;
     }
 
 
     public void updateControlador(Controlador controlador) {
         jdbcTemplate.update("UPDATE Controlador SET nombre =?,direccion =?,email =?,telefono =?,fechaInicio =?,fechaFin =? WHERE identificador =?",
-                controlador.getNombre(),controlador.getDireccion(),controlador.getEmail(),controlador.getTelefono(),controlador.getFechaInicio(),controlador.getFechaFin(),controlador.getIdentificador());
+                controlador.getNombre(),controlador.getDireccion(),controlador.getEmail(),controlador.getTelefono(),controlador.getFecha(),controlador.getFechaFin(),controlador.getIdentificador());
     }
 
     public void deleteControlador(int identificador) {
@@ -66,6 +66,16 @@ public class ControladorDAO {
         }
         catch(EmptyResultDataAccessException e) {
             return new ArrayList<>();
+        }
+    }
+    public Integer dameIdAreaPorEmail(String email){
+        try{
+            return jdbcTemplate.queryForObject(
+                    "SELECT nombrearea FROM PeriodoAsignado WHERE nombrecontrolador IN (SELECT identificador FROM Controlador WHERE email=?)",
+                    Integer.class,email);
+        }
+        catch(EmptyResultDataAccessException e) {
+            return null;
         }
     }
 }
