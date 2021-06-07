@@ -12,9 +12,18 @@ public class PeriodoAsignado {
     LocalDate fechaFin;
     int nombreControlador;
     int nombreArea;
+    String nomArea;
 
     public PeriodoAsignado() {
 
+    }
+
+    public String getNomArea() {
+        return nomArea;
+    }
+
+    public void setNomArea(String nomArea) {
+        this.nomArea = nomArea;
     }
 
     public int getIdentificador() {

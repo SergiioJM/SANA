@@ -39,7 +39,7 @@
     <tr>
       <td><label>Identificador del Area</label></td>
       <td>
-        <select class="form_control" type="text" th:field="*{area}">
+        <select class="form_control" type="text" th:field="*{nomArea}">
           <option th:each="nombre: ${arealista}" th:value="${nombre}" th:text="${nombre}"></option>
         </select>
       </td>
