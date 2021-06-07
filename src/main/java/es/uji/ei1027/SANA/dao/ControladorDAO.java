@@ -68,4 +68,15 @@ public class ControladorDAO {
             return new ArrayList<>();
         }
     }
+
+    public Integer dameIdAreaPorEmail(String email){
+        try{
+            return jdbcTemplate.queryForObject(
+                    "SELECT nombrearea FROM PeriodoAsignado WHERE nombrecontrolador IN (SELECT identificador FROM Controlador WHERE email=?)",
+                    Integer.class,email);
+        }
+        catch(EmptyResultDataAccessException e) {
+            return null;
+        }
+    }
 }

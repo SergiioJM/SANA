@@ -5,6 +5,7 @@ public class UserDetails {
     String email;
     String password;
     String municipio;
+    Integer area;
     String usuario;
 
 
@@ -54,6 +55,14 @@ public class UserDetails {
 
     public void setIdentificador(String usuario) {
         this.usuario = usuario;
+    }
+
+    public Integer getArea() {
+        return area;
+    }
+
+    public void setArea(Integer area) {
+        this.area = area;
     }
 
     @Override

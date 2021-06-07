@@ -119,7 +119,7 @@ public class LoginController {
             return "loginControlador";
         }
 
-        user = userDao.loadUserByUsername3(user.getEmail(), user.getPassword(), controladorDAO);
+        user = userDao.loadUserByUsername3(user.getEmail(), user.getPassword(),controladorDAO.dameIdAreaPorEmail(user.getEmail()), controladorDAO);
         if (user == null) {
             bindingResult.rejectValue("password", "password", "Contraseña incorrecta");
             return "loginControlador";
