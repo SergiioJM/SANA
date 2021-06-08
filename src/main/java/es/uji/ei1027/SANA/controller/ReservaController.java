@@ -26,6 +26,7 @@ public class ReservaController {
     private ReservaZonaController reservaZonaController;
     private CiudadanoDAO ciudadanoDAO;
     private ControladorDAO controladorDAO;
+    private  ResponsableMunicipioDAO responsableMunicipioDAO;
 
     @Autowired
     public void setReservaDAO(ReservaDAO reservaDAO) {
@@ -51,6 +52,10 @@ public class ReservaController {
     public void setCiudadanoDAO(CiudadanoDAO ciudadanoDAO) { this.ciudadanoDAO = ciudadanoDAO; }
     @Autowired
     public void setControladorDAO(ControladorDAO controladorDAO){ this.controladorDAO=controladorDAO;}
+    @Autowired
+    public void setResponsableMunicipioDAO(ResponsableMunicipioDAO responsableMunicipioDAO){
+        this.responsableMunicipioDAO=responsableMunicipioDAO;
+    }
 
     @RequestMapping("/list")
     public String listaDeReservas(Model model){
@@ -65,7 +70,6 @@ public class ReservaController {
         return "reserva/reservasciudadano";
     }
 
-
     @RequestMapping(value = "/reservasControlador", method = RequestMethod.GET)
     public String listaDeReservasControlador(Model model,HttpSession session){
         UserDetails user = (UserDetails) session.getAttribute("user");
@@ -77,6 +81,32 @@ public class ReservaController {
         }
         model.addAttribute("reservas", reservas);
         return "reserva/reservasControlador";
+    }
+    @RequestMapping(value = "/reservasGestorMunicipal", method = RequestMethod.GET)
+    public String listaDeReservasGestorMunicipal(Model model,HttpSession session){
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        List<Integer> areas= responsableMunicipioDAO.getAreaMunicipio(user.getMunicipio());
+        List<Integer> resevaEnMunicipio = new ArrayList<>();
+        for(Integer e : areas) {
+            for (Integer i : responsableMunicipioDAO.getZonasArea(e)) {
+                List<Integer> a=responsableMunicipioDAO.getReservasDeUnaZona(i);
+                for (Integer ide: a){
+                    if(!resevaEnMunicipio.contains(ide)){
+                        resevaEnMunicipio.add(ide);
+                    }
+                }
+            }
+        }
+        List<Reserva> res= new ArrayList<>();
+        for (Integer w: resevaEnMunicipio){
+            Reserva reserva= responsableMunicipioDAO.getReserva(w);
+            reserva.setListreserva(responsableMunicipioDAO.getZonasDeReserva(reserva.getIdentificador()));
+            if (reserva.getListreserva().size()>0)
+                reserva.setArea(reservaDAO.dameArea(reserva.getListreserva().get(0)));
+            res.add(reserva);
+        }
+        model.addAttribute("reservasmunicipioo", res);
+        return "reserva/reservasGestorMunicipal";
     }
 
     @RequestMapping(value="/add/{nif}")
@@ -353,6 +383,25 @@ public class ReservaController {
             reservaDAO.eliminarZonasReservadas(reserva.getFecha(),reserva.getHora(),e);
         reservaDAO.updateReserva(reserva);
         return "redirect:../reserva/reservasControlador";
+    }
+    @RequestMapping(value="/popupG/{identificador}", method = RequestMethod.GET)
+    public String abrirPopupG(Model model, @PathVariable int identificador, HttpSession session) {
+        session.setAttribute("idReserva", identificador);
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        return "redirect:../reservasGestorMunicipal/" + "#popup";
+    }
+    @RequestMapping(value="/cancelarG")
+    public String processCancelarG(HttpSession session) {
+        int identificador = (int) session.getAttribute("idReserva");
+        session.removeAttribute("idReserva");
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        List<String> zonasreserva=reservaZonaDAO.getReservaZona(identificador);
+        Reserva reserva= reservaDAO.getReserva(identificador);
+        reserva.setEstado("cancelada");
+        for (String e: zonasreserva)
+            reservaDAO.eliminarZonasReservadas(reserva.getFecha(),reserva.getHora(),e);
+        reservaDAO.updateReserva(reserva);
+        return "redirect:../reserva/reservasGestorMunicipal";
     }
     @RequestMapping("/listadodetallado/{reserva}")
     public String listaDeZonasDeReserva(@PathVariable int reserva, Model model, HttpSession session){

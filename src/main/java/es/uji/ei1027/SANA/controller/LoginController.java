@@ -97,6 +97,7 @@ public class LoginController {
             return "loginGestor";
         }
         session.setAttribute("user", user);
+
         return "redirect:/user/gestor";
     }
 

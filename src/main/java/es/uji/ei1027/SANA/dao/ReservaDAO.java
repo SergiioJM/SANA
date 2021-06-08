@@ -203,8 +203,8 @@ public class ReservaDAO {
             return new ArrayList<>();
         }
     }
-
-
-
-
+    public String dameArea(String zona){
+            String area = jdbcTemplate.queryForObject("SELECT nombre FROM AREA WHERE idArea IN (SELECT idArea FROM Zona WHERE identificador=?)", String.class, Integer.parseInt(zona));
+            return area;
+    }
 }
