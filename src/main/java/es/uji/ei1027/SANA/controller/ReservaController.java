@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,6 +85,34 @@ public class ReservaController {
     }
     @RequestMapping(value = "/reservasGestorMunicipal", method = RequestMethod.GET)
     public String listaDeReservasGestorMunicipal(Model model,HttpSession session){
+        UserDetails user = (UserDetails) session.getAttribute("user");
+        List<Integer> areas= responsableMunicipioDAO.getAreaMunicipio(user.getMunicipio());
+        List<Integer> resevaEnMunicipio = new ArrayList<>();
+        for(Integer e : areas) {
+            for (Integer i : responsableMunicipioDAO.getZonasArea(e)) {
+                List<Integer> a=responsableMunicipioDAO.getReservasDeUnaZona(i);
+                for (Integer ide: a){
+                    if(!resevaEnMunicipio.contains(ide)){
+                        resevaEnMunicipio.add(ide);
+                    }
+                }
+            }
+        }
+        List<Reserva> res= new ArrayList<>();
+        for (Integer w: resevaEnMunicipio){
+            Reserva reserva= responsableMunicipioDAO.getReserva(w);
+            reserva.setListreserva(responsableMunicipioDAO.getZonasDeReserva(reserva.getIdentificador()));
+            if (reserva.getListreserva().size()>0)
+                reserva.setArea(reservaDAO.dameArea(reserva.getListreserva().get(0)));
+            if(reserva.getFecha().isAfter(LocalDate.now())){
+                res.add(reserva);
+            }
+        }
+        model.addAttribute("reservasmunicipioo", res);
+        return "reserva/reservasGestorMunicipal";
+    }
+    @RequestMapping(value = "/reservasGestorMunicipal2", method = RequestMethod.GET)
+    public String listaDeReservasGestorMunicipal2(Model model,HttpSession session){
         UserDetails user = (UserDetails) session.getAttribute("user");
         List<Integer> areas= responsableMunicipioDAO.getAreaMunicipio(user.getMunicipio());
         List<Integer> resevaEnMunicipio = new ArrayList<>();
