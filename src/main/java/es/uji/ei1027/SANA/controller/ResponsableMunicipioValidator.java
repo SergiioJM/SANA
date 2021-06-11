@@ -11,29 +11,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ResponsableMunicipioValidator implements Validator {
-    public MunicipioDAO municipioDAO;
-    public ResponsableMunicipioValidator(MunicipioDAO municipioDAO){
-        this.municipioDAO=municipioDAO;
-    }
-    private JdbcTemplate jdbcTemplate;
     @Override
     public boolean supports(Class<?> cls) {
         return ResponsableMunicipio.class.equals(cls);
-        // o, si volguérem tractar també les subclasses:
-        // return Nadador.class.isAssignableFrom(cls);
     }
 
     @Override
     public void validate(Object o, Errors errors) {
         ResponsableMunicipio responsableMunicipio=(ResponsableMunicipio) o;
-
-
-        ArrayList<String> lista = new ArrayList<>();
-        List<Municipio> lista2 = municipioDAO.getMunicipios();
-        for (Municipio e : lista2) {
-            lista.add(e.getCp());
-            //System.out.println(e);
-        }
 
         if (responsableMunicipio.getMunicipio().trim().equals("")) errors.rejectValue("municipio", "obligatori",
                 "El municipio es obligatorio");
@@ -48,9 +33,6 @@ public class ResponsableMunicipioValidator implements Validator {
                 errors.rejectValue("fechaFin", "obligatorio", "La fecha de fin tiene que ser posterior a la de inicio");
         }
 
-        Boolean esta=lista.contains(responsableMunicipio.getMunicipio());
-        //if (esta.equals(Boolean.FALSE));
-            //errors.rejectValue("muni", "El municipio no existe");
 
     }
 }

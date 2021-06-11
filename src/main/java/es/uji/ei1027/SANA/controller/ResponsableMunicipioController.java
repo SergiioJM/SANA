@@ -61,7 +61,7 @@ public class ResponsableMunicipioController {
     public String processAddSubmit(@ModelAttribute("responsable") ResponsableMunicipio responsableMunicipio,
                                    BindingResult bindingResult, Model model) {
 
-        ResponsableMunicipioValidator responsableMunicipioValidator= new ResponsableMunicipioValidator(MunicipioDAO);
+        ResponsableMunicipioValidator responsableMunicipioValidator= new ResponsableMunicipioValidator();
         responsableMunicipioValidator.validate(responsableMunicipio,bindingResult);
 
         if (bindingResult.hasErrors()) {
@@ -73,7 +73,6 @@ public class ResponsableMunicipioController {
             }
             model.addAttribute("municipioslista",lista);
             return "responsable/add";
-
 
         }try {
             responsableMunicipioDAO.addResponsableMunicipio(responsableMunicipio);
@@ -102,7 +101,7 @@ public class ResponsableMunicipioController {
     public String processUpdateSubmit(
             @ModelAttribute("responsable") ResponsableMunicipio responsableMunicipio,
             BindingResult bindingResult, Model model) {
-        ResponsableMunicipioValidator responsableMunicipioValidator= new ResponsableMunicipioValidator(MunicipioDAO);
+        ResponsableMunicipioValidator responsableMunicipioValidator= new ResponsableMunicipioValidator();
         responsableMunicipioValidator.validate(responsableMunicipio,bindingResult);
         if (bindingResult.hasErrors()) {
             List<Municipio> lista2 = MunicipioDAO.getMunicipios();

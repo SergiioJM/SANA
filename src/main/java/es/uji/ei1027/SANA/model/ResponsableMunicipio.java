@@ -1,12 +1,18 @@
 package es.uji.ei1027.SANA.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.time.LocalDate;
+
 public class ResponsableMunicipio {
     private String nombre;
     private String email;
     String password;
     private int numerotelefono;
-    java.time.LocalDate fechaInicioo;
-    java.time.LocalDate fechaFin;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    LocalDate fechaInicio;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    LocalDate fechaFin;
     private int identificador;
     private String municipio;
 
@@ -46,15 +52,15 @@ public class ResponsableMunicipio {
         this.numerotelefono = numerotelefono;
     }
 
-    public java.time.LocalDate getfechaInicio() {
-        return fechaInicioo;
+    public LocalDate getfechaInicio() {
+        return fechaInicio;
     }
 
     public void setfechaInicio(java.time.LocalDate fechaInicio) {
-        this.fechaInicioo = fechaInicio;
+        this.fechaInicio = fechaInicio;
     }
 
-    public java.time.LocalDate getfechaFin() {
+    public LocalDate getfechaFin() {
         return fechaFin;
     }
 
@@ -84,7 +90,7 @@ public class ResponsableMunicipio {
                 "nombre='" + nombre + '\'' +
                 ", email='" + email + '\'' +
                 ", numeroTelefono=" + numerotelefono +
-                ", fechaInicio=" + fechaInicioo +
+                ", fechaInicio=" + fechaInicio +
                 ", fechaFin=" + fechaFin +
                 ", identificador='" + identificador + '\'' +
                 ", municipio=" + municipio +
