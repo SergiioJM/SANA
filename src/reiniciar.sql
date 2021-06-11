@@ -150,17 +150,6 @@ CREATE TABLE Zona(
 CONSTRAINT ri_capacidad CHECK (capacidad>0)
 );
 
-CREATE TABLE Ciudadano(
-	nombre 	VARCHAR(50),
-	nif 		VARCHAR(15),
-	email		VARCHAR(50),
-	residencia	VARCHAR(50),
-	fechaRegistro	Date,
-	password VARCHAR,
-
-	CONSTRAINT cp_ciudadano PRIMARY KEY(nif)
-);
-
 CREATE TABLE Reserva(
 	identificador 	INTEGER,
 	hora		VARCHAR,
