@@ -1,5 +1,12 @@
 package es.uji.ei1027.SANA.controller;
 
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.MultiFormatWriter;
+import com.google.zxing.Writer;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
 import es.uji.ei1027.SANA.dao.*;
 import es.uji.ei1027.SANA.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +18,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.imageio.ImageIO;
 import javax.servlet.http.HttpSession;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Field;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -438,5 +452,37 @@ public class ReservaController {
         UserDetails user= (UserDetails) session.getAttribute("user");
         model.addAttribute("nif",user.getNif());
         return "reserva/listadodetallado";
+    }
+
+    @RequestMapping("/mostrarQR/{id}")
+    public String processMostrarQR(@PathVariable int id, Model model, HttpSession session) throws IOException, WriterException {
+        //aquí sacamos los datos de la reserva, generamos el QR
+        //lo guardamos en una iamgen y se la pasamos mediante el modelo a la vista
+        String cadenaQR = reservaDAO.getReserva(id).toString();
+        String path = "src/main/resources/static/images/QR.png";
+        BitMatrix matrix;
+        Writer writer = new QRCodeWriter();
+        matrix = writer.encode(cadenaQR, BarcodeFormat.QR_CODE, 200, 200);
+
+
+        // Create buffered image to draw to
+        BufferedImage image = new BufferedImage(200,
+                200, BufferedImage.TYPE_INT_RGB);
+
+        // Iterate through the matrix and draw the pixels to the image
+        for (int y = 0; y < 200; y++) {
+            for (int x = 0; x < 200; x++) {
+                int grayValue = (matrix.get(x, y) ? 0 : 1) & 0xff;
+                image.setRGB(x, y, (grayValue == 0 ? 0 : 0xFFFFFF));
+            }
+        }
+
+        // Write the image to a file
+        FileOutputStream qrCode = new FileOutputStream(path);
+        ImageIO.write(image, "png", qrCode);
+        model.addAttribute("pathQR", path);
+        UserDetails user= (UserDetails) session.getAttribute("user");
+        model.addAttribute("nif",user.getNif());
+        return "reserva/mostrarQR";
     }
 }

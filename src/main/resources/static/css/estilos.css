@@ -17,6 +17,11 @@ img {
      height: 30px;
 }
 
+.imagen {
+    width: 200px;
+    height: 200px;
+}
+
 *{box-sizing : border-box;}
 
 .boton{
@@ -32,6 +37,7 @@ img {
 	padding: 5px;
 
 }
+
 .boton:hover{
 	background-color:#2e5fff;}
 

@@ -134,6 +134,13 @@ public class ReservaZonaController {
         if (reservaZona.getZona() != null){//Comprobamos que ha seleccionado almenos una zona
             Reserva reserva= (Reserva) session.getAttribute("reserva");
             session.removeAttribute("reserva");
+
+            //Aquí sería el momento de generar una cadena con los datos de la reserva
+            //y además de meter la reserva como tal en la BBDD, meter tambíen esa cadena
+            //y luego al mostrar el listado de reservas un botón que diga 'generar QR'
+
+            String cadenaQR = reserva.toString();
+            System.out.println("cadena para el QR" + cadenaQR);
             reservaDAO.addReserva(reserva);
             for (String zona: reservaZona.getZona().split(",")) {
                 zona=zona.split("#Capacidad:")[0];
