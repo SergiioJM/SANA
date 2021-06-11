@@ -102,13 +102,12 @@ public class Reserva {
 
     @Override
     public String toString() {
-        return "Reservation{" +
-                "identificador='" + identificador + '\'' +
-                ", hora=" + hora +
-                ", fecha=" + fecha +
-                ", numeroPersonas=" + numeroPersonas +
-                ", estado='" + estado +
-                ", ciudadano='" + ciudadano + '\'' +
-                '}';
+        return "Detalles de la Reserva: " + "\n" +
+                "Identificador: " + identificador + "\n" +
+                "Fecha: " + fecha + "\n" +
+                "Hora: " + hora + "\n" +
+                "Numero de Personas: " + numeroPersonas + "\n" +
+                "Estado de la reserva: " + estado + "\n" +
+                "DNI de la Reserva: " + ciudadano;
     }
 }

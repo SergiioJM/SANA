@@ -181,7 +181,6 @@ CREATE TABLE Ciudadano(
 	fechaRegistro	Date,
 
 	CONSTRAINT cp_ciudadano PRIMARY KEY(nif),
-    CONSTRAINT ca_reserva REFERENCES Reserva(identificador) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE tipoServicio(

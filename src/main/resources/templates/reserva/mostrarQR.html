@@ -10,8 +10,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet"/>
 </head>
 <body class="center">
-<h1 class="negrita">Es código QR contiene los datos de la reserva</h1>
-    <img class="imagen" src="../static/images/QR.png" th:src="@{/images/QR.png}"/>
+<h1 class="negrita">Este código QR contiene los datos de la reserva</h1>
+    <img class="imagen" src="/static/images/QR.png" th:src="@{/images/QR.png}"/>
     <br><br>
 <a th:href="@{/reserva/reservasciudadano/{nif}(nif=${nif})}"><button type="button" class="btn btn-secondary">Volver</button></a>
 </body>

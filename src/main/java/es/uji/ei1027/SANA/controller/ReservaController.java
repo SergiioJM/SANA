@@ -464,12 +464,9 @@ public class ReservaController {
         Writer writer = new QRCodeWriter();
         matrix = writer.encode(cadenaQR, BarcodeFormat.QR_CODE, 200, 200);
 
-
-        // Create buffered image to draw to
         BufferedImage image = new BufferedImage(200,
                 200, BufferedImage.TYPE_INT_RGB);
 
-        // Iterate through the matrix and draw the pixels to the image
         for (int y = 0; y < 200; y++) {
             for (int x = 0; x < 200; x++) {
                 int grayValue = (matrix.get(x, y) ? 0 : 1) & 0xff;
@@ -477,7 +474,6 @@ public class ReservaController {
             }
         }
 
-        // Write the image to a file
         FileOutputStream qrCode = new FileOutputStream(path);
         ImageIO.write(image, "png", qrCode);
         model.addAttribute("pathQR", path);
