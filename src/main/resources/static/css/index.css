@@ -85,3 +85,15 @@ button{
 #miModal:target{
   pointer-events:auto;
 }
+
+.cartel {
+    background: white;
+    color: black;
+    font-weight: bold;
+    padding: 15px;
+    border: 3px solid black;
+    margin-top: 40px;
+    margin-bottom: 40px;
+    text-align: center;
+    font-size: 22px;
+}
