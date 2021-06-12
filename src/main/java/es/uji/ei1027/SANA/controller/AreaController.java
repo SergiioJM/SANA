@@ -1,10 +1,7 @@
 package es.uji.ei1027.SANA.controller;
 
-import es.uji.ei1027.SANA.dao.AreaDAO;
-import es.uji.ei1027.SANA.dao.MunicipioDAO;
-import es.uji.ei1027.SANA.model.Area;
-import es.uji.ei1027.SANA.model.Municipio;
-import es.uji.ei1027.SANA.model.UserDetails;
+import es.uji.ei1027.SANA.dao.*;
+import es.uji.ei1027.SANA.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -23,8 +21,26 @@ import java.util.List;
 
 public class AreaController {
 
+
+
+
+
+
     private AreaDAO areaDao;
     private MunicipioDAO municipioDAO;
+    private ZonaReservadaDAO zonaReservadaDAO;
+
+
+    private ZonaDAO zonaDAO;
+
+    @Autowired
+    public void setZonaReservadaDAO(ZonaReservadaDAO zonaReservadaDAO) {
+        this.zonaReservadaDAO = zonaReservadaDAO;
+    }
+    @Autowired
+    public void setZonaDAO(ZonaDAO zonaDAO) {
+        this.zonaDAO = zonaDAO;
+    }
 
     @Autowired
     public void setAreaDao(AreaDAO areaDao) {
@@ -44,6 +60,40 @@ public class AreaController {
         model.addAttribute("zonas", areaDao.getZonasArea(area));
         return "area/zonasarea";
     }
+
+
+
+
+    @RequestMapping("/zonasAreaDeterminada/{area}")
+    public String addZonasDeterminadas(@PathVariable("area") int area,Model model,HttpSession session){
+        model.addAttribute("fecha",new Reserva());
+        model.addAttribute("zonas", areaDao.getZonasArea(area));
+        session.setAttribute("idArea" , area);
+        return "area/zonasAreaDeterminada"  ;
+    }
+
+    @RequestMapping(value= "/zonasAreaDeterminada",  method=RequestMethod.POST)
+    public String listaDeZonasenAreasDeterminada(@ModelAttribute("fecha") Reserva reserva,
+                                                 Model model ,HttpSession session){
+
+        int area = (int) session.getAttribute("idArea");
+        List<ZonaReservada> reservaZona = zonaReservadaDAO.getZonaReservada3(area,reserva.getFecha());/**reservas en una determinada zona*/
+        List<Zona> zonasFechaDeterminada = new ArrayList<>();/**sacar las zonas reservadas en una fecha determinada*/
+
+
+        for (ZonaReservada zonaReservada : reservaZona) {
+            Zona añadirZona = zonaDAO.getZona(zonaReservada.getIdzona());
+            zonasFechaDeterminada.add(añadirZona);
+        }
+
+        model.addAttribute("fecha",reserva.getFecha());
+        model.addAttribute("zonas", zonasFechaDeterminada);
+        return "area/zonasUnaFechaDeterminada";
+    }
+
+
+
+
 
     @RequestMapping("/areasVisiblesCiudadanos")
     public String listaDeAreasCiudadano(Model model){
@@ -106,4 +156,7 @@ public class AreaController {
         areaDao.deleteArea(idArea);
         return "redirect:../list";
     }
+
+
+
 }

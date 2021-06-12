@@ -22,6 +22,7 @@
         <th>Telefono</th>
         <th></th>
         <th></th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -35,9 +36,11 @@
         </td>
         <td><a th:href="@{/municipio/delete/{cif}(cif=${municipio.cp})}"><button type="button" class="btn btn-danger">Borra</button></a>
         </td>
+        <td><a th:href="@{/municipio/verMasDetalles/{cif}(cif=${municipio.cp})}"><button type="button" class="btn btn-info">Ver detalles</button></a></td>
     </tr>
     </tbody>
 </table>
+
 <a href="add"><button type="button" class="btn btn-success">Añade municipio</button></a>
 <a href="/user/medioAmbiente"><button type="button" class="btn btn-outline-secondary">Menu Princpial</button></a>
 

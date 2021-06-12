@@ -1,7 +1,10 @@
 package es.uji.ei1027.SANA.controller;
 
 import es.uji.ei1027.SANA.dao.MunicipioDAO;
+import es.uji.ei1027.SANA.model.Area;
 import es.uji.ei1027.SANA.model.Municipio;
+import es.uji.ei1027.SANA.model.Reserva;
+import es.uji.ei1027.SANA.model.UserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Controller;
@@ -12,6 +15,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
+
+import javax.servlet.http.HttpSession;
+import java.sql.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/municipio")
@@ -72,6 +79,22 @@ public class MunicipioController {
     public String processDelete(@PathVariable String cp) {
         municipioDAO.deleteMunicipio(cp);
         return "redirect:../list";
+    }
+
+     @RequestMapping(value="/verMasDetalles/{cp}", method = RequestMethod.GET)
+    public String verDetallesMunicipio(Model model, @PathVariable String cp) {
+        model.addAttribute("areaMunicipio", municipioDAO.getAreasMunicipio(cp));
+        return "area/areasMunicipio";
+    }
+
+    @RequestMapping(value="/filtrarAreas", method= RequestMethod.POST)
+    public String processAddSubmit0(@ModelAttribute("fecha") Date fecha,
+                                    BindingResult bindingResult, Model model, HttpSession session) {
+
+
+
+
+        return "redirect:../reserva/add1";
     }
 
 }

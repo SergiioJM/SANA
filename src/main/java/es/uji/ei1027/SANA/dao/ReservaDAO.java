@@ -13,6 +13,7 @@ import java.util.List;
 @Repository
 public class ReservaDAO {
 
+
     private JdbcTemplate jdbcTemplate;
     private UserDetails userDetails;
 
@@ -207,4 +208,15 @@ public class ReservaDAO {
             String area = jdbcTemplate.queryForObject("SELECT nombre FROM AREA WHERE idArea IN (SELECT idArea FROM Zona WHERE identificador=?)", String.class, Integer.parseInt(zona));
             return area;
     }
+
+    public List<List> getZonasReservadasFecha(LocalDate fecha){
+        try {
+            return jdbcTemplate.queryForList("SELECT identificador FROM Reserva WHERE fecha=?",List.class ,fecha);
+
+        }catch(EmptyResultDataAccessException e) {
+            return null;
+        }
+
+    }
+
 }

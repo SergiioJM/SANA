@@ -1,5 +1,6 @@
 package es.uji.ei1027.SANA.dao;
 
+import es.uji.ei1027.SANA.model.Area;
 import es.uji.ei1027.SANA.model.Municipio;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -62,4 +63,17 @@ public class MunicipioDAO {
             return new ArrayList<>();
         }
     }
+
+    public List<Area> getAreasMunicipio(String cp){
+        try{
+
+            return jdbcTemplate.query(
+                    "SELECT * FROM Area WHERE municipio =?",
+                    new es.uji.ei1027.SANA.dao.AreaRowMapper(),cp);
+        }
+        catch(EmptyResultDataAccessException e) {
+            return new ArrayList<>();
+        }
+    }
+
 }
