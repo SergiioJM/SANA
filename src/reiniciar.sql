@@ -75,7 +75,7 @@ CREATE TABLE FranjaHoraria(
 	idArea			VARCHAR  NOT NULL,
 
 	CONSTRAINT cp_periodo PRIMARY KEY(identificador),
-	CONSTRAINT ca_periodo_area FOREIGN KEY(idArea) REFERENCES Area(idarea) ON DELETE RESTRICT ON UPDATE CASCADE,
+	CONSTRAINT ca_periodo_area FOREIGN KEY(idArea) REFERENCES Area(idarea) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT ri_fechaFin CHECK (fechaFin>fechaInicio),
     CONSTRAINT ri_horaFin CHECK (horaFin>horaInicio)
 );

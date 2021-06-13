@@ -11,9 +11,9 @@ public class Controlador {
     String email;
     String password;
     int telefono;
-    @DateTimeFormat(pattern = "yy-M-d")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate fecha;
-    @DateTimeFormat(pattern = "yy-M-d")
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate fechaFin;
 
     public Controlador(){

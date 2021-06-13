@@ -1,16 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Añadir franjaHoraria</title>
+    <title>Añadir Franja Horaria</title>
     <meta charset="UTF-8" />
-    <link rel="stylesheet"
-          href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="/css/estilos.css"
-          th:href="@{/css/estilos.css}"/>
+    <link rel="icon" type="image/png" href="/images/LogoSana.png" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/estilos.css" th:href="@{/css/estilos.css}"/>
+    <link rel="stylesheet" type="text/css" href="/css/popup.css" th:href="@{/css/popup.css}"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Noto+Sans&display=swap" rel="stylesheet">
+
 </head>
-<body>
-<h2>Nuevo Franja Horaria</h2>
-<form action="#" th:action="@{/franjahoraria/add}"
+<body class="center">
+<h2 class="negrita">Nueva Franja Horaria</h2>
+<form class="form" action="#" th:action="@{/franjahoraria/add}"
       th:object="${franjahoraria}" method="post">
     <table>
         <tr>
